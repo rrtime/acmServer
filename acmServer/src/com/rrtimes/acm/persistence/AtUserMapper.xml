@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtUserMapper">
+
+  <insert id="insert" parameterType="AtUser">
+  	INSERT INTO AT_USER(
+  	     CP_CODE,
+  	     OID,
+  	     I_TYPE,
+  	     I_NAME,
+  	     LOGIN_PWD,
+  	     USER_NAME,
+  	     SEX,
+  	     WORKER_NO,
+  	     JOB_DUTY,
+  	     TELNO,
+  	     EMAIL,
+  	     IS_USED,
+  	     IS_ADMIN,
+  	     ORDER_NUM,
+  	     AUTH_STATE,
+  	     LAST_LOGIN_DATE,
+  	     STATUS,
+  	     LOGIN_IP,
+  	     LOGIN_TIME,
+  	     OPERATOR,
+  	     LAST_OPERATOR,
+  	     REMARK
+  		 )
+  	VALUES(
+  		 #{cpCode},
+  	     #{oid},
+  	     #{itype},
+  	     #{iname},
+  	     #{loginPwd},
+  	     #{userName},
+  	     #{sex},
+  	     #{workerNo},
+  	     #{jobDuty},
+  	     #{telno},
+  	     #{email},
+  	     #{idUsed},
+  	     #{isAdmin},
+  	     #{orderNum},
+  	     #{authState},
+  	     #{lastLoginDate},
+  	     #{status},
+  	     #{loginIp},
+  	     #{loginTime},
+  	     #{operator},
+  	     #{lastOperator},
+  	     #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtUser">
+  	UPDATE AT_USER
+  		SET
+	  		CP_CODE = #{cpCode}
+	  		,I_NAME = #{iname}
+	  		,LOGIN_PWD = #{loginPwd}
+	  		,USER_NAME = #{userName}
+	  		,SEX = #{sex}
+	  		,TELNO = #{telno}
+	  		,IS_ADMIN = #{isAdmin}
+	  		,OPERATOR = #{operator}
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="oid!=null">
+	  		  ,OID = #{oid}
+	  		</if>
+	  		<if test="itype!=null">
+	  		  ,I_TYPE = #{itype}
+	  		</if>    
+	  		<if test="workerNo!=null">
+	  		  ,WORKER_NO = #{workerNo}
+	  		</if>
+	  		<if test="jobDuty!=null">
+	  		  ,JOB_DUTY = #{jobDuty}
+	  		</if>
+	  		<if test="email!=null">
+	  		  ,EMAIL = #{email}
+	  		</if>
+	  		<if test="isUsed!=null">
+	  		  ,IS_USED = #{isUsed}
+	  		</if>
+	  		<if test="orderNum!=null">
+	  		  ,ORDER_NUM = #{orderNum}
+	  		</if>
+	  		<if test="authState!=null">
+	  		  ,AUTH_STATE = #{authState}
+	  		</if>
+	  		<if test="lastLoginDate!=null">
+	  		  ,LAST_LOGIN_DATE = #{lastLoginDate}
+	  		</if>
+	  		<if test="status!=null">
+	  		  ,STATUS = #{status}
+	  		</if>
+	  		<if test="loginIp!=null">
+	  		  ,LOGIN_IP = #{loginIp}
+	  		</if>
+	  		<if test="loginTime!=null">
+	  		  ,LOGIN_TIME = #{loginTime}
+	  		</if>
+	  		<if test="lastOperator!=null">
+	  		  ,LAST_OPERATOR = #{lastOperator}
+	  		</if>
+	  		<if test="remark!=null">
+	  		  ,REMARK = #{remark}
+	  		</if>
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_USER WHERE ID=#{id}
+  </delete>
+  
+ 
+  
+  <select id="findByPage" parameterType="Map" resultType="AtUser">
+	  	SELECT
+	  		ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+	    FROM AT_USER 
+	    	WHERE 1 = 1
+	    	<if test="cpCode!=null">and CP_CODE = #{cpCode}</if>
+	    	<if test="oid!=null">and OID = #{oid}</if>
+	    	<if test="iType!=null">and I_TYPE = #{iType}</if>
+	    	<if test="iName!=null">and I_NAME = #{iName}</if>
+	    	<if test="loginPwd!=null">and LOGIN_PWD = #{loginPwd}</if>
+	    	<if test="userName!=null">and USER_NAME = #{userName}</if>
+	    	<if test="sex!=null">and SEX = #{sex}</if>
+	    	<if test="workerNo!=null">and WORKER_NO = #{workerNo}</if>
+	    	<if test="jobDuty!=null">and JOB_DUTY = #{jobDuty}</if>
+	    	<if test="telno!=null">and TELNO = #{telno}</if>
+	    	<if test="email!=null">and EMAIL = #{email}</if>
+	    	<if test="isUsed!=null">and IS_USED = #{isUsed}</if>
+	    	<if test="isAdmin!=null">and IS_ADMIN = #{isAdmin}</if>
+	    	<if test="orderNum!=null">and ORDER_NUM = #{orderNum}</if>
+	    	<if test="authState!=null">and AUTH_STATE = #{authState}</if>
+	    	<if test="lastLoginDate!=null">and LAST_LOGIN_DATE = #{lastLoginDate}</if>
+	    	<if test="status!=null">and STATUS = #{status}</if>
+	    	<if test="loginIp!=null">and LOGIN_IP = #{loginIp}</if>
+	    	<if test="loginTime!=null">and LOGIN_TIME = #{loginTime}</if>
+	    	<if test="operator!=null">and OPERATOR = #{operator}</if>
+	    	<if test="lastOperator!=null">and LAST_OPERATOR = #{lastOperator}</if>
+	    	<if test="remark!=null">and REMARK = #{remark}</if>
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByMap" parameterType="Map" resultType="AtUser">
+	  	SELECT
+	  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+	    FROM AT_USER 
+	    	WHERE 1 = 1
+	         and OID=#{oid,jdbcType=DECIMAL}
+	    	ORDER BY CREATE_TIME DESC 
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+    FROM AT_USER 
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByUser" parameterType="Map" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+    FROM AT_USER 
+    WHERE I_NAME=#{iName} and LOGIN_PWD=#{loginPwd}
+  </select>
+  
+  <select id="findByINameToinsert" parameterType="String" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+    FROM AT_USER 
+    WHERE I_NAME=#{iName}
+  </select>
+  
+   <select id="findCountByINameToupdate" parameterType="String" resultType="AtUser">
+  	SELECT
+  		 count(*) 
+    FROM AT_USER 
+    WHERE I_NAME=#{iName}
+  </select>
+  
+  <select id="findByINameToupdate" parameterType="String" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark  
+    FROM AT_USER 
+    WHERE I_NAME=#{iName}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_USER 
+	    WHERE 1 = 1
+	    <if test="cpCode!=null">and CP_CODE = #{cpCode}</if>
+	    	<if test="oid!=null">and OID = #{oid}</if>
+	    	<if test="iType!=null">and I_TYPE = #{iType}</if>
+	    	<if test="iName!=null">and I_NAME = #{iName}</if>
+	    	<if test="loginPwd!=null">and LOGIN_PWD = #{loginPwd}</if>
+	    	<if test="userName!=null">and USER_NAME = #{userName}</if>
+	    	<if test="sex!=null">and SEX = #{sex}</if>
+	    	<if test="workerNo!=null">and WORKER_NO = #{workerNo}</if>
+	    	<if test="jobDuty!=null">and JOB_DUTY = #{jobDuty}</if>
+	    	<if test="telno!=null">and TELNO = #{telno}</if>
+	    	<if test="email!=null">and EMAIL = #{email}</if>
+	    	<if test="isUsed!=null">and IS_USED = #{isUsed}</if>
+	    	<if test="isAdmin!=null">and IS_ADMIN = #{isAdmin}</if>
+	    	<if test="orderNum!=null">and ORDER_NUM = #{orderNum}</if>
+	    	<if test="authState!=null">and AUTH_STATE = #{authState}</if>
+	    	<if test="lastLoginDate!=null">and LAST_LOGIN_DATE = #{lastLoginDate}</if>
+	    	<if test="status!=null">and STATUS = #{status}</if>
+	    	<if test="loginIp!=null">and LOGIN_IP = #{loginIp}</if>
+	    	<if test="loginTime!=null">and LOGIN_TIME = #{loginTime}</if>
+	    	<if test="operator!=null">and OPERATOR = #{operator}</if>
+	    	<if test="lastOperator!=null">and LAST_OPERATOR = #{lastOperator}</if>
+	    	<if test="remark!=null">and REMARK = #{remark}</if>
+  </select>
+
+</mapper>

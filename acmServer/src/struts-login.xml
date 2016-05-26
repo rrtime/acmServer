@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+ 	<package name="struts-login" extends="struts-base" namespace="/lg">
+ 	
+ 		<!-- 系统登录拦截跳转管理 -->
+ 		<action name="login" class="com.rrtimes.acm.action.UserManagerAction">
+			<result name="login" type="dispatcher">/login.jsp</result>
+			<result name="suc" type="dispatcher">/WEB-INF/manager/index.jsp</result>
+		</action>
+ 		
+    </package>
+</struts>

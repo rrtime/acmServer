@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.action.extension" value="do"/>
+    <constant name="struts.serve.static.browserCache" value="false"/>
+    <constant name="struts.configuration.xml.reload" value="true"/>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.objectFactory" value="spring" />
+   
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <constant name="struts.multipart.maxSize" value="999999999" />
+    
+ 	<package name="struts-base" extends="struts-default">
+ 		<interceptors>
+ 			<!-- 登录会话监测拦截器 -->
+ 			<interceptor name="authenticationInterceptor" class="com.rrtimes.acm.action.AuthenticationInterceptor" />
+ 			<!-- 系统异常拦截器 -->
+ 			
+ 			<!-- 认证拦截器拦截器链-->
+ 			<interceptor-stack name="loginInterceptorStack">
+ 				<interceptor-ref name="authenticationInterceptor"/>
+ 				<interceptor-ref name="exception"/>
+ 				<interceptor-ref name="defaultStack"/>
+ 			</interceptor-stack>
+ 		</interceptors>
+ 		
+		<global-results>
+			<result name="sys_login" type="dispatcher">/WEB-INF/jsp/system/loadLogin.jsp</result>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>  
+			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>  
+		</global-exception-mappings>  
+		
+		
+    </package>
+    
+	<!-- CaaS 计费模块 -->
+	<include file="struts-login.xml"/>
+	<include file="struts-charge.xml"/>
+	<!-- yan begin -->
+	<include file="struts-yanxb.xml"/>
+	<!-- yan end -->
+</struts>

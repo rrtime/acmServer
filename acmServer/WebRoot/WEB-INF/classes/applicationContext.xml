@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://code.alibabatech.com/schema/dubbo
+           http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+           "
+	default-lazy-init="false">
+
+	<context:component-scan base-package="com.rrtimes.acm">
+		<!-- <context:exclude-filter type="regex" expression="com.xinwei.crm.resource.telephone.*"/>  -->
+	</context:component-scan>
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!-- enable autowire -->
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" order="1" />
+
+	<!-- load properties-->
+	<context:property-placeholder location="classpath:config/db.properties,classpath:config/process.properties" ignore-unresolvable="true"/>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="acm.dataSource" />
+	</bean>
+	 
+	<bean id="acm.dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource" lazy-init="false">
+		<property name="driver" value="${acm.driver}"/>
+		<property name="driverUrl" value="${acm.url}"/>
+		<property name="user" value="${acm.username}"/>
+		<property name="password" value="${acm.password}"/>
+	</bean>
+	
+	<bean id="shardPlugin" class="com.google.code.shardbatis.plugin.ShardPlugin ">
+		<property name="properties">
+			<props>
+				<prop key="shardingConfig">
+					shard_config.xml
+				</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="acm.sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-configuration.xml"/>
+		<property name="dataSource" ref="acm.dataSource" />
+		<property name="typeAliasesPackage" value="com.rrtimes.acm.domain" />
+		<property name="plugins">
+			<list>
+				<ref bean="shardPlugin" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- scan for mappers and let them be autowired -->
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.rrtimes.acm.persistence" />
+		<property name="sqlSessionFactoryBeanName" value="acm.sqlSessionFactory" />
+	</bean>  
+    
+    <!-- 具体的实现bean -->
+	<bean id="acsi" class="com.rrtimes.acm.service.impl.AtComplainServiceImpl" />
+	<bean id="demoService" class="com.rrtimes.acm.service.impl.AcmSysOrgServiceImpl" />
+	<bean id="demoService1" class="com.rrtimes.acm.service.impl.AtUserServiceImpl" />
+
+	<!-- 提供方应用信息，用于计算依赖关系-->
+	<dubbo:application name="xixi_provider" />
+
+	<!-- 使用multicast广播注册中心暴露服务地址 -->
+            <dubbo:registry address="multicast://224.5.6.7:1234"/>
+		
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<!-- 声明需要暴露的服务接口 -->
+	<!-- 客户投诉信息 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtComplainService" ref="acsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AcmSysOrgService" ref="demoService" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtUserService" ref="demoService1" />
+</beans>

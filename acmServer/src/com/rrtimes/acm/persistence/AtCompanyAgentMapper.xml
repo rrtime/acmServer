@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCompanyAgentMapper">
+
+  <insert id="insert" parameterType="AtCompanyAgent">
+  	INSERT INTO AT_COMPANY_AGENT(
+  		 CP_CODE,
+  		 CP_NAME,
+         CP_NAME_ALL,
+         RG_ADDRESS,
+         OFFICE_ADDRESS,
+         CP_OWNER,
+         CP_AGENTER,
+         CP_TEL,
+         CP_EMAIL,
+         USE_TYPE,
+         REMARK )
+  	VALUES(
+  	     #{cpCode},
+  		 #{cpName},
+  		 #{cpNameAll},
+  		 #{rgAddress},
+  		 #{officeAddress},
+  		 #{cpOwner},
+  		 #{cpAgenter},
+  		 #{cpTel},
+  		 #{cpEmail},
+  		 #{useType},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCompanyAgent">
+  	UPDATE AT_COMPANY_AGENT
+  		SET
+            CP_CODE = #{cpCode,jdbcType=VARCHAR}
+    		,CP_NAME = #{cpName,jdbcType=VARCHAR}
+	  		<if test="cpNameAll != null">
+	  	    ,CP_NAME_ALL = #{cpNameAll,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="rgAddress != null">
+	  		,RG_ADDRESS = #{rgAddress,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="officeAddress != null">
+	  		,OFFICE_ADDRESS = #{officeAddress,jdbcType=VARCHAR}
+	  		</if>
+	  		,CP_OWNER = #{cpOwner,jdbcType=VARCHAR}
+	  		,CP_AGENTER = #{cpAgenter,jdbcType=VARCHAR}
+	  		,CP_TEL = #{cpTel,jdbcType=VARCHAR}
+	  		<if test="cpEmail != null">
+	  		,CP_EMAIL = #{cpEmail,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="useType != null">
+	  		,USE_TYPE = #{useType,jdbcType=DECIMAL}
+	  		</if>
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark,jdbcType=VARCHAR}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_COMPANY_AGENT WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCompanyAgent">
+	  	SELECT
+	  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CP_NAME as cpName,
+	         CP_NAME_ALL as cpNameAll,
+	         RG_ADDRESS as rgAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CP_OWNER as cpOwner,
+	         CP_AGENTER as cpAgenter,
+	         CP_TEL as cpTel,
+	         CP_EMAIL as cpEmail,
+	         USE_TYPE as useType,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_COMPANY_AGENT  
+	    	WHERE 1 = 1
+	    	<if test="cpName != null">
+    		and CP_NAME = #{cpName,jdbcType=VARCHAR}
+    		</if>
+	  		<if test="cpNameAll != null">
+	  	    and CP_NAME_ALL = #{cpNameAll,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="rgAddress != null">
+	  		and RG_ADDRESS = #{rgAddress,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="officeAddress != null">
+	  		and OFFICE_ADDRESS = #{officeAddress,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpOwner != null">
+	  		and CP_OWNER = #{cpOwner,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpAgenter != null">
+	  		and CP_AGENTER = #{cpAgenter,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpTel != null">
+	  		and CP_TEL = #{cpTel,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpEmail != null">
+	  		and CP_EMAIL = #{cpEmail,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="useType != null">
+	  		and USE_TYPE = #{useType,jdbcType=DECIMAL}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark,jdbcType=VARCHAR}
+	  		</if>		
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtCompanyAgent">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CP_NAME as cpName,
+	         CP_NAME_ALL as cpNameAll,
+	         RG_ADDRESS as rgAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CP_OWNER as cpOwner,
+	         CP_AGENTER as cpAgenter,
+	         CP_TEL as cpTel,
+	         CP_EMAIL as cpEmail,
+	         USE_TYPE as useType,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_COMPANY_AGENT  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_COMPANY_AGENT 
+	    WHERE 1 = 1
+	    <if test="cpName != null">
+    		and CP_NAME = #{cpName,jdbcType=VARCHAR}
+    		</if>
+	  		<if test="cpNameAll != null">
+	  	    and CP_NAME_ALL = #{cpNameAll,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="rgAddress != null">
+	  		and RG_ADDRESS = #{rgAddress,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="officeAddress != null">
+	  		and OFFICE_ADDRESS = #{officeAddress,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpOwner != null">
+	  		and CP_OWNER = #{cpOwner,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpAgenter != null">
+	  		and CP_AGENTER = #{cpAgenter,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpTel != null">
+	  		and CP_TEL = #{cpTel,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="cpEmail != null">
+	  		and CP_EMAIL = #{cpEmail,jdbcType=VARCHAR}
+	  		</if>
+	  		<if test="useType != null">
+	  		and USE_TYPE = #{useType,jdbcType=DECIMAL}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark,jdbcType=VARCHAR}
+	  		</if>		
+  </select>
+
+</mapper>

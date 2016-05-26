@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtModelFunctionMapper">
+
+  <insert id="insert" parameterType="AtModelFunction">
+  	INSERT INTO AT_MODEL_FUNCTION(
+  		 MENU_CODE,
+         F_NAME,
+         F_TITLE,
+         TABLE_INDEX,
+         IS_SYSTEM,
+         FUN_CODE,
+         FUN_DESC,
+         ID_PARENT,
+         CONTROL_ID,
+         CONTROL_TYPE,
+         IS_HASTAG,
+         CATEGORY,
+         SHOW_INDEX,
+         IS_CON_SHOWNUM,
+         CONTROL_NUM,
+         CONTROL_PAGE,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  		#{menuCode},
+  		#{fname},
+  		#{ftitle},
+  		#{tableIndex},
+  		#{isSystem},
+  		#{funCode},
+  		#{funDesc},
+  		#{idParent},
+  		#{controlId},
+  		#{controlType},
+  		#{isHastag},
+  		#{category},
+  		#{showIndex},
+  		#{isConShownum},
+  		#{controlNum},
+  		#{controlPage},
+  		#{operator},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtModelFunction">
+  	UPDATE AT_MODEL_FUNCTION
+  		SET
+  			UPDATE_TIME = #{updateTime}
+  	    	,MENU_CODE = #{menuCode}
+  	    	,F_NAME = #{fname}
+  	    	,F_TITLE = #{ftitle}
+  		<if test="tableIndex >= 0">
+  	    	,TABLE_INDEX = #{tableIndex}
+  		</if>
+  		<if test="isSystem >= 0">
+  	    	,IS_SYSTEM = #{isSystem}
+  		</if>
+  		<if test="funCode != null and funCode != ''">
+  	    	,FUN_CODE = #{funCode}
+  		</if>
+  		<if test="funDesc != null and funDesc != ''">
+  	    	,FUN_DESC = #{funDesc}
+  		</if>
+  		<if test="idParent >= 0">
+  	    	,ID_PARENT = #{idParent}
+  		</if>
+  		<if test="controlType >= 0">
+  	    	,CONTROL_TYPE = #{controlType}
+  		</if>
+  		<if test="isHastag >= 0">
+  	    	,IS_HASTAG = #{isHastag}
+  		</if>
+  		<if test="category >= 0">
+  	    	,CATEGORY = #{category}
+  		</if>
+  		<if test="isConShownum != null and isConShownum != ''">
+  	    	,IS_CON_SHOWNUM = #{isConShownum}
+  		</if>
+  		<if test="controlNum != null and controlNum != ''">
+  	    	,CONTROL_NUM = #{controlNum}
+  		</if>
+  		<if test="controlPage != null and controlPage != ''">
+  	    	,CONTROL_PAGE = #{controlPage}
+  		</if>
+  		<if test="showIndex >= 0">
+  	    	,SHOW_INDEX = #{showIndex}
+  		</if>
+  			,OPERATOR = #{operator}
+  		<if test="remark != null and remark != ''">
+  			,REMARK = #{remark}
+  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_MODEL_FUNCTION WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AtModelFunction">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         F_NAME as fname,
+         F_TITLE as ftitle,
+         TABLE_INDEX as tableIndex,
+		 IS_SYSTEM as isSystem,
+		 FUN_CODE as funCode,
+		 FUN_DESC as funDesc,
+		 ID_PARENT as idParent,
+		 CONTROL_ID as controlId,
+		 CONTROL_TYPE as controlType,
+		 IS_HASTAG as isHastag,
+         CATEGORY as category,
+		 SHOW_INDEX as showIndex,
+         IS_CON_SHOWNUM as isConShownum,
+         CONTROL_NUM as controlNum,
+         CONTROL_PAGE as controlPage,
+         CREATE_TIME as createTime,
+         OPERATOR as operator,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_MODEL_FUNCTION c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AtModelFunction">
+	  	SELECT
+	  		 c.ID as id,
+	  		 MENU_CODE as menuCode,
+	         F_NAME as fname,
+	         F_TITLE as mdesc,
+	         TABLE_INDEX as tableIndex,
+			 IS_SYSTEM as isSystem,
+			 FUN_CODE as funCode,
+			 FUN_DESC as funDesc,
+			 ID_PARENT as idParent,
+			 CONTROL_ID as controlId,
+			 CONTROL_TYPE as controlType,
+			 IS_HASTAG as isHastag,
+	         CATEGORY as category,
+			 SHOW_INDEX as showIndex,
+	         IS_CON_SHOWNUM as isConShownum,
+	         CONTROL_NUM as controlNum,
+	         CONTROL_PAGE as controlPage,
+	         CREATE_TIME as createTime,
+	         OPERATOR as operator,
+		     UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_MODEL_FUNCTION c 
+	    	where 1 = 1
+	 		<if test="menuCode != null and menuCode != ''">
+	 	    	and MENU_CODE = #{menuCode}
+	 		</if>
+	 		<if test="fname != null and fname != ''">
+	 	    	and F_NAME like #{fname}
+	 		</if>
+	 		<if test="controlType >= 0">
+	 	    	and CONTROL_TYPE = #{controlType}
+	 		</if>
+	 		<if test="isHastag >= 0">
+	 	    	and IS_HASTAG = #{isHastag}
+	 		</if>
+	  		<if test="isConShownum >= 0">
+	  	    	and IS_CON_SHOWNUM = #{isConShownum}
+	  		</if>
+	  		<if test="operator != null and operator != ''">
+	 	    	and OPERATOR = #{operator}
+	 		</if>
+	  		<if test="remark != null and remark != ''">
+	  	    	and REMARK like #{remark}
+	  		</if>
+	    	ORDER BY showIndex
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM AT_MODEL_FUNCTION c
+  		where 1 = 1
+ 		<if test="menuCode != null and menuCode != ''">
+ 	    	and MENU_CODE = #{menuCode}
+ 		</if>
+ 		<if test="fname != null and fname != ''">
+ 	    	and F_NAME like #{fname}
+ 		</if>
+ 		<if test="controlType >= 0">
+ 	    	and CONTROL_TYPE = #{controlType}
+ 		</if>
+ 		<if test="isHastag >= 0">
+ 	    	and IS_HASTAG = #{isHastag}
+ 		</if>
+  		<if test="isConShownum >= 0">
+  	    	and IS_CON_SHOWNUM = #{isConShownum}
+  		</if>
+  		<if test="operator != null and operator != ''">
+ 	    	and OPERATOR = #{operator}
+ 		</if>
+  		<if test="remark != null and remark != ''">
+  	    	and REMARK like #{remark}
+  		</if>
+  </select>
+  
+  <select id="findAll" resultType="AtModelFunction">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         F_NAME as fname,
+         F_TITLE as mdesc,
+         TABLE_INDEX as tableIndex,
+		 IS_SYSTEM as isSystem,
+		 FUN_CODE as funCode,
+		 FUN_DESC as funDesc,
+		 ID_PARENT as idParent,
+		 CONTROL_ID as controlId,
+		 CONTROL_TYPE as controlType,
+		 IS_HASTAG as isHastag,
+         CATEGORY as category,
+		 SHOW_INDEX as showIndex,
+         IS_CON_SHOWNUM as isConShownum,
+         CONTROL_NUM as controlNum,
+         CONTROL_PAGE as controlPage,
+         CREATE_TIME as createTime,
+         OPERATOR as operator,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_MODEL_FUNCTION c 
+    	ORDER BY showIndex
+  </select>
+  
+  <select id="findModelFunctionByMenuCode" resultType="AtModelFunction">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         F_NAME as fname,
+         F_TITLE as mdesc,
+         TABLE_INDEX as tableIndex,
+		 IS_SYSTEM as isSystem,
+		 FUN_CODE as funCode,
+		 FUN_DESC as funDesc,
+		 ID_PARENT as idParent,
+		 CONTROL_ID as controlId,
+		 CONTROL_TYPE as controlType,
+		 IS_HASTAG as isHastag,
+         CATEGORY as category,
+		 SHOW_INDEX as showIndex,
+         IS_CON_SHOWNUM as isConShownum,
+         CONTROL_NUM as controlNum,
+         CONTROL_PAGE as controlPage,
+         CREATE_TIME as createTime,
+         OPERATOR as operator,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_MODEL_FUNCTION c 
+    	where c.MENU_CODE = #{menuCode}
+    	ORDER BY showIndex
+  </select>
+  
+  <select id="findModelFunctionByTreeId" parameterType="Map" resultType="Map">
+  	SELECT
+  		 asm.M_NAME as mname,
+  		 amf.ID as id,
+  		 amf.MENU_CODE as menuCode,
+         amf.F_NAME as fname,
+         amf.F_TITLE as mdesc,
+         amf.TABLE_INDEX as tableIndex,
+		 amf.IS_SYSTEM as isSystem,
+		 amf.FUN_CODE as funCode,
+		 amf.FUN_DESC as funDesc,
+		 amf.ID_PARENT as idParent,
+		 amf.CONTROL_ID as controlId,
+		 amf.CONTROL_TYPE as controlType,
+		 amf.IS_HASTAG as isHastag,
+         amf.CATEGORY as category,
+		 amf.SHOW_INDEX as showIndex,
+         amf.IS_CON_SHOWNUM as isConShownum,
+         amf.CONTROL_NUM as controlNum,
+         amf.CONTROL_PAGE as controlPage,
+         amf.CREATE_TIME as createTime,
+         amf.OPERATOR as operator,
+	     amf.UPDATE_TIME as updateTime,
+         amf.REMARK as remark
+    FROM
+		AT_MODEL_FUNCTION amf,
+		AT_SYS_MODEL asm
+	WHERE
+		asm.MENU_CODE = amf.MENU_CODE
+	and asm.TREE_ID = #{treeId}
+		ORDER BY amf.SHOW_INDEX
+  </select>
+</mapper>

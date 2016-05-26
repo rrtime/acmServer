@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AcmSysOrgMapper">
+
+  <insert id="insert" parameterType="AcmSysOrg">
+  	INSERT INTO ACM_SYS_ORG(
+  		 CP_CODE,
+  		 ORG_NAME,
+  		 ORG_DESC,
+         OID,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  		 #{cpCode,jdbcType=VARCHAR},
+  	     #{orgName,jdbcType=VARCHAR},
+  		 #{orgDesc,jdbcType=VARCHAR},
+  		 #{oid,jdbcType=DECIMAL},
+  		 #{operator,jdbcType=VARCHAR},
+         #{remark,jdbcType=VARCHAR}  )
+  </insert> 
+  
+  <update id="update" parameterType="AcmSysOrg">
+  	UPDATE ACM_SYS_ORG
+  		SET
+  		    CP_CODE = #{cpCode,jdbcType=VARCHAR}
+            ,ORG_NAME = #{orgName,jdbcType=VARCHAR}
+            <if test="orgDesc != null and orgDesc != '' ">
+    		,ORG_DESC = #{orgDesc,jdbcType=VARCHAR}
+    		</if>
+	  	    ,OID = #{oid,jdbcType=DECIMAL}
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null and remark != '' ">
+	  		,REMARK = #{remark,jdbcType=VARCHAR}
+	  		</if>	        
+		WHERE
+			ID=#{id}  
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM ACM_SYS_ORG WHERE ID=#{id}
+  </delete>
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AcmSysOrg">
+	  	SELECT
+	  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 ORG_NAME as orgName,
+	  		 ORG_DESC as orgDesc,
+	         OID as oid,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM ACM_SYS_ORG 
+	    	WHERE 1 = 1
+	        <if test="oid != null">
+	  	    and OID = #{oid}
+	  		</if>
+	  		<if test="orgName != null and orgName != ''">
+	  		and ORG_NAME = #{orgName}
+	  		</if>
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AcmSysOrg">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 ORG_NAME as orgName,
+	  		 ORG_DESC as orgDesc,
+	         OID as oid,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM ACM_SYS_ORG  
+    WHERE ID=#{id}
+  </select>
+  
+	<select id="findOrgByOid" parameterType="int" resultType="AcmSysOrg">
+	  	SELECT
+	  		 ID as id,
+		  		 CP_CODE as cpCode,
+		  		 ORG_NAME as orgName,
+		  		 ORG_DESC as orgDesc,
+		         OID as oid,
+		         OPERATOR as operator,
+		         CREATE_TIME as createTime,
+		         UPDATE_TIME as updateTime,
+		         REMARK as remark
+	    FROM ACM_SYS_ORG  
+	    WHERE OID=#{oid}
+	  </select>
+	  
+	  <select id="findAll" parameterType="String" resultType="AcmSysOrg">
+	  	SELECT
+	  		 ID as id,
+		  		 CP_CODE as cpCode,
+		  		 ORG_NAME as orgName,
+		  		 ORG_DESC as orgDesc,
+		         OID as oid,
+		         OPERATOR as operator,
+		         CREATE_TIME as createTime,
+		         UPDATE_TIME as updateTime,
+		         REMARK as remark
+	    FROM ACM_SYS_ORG  
+	    WHERE CP_CODE=#{cpCode}
+	  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM ACM_SYS_ORG
+	    WHERE 1 = 1
+	      <if test="oid != null">
+	  	    and OID = #{oid}
+	  		</if>
+	  		<if test="orgName != null and orgName != ''">
+	  		and ORG_NAME = #{orgName}
+	  		</if>
+  </select>
+
+</mapper>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtFieldRelMapper">
+
+  <insert id="insert" parameterType="AtFieldRel">
+  	INSERT INTO AT_FIELD_REL(
+  		 MENU_CODE,
+         R_NAME,
+         PRIVILEGETYPE,
+         FID,
+         UID,
+         ISUSERGROUP,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  		#{menuCode},
+  		#{rname},
+  		#{privilegeType},
+  		#{fid},
+  		#{uid},
+  		#{isUserGroup},
+  		#{operator},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtFieldRel">
+  	UPDATE AT_FIELD_REL
+  		SET
+  			UPDATE_TIME = #{updateTime}
+  	    	,MENU_CODE = #{menuCode}
+  	    	,FID = #{fid}
+  	    	,UID = #{uid}
+  		<if test="rname != null and rname != ''">
+  	    	,R_NAME = #{rname}
+  		</if>
+  		<if test="privilegeType >= 0">
+  	    	,PRIVILEGETYPE = #{privilegeType}
+  		</if>
+  		<if test="isUserGroup >= 0">
+  	    	,ISUSERGROUP = #{isUserGroup}
+  		</if>
+  		<if test="operator != null and operator != ''">
+  	    	,OPERATOR = #{operator}
+  		</if>
+  		<if test="remark != null and remark != ''">
+  			,REMARK = #{remark}
+  		</if>
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_FIELD_REL WHERE ID=#{id}
+  </delete>
+  
+  <delete id="delAtFieldRelByUidAndTreeId" parameterType="int">
+  	DELETE FROM AT_FIELD_REL WHERE 1 = 1 
+  		<if test="uid >= 0">
+  	    	and UID = #{uid}
+  		</if>
+  		<if test="treeId >= 0">
+  	    	and MENU_CODE in 
+  	    	(
+  	    		select asm.MENU_CODE from AT_SYS_MODEL asm 
+  	    		where asm.TREE_ID = #{treeId}
+  	    	)
+  		</if>
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AtFieldRel">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         R_NAME as rname,
+         PRIVILEGETYPE as privilegeType,
+         FID as fid,
+		 UID as uid,
+		 ISUSERGROUP as isUserGroup,
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_FIELD_REL c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AtFieldRel">
+	  	SELECT
+	  		 c.ID as id,
+	  		 MENU_CODE as menuCode,
+	         R_NAME as rname,
+	         PRIVILEGETYPE as privilegeType,
+	         FID as fid,
+			 UID as uid,
+			 ISUSERGROUP as isUserGroup,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+		     UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_FIELD_REL c 
+	    	where 1 = 1
+	 		<if test="menuCode != null and menuCode != ''">
+	 	    	and MENU_CODE = #{menuCode}
+	 		</if>
+	 		<if test="rname != null and rname != ''">
+	 	    	and R_NAME like #{rname}
+	 		</if>
+	 		<if test="privilegeType >= 0">
+	 	    	and PRIVILEGETYPE = #{privilegeType}
+	 		</if>
+	 		<if test="fid >= 0">
+	 	    	and FID = #{fid}
+	 		</if>
+	 		<if test="uid >= 0">
+	 	    	and UID = #{uid}
+	 		</if>
+	  		<if test="remark != null and remark != ''">
+	  	    	and REMARK like #{remark}
+	  		</if>
+	    	ORDER BY createTime DESC
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM AT_FIELD_REL c
+  		where 1 = 1
+ 		<if test="menuCode != null and menuCode != ''">
+ 	    	and MENU_CODE = #{menuCode}
+ 		</if>
+ 		<if test="rname != null and rname != ''">
+ 	    	and R_NAME like #{rName}
+ 		</if>
+ 		<if test="privilegeType >= 0">
+ 	    	and PRIVILEGETYPE = #{privilegeType}
+ 		</if>
+ 		<if test="fid >= 0">
+ 	    	and FID = #{fid}
+ 		</if>
+ 		<if test="uid >= 0">
+ 	    	and UID = #{uid}
+ 		</if>
+  		<if test="remark != null and remark != ''">
+  	    	and REMARK like #{remark}
+  		</if>
+  </select>
+  
+  <select id="findAll" resultType="AtFieldRel">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         R_NAME as rname,
+         PRIVILEGETYPE as privilegeType,
+         FID as fid,
+		 UID as uid,
+		 ISUSERGROUP as isUserGroup,
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_FIELD_REL c 
+    	ORDER BY createTime
+  </select>
+  
+  <select id="findAtFieldRelByUidAndMenuCode" resultType="AtFieldRel">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         R_NAME as rname,
+         PRIVILEGETYPE as privilegeType,
+         FID as fid,
+		 UID as uid,
+		 ISUSERGROUP as isUserGroup,
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_FIELD_REL c 
+    	where 1 = 1
+    	<if test="uid >= 0">
+ 	    	and UID = #{uid}
+ 		</if>
+  		<if test="menuCode != null and menuCode != ''">
+  	    	and MENU_CODE like #{menuCode}
+  		</if>
+    	ORDER BY createTime
+  </select>
+  
+  <select id="findAtFieldRelByUidAndTreeId" resultType="Map">
+  	SELECT
+  		 afd.F_NAME as fname
+  		 afr.ID as id,
+  		 afr.MENU_CODE as menuCode,
+         afr.R_NAME as rname,
+         afr.PRIVILEGETYPE as privilegeType,
+         afr.FID as fid,
+		 afr.UID as uid,
+		 afr.ISUSERGROUP as isUserGroup,
+         afr.OPERATOR as operator,
+         afr.CREATE_TIME as createTime,
+	     afr.UPDATE_TIME as updateTime,
+         afr.REMARK as remark
+    FROM
+		AT_FIELD_REL afr,
+		AT_SYS_MODEL asm,
+		AT_FIELD_DICT afd
+	WHERE
+		asm.TREE_ID = #{treeId}
+	AND asm.MENU_CODE = afr.MENU_CODE
+	AND afr.MENU_CODE = afd.MENU_CODE
+	AND afr.FID = afd.ID
+	AND afr.UID = #{uid}
+  </select>
+</mapper>

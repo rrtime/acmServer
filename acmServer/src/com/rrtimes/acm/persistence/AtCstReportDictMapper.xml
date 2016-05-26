@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCstReportDictMapper">
+
+  <insert id="insert" parameterType="AtCstReportDict">
+  	INSERT INTO AT_CST_REPORT_DICT(
+  		 REPORT_NAME,
+  		 REPORT_DESC,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  	     #{reportName},
+  		 #{reportDesc},
+  		 #{operator},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCstReportDict">
+  	UPDATE AT_CST_REPORT_DICT
+  		SET
+            REPORT_NAME = #{reportName}
+	  		<if test="reportDesc != null">
+	  	    ,REPORT_DESC = #{reportDesc}
+	  		</if>
+	  		,OPERATOR = #{operator}
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_CST_REPORT_DICT WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCstReportDict">
+	  	SELECT
+	  		 ID as id,
+	  		 REPORT_NAME as reportName,
+	  		 REPORT_DESC as reportDesc,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_CST_REPORT_DICT  
+	    	WHERE 1 = 1
+	    	<if test="reportName!=null">
+	    	and REPORT_NAME = #{reportName}
+	    	</if>
+	    	<if test="reportDesc != null">
+	  	    and REPORT_DESC = #{reportDesc}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+	    	ORDER BY CREATE_TIME DESC 
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtCstReportDict">
+  	SELECT
+  		 ID as id,
+	  		 REPORT_NAME as reportName,
+	  		 REPORT_DESC as reportDesc,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_REPORT_DICT  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_CST_REPORT_DICT 
+	    WHERE 1 = 1
+	    	<if test="reportName!=null">
+	    	and REPORT_NAME = #{reportName}
+	    	</if>
+	   		<if test="reportDesc != null">
+	  	    and REPORT_DESC = #{reportDesc}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+  </select>
+
+</mapper>

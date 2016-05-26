@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCstVisitMapper">
+
+  <insert id="insert" parameterType="AtCstVisit">
+  	INSERT INTO AT_CST_VISIT(
+  		 CP_CODE,
+  		 CN_IDENTIFER,
+         CN_CUSTOMER,
+         CN_TYPE,
+         CN_CONTACT,
+         CN_TIME,
+         CN_CONTENT,
+         CN_RESULT,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  		#{cpCode},
+  		#{cnIdentifer},
+  		#{cnCustomer},
+  		#{cnType},
+  		#{cnContact},
+  		#{cnTime},
+  		#{cnContent},
+  		#{cnResult},
+  		#{operator},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCstVisit">
+  	UPDATE AT_CST_VISIT
+  		SET
+	  	    	CP_CODE = #{cpCode}
+	  	    	,CN_IDENTIFER = #{cnIdentifer}
+	  		<if test="cnCustomer != null">
+	  	    	,CN_CUSTOMER = #{cnCustomer}
+	  		</if>
+	  		<if test="cnType > 0">
+	  	    	,CN_TYPE = #{cnType}
+	  		</if>
+	  		<if test="cnContact != null">
+	  	    	,CN_CONTACT = #{cnContact}
+	  		</if>
+	  		<if test="cnTime != null">
+	  	    	,CN_TIME = #{cnTime}
+	  		</if>
+	  		<if test="cnContent != null">
+	  	    	,CN_CONTENT = #{cnContent}
+	  		</if>
+	  		<if test="cnResult >= 0">
+	  	    	,CN_RESULT = #{cnResult}
+	  		</if>
+	  		<if test="operator != null">
+	  	    	,OPERATOR = #{operator}
+	  		</if>
+	  			,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  			,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_CST_VISIT WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AtCstVisit">
+  	SELECT
+  		 c.ID as id,
+  		 CP_CODE as cpCode,
+  		 CN_IDENTIFER as cnIdentifer,
+         CN_CUSTOMER as cnCustomer,
+         CN_TYPE as cnType,
+         CN_CONTACT as cnContact,
+         CN_TIME as cnTime,
+         CN_CONTENT as cnContent,
+         CN_RESULT as cnResult,
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_CST_VISIT c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCstVisit">
+	  	SELECT
+	  		 c.ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CN_IDENTIFER as cnIdentifer,
+	         CN_CUSTOMER as cnCustomer,
+	         CN_TYPE as cnType,
+	         CN_CONTACT as cnContact,
+	         CN_TIME as cnTime,
+	         CN_CONTENT as cnContent,
+	         CN_RESULT as cnResult,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+		     UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_CST_VISIT c 
+	    	where 1 = 1
+	    	<if test="cpCode != null and cpCode != ''">
+ 	    		and CP_CODE = #{cpCode}
+	 		</if>
+	 		<if test="cnIdentifer != null and cnIdentifer != ''">
+	 	    	and CN_IDENTIFER = #{cnIdentifer}
+	 		</if>
+	 		<if test="cnCustomer != null and cnCustomer != ''">
+	 	    	and CN_CUSTOMER like #{cnCustomer}
+	 		</if>
+	  		<if test="cnType > 0">
+	  	    	and CN_TYPE = #{cnType}
+	  		</if>
+	  		<if test="cnResult > 0">
+	 	    	and CN_RESULT = #{cnResult}
+	 		</if>
+	 		<if test="operator != null and operator != ''">
+	  	    	and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null and remark != ''">
+	  	    	and REMARK like #{remark}
+	  		</if>
+	    	ORDER BY createTime DESC
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM AT_CST_VISIT c
+  		where 1 = 1
+    	<if test="cpCode != null and cpCode != ''">
+	    		and CP_CODE = #{cpCode}
+ 		</if>
+ 		<if test="cnIdentifer != null and cnIdentifer != ''">
+ 	    	and CN_IDENTIFER = #{cnIdentifer}
+ 		</if>
+ 		<if test="cnCustomer != null and cnCustomer != ''">
+ 	    	and CN_CUSTOMER like #{cnCustomer}
+ 		</if>
+  		<if test="cnType > 0">
+  	    	and CN_TYPE = #{cnType}
+  		</if>
+  		<if test="cnResult > 0">
+ 	    	and CN_RESULT = #{cnResult}
+ 		</if>
+ 		<if test="operator != null and operator != ''">
+  	    	and OPERATOR = #{operator}
+  		</if>
+  		<if test="remark != null and remark != ''">
+  	    	and REMARK like #{remark}
+  		</if>
+  </select>
+  
+  <select id="findAll" resultType="AtCstVisit">
+  	SELECT
+  		 c.ID as id,
+  		 CP_CODE as cpCode,
+  		 CN_IDENTIFER as cnIdentifer,
+         CN_CUSTOMER as cnCustomer,
+         CN_TYPE as cnType,
+         CN_CONTACT as cnContact,
+         CN_TIME as cnTime,
+         CN_CONTENT as cnContent,
+         CN_RESULT as cnResult,
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_CST_VISIT c 
+    	ORDER BY createTime
+  </select>
+</mapper>

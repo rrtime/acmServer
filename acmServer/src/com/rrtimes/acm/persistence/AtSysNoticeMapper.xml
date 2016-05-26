@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtSysNoticeMapper">
+
+  <insert id="insert" parameterType="AtSysNotice">
+  	INSERT INTO AT_SYS_NOTICE(
+  		 CP_CODE,
+         N_TITLE,
+         N_KEY,
+         N_CONTENT,
+         N_HISTORY,
+         OIDS,
+         UIDS,
+         UID,
+         LAST_UID,
+         REMARK )
+  	VALUES(
+  	     #{cpCode},
+  		 #{ntitle},
+  		 #{nkey},
+         #{ncontent},
+         #{nhistory},
+         #{oids},
+         #{uids},
+         #{uid},
+         #{lastUid},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtSysNotice">
+  	UPDATE AT_SYS_NOTICE
+  		SET
+            CP_CODE = #{cpCode}
+	  		<if test="ntype != null">
+	  	    ,N_TYPE = #{ntype}
+	  		</if>
+	  		,N_TITLE = #{ntitle}
+	  		<if test="nkey!=null">
+	  		,N_KEY = #{nkey}
+	  		</if>
+	  		,N_CONTENT = #{ncontent}
+	  		<if test="nstatus!=null">
+	  		,N_STATUS = #{nstatus}
+	  		</if>
+	  		<if test="nhistory!=null">
+	  		,N_HISTORY = #{nhistory}
+	  		</if>
+	  		<if test="oids!=null">
+	  		,OIDS = #{oids}
+	  		</if>
+	  		<if test="uids!=null">
+	  		,UIDS = #{uids}
+	  		</if>
+	  		,UID = #{uid}
+	  		<if test="lastUid!=null">
+	  		,LAST_UID = #{lastUid}
+	  		</if>
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_SYS_NOTICE WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtSysNotice">
+	  	SELECT
+	  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_SYS_NOTICE  
+	    	WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="cpCode != null">
+	  	    and CP_CODE = #{cpCode}
+	  		</if>
+	  		<if test="nType != null">
+	  		and N_TYPE = #{nType}
+	  		</if>
+	  		<if test="nTitle != null">
+	  		and N_TITLE = #{nTitle}
+	  		</if>	
+	  		<if test="nKey !=null">
+	  		and N_KEY = #{nKey}
+	  		</if>
+	  		<if test="nContent!=null">
+	  		and N_CONTENT = #{nContent}
+	  		</if>
+	  		<if test="nStatus!=null">
+	  		and N_STATUS = #{nStatus}
+	  		</if>
+	  		<if test="nHistory!=null">
+	  		and N_HISTORY = #{nHistory}
+	  		</if>
+	  		<if test="oids!=null">
+	  		and OIDS = #{oids}
+	  		</if>
+	  		<if test="uids!=null">
+	  		and UIDS = #{uids}
+	  		</if>
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findGnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_TYPE=2 and N_STATUS=1 and UID=#{userId}
+  </select>
+  
+  <select id="findNoticeByGUserId" parameterType="Map" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_TYPE=2 and N_STATUS=1 and OIDS like #{oid} or UIDS like #{uid}
+  </select>
+  
+  <select id="findCGnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_TYPE=2 and N_STATUS=2 and UID=#{userId}
+  </select>
+  
+  <select id="findTnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_TYPE=1 and UID=#{userId}
+  </select>
+  
+  <select id="findNoticeByTUserId" parameterType="Map" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_TYPE=1 and OIDS like #{oid} or UIDS like #{uid}
+  </select>
+  
+  <select id="findCTnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_TYPE=1 and N_STATUS=2 and UID=#{userId}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_SYS_NOTICE 
+	    WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="cpCode != null">
+	  	    and CP_CODE = #{cpCode}
+	  		</if>
+	  		<if test="nType != null">
+	  		and N_TYPE = #{nType}
+	  		</if>
+	  		<if test="nTitle != null">
+	  		and N_TITLE = #{nTitle}
+	  		</if>	
+	  		<if test="nKey !=null">
+	  		and N_KEY = #{nKey}
+	  		</if>
+	  		<if test="nContent!=null">
+	  		and N_CONTENT = #{nContent}
+	  		</if>
+	  		<if test="nStatus!=null">
+	  		and N_STATUS = #{nStatus}
+	  		</if>
+	  		<if test="nHistory!=null">
+	  		and N_HISTORY = #{nHistory}
+	  		</if>
+	  		<if test="oids!=null">
+	  		and OIDS = #{oids}
+	  		</if>
+	  		<if test="uids!=null">
+	  		and UIDS = #{uids}
+	  		</if>	
+  </select>
+
+</mapper>

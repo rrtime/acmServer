@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCstContractMapper">
+
+  <insert id="insert" parameterType="AtCstContract">
+  	INSERT INTO AT_CST_CONTRACT(
+  		 CSR_IDENTIFER,
+  		 SERVICE_TYPE,
+         START_TIME,
+         END_TIME,
+         SERVICE_FEE,
+         PAY_CYCLE,
+         PAY_DAY,
+         SORT_TYPE,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  	     #{csrIdentifer},
+  		 #{serviceType},
+  		 #{startTime},
+  		 #{endTime},
+  		 #{serviceFee},
+  		 #{payCycle},
+  		 #{payDay},
+  		 #{sortType},
+  		 #{operator},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCstContract">
+  	UPDATE AT_CST_CONTRACT
+  		SET
+            CSR_IDENTIFER = #{csrIdentifer}
+    		,SERVICE_TYPE = #{serviceType}
+	  	    ,START_TIME = #{startTime}
+	  	    ,END_TIME = #{endTime}
+	  		,SERVICE_FEE = #{serviceFee}
+	  		,PAY_CYCLE = #{payCycle}
+	  		,PAY_DAY = #{payDay}
+	  		,SORT_TYPE = #{sortType}
+	  		,OPERATOR = #{operator}
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_CST_CONTRACT WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCstContract">
+	  	SELECT
+	  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 SERVICE_TYPE as serviceType,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         SERVICE_FEE as serviceFee,
+	         PAY_CYCLE as payCycle,
+	         PAY_DAY as payDay,
+	         SORT_TYPE as sortType,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_CST_CONTRACT  
+	    	WHERE 1 = 1
+	    	<if test="csrIdentifer!=null">
+	    	and CSR_IDENTIFER = #{csrIdentifer}
+	    	</if>
+	    	<if test="serviceType != null">
+    		and SERVICE_TYPE = #{serviceType}
+    		</if>
+	  		<if test="startTime != null">
+	  	    and START_TIME = #{startTime}
+	  		</if>
+	  		<if test="endTime != null">
+	  	    and END_TIME = #{endTime}
+	  		</if>
+	  		<if test="serviceFee != null">
+	  		and SERVICE_FEE = #{serviceFee}
+	  		</if>
+	  		<if test="payCycle != null">
+	  		and PAY_CYCLE = #{payCycle}
+	  		</if>
+	  		<if test="payDay != null">
+	  		and PAY_DAY = #{payDay}
+	  		</if>
+	  		<if test="sortType != null">
+	  		and SORT_TYPE = #{sortType}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtCstContract">
+  	SELECT
+  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 SERVICE_TYPE as serviceType,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         SERVICE_FEE as serviceFee,
+	         PAY_CYCLE as payCycle,
+	         PAY_DAY as payDay,
+	         SORT_TYPE as sortType,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_CONTRACT  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByUserIdAndDay"  parameterType="Map" resultType="AtCstContract">
+  	SELECT
+  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 SERVICE_TYPE as serviceType,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         SERVICE_FEE as serviceFee,
+	         PAY_CYCLE as payCycle,
+	         PAY_DAY as payDay,
+	         SORT_TYPE as sortType,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_CONTRACT  
+    WHERE 
+      CSR_IDENTIFER in
+      (
+		  select CSR_IDENTIFER from AT_CSR_BASIC 
+			where 
+				OPERATOR=
+			 (
+					select id from AT_USER where id=#{userId}
+			 )
+	  )
+      AND END_TIME
+      BETWEEN 
+      NOW() 
+      AND 
+      #{day}
+  </select>
+  
+  <select id="findByUserId"  resultType="AtCstContract">
+  	SELECT
+  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 SERVICE_TYPE as serviceType,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         SERVICE_FEE as serviceFee,
+	         PAY_CYCLE as payCycle,
+	         PAY_DAY as payDay,
+	         SORT_TYPE as sortType,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_CONTRACT  
+    WHERE 
+       1=1
+       and CSR_IDENTIFER in
+       (
+		  select CSR_IDENTIFER from AT_CSR_BASIC 
+			where 
+				OPERATOR=
+			 (
+					select id from AT_USER where id=#{userId}
+			 )
+	   )
+       and CURDATE()= date_format(END_TIME,'%Y-%m-%d')
+  </select>
+  
+  <select id="findByCsrIdentifer"  resultType="AtCstContract">
+  	SELECT
+  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 SERVICE_TYPE as serviceType,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         SERVICE_FEE as serviceFee,
+	         PAY_CYCLE as payCycle,
+	         PAY_DAY as payDay,
+	         SORT_TYPE as sortType,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_CONTRACT  
+    WHERE 
+       1=1
+       and CSR_IDENTIFER = #{csrIdentifer}
+  </select>
+  
+  <select id="findByContractIdAndDaybefore"  parameterType="Map" resultType="Map">
+  	select * from AT_CST_FEE
+	where nid=#{contractId}
+	and 
+	FEE_TIME BETWEEN #{date} and CURDATE()
+  </select>
+  
+  <select id="findByContractIdAndDayaffer"  resultType="Map">
+  	select * from AT_CST_FEE
+	where nid=#{contractId}
+	and 
+	FEE_TIME BETWEEN #{datebegin} 
+	and 
+	#{datend}
+  </select>
+  
+  <select id="findPaydayByUserId"  resultType="AtCstContract">
+  	SELECT
+	        ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 SERVICE_TYPE as serviceType,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         SERVICE_FEE as serviceFee,
+	         PAY_CYCLE as payCycle,
+	         PAY_DAY as payDay,
+	         SORT_TYPE as sortType,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_CONTRACT  
+    WHERE 
+      CSR_IDENTIFER in
+       (
+		  select CSR_IDENTIFER from AT_CSR_BASIC 
+			where 
+				OPERATOR=
+			 (
+					select id from AT_USER where id=#{userId}
+			 )
+	   )
+  </select>
+  
+  <select id="findContractQFByUserId"  resultType="Map">
+  	select * from AT_CST_FEE
+	where nid=#{contractId}
+	and 
+	FEE_TIME BETWEEN #{datebegin} 
+	and 
+	#{datend}
+  </select>
+  
+   <select id="findQFByUserId" parameterType="int" resultType="AtCstContract">
+  	select 
+			 c.ID as id,
+	  		 c.CSR_IDENTIFER as csrIdentifer,
+	  		 c.SERVICE_TYPE as serviceType,
+	         c.START_TIME as startTime,
+	         c.END_TIME as endTime,
+	         c.SERVICE_FEE as serviceFee,
+	         c.PAY_CYCLE as payCycle,
+	         c.PAY_DAY as payDay,
+	         c.SORT_TYPE as sortType,
+	         c.OPERATOR as operator,
+	         c.CREATE_TIME as createTime,
+	         c.UPDATE_TIME as updateTime,
+	         c.REMARK as remark
+	          from AT_CST_CONTRACT c LEFT JOIN AT_CST_FEE f on
+    c.ID=f.NID where  NOW() > f.END_TIME
+    and c.CSR_IDENTIFER in
+       (
+		  select CSR_IDENTIFER from AT_CSR_BASIC 
+			where 
+				OPERATOR=
+			 (
+					select id from AT_USER where id=#{userId}
+			 )
+	   )
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_CST_CONTRACT 
+	    WHERE 1 = 1
+	    	<if test="csrIdentifer!=null">
+	    	and CSR_IDENTIFER = #{csrIdentifer}
+	    	</if>
+	   		<if test="serviceType != null">
+    		and SERVICE_TYPE = #{serviceType}
+    		</if>
+	  		<if test="serviceCycle != null">
+	  	    and SERVICE_CYCLE = #{serviceCycle}
+	  		</if>
+	  		<if test="serviceFee != null">
+	  		and SERVICE_FEE = #{serviceFee}
+	  		</if>
+	  		<if test="payCycle != null">
+	  		and PAY_CYCLE = #{payCycle}
+	  		</if>
+	  		<if test="payDay != null">
+	  		and PAY_DAY = #{payDay}
+	  		</if>
+	  		<if test="sortType != null">
+	  		and SORT_TYPE = #{sortType}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>		
+  </select>
+
+</mapper>

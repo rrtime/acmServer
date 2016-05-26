@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCstFtMapper">
+
+  <insert id="insert" parameterType="AtCstFt">
+  	INSERT INTO AT_CST_FT(
+  		 CSR_IDENTIFER,
+  		 FT_INST,
+         RIDS,
+         RECEPIT_COUNT,
+         OWN_TAX_STATION,
+         OWN_DECLARE_TIME,
+         OWN_LEVY_TYPE,
+         OWN_TAX_TYPE,
+         OWN_TAX_RATE,
+         ADD_TAX_OWNER,
+         ADD_TAX_STATION,
+         ADD_TAX_DECLARE_TIME,
+         ADD_TAX_LEVY_TYPE,
+         ADD_TAX_TYPE,
+         ADD_TAX_RATE,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  	     #{csrIdentifer},
+  		 #{ftInst},
+  		 #{rids},
+  		 #{recepitCount},
+  		 #{ownTaxStation},
+  		 #{ownDeclareTime},
+  		 #{ownLevyType},
+  		 #{ownTaxType},
+  		 #{ownTaxRate},
+  		 #{addTaxOwner},
+  		 #{addTaxStation},
+  		 #{addTaxDeclareTime},
+  		 #{addTaxLevyType},
+  		 #{addTaxType},
+  		 #{addTaxRate},
+  		 #{operator},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCstFt">
+  	UPDATE AT_CST_FT
+  		SET
+            CSR_IDENTIFER = #{csrIdentifer}
+            <if test="ftInst != null">
+    		,FT_INST = #{ftInst}
+	  		</if>
+	  		<if test="rids != null">
+	  	    ,RIDS = #{rids}
+	  		</if>
+	  		,RECEPIT_COUNT = #{recepitCount}
+	  		,OWN_TAX_STATION = #{ownTaxStation}
+	  		,OWN_DECLARE_TIME = #{ownDeclareTime}
+	  		,OWN_LEVY_TYPE = #{ownLevyType}
+	  		,OWN_TAX_TYPE = #{ownTaxType}
+	  		<if test="ownTaxRate != null">
+	  		,OWN_TAX_RATE = #{ownTaxRate}
+	  		</if>
+	  		,ADD_TAX_OWNER = #{addTaxOwner}
+	  		,ADD_TAX_STATION = #{addTaxStation}
+	  		,ADD_TAX_DECLARE_TIME = #{addTaxDeclareTime}
+	  		,ADD_TAX_LEVY_TYPE = #{addTaxLevyType}
+	  		,ADD_TAX_TYPE = #{addTaxType}
+	  		,ADD_TAX_RATE = #{addTaxRate}
+	  		,OPERATOR = #{operator}
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_CST_FT WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCstFt">
+	  	SELECT
+	  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 FT_INST as ftInst,
+	         RIDS as rids,
+	         RECEPIT_COUNT as recepitCount,
+	         OWN_TAX_STATION as ownTaxStation,
+	         OWN_DECLARE_TIME as ownDeclareTime,
+	         OWN_LEVY_TYPE as ownLevyType,
+	         OWN_TAX_TYPE as ownTaxType,
+	         OWN_TAX_RATE as ownTaxRate,
+	         ADD_TAX_OWNER as addTaxOwner,
+	         ADD_TAX_STATION as addTaxStation,
+	         ADD_TAX_DECLARE_TIME as addTaxDeclareTime,
+	         ADD_TAX_LEVY_TYPE as addTaxLevyType,
+	         ADD_TAX_TYPE as addTaxType,
+	         ADD_TAX_RATE as addTaxRate,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_CST_FT  
+	    	WHERE 1 = 1
+	    	<if test="csrIdentifer!=null">
+	    	and CSR_IDENTIFER = #{csrIdentifer}
+	    	</if>
+	    	<if test="ftInst != null">
+    		and FT_INST = #{ftInst}
+	  		</if>
+	  		<if test="rids != null">
+	  	    and RIDS = #{rids}
+	  		</if>
+	  		<if test="recepitCount != null">
+	  		and RECEPIT_COUNT = #{recepitCount}
+	  		</if>
+	  		<if test="ownTaxStation != null">
+	  		and OWN_TAX_STATION = #{ownTaxStation}
+	  		</if>
+	  		<if test="ownDeclareTime != null">
+	  		and OWN_DECLARE_TIME = #{ownDeclareTime}
+	  		</if>
+	  		<if test="ownLevyType != null">
+	  		and OWN_LEVY_TYPE = #{ownLevyType}
+	  		</if>
+	  		<if test="ownTaxType != null">
+	  		and OWN_TAX_TYPE = #{ownTaxType}
+	  		</if>
+	  		<if test="ownTaxRate != null">
+	  		and OWN_TAX_RATE = #{ownTaxRate}
+	  		</if>
+	  		<if test="addTaxOwner != null">
+	  		and ADD_TAX_OWNER = #{addTaxOwner}
+	  		</if>
+	  		<if test="addTaxStation != null">
+	  		and ADD_TAX_STATION = #{addTaxStation}
+	  		</if>
+	  		<if test="addTaxDeclareTime != null">
+	  		and ADD_TAX_DECLARE_TIME = #{addTaxDeclareTime}
+	  		</if>
+	  		<if test="addTaxLevyType != null">
+	  		and ADD_TAX_LEVY_TYPE = #{addTaxLevyType}
+	  		</if>
+	  		<if test="addTaxType != null">
+	  		and ADD_TAX_TYPE = #{addTaxType}
+	  		</if>
+	  		<if test="addTaxRate != null">
+	  		and ADD_TAX_RATE = #{addTaxRate}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtCstFt">
+  	SELECT
+  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 FT_INST as ftInst,
+	         RIDS as rids,
+	         RECEPIT_COUNT as recepitCount,
+	         OWN_TAX_STATION as ownTaxStation,
+	         OWN_DECLARE_TIME as ownDeclareTime,
+	         OWN_LEVY_TYPE as ownLevyType,
+	         OWN_TAX_TYPE as ownTaxType,
+	         OWN_TAX_RATE as ownTaxRate,
+	         ADD_TAX_OWNER as addTaxOwner,
+	         ADD_TAX_STATION as addTaxStation,
+	         ADD_TAX_DECLARE_TIME as addTaxDeclareTime,
+	         ADD_TAX_LEVY_TYPE as addTaxLevyType,
+	         ADD_TAX_TYPE as addTaxType,
+	         ADD_TAX_RATE as addTaxRate,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_FT  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByCsrIdentifer" parameterType="String" resultType="AtCstFt">
+  	SELECT
+  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 FT_INST as ftInst,
+	         RIDS as rids,
+	         RECEPIT_COUNT as recepitCount,
+	         OWN_TAX_STATION as ownTaxStation,
+	         OWN_DECLARE_TIME as ownDeclareTime,
+	         OWN_LEVY_TYPE as ownLevyType,
+	         OWN_TAX_TYPE as ownTaxType,
+	         OWN_TAX_RATE as ownTaxRate,
+	         ADD_TAX_OWNER as addTaxOwner,
+	         ADD_TAX_STATION as addTaxStation,
+	         ADD_TAX_DECLARE_TIME as addTaxDeclareTime,
+	         ADD_TAX_LEVY_TYPE as addTaxLevyType,
+	         ADD_TAX_TYPE as addTaxType,
+	         ADD_TAX_RATE as addTaxRate,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_FT  
+    WHERE CSR_IDENTIFER=#{csrIdentifer}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_CST_FT 
+	    WHERE 1 = 1
+	    	<if test="csrIdentifer!=null">
+	    	and CSR_IDENTIFER = #{csrIdentifer}
+	    	</if>
+	   		<if test="ftInst != null">
+    		and FT_INST = #{ftInst}
+	  		</if>
+	  		<if test="rids != null">
+	  	    and RIDS = #{rids}
+	  		</if>
+	  		<if test="recepitCount != null">
+	  		and RECEPIT_COUNT = #{recepitCount}
+	  		</if>
+	  		<if test="ownTaxStation != null">
+	  		and OWN_TAX_STATION = #{ownTaxStation}
+	  		</if>
+	  		<if test="ownDeclareTime != null">
+	  		and OWN_DECLARE_TIME = #{ownDeclareTime}
+	  		</if>
+	  		<if test="ownLevyType != null">
+	  		and OWN_LEVY_TYPE = #{ownLevyType}
+	  		</if>
+	  		<if test="ownTaxType != null">
+	  		and OWN_TAX_TYPE = #{ownTaxType}
+	  		</if>
+	  		<if test="ownTaxRate != null">
+	  		and OWN_TAX_RATE = #{ownTaxRate}
+	  		</if>
+	  		<if test="addTaxOwner != null">
+	  		and ADD_TAX_OWNER = #{addTaxOwner}
+	  		</if>
+	  		<if test="addTaxStation != null">
+	  		and ADD_TAX_STATION = #{addTaxStation}
+	  		</if>
+	  		<if test="addTaxDeclareTime != null">
+	  		and ADD_TAX_DECLARE_TIME = #{addTaxDeclareTime}
+	  		</if>
+	  		<if test="addTaxLevyType != null">
+	  		and ADD_TAX_LEVY_TYPE = #{addTaxLevyType}
+	  		</if>
+	  		<if test="addTaxType != null">
+	  		and ADD_TAX_TYPE = #{addTaxType}
+	  		</if>
+	  		<if test="addTaxRate != null">
+	  		and ADD_TAX_RATE = #{addTaxRate}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>
+  </select>
+
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+ 	<package name="struts-charge" extends="struts-base" namespace="/sm">
+ 	
+ 		<default-interceptor-ref name="loginInterceptorStack"/>
+ 		
+ 		<!-- 系统菜单、角色管理 -->
+ 		<action name="sysMag" class="com.rrtimes.acm.action.SystemManagerAction">
+			<result name="index" type="dispatcher">/index.jsp</result>
+			<result name="head" type="dispatcher">/WEB-INF/manager/header.jsp</result>
+			<result name="menu" type="dispatcher">/WEB-INF/manager/menu.jsp</result>
+			<result name="main" type="dispatcher">/WEB-INF/manager/main.jsp</result>
+			<result name="addMenu" type="dispatcher">/WEB-INF/jsp/system/addMenu.jsp</result>
+			<result name="menuList" type="dispatcher">/WEB-INF/jsp/system/menuList.jsp</result>
+			<result name="logList" type="dispatcher">/WEB-INF/jsp/system/logQuery.jsp</result>
+			<result name="logDetail" type="dispatcher">/WEB-INF/jsp/system/logDetail.jsp</result>
+			<result name="roleList" type="dispatcher">/WEB-INF/jsp/system/roleList.jsp</result>
+			<result name="roleDetail" type="dispatcher">/WEB-INF/jsp/system/amdRole.jsp</result>
+ 		</action>
+ 		
+ 		<!-- 系统用户管理 -->
+ 		<action name="userMag" class="com.rrtimes.acm.action.UserManagerAction">
+ 			<result name="suc" type="dispatcher">/WEB-INF/manager/index.jsp</result>
+			<result name="addUser" type="dispatcher">/WEB-INF/jsp/system/addUser.jsp</result>
+			<result name="modUser" type="dispatcher">/WEB-INF/jsp/system/addUser.jsp</result>
+			<result name="userList" type="dispatcher">/WEB-INF/jsp/system/userList.jsp</result>
+			<result name="modPwd" type="dispatcher">/WEB-INF/jsp/system/modPwd.jsp</result>
+			<result name="main" type="dispatcher">/WEB-INF/manager/main.jsp</result>
+			<result name="login" type="dispatcher">/login.jsp</result>
+		</action>
+ 		
+ 		<!-- 系统首页显示管理 -->
+		<action name="sysMenu" class="com.rrtimes.acm.action.SystemManagerAction">
+			<result name="index" type="dispatcher">/index.jsp</result>
+			<result name="head" type="dispatcher">/WEB-INF/manager/header.jsp</result>
+			<result name="menu" type="dispatcher">/WEB-INF/manager/menu.jsp</result>
+			<result name="main" type="dispatcher">/WEB-INF/manager/main.jsp</result>
+			<result name="foot" type="dispatcher">/WEB-INF/manager/footer.jsp</result>
+			<result name="home" type="dispatcher">/WEB-INF/manager/home.jsp</result>
+ 		</action>
+ 		
+ 		<!-- 开发者信息管理 -->
+ 		<action name="devMan" class="com.rrtimes.acm.action.OcsDevelopAction">
+			<result name="developPage" type="dispatcher">/WEB-INF/jsp/billing/developerQuery.jsp</result>
+			<result name="developDetail" type="dispatcher">/WEB-INF/jsp/billing/developDetail.jsp</result>
+			<result name="pagOrder" type="dispatcher">/WEB-INF/jsp/billing/devPagRln.jsp</result>
+		</action>
+		
+		<!-- 应用信息管理 -->
+ 		<action name="appMan" class="com.rrtimes.acm.action.OcsAppAction">
+			<result name="appList" type="dispatcher">/WEB-INF/jsp/billing/appQuery.jsp</result>
+			<result name="appDetail" type="dispatcher">/WEB-INF/jsp/billing/appDetail.jsp</result>
+			<result name="pagOrder" type="dispatcher">/WEB-INF/jsp/billing/devPagRln.jsp</result>
+		</action>
+		
+		<!-- 费率套餐计划管理 -->
+ 		<action name="pagMan" class="com.rrtimes.acm.action.OcsPackageAction">
+			<result name="addPag" type="dispatcher">/WEB-INF/jsp/rate/addRatePackage.jsp</result>
+			<result name="pagList" type="dispatcher">/WEB-INF/jsp/rate/ratePackageList.jsp</result>
+			<result name="pagDetail" type="dispatcher">/WEB-INF/jsp/rate/ratePackageDetail.jsp</result>
+			<result name="addPagType" type="dispatcher">/WEB-INF/jsp/rate/addPackageType.jsp</result>
+			<result name="modPagType" type="dispatcher">/WEB-INF/jsp/rate/modRatePackage.jsp</result>
+			<result name="pagTypeList" type="dispatcher">/WEB-INF/jsp/rate/packageTypeList.jsp</result>
+			<result name="pagTypeDetail" type="dispatcher">/WEB-INF/jsp/rate/packageTypeDetail.jsp</result>
+			<result name="addBusiType" type="dispatcher">/WEB-INF/jsp/rate/addBusinessType.jsp</result>
+			<result name="busiTypeList" type="dispatcher">/WEB-INF/jsp/rate/businessTypeList.jsp</result>
+			<result name="busiTypeDetail" type="dispatcher">/WEB-INF/jsp/rate/businessTypeDetail.jsp</result>
+		</action>
+ 		
+ 		<!-- 分拣源管理 -->
+ 		<action name="cdrMag" class="com.rrtimes.acm.action.OcsCdrAction">
+			<result name="addCdr" type="dispatcher">/WEB-INF/jsp/cdr/addCdrRes.jsp</result>
+			<result name="modCdr" type="dispatcher">/WEB-INF/jsp/cdr/addCdrRes.jsp</result>
+			<result name="cdrList" type="dispatcher">/WEB-INF/jsp/cdr/cdrResList.jsp</result>
+			<result name="cdrDetail" type="dispatcher">/WEB-INF/jsp/cdr/addCdrRes.jsp</result>
+		</action>
+		
+		<!-- 详单查询 -->
+ 		<action name="billMag" class="com.rrtimes.acm.action.OcsBillManagerAction">
+			<result name="billList" type="dispatcher">/WEB-INF/jsp/cdr/billList.jsp</result>
+			<result name="billDetail" type="dispatcher">/WEB-INF/jsp/cdr/billDetail.jsp</result>
+		</action>
+		
+		<!-- 已分拣文件、分拣日志查询 -->
+ 		<action name="sortMag" class="com.rrtimes.acm.action.OcsBillManagerAction">
+			<result name="sortList" type="dispatcher">/WEB-INF/jsp/cdr/sortFilesList.jsp</result>
+			<result name="cdrOfRecords" type="dispatcher">/WEB-INF/jsp/cdr/cdrOfRecords.jsp</result>
+			<result name="sortLog" type="dispatcher">/WEB-INF/jsp/cdr/sortLog.jsp</result>
+			<result name="sortDetail" type="dispatcher">/WEB-INF/jsp/cdr/sortFileDetail.jsp</result>
+		</action>
+		
+		<!-- 账单查询 -->
+ 		<action name="zdMag" class="com.rrtimes.acm.action.OcsBillManagerAction">
+			<result name="billQuery" type="dispatcher">/WEB-INF/jsp/finance/billQuery.jsp</result>
+			<result name="billDetail" type="dispatcher">/WEB-INF/jsp/finance/billDetail.jsp</result>
+		</action>
+		
+		<!--  呼叫类型管理-->
+		<action name="callTypeMag" class="com.rrtimes.acm.action.OcsRateCallTypeAction">
+			<result name="rateCallTypeList" type="dispatcher">/WEB-INF/jsp/rate/callTypeList.jsp</result>
+			<result name="addCallTypePage" type="dispatcher">/WEB-INF/jsp/rate/addCallTypePage.jsp</result>
+		</action>
+		<!--  套餐业务类型管理-->
+		<action name="packBusMag" class="com.rrtimes.acm.action.OcsPackageBusinessAction">
+			<result name="packageBusinessList" type="dispatcher">/WEB-INF/jsp/rate/packageBusinessList.jsp</result>
+			<result name="addPackageBusiness" type="dispatcher">/WEB-INF/jsp/rate/addPackageBusinessPage.jsp</result>
+		</action>
+		<!--  费率优惠策略管理-->
+		<action name="ratSalPolicyMag" class="com.rrtimes.acm.action.OcsRateSalePolicyAction">
+			<result name="rateSalePolicyList" type="dispatcher">/WEB-INF/jsp/rate/rateSalePolicyList.jsp</result>
+			<result name="addRateSalePolicy" type="dispatcher">/WEB-INF/jsp/rate/addRateSalePolicyPage.jsp</result>
+		</action>
+		
+ 		
+		
+ 		<!-- 用户管理 -->
+ 		<action name="um" class="com.tstar.monitor.action.UserManagerAction">
+ 			<interceptor-ref name="tokenSession" />
+			<interceptor-ref name="defaultStack" />            
+			<result name="adduser" type="dispatcher">/WEB-INF/system/addsysuser.jsp</result>
+			<result name="users" type="dispatcher">/WEB-INF/system/users.jsp</result>
+		</action>
+		
+    </package>
+</struts>

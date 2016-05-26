@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AcmSysRoleRuleMapper">
+
+  <insert id="insert" parameterType="AcmSysRoleRule">
+  	INSERT INTO ACM_SYS_ROLE_RULE(
+  		 ID,
+  		 RID,
+  		 MID,
+         FUN_CODE,
+         REMARK )
+  	VALUES(
+  		#{id},
+  		#{rid},
+  		#{mid},
+  		#{funCode},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AcmSysRoleRule">
+  	UPDATE ACM_SYS_ROLE_RULE
+  		SET
+	  	    	RID = #{rid},
+	  	    	MID = #{mid}
+	  		<if test="funCode != null">
+	  	    	,FUN_CODE = #{funCode}
+	  		</if>
+    			,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  			,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM ACM_SYS_ROLE_RULE WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AcmSysRoleRule">
+  	SELECT
+  		 c.ID as id,
+  		 RID as rid,
+  		 MID as mid,
+  		 FUN_CODE as funCode,
+         CREATE_TIME as createTime,
+         UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM ACM_SYS_ROLE_RULE c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AcmSysRoleRule">
+	  	SELECT
+	  		 c.ID as id,
+	  		 RID as rid,
+	  		 MID as mid,
+	  		 FUN_CODE as funCode,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM ACM_SYS_ROLE_RULE c 
+	    	ORDER BY createTime DESC
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findAll" resultType="AcmSysRoleRule">
+	  	SELECT
+	  		 c.ID as id,
+	  		 RID as rid,
+	  		 MID as mid,
+	  		 FUN_CODE as funCode,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM ACM_SYS_ROLE_RULE c 
+	    	ORDER BY createTime
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM ACM_SYS_ROLE_RULE c
+  </select>
+  
+</mapper>

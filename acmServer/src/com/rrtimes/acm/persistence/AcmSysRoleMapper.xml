@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AcmSysRoleMapper">
+
+  <insert id="insert" parameterType="AcmSysRole">
+  	INSERT INTO ACM_SYS_ROLE(
+  		 ID,
+  		 ROLE_NAME,
+  		 ROLE_DESC,
+         IS_FILED,
+         ROLE_STATUS,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  		#{id},
+  		#{roleName},
+  		#{roleDesc},
+  		#{isFiled},
+  		#{roleStatus},
+  		#{operator},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AcmSysRole">
+  	UPDATE ACM_SYS_ROLE
+  		SET
+	  	    	ROLE_NAME = #{roleName}
+	  		<if test="roleDesc != null">
+	  	    	,ROLE_DESC = #{roleDesc}
+	  		</if>
+	  		<if test="isFiled >= 0">
+	  	    	,IS_FILED = #{isFiled}
+	  		</if>
+	  	    	,ROLE_STATUS = #{roleStatus}
+    			,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  			,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM ACM_SYS_ROLE WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AcmSysRole">
+  	SELECT
+  		 c.ID as id,
+  		 ROLE_NAME as roleName,
+  		 ROLE_DESC as roleDesc,
+  		 IS_FILED as isFiled,
+  		 ROLE_STATUS as roleStatus,
+  		 OPERATOR as operator,
+         CREATE_TIME as createTime,
+         UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM ACM_SYS_ROLE c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AcmSysRole">
+	  	SELECT
+	  		 c.ID as id,
+	  		 ROLE_NAME as roleName,
+	  		 ROLE_DESC as roleDesc,
+	  		 IS_FILED as isFiled,
+	  		 ROLE_STATUS as roleStatus,
+	  		 OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM ACM_SYS_ROLE c 
+	    	ORDER BY createTime DESC
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findAll" resultType="AcmSysRole">
+	  	SELECT
+	  		 c.ID as id,
+	  		 ROLE_NAME as roleName,
+	  		 ROLE_DESC as roleDesc,
+	  		 IS_FILED as isFiled,
+	  		 ROLE_STATUS as roleStatus,
+	  		 OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM ACM_SYS_ROLE c 
+	    	ORDER BY createTime
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM ACM_SYS_ROLE c
+  </select>
+  
+</mapper>

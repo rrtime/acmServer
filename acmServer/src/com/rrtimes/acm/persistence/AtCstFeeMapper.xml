@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCstFeeMapper">
+
+  <insert id="insert" parameterType="AtCstFee">
+  	INSERT INTO AT_CST_FEE(
+  		 NID,
+  		 CID,
+         PAY_TYPE,
+         FEE_TIME,
+         FEE_SUM,
+         START_TIME,
+         END_TIME,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  		#{nid},
+  		#{cid},
+  		#{payType},
+  		#{feeTime},
+  		#{feeSum},
+  		#{startTime},
+  		#{endTime},
+  		#{operator},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCstFee">
+  	UPDATE AT_CST_FEE
+  		SET
+	  	    	CID = #{cid}
+	  		<if test="nid > 0">
+	  	    	,NID = #{nid}
+	  		</if>
+	  		<if test="payType != null">
+	  	    	,PAY_TYPE = #{payType}
+	  		</if>
+	  		<if test="feeTime != null">
+	  	    	,FEE_TIME = #{feeTime}
+	  		</if>
+	  		<if test="feeSum > 0">
+	  	    	,FEE_SUM = #{feeSum}
+	  		</if>
+	  		<if test="startTime != null">
+	  	    	,START_TIME = #{startTime}
+	  		</if>
+	  		<if test="endTime != null">
+	  	    	,END_TIME = #{endTime}
+	  		</if>
+	  			,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  			,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_CST_FEE WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AtCstFee">
+  	SELECT
+  		 c.ID as id,
+  		 NID as nid,
+  		 CID as cid,
+         PAY_TYPE as payType,
+         FEE_TIME as feeType,
+         FEE_SUM as feeSum,
+         START_TIME as startTime,
+         END_TIME as endTime,
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_CST_FEE c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCstFee">
+	  	SELECT
+	  		 c.ID as id,
+	  		 NID as nid,
+	  		 CID as cid,
+	         PAY_TYPE as payType,
+	         FEE_TIME as feeType,
+	         FEE_SUM as feeSum,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+		     UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_CST_FEE c 
+	    	where 1 = 1
+	    	<if test="nid > 0">
+	 	    	and NID = #{nid}
+	 		</if>
+	 		<if test="cid > 0">
+	 	    	and CID = #{cid}
+	 		</if>
+	 		<if test="payType > 0">
+	 	    	and PAY_TYPE = #{payType}
+	 		</if>
+	  		<if test="operator != null and operator != ''">
+	  	    	and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null and remark != ''">
+	  	    	and REMARK like #{remark}
+	  		</if>
+	    	ORDER BY createTime DESC
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM AT_CST_FEE c
+  		where 1 = 1
+    	<if test="nid > 0">
+ 	    	and NID = #{nid}
+ 		</if>
+ 		<if test="cid > 0">
+ 	    	and CID = #{cid}
+ 		</if>
+ 		<if test="payType > 0">
+ 	    	and PAY_TYPE = #{payType}
+ 		</if>
+  		<if test="operator != null and operator != ''">
+  	    	and OPERATOR = #{operator}
+  		</if>
+  		<if test="remark != null and remark != ''">
+  	    	and REMARK like #{remark}
+  		</if>
+  </select>
+  
+  <select id="findAll" resultType="AtCstFee">
+	  	SELECT
+	  		 c.ID as id,
+	  		 NID as nid,
+	  		 CID as cid,
+	         PAY_TYPE as payType,
+	         FEE_TIME as feeType,
+	         FEE_SUM as feeSum,
+	         START_TIME as startTime,
+	         END_TIME as endTime,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+		     UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_CST_FEE c 
+	    	ORDER BY createTime
+  </select>
+  
+  <select id="getRemindFeeCount" resultType="int">
+  	select count(*) from AT_CST_FEE c 
+  		where 1 = 1 
+  			and #{dateTime} >= c.END_TIME 
+  		 <if test="operator != null">
+  	    	and OPERATOR = #{operator}
+  		 </if>
+  </select>
+  
+  <select id="getRemindFeeList" resultType="AtCstFee">
+  	SELECT
+  		 c.ID as id,
+  		 NID as nid,
+  		 CID as cid,
+         PAY_TYPE as payType,
+         FEE_TIME as feeType,
+         FEE_SUM as feeSum,
+         START_TIME as startTime,
+         END_TIME as endTime,
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_CST_FEE c
+     where #{dateTime} >= c.END_TIME 
+     <if test="operator != null">
+    	and OPERATOR = #{operator}
+	 </if>
+  </select>
+</mapper>

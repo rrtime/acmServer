@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd"
+	version="2.4">
+	<display-name>monitor</display-name>
+
+	<!-- spring -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<!-- struts2 -->
+	<filter>
+		<filter-name>prepare</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>execute</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter
+		</filter-class>
+	</filter>
+	
+	 
+	
+	 <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+	<filter-mapping>
+		<filter-name>prepare</filter-name>
+		<url-pattern>*.do</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>execute</filter-name>
+		<url-pattern>*.do</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>JSPSupportServlet</servlet-name>
+		<servlet-class>org.apache.struts2.views.JspSupportServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<description>验证码</description>
+		<display-name>验证码</display-name>
+		<servlet-name>CreateImageAction</servlet-name>
+		<servlet-class>
+			com.rrtimes.acm.action.CreateImageAction
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateImageAction</servlet-name>
+		<url-pattern>/CreateImage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>IdentifyingCodeAction</servlet-name>
+		<servlet-class>
+			com.rrtimes.acm.action.IdentifyingCodeAction
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IdentifyingCodeAction</servlet-name>
+		<url-pattern>/IdentifyingCode</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

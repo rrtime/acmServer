@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtComplainMapper">
+
+  <insert id="insert" parameterType="AtComplain">
+  	INSERT INTO AT_COMPLAIN(
+  		 CP_CODE,
+  		 CSR_IDENTIFER,
+  		 CN_FROM,
+  		 CN_TYPE,
+         CN_THEME,
+         CN_CONTENT,
+         CN_OPT,
+         CN_INQUIRE,
+         CN_RESULT,
+         CN_PRINCIPAL,
+		 CN_STATUS,        
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  		#{cpCode},
+  		#{csrIdentifer},
+  		#{cnFrom},
+  		#{cnType},
+  		#{cnTheme},
+  		#{cnContent},
+  		#{cnOpt},
+  		#{cnInquire},
+  		#{cnResult},
+  		#{cnPrincipal},
+  		#{cnStatus},
+  		#{operator},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtComplain">
+  	UPDATE AT_COMPLAIN
+  		SET
+		  	    CP_CODE = #{cpCode}
+		  	    ,CSR_IDENTIFER = #{csrIdentifer}
+	  		<if test="cnFrom > 0">
+	  	    	,CN_FROM = #{cnFrom}
+	  		</if>
+	  		<if test="cnType > 0">
+	  	    	,CN_TYPE = #{cnType}
+	  		</if>
+	  	    	,CN_THEME = #{cnTheme}
+	  		<if test="cnContent != null">
+	  	    	,CN_CONTENT = #{cnContent}
+	  		</if>
+	  	    	,CN_OPT = #{cnOpt}
+	  		<if test="cnInquire != null">
+	  	    	,CN_INQUIRE = #{cnInquire}
+	  		</if>
+	  		<if test="cnResult != null">
+	  	    	,CN_RESULT = #{cnResult}
+	  		</if>
+	  		<if test="cnPrincipal != null">
+	  	    	,CN_PRINCIPAL = #{cnPrincipal}
+	  		</if>
+	  		<if test="cnStatus > 0">
+	  	    	,CN_STATUS = #{cnStatus}
+	  		</if>
+	  	    	,OPERATOR = #{operator}
+	  	    	,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  			,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_COMPLAIN WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AtComplain">
+  	SELECT
+  		 c.ID as id,
+  		 CP_CODE as cpCode,
+  		 CSR_IDENTIFER as csrIdentifer,
+  		 CN_FROM as cnFrom,
+  		 CN_TYPE as cnType,
+         CN_THEME as cnTheme,
+         CN_CONTENT as cnContent,
+         CN_OPT as cnOpt,
+         CN_INQUIRE as cnInquire,
+         CN_RESULT as cnResult,
+         CN_PRINCIPAL as cnPrincipal,
+		 CN_STATUS as cnStatus,         
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+         UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_COMPLAIN c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AtComplain">
+	  	SELECT
+	  		 c.ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 CN_FROM as cnFrom,
+	  		 CN_TYPE as cnType,
+	         CN_THEME as cnTheme,
+	         CN_CONTENT as cnContent,
+	         CN_OPT as cnOpt,
+	         CN_INQUIRE as cnInquire,
+	         CN_RESULT as cnResult,
+	         CN_PRINCIPAL as cnPrincipal,
+			 CN_STATUS as cnStatus,         
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_COMPLAIN c 
+		    where 1 = 1
+	  		<if test="cpCode != null and cpCode != ''">
+		    	and CP_CODE = #{cpCode}
+	 		</if>
+	 		<if test="csrIdentifer != null and csrIdentifer != ''">
+	 	    	and CSR_IDENTIFER = #{csrIdentifer}
+	 		</if>
+	 		<if test="cnFrom > 0">
+	 	    	and CN_FROM = #{cnFrom}
+	 		</if>
+	  		<if test="cnType > 0">
+	  	    	and CN_TYPE = #{cnType}
+	  		</if>
+	  		<if test="cnTheme != null and cnTheme != ''">
+	 	    	and CN_THEME like #{cnTheme}
+	 		</if>
+	  		<if test="cnPrincipal != null and cnPrincipal != ''">
+	 	    	and CN_PRINCIPAL = #{cnPrincipal}
+	 		</if>
+	 		<if test="cnStatus > 0">
+	  	    	and CN_STATUS = #{cnStatus}
+	  		</if>
+	 		<if test="operator != null and operator != ''">
+	  	    	and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null and remark != ''">
+	  	    	and REMARK like #{remark}
+	  		</if>
+	    	ORDER BY createTime DESC
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findAll" resultType="AtComplain">
+	  	SELECT
+	  		 c.ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 CN_FROM as cnFrom,
+	  		 CN_TYPE as cnType,
+	         CN_THEME as cnTheme,
+	         CN_CONTENT as cnContent,
+	         CN_OPT as cnOpt,
+	         CN_INQUIRE as cnInquire,
+	         CN_RESULT as cnResult,
+	         CN_PRINCIPAL as cnPrincipal,
+			 CN_STATUS as cnStatus,         
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_COMPLAIN c 
+	    	ORDER BY createTime
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM AT_COMPLAIN c
+  		where 1 = 1
+  		<if test="cpCode != null and cpCode != ''">
+	    	and CP_CODE = #{cpCode}
+ 		</if>
+ 		<if test="csrIdentifer != null and csrIdentifer != ''">
+ 	    	and CSR_IDENTIFER = #{csrIdentifer}
+ 		</if>
+ 		<if test="cnFrom > 0">
+ 	    	and CN_FROM = #{cnFrom}
+ 		</if>
+  		<if test="cnType > 0">
+  	    	and CN_TYPE = #{cnType}
+  		</if>
+  		<if test="cnTheme != null and cnTheme != ''">
+ 	    	and CN_THEME like #{cnTheme}
+ 		</if>
+  		<if test="cnPrincipal != null and cnPrincipal != ''">
+ 	    	and CN_PRINCIPAL = #{cnPrincipal}
+ 		</if>
+ 		<if test="cnStatus > 0">
+  	    	and CN_STATUS = #{cnStatus}
+  		</if>
+ 		<if test="operator != null and operator != ''">
+  	    	and OPERATOR = #{operator}
+  		</if>
+  		<if test="remark != null and remark != ''">
+  	    	and REMARK = #{remark}
+  		</if>
+  </select>
+  
+</mapper>

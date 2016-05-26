@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCsrBasicMapper">
+  
+  <insert id="insert" parameterType="AtCsrBasic">
+  	INSERT INTO AT_CSR_BASIC(
+  		 CP_CODE,
+  		 CSR_TYPE,
+         CSR_IDENTIFER,
+         CSR_CODE,
+         REG_ADDRESS,
+         OFFICE_ADDRESS,
+         CSR_OWNER,
+         FINANCE_LEADER,
+         TAX_LEADER,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  	     #{cpCode},
+  		 #{csrType},
+  		 #{csrIdentifer},
+  		 #{csrCode},
+  		 #{regAddress},
+  		 #{officeAddress},
+  		 #{csrOwner},
+  		 #{financeLeader},
+  		 #{taxLeader},
+  		 #{operator},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCsrBasic">
+  	UPDATE AT_CSR_BASIC
+  		SET
+            CP_CODE = #{cpCode}
+    		,CSR_TYPE = #{csrType}
+	  	    ,CSR_IDENTIFER = #{csrIdentifer}
+	  		<if test="csrCode != null">
+	  		,CSR_CODE = #{csrCode}
+	  		</if>
+	  		<if test="regAddress != null">
+	  		,REG_ADDRESS = #{regAddress}
+	  		</if>
+	  		<if test="officeAddress != null">
+	  		,OFFICE_ADDRESS = #{officeAddress}
+	  		</if>
+	  		<if test="csrOwner != null">
+	  		,CSR_OWNER = #{csrOwner}
+	  		</if>
+	  		<if test="financeLeader != null">
+	  		,FINANCE_LEADER = #{financeLeader}
+	  		</if>
+	  		<if test="taxLeader != null">
+	  		,TAX_LEADER = #{taxLeader}
+	  		</if>
+	  		,OPERATOR = #{operator}
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_CSR_BASIC WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCsrBasic">
+	  	SELECT
+	  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_CSR_BASIC  
+	    	WHERE 1 = 1
+	    	<if test="cpCode!=null">
+	    	and CP_CODE = #{cpCode}
+	    	</if>
+	    	<if test="csrType != null">
+    		and CSR_TYPE = #{csrType}
+    		</if>
+	  		<if test="csrIdentifer != null">
+	  	    and CSR_IDENTIFER = #{csrIdentifer}
+	  		</if>
+	  		<if test="csrCode != null">
+	  		and CSR_CODE = #{csrCode}
+	  		</if>
+	  		<if test="regAddress != null">
+	  		and REG_ADDRESS = #{regAddress}
+	  		</if>
+	  		<if test="officeAddress != null">
+	  		and OFFICE_ADDRESS = #{officeAddress}
+	  		</if>
+	  		<if test="csrOwner != null">
+	  		and CSR_OWNER = #{csrOwner}
+	  		</if>
+	  		<if test="financeLeader != null">
+	  		and FINANCE_LEADER = #{financeLeader}
+	  		</if>
+	  		<if test="taxLeader != null">
+	  		and TAX_LEADER = #{taxLeader}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByUser" parameterType="String" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC  
+    WHERE CP_CODE = 
+    (
+    select cp_code from ACM_SYS_ORG where id = 
+      (
+      select oid from AT_USER where I_NAME = #{userAccount}
+      )
+    )
+  </select>
+  
+  <select id="findByAgent" parameterType="String" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC  
+    WHERE CP_CODE = #{agentCode}
+  </select>
+  
+  <select id="findByOrg" parameterType="int" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC  
+    WHERE CP_CODE = 
+    (
+    select cp_code from ACM_SYS_ORG where id = #{id}
+    )
+  </select>
+
+  <select id="findAllById" parameterType="int" resultType="AtCsrBasic">
+  	SELECT
+  		 b.ID as id,
+	  		 b.CP_CODE as cpCode,
+	  		 b.CSR_TYPE as csrType,
+	         b.CSR_IDENTIFER as csrIdentifer,
+	         b.CSR_CODE as csrCode,
+	         b.REG_ADDRESS as regAddress,
+	         b.OFFICE_ADDRESS as officeAddress,
+	         b.CSR_OWNER as csrOwner,
+	         b.FINANCE_LEADER as financeLeader,
+	         b.TAX_LEADER as taxLeader,
+	         b.OPERATOR as operator,
+	         b.CREATE_TIME as createTime,
+	         b.UPDATE_TIME as updateTime,
+	         b.REMARK as remark
+    FROM AT_CSR_BASIC b 
+    WHERE 
+     b.ID = #{id}
+  </select>
+  
+  <select id="findByUserId" parameterType="int" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC  
+    WHERE 
+      CSR_TYPE = 3
+      and
+      CP_CODE=
+      (
+         SELECT ID FROM AT_USER WHERE ID = #{userId}
+      )
+  </select>
+  
+  <select id="findCountByUserId" parameterType="int" resultType="int">
+  	SELECT
+  		 count(*)
+    FROM AT_CSR_BASIC  
+    WHERE 
+      CSR_TYPE = 3
+      and
+      CP_CODE=
+      (
+         SELECT ID FROM AT_USER WHERE ID = #{userId}
+      )
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_CSR_BASIC 
+	    WHERE 1 = 1
+	    	<if test="cpCode!=null">
+	    	and CP_CODE = #{cpCode}
+	    	</if>
+	   		<if test="csrType != null">
+    		and CSR_TYPE = #{csrType}
+    		</if>
+	  		<if test="csrIdentifer != null">
+	  	    and CSR_IDENTIFER = #{csrIdentifer}
+	  		</if>
+	  		<if test="csrCode != null">
+	  		and CSR_CODE = #{csrCode}
+	  		</if>
+	  		<if test="regAddress != null">
+	  		and REG_ADDRESS = #{regAddress}
+	  		</if>
+	  		<if test="officeAddress != null">
+	  		and OFFICE_ADDRESS = #{officeAddress}
+	  		</if>
+	  		<if test="csrOwner != null">
+	  		and CSR_OWNER = #{csrOwner}
+	  		</if>
+	  		<if test="financeLeader != null">
+	  		and FINANCE_LEADER = #{financeLeader}
+	  		</if>
+	  		<if test="taxLeader != null">
+	  		and TAX_LEADER = #{taxLeader}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+  </select>
+
+</mapper>

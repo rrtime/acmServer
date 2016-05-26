@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtSysModelMapper">
+
+  <insert id="insert" parameterType="AtSysModel">
+  	INSERT INTO AT_SYS_MODEL(
+  		 TREE_ID,
+  		 MENU_CODE,
+         M_NAME,
+         M_DESC,
+         IS_SYSTEM,
+         CATEGORY,
+         IS_CON_SHOWNUM,
+         CONTROL_NUM,
+         CONTROL_PAGE,
+         SHOW_INDEX,
+         REMARK )
+  	VALUES(
+  		#{treeId},
+  		#{menuCode},
+  		#{mname},
+  		#{mdesc},
+  		#{isSystem},
+  		#{category},
+  		#{isConShownum},
+  		#{controlNum},
+  		#{controlPage},
+  		#{showIndex},
+        #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtSysModel">
+  	UPDATE AT_SYS_MODEL
+  		SET
+  			UPDATE_TIME = #{updateTime}
+  	    	,TREE_ID = #{treeId}
+  	    	,MENU_CODE = #{menuCode}
+  	    	,M_NAME = #{mName}
+  		<if test="mdesc != null and mdesc != ''">
+  	    	,M_DESC = #{mdesc}
+  		</if>
+  		<if test="isConShownum != null and isConShownum != ''">
+  	    	,IS_CON_SHOWNUM = #{isConShownum}
+  		</if>
+  		<if test="controlNum != null and controlNum != ''">
+  	    	,CONTROL_NUM = #{controlNum}
+  		</if>
+  		<if test="controlPage != null and controlPage != ''">
+  	    	,CONTROL_PAGE = #{controlPage}
+  		</if>
+  		<if test="showIndex >= 0">
+  	    	,SHOW_INDEX = #{showIndex}
+  		</if>
+  		<if test="remark != null and remark != ''">
+  			,REMARK = #{remark}
+  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_SYS_MODEL WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AtSysModel">
+  	SELECT
+  		 c.ID as id,
+  		 TREE_ID as treeId,
+  		 MENU_CODE as menuCode,
+         M_NAME as mname,
+         M_DESC as mdesc,
+         IS_SYSTEM as isSystem,
+         CATEGORY as category,
+         IS_CON_SHOWNUM as isConShownum,
+         CONTROL_NUM as controlNum,
+         CONTROL_PAGE as controlPage,
+         SHOW_INDEX as showIndex,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_SYS_MODEL c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AtSysModel">
+	  	SELECT
+	  		 c.ID as id,
+	  		 TREE_ID as treeId,
+	  		 MENU_CODE as menuCode,
+	         M_NAME as mname,
+	         M_DESC as mdesc,
+	         IS_SYSTEM as isSystem,
+	         CATEGORY as category,
+	         IS_CON_SHOWNUM as isConShownum,
+	         CONTROL_NUM as controlNum,
+	         CONTROL_PAGE as controlPage,
+	         SHOW_INDEX as showIndex,
+	         CREATE_TIME as createTime,
+		     UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_SYS_MODEL c 
+	    	where 1 = 1
+	    	<if test="treeId >= 0">
+ 	    		and TREE_ID = #{treeId}
+	 		</if>
+	 		<if test="menuCode != null and menuCode != ''">
+	 	    	and MENU_CODE = #{menuCode}
+	 		</if>
+	 		<if test="mname != null and mname != ''">
+	 	    	and M_NAME like #{mname}
+	 		</if>
+	  		<if test="isConShownum >= 0">
+	  	    	and IS_CON_SHOWNUM = #{isConShownum}
+	  		</if>
+	  		<if test="remark != null and remark != ''">
+	  	    	and REMARK like #{remark}
+	  		</if>
+	    	ORDER BY showIndex
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM AT_SYS_MODEL c
+  		where 1 = 1
+  		<if test="treeId >= 0">
+	    	and TREE_ID = #{treeId}
+ 		</if>
+ 		<if test="menuCode != null and menuCode != ''">
+ 	    	and MENU_CODE = #{menuCode}
+ 		</if>
+ 		<if test="mname != null and mname != ''">
+ 	    	and M_NAME like #{mname}
+ 		</if>
+  		<if test="isConShownum >= 0">
+  	    	and IS_CON_SHOWNUM = #{isConShownum}
+  		</if>
+  		<if test="remark != null and remark != ''">
+  	    	and REMARK like #{remark}
+  		</if>
+  </select>
+  
+  <select id="findAll" resultType="AtSysModel">
+  	SELECT
+  		 c.ID as id,
+  		 TREE_ID as treeId,
+  		 MENU_CODE as menuCode,
+         M_NAME as mname,
+         M_DESC as mdesc,
+         IS_SYSTEM as isSystem,
+         CATEGORY as category,
+         IS_CON_SHOWNUM as isConShownum,
+         CONTROL_NUM as controlNum,
+         CONTROL_PAGE as controlPage,
+         SHOW_INDEX as showIndex,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_SYS_MODEL c 
+    	ORDER BY showIndex
+  </select>
+  
+  <select id="getAtSysModelByTreeId" resultType="AtSysModel">
+  	SELECT
+  		 c.ID as id,
+  		 TREE_ID as treeId,
+  		 MENU_CODE as menuCode,
+         M_NAME as mname,
+         M_DESC as mdesc,
+         IS_SYSTEM as isSystem,
+         CATEGORY as category,
+         IS_CON_SHOWNUM as isConShownum,
+         CONTROL_NUM as controlNum,
+         CONTROL_PAGE as controlPage,
+         SHOW_INDEX as showIndex,
+         CREATE_TIME as createTime,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_SYS_MODEL c 
+    where c.TREE_ID = #{treeId}
+    	ORDER BY showIndex
+  </select>
+</mapper>

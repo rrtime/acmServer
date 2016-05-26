@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtCstImyMapper">
+
+  <insert id="insert" parameterType="AtCstImy">
+  	INSERT INTO AT_CST_IMY(
+  		 CP_CODE,
+  		 CN_IDENTIFER,
+         IMY_FORM,
+         CID,
+         IMY_STATUS,
+         IMY_OPT,
+         IMY_REASON,
+         IMY_AUDIT_RST,
+         IMY_RESULT,
+         IMY_SUM,
+         PAY_TYPE,
+         PAY_TIME,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+	    #{cpCode},
+	 	#{cnIdentifer},
+	 	#{imyForm},
+	 	#{cid},
+	 	#{imyStatus},
+	 	#{imyOpt},
+	 	#{imyReason},
+	 	#{imyAuditRst},
+	 	#{imyResult},
+	 	#{imySum},
+	 	#{payType},
+	 	#{payTime},
+	 	#{operator},
+	 	#{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtCstImy">
+  	UPDATE AT_CST_IMY
+  		SET
+	  	    	CP_CODE = #{cpCode}
+	  	    	,CN_IDENTIFER = #{cnIdentifer}
+	  		<if test="imyForm > 0">
+	  	    	,IMY_FORM = #{imyForm}
+	  		</if>
+	  		<if test="cid > 0">
+	  	    	,CID = #{cid}
+	  		</if>
+	  		<if test="imyStatus > 0">
+	  	    	,IMY_STATUS = #{imyStatus}
+	  		</if>
+	  	    	,IMY_OPT = #{imyOpt}
+	  		<if test="imyReason != null">
+	  	    	,IMY_REASON = #{imyReason}
+	  		</if>
+	  		<if test="imyAuditRst != null">
+	  	    	,IMY_AUDIT_RST = #{imyAuditRst}
+	  		</if>
+	  		<if test="imyResult != null">
+	  	    	,IMY_RESULT = #{imyResult}
+	  		</if>
+	  		<if test="imySum >= 0">
+	  	    	,IMY_SUM = #{imySum}
+	  		</if>
+	  		<if test="payType > 0">
+	  	    	,PAY_TYPE = #{payType}
+	  		</if>
+	  		<if test="payTime != null">
+	  	    	,PAY_TIME = #{payTime}
+	  		</if>
+	  	    	,OPERATOR = #{operator}
+	  			,UPDATE_TIME = #{updateTime}
+	  		<if test="remark != null">
+	  			,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_CST_IMY WHERE ID=#{id}
+  </delete>
+  
+  <select id="findById" parameterType="int" resultType="AtCstImy">
+  	SELECT
+  		 c.ID as id,
+  		 CP_CODE as cpCode, 
+  		 CN_IDENTIFER as cnIdentifer,
+         IMY_FORM as imyForm ,
+         CID as cid ,
+         IMY_STATUS as imyStatus, 
+         IMY_OPT as imyOpt, 
+         IMY_REASON as imyReason, 
+         IMY_AUDIT_RST as imyAuditRst,
+         IMY_RESULT as imyResult, 
+         IMY_SUM as imySum ,
+         PAY_TYPE as payType, 
+         PAY_TIME as payTime, 
+         OPERATOR as operator ,
+         CREATE_TIME as createTime, 
+         UPDATE_TIME as updateTime ,
+         REMARK as remark
+    FROM AT_CST_IMY c 
+    WHERE c.ID=#{id}
+  </select>
+  
+  <select id="findByPage" parameterType="Map" resultType="AtCstImy">
+	  	SELECT
+	  		 c.ID as id,
+	  		 CP_CODE as cpCode, 
+	  		 CN_IDENTIFER as cnIdentifer,
+	         IMY_FORM as imyForm ,
+	         CID as cid ,
+	         IMY_STATUS as imyStatus, 
+	         IMY_OPT as imyOpt, 
+	         IMY_REASON as imyReason, 
+	         IMY_AUDIT_RST as imyAuditRst,
+	         IMY_RESULT as imyResult, 
+	         IMY_SUM as imySum ,
+	         PAY_TYPE as payType, 
+	         PAY_TIME as payTime, 
+	         OPERATOR as operator ,
+	         CREATE_TIME as createTime, 
+	         UPDATE_TIME as updateTime ,
+	         REMARK as remark
+	    FROM AT_CST_IMY c 
+		    where 1 = 1
+	    	<if test="cpCode != null and cpCode != ''">
+ 	    		and CP_CODE = #{cpCode}
+	 		</if>
+	 		<if test="cnIdentifer != null and cnIdentifer != ''">
+	 	    	and CN_IDENTIFER = #{cnIdentifer}
+	 		</if>
+	 		<if test="imyForm > 0">
+	 	    	and IMY_FORM = #{imyForm}
+	 		</if>
+	  		<if test="imyStatus > 0">
+	  	    	and IMY_STATUS = #{imyStatus}
+	  		</if>
+	  		<if test="payType > 0">
+	 	    	and PAY_TYPE = #{payType}
+	 		</if>
+	 		<if test="operator != null and operator != ''">
+	  	    	and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null and remark != ''">
+	  	    	and REMARK like #{remark}
+	  		</if>
+	    	ORDER BY createTime DESC
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByCount" resultType="int">
+  	SELECT COUNT(*) FROM AT_CST_IMY c
+  		where 1 = 1
+    	<if test="cpCode != null and cpCode != ''">
+ 	    	and CP_CODE = #{cpCode}
+ 		</if>
+ 		<if test="cnIdentifer != null and cnIdentifer != ''">
+ 	    	and CN_IDENTIFER = #{cnIdentifer}
+ 		</if>
+ 		<if test="imyForm > 0">
+ 	    	and IMY_FORM = #{imyForm}
+ 		</if>
+  		<if test="imyStatus > 0">
+  	    	and IMY_STATUS = #{imyStatus}
+  		</if>
+  		<if test="payType > 0">
+ 	    	and PAY_TYPE = #{payType}
+ 		</if>
+ 		<if test="operator != null and operator != ''">
+  	    	and OPERATOR = #{operator}
+  		</if>
+  		<if test="remark != null and remark != ''">
+  	    	and REMARK like #{remark}
+  		</if>
+  </select>
+  
+  <select id="findAll" resultType="AtCstImy">
+  	SELECT
+  		 c.ID as id,
+  		 CP_CODE as cpCode, 
+  		 CN_IDENTIFER as cnIdentifer,
+         IMY_FORM as imyForm ,
+         CID as cid ,
+         IMY_STATUS as imyStatus, 
+         IMY_OPT as imyOpt, 
+         IMY_REASON as imyReason, 
+         IMY_AUDIT_RST as imyAuditRst,
+         IMY_RESULT as imyResult, 
+         IMY_SUM as imySum ,
+         PAY_TYPE as payType, 
+         PAY_TIME as payTime, 
+         OPERATOR as operator ,
+         CREATE_TIME as createTime, 
+         UPDATE_TIME as updateTime ,
+         REMARK as remark
+    FROM AT_CST_IMY c 
+    	ORDER BY createTime
+  </select>
+  
+</mapper>

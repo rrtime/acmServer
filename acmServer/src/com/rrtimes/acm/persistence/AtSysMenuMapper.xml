@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtSysMenuMapper">
+
+  <insert id="insert" parameterType="AtSysMenu">
+  	INSERT INTO AT_SYS_MENU(
+  		 M_TITLE,
+  		 M_DESC,
+  		 PARENT_ID,
+  		 TFLAG,
+  		 INID,
+  		 IS_SYSTEM,
+  		 CATEGORY,
+  		 IS_ENDNODE,
+  		 SHOW_INDEX,
+         REMARK )
+  	VALUES(
+  	     #{mtitle},
+  	     #{mdesc},
+  	     #{parentId},
+  	     #{tflag},
+  	     #{inid},
+  	     #{idSystem},
+  	     #{category},
+  	     #{isEndnode},
+  		 #{showIndex},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtSysMenu">
+  	UPDATE AT_SYS_MENU
+  		SET
+            M_TITLE = #{mtitle}
+            <if test="mdesc!=null">,M_DESC = #{mdesc}</if>	 
+            <if test="parentId!=null">,PARENT_ID = #{parentId}</if>  
+            <if test="tflag!=null">,TFLAG = #{tflag}</if> 
+            <if test="inid!=null">,INID = #{inid}</if>
+            <if test="idSystem!=null">,IS_SYSTEM = #{idSystem}</if>  
+            <if test="category!=null">,CATEGORY = #{category}</if>  
+            <if test="isEndnode!=null">,IS_ENDNODE = #{isEndnode}</if>
+            <if test="showIndex">,SHOW_INDEX = #{showIndex}</if>
+            ,UPDATE_TIME = #{updateTime}
+            <if test="remark!=null">,REMARK = #{remark}</if>
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_SYS_MENU WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtSysMenu">
+	  	SELECT
+	  		 ID as id,
+	  		 M_TITLE as mtitle,
+	  		 M_DESC as mdesc,
+	  		 PARENT_ID as parentId,
+	  		 TFLAG as tflag,
+	  		 INID as inid,
+	  		 IS_SYSTEM as isSystem,
+	  		 CATEGORY as category,
+	  		 IS_ENDNODE as isEndnode,
+	  		 SHOW_INDEX as showIndex,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_SYS_MENU  
+	    	WHERE 1 = 1
+	    	<if test="id!=null">and ID = #{id}</if>
+	    	<if test="mTitle!=null">and M_TITLE = #{mTitle}</if>
+	    	<if test="mDesc!=null">and M_DESC = #{mDesc}</if>
+	    	<if test="parentId!=null">and PARENT_ID = #{parentId}</if>
+	    	<if test="tflag!=null">and TFLAG = #{tflag}</if>
+	    	<if test="inid!=null">and INID = #{inid}</if>
+	    	<if test="isSystem!=null">and IS_SYSTEM = #{isSystem}</if>
+	    	<if test="category!=null">and CATEGORY = #{category}</if>
+	    	<if test="isEndnode!=null">and IS_ENDNODE = #{isEndnode}</if>
+	    	<if test="showIndex!=null">and SHOW_INDEX = #{showIndex}</if>
+	    	<if test="remark!=null">and REMARK = #{remark}</if>
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtSysMenu">
+  	SELECT
+  		 ID as id,
+	  		 M_TITLE as mtitle,
+	  		 M_DESC as mdesc,
+	  		 PARENT_ID as parentId,
+	  		 TFLAG as tflag,
+	  		 INID as inid,
+	  		 IS_SYSTEM as isSystem,
+	  		 CATEGORY as category,
+	  		 IS_ENDNODE as isEndnode,
+	  		 SHOW_INDEX as showIndex,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_MENU  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByUserId" parameterType="int" resultType="AtSysMenu">
+  	select 
+      ID as id,
+	  M_TITLE as mtitle,
+	  M_DESC as mdesc,
+	  PARENT_ID as parentId,
+	  TFLAG as tflag,
+	  INID as inid,
+	  IS_SYSTEM as isSystem,
+	  CATEGORY as category,
+	  IS_ENDNODE as isEndnode,
+	  SHOW_INDEX as showIndex,
+	  CREATE_TIME as createTime,
+	  UPDATE_TIME as updateTime,
+	  REMARK as remark from AT_SYS_MENU 
+	where id in
+	(
+		select TREE_ID from AT_SYS_MODEL where MENU_CODE in 
+		(
+			select DISTINCT MENU_CODE 
+			from AT_HOLD_FUNCTION where ACTOR_ID = #{userId}
+		)
+	)
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_SYS_MENU 
+	    WHERE 1 = 1
+	   <if test="id!=null">and ID = #{id}</if>
+	    	<if test="mTitle!=null">and M_TITLE = #{mTitle}</if>
+	    	<if test="mDesc!=null">and M_DESC = #{mDesc}</if>
+	    	<if test="parentId!=null">and PARENT_ID = #{parentId}</if>
+	    	<if test="tflag!=null">and TFLAG = #{tflag}</if>
+	    	<if test="inid!=null">and INID = #{inid}</if>
+	    	<if test="isSystem!=null">and IS_SYSTEM = #{isSystem}</if>
+	    	<if test="category!=null">and CATEGORY = #{category}</if>
+	    	<if test="isEndnode!=null">and IS_ENDNODE = #{isEndnode}</if>
+	    	<if test="showIndex!=null">and SHOW_INDEX = #{showIndex}</if>
+	    	<if test="remark!=null">and REMARK = #{remark}</if>	
+  </select>
+
+</mapper>

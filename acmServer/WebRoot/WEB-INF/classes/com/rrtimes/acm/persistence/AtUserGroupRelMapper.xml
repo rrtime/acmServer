@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtUserGroupRelMapper">
+
+  <insert id="insert" parameterType="AtUserGroupRel">
+  	INSERT INTO AT_USER_GROUP_REL(
+  	     UID,
+  	     GID,
+  	     REMARK
+  		 )
+  	VALUES(
+  		 #{uid},
+  	     #{gid},
+  	     #{remark}
+  		   )
+  </insert> 
+  
+  <update id="update" parameterType="AtUserGroupRel">
+  	UPDATE AT_USER_GROUP_REL
+  		SET
+	  		UID = #{uid}
+	  		,GID = #{gid}
+	  		,UPDATE_TIME = #{updateTime}
+	  		<if test="remark!=null">
+	  		  ,REMARK = #{remark}
+	  		</if>
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_USER_GROUP_REL WHERE ID=#{id}
+  </delete>
+  
+ 
+  
+  <select id="findByPage" parameterType="Map" resultType="AtUserGroupRel">
+	  	SELECT
+	  		ID as id,
+	  		UID as uid,
+	  		GID as gid,
+	  		CREATE_TIME as createTime,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+	    FROM AT_USER_GROUP_REL 
+	    	WHERE 1 = 1
+	    	<if test="uid!=null">and UID = #{uid}</if>
+	    	<if test="gid!=null">and GID = #{gid}</if>
+	    	<if test="createTime!=null">and CREATE_TIME = #{createTime}</if>
+	    	<if test="updateTime!=null">and UPDATE_TIME = #{updateTime}</if>
+	    	<if test="remark!=null">and REMARK = #{remark}</if>
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByMap" parameterType="Map" resultType="AtUserGroupRel">
+	  	SELECT
+	  		ID as id,
+	  		UID as uid,
+	  		GID as gid,
+	  		CREATE_TIME as createTime,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+	    FROM AT_USER_GROUP_REL 
+	    	WHERE 1 = 1
+	    	<if test="uid!=null">and UID = #{uid}</if>
+	    	<if test="gid!=null">and GID = #{gid}</if>
+	    	<if test="createTime!=null">and CREATE_TIME = #{createTime}</if>
+	    	<if test="updateTime!=null">and UPDATE_TIME = #{updateTime}</if>
+	    	<if test="remark!=null">and REMARK = #{remark}</if>
+  </select>
+  
+  
+  
+  <select id="findById" parameterType="int" resultType="AtUserGroupRel">
+  	SELECT
+  		 ID as id,
+	  		UID as uid,
+	  		GID as gid,
+	  		CREATE_TIME as createTime,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+    FROM AT_USER_GROUP_REL 
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_USER_GROUP_REL 
+	    WHERE 1 = 1
+	    <if test="uid!=null">and UID = #{uid}</if>
+	    	<if test="gid!=null">and GID = #{gid}</if>
+	    	<if test="createTime!=null">and CREATE_TIME = #{createTime}</if>
+	    	<if test="updateTime!=null">and UPDATE_TIME = #{updateTime}</if>
+	    	<if test="remark!=null">and REMARK = #{remark}</if>
+  </select>
+
+</mapper>
