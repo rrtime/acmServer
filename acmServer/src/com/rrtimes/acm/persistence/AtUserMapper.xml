@@ -201,7 +201,7 @@
 	  		REMARK as remark 
 	    FROM AT_USER 
 	    	WHERE 1 = 1
-	         and OID=#{oid,jdbcType=DECIMAL}
+	         and OID=#{oid}
 	    	ORDER BY CREATE_TIME DESC 
   </select>
   

@@ -41,4 +41,6 @@ public interface AtCstFtMapper {
     public int findByCount(Map<String,Object> map);
     
     public AtCstFt findByCsrIdentifer(String csrIdentifer);
+    
+    public List<AtCstFt> findByUserId(int userId);
 }

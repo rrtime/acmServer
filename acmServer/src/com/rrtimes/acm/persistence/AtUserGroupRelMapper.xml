@@ -30,7 +30,7 @@
   </update>
   
   <delete id="delete" parameterType="int">
-  	DELETE FROM AT_USER_GROUP_REL WHERE ID=#{id}
+  	DELETE FROM AT_USER_GROUP_REL WHERE UID=#{userId}
   </delete>
   
  
