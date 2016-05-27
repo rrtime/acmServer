@@ -17,14 +17,15 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.service.AcmSysOrgService;
+import com.rrtimes.acm.service.AtUserService;
 
 /**
  * @Title:       OrgAction.java
  * @Package:     com.rrtimes.acm.action
- * @Description: 类文件概述
+ * @Description: 组织机构表
  * 
  * <p>
- * 	类文件详细描述
+ * 	组织机构表
  * </p> 
  * 
  * @author lil

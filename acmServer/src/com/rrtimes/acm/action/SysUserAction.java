@@ -9,25 +9,32 @@
 package com.rrtimes.acm.action;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtUser;
+import com.rrtimes.acm.service.AtUserGroupRelService;
 import com.rrtimes.acm.service.AtUserService;
 
 /**
  * @Title:       SysUserAction.java
  * @Package:     com.rrtimes.acm.action
- * @Description: 类文件概述
+ * @Description: 用户组、用户综合信息表
  * 
  * <p>
- * 	类文件详细描述
+ * 	用户组、用户综合信息表
  * </p> 
  * 
  * @author lil
@@ -42,7 +49,18 @@ public class SysUserAction extends ActionSupport{
 	private static final long serialVersionUID = 2954363164266848728L;
 	@Resource
 	private AtUserService aus;
+	@Resource 
+	private AtUserGroupRelService augrs;
+
 	private AtUser atUser = new AtUser();
+	
+	private List<AtUser> list = new ArrayList<AtUser>();
+	
+	private int rst;
+	
+	private int cmd;
+	
+	private String msg;
 	
 	//登录
 	public String login(){
@@ -55,10 +73,21 @@ public class SysUserAction extends ActionSupport{
 		}
 	}
     
+	//根据用户账号查询所属部门的人员信息
+	public String findUserByMap(){
+		list = aus.queryUserByMap(atUser);
+		return "list";
+	}
+	
 	//新增用户
-	public String add(){
-		aus.addUser(atUser);
-		return "add";
+	public String insertUser(){
+		rst = aus.addUser(atUser);
+		if(rst==0){
+			msg="新增成功";
+		}else{
+			msg="新增失败";
+		}
+		return findUserByMap();
 	}
 	
 	//新增用户校验用户名I_NAME
@@ -85,8 +114,13 @@ public class SysUserAction extends ActionSupport{
 	
 	//修改用户
 	public String update(){
-		aus.updateUser(atUser);
-		return "update";
+		rst=aus.updateUser(atUser);
+		if(rst==0){
+			msg="修改成功";
+		}else{
+			msg="修改失败";
+		}
+		return findUserByMap();
 	}
 	
 	//修改用户校验用户名I_NAME
@@ -113,16 +147,29 @@ public class SysUserAction extends ActionSupport{
 	
 	//删除用户
 	public String delete(){
-		aus.deleteUser(atUser.getId());
-		return "delete";
+		rst= aus.deleteUser(atUser.getId());
+		augrs.delete(atUser.getId());
+		if(rst==0){
+			msg="删除成功";
+		}else{
+			msg="删除失败";
+		}
+		return findUserByMap();
 	}
 	
 	//按Id查询用户
 	public String findById(){
-		atUser = aus.queryUserById(atUser.getId());
-		return "findById";
+		setCmd(1);
+		setAtUser(aus.queryUserById(atUser.getId()));
+		return "add";
 	}
 
+	//打开新增页面
+	public String add(){
+		setCmd(0);
+		return "add";
+	}
+	
 	public AtUser getAtUser() {
 		return atUser;
 	}
@@ -130,7 +177,38 @@ public class SysUserAction extends ActionSupport{
 	public void setAtUser(AtUser atUser) {
 		this.atUser = atUser;
 	}
-	
+	public List<AtUser> getList() {
+		return list;
+	}
+
+	public void setList(List<AtUser> list) {
+		this.list = list;
+	}
+
+	public int getRst() {
+		return rst;
+	}
+
+	public void setRst(int rst) {
+		this.rst = rst;
+	}
+
+	public int getCmd() {
+		return cmd;
+	}
+
+	public void setCmd(int cmd) {
+		this.cmd = cmd;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
 
 	
 }

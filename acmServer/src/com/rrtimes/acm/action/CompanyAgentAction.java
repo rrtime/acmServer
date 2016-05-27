@@ -21,10 +21,10 @@ import com.rrtimes.acm.service.AtCompanyAgentService;
 /**
  * @Title:       CompanyAgentAction.java
  * @Package:     com.rrtimes.acm.action
- * @Description: 类文件概述
+ * @Description: 代账机构信息表
  * 
  * <p>
- * 	类文件详细描述
+ * 	代账机构信息表
  * </p> 
  * 
  * @author lil

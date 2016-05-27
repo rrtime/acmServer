@@ -30,10 +30,10 @@ import com.rrtimes.acm.service.AtCsrBasicService;
 /**
  * @Title:       AtCsrBasicAction.java
  * @Package:     com.rrtimes.acm.action
- * @Description: 类文件概述
+ * @Description: 代账客户基本信息表
  * 
  * <p>
- * 	类文件详细描述
+ * 	代账客户基本信息表
  * </p> 
  * 
  * @author lil
@@ -41,13 +41,7 @@ import com.rrtimes.acm.service.AtCsrBasicService;
  */
 public class AtCsrBasicAction extends ActionSupport{
 	
-	public AtCsrBasic getAso() {
-		return aso;
-	}
-
-	public void setAso(AtCsrBasic aso) {
-		this.aso = aso;
-	}
+	
 	@Resource
 	private AtCsrBasicService asoservice;
 	
@@ -63,67 +57,34 @@ public class AtCsrBasicAction extends ActionSupport{
 	
 	private AtUser atUser = new AtUser();          //用户Id
 	
-	public PageObject getPage() {
-		return page;
-	}
-
-	public void setPage(PageObject page) {
-		this.page = page;
-	}
-
-	public List<AtCsrBasic> getAsoList() {
-		return asoList;
-	}
-
-	public void setAsoList(List<AtCsrBasic> asoList) {
-		this.asoList = asoList;
-	}
+	private AtCsrBasic acb = new AtCsrBasic();
 	
+	private int cmd;
+	
+	private int rst;
 
-	public String getFile() {
-		return file;
-	}
-
-	public void setFile(String file) {
-		this.file = file;
-	}
+	private String msg;
 	
 	
 	//组织机构分页查询
-		public String userList(){
-			asoList = asoservice.queryUser(aso, page);
-			return "list";
-		}
+	public String userList(){
+		asoList = asoservice.queryUser(aso, page);
+		return "list";
+	}
 		
 	//导入用户
-		public String importUser(){
-			try {
-				String filepath = new String( file.getBytes("ISO8859-1"), "UTF-8" );
-				BufferedReader br = null;
-				List<AtCsrBasic> list = new ArrayList<AtCsrBasic>();
-				br = new BufferedReader(new FileReader(filepath));
-	            String stemp;
-	            while ((stemp = br.readLine()) != null) {
-	            	   String[] str = stemp.split(",");
-	            	   AtCsrBasic acb = new AtCsrBasic();
-	            	   acb.setCsrType(Integer.parseInt(str[0]));
-	            	   acb.setCsrIdentifer(str[1]);
-	            	   acb.setCsrCode(str[2]);
-	            	   acb.setRegAddress(str[3]);
-	            	   acb.setOfficeAddress(str[4]);
-	            	   acb.setFinanceLeader(str[5]);
-	            	   acb.setTaxLeader(str[6]);
-	            	   acb.setOperator(str[7]);
-	            	   acb.setRemark(str[8]);
-	                   list.add(acb);
-	            }
-				asoservice.importUser(list,Integer.parseInt(aso.getCpCode()));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return "suc";
-		} 
+	public String importUser(){
+		try {
+			String filepath = new String( file.getBytes("ISO8859-1"), "UTF-8" );
+			BufferedReader br = null;
+			br = new BufferedReader(new FileReader(filepath));
+			asoservice.importUser(br,Integer.parseInt(aso.getCpCode()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "suc";
+	} 
 		
 		//根据客户信息表id查询客户信息、合同信息、客户财税信息
 		public String query(){
@@ -131,25 +92,50 @@ public class AtCsrBasicAction extends ActionSupport{
 			return "query";
 		}
 		
-		//新增客户信息
-		@SuppressWarnings("unused")
+		//打开新增页面
 		public String add(){
-			int i = asoservice.addUser(aso);
+			setCmd(0);
 			return "add";
 		}
 		
+		//打开修改页面
+		public String modify(){
+			setCmd(1);
+			setAcb(asoservice.queryUserById(acb.getId()));
+			return "add";
+		}
+		
+		//新增客户信息
+		public String insertUser(){
+			rst = asoservice.addUser(aso);
+			if(rst == 0){
+				setMsg("新增成功");
+			}else{
+				setMsg("新增失败");
+			}
+			return userList();
+		}
+		
 		//修改客户信息
-		@SuppressWarnings("unused")
 		public String update(){
-			int i = asoservice.updateUser(aso);
-			return "update";
+			rst = asoservice.updateUser(aso);
+			if(rst == 0){
+				setMsg("修改成功");
+			}else{
+				setMsg("修改失败");
+			}
+			return userList();
 		}
 		
 		//删除客户信息
-		@SuppressWarnings("unused")
 		public String delete(){
-			int i = asoservice.deleteUser(aso.getId());
-			return "delete";
+			rst = asoservice.deleteUser(aso.getId());
+			if(rst == 0){
+				setMsg("删除成功");
+			}else{
+				setMsg("删除失败");
+			}
+			return userList();
 		}
 		
 		//根据用户Id查询需要跟进的客户的个数
@@ -182,5 +168,68 @@ public class AtCsrBasicAction extends ActionSupport{
 
 		public void setAtUser(AtUser atUser) {
 			this.atUser = atUser;
+		}
+		public PageObject getPage() {
+			return page;
+		}
+
+		public void setPage(PageObject page) {
+			this.page = page;
+		}
+
+		public List<AtCsrBasic> getAsoList() {
+			return asoList;
+		}
+
+		public void setAsoList(List<AtCsrBasic> asoList) {
+			this.asoList = asoList;
+		}
+		
+
+		public String getFile() {
+			return file;
+		}
+
+		public void setFile(String file) {
+			this.file = file;
+		}
+		
+		public AtCsrBasic getAso() {
+			return aso;
+		}
+
+		public void setAso(AtCsrBasic aso) {
+			this.aso = aso;
+		}
+
+		public int getCmd() {
+			return cmd;
+		}
+
+		public void setCmd(int cmd) {
+			this.cmd = cmd;
+		}
+
+		public String getMsg() {
+			return msg;
+		}
+
+		public void setMsg(String msg) {
+			this.msg = msg;
+		}
+		public int getRst() {
+			return rst;
+		}
+
+		public void setRst(int rst) {
+			this.rst = rst;
+		}
+
+		public AtCsrBasic getAcb() {
+			return acb;
+		}
+
+		public void setAcb(AtCsrBasic acb) {
+			this.acb = acb;
 		}
 }

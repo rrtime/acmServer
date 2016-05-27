@@ -28,10 +28,10 @@ import com.rrtimes.acm.service.AtCstContractService;
 /**
  * @Title:       ContractAction.java
  * @Package:     com.rrtimes.acm.action
- * @Description: 类文件概述
+ * @Description: 代账客户合同信息表
  * 
  * <p>
- * 	类文件详细描述
+ * 	代账客户合同信息表
  * </p> 
  * 
  * @author lil
@@ -57,6 +57,12 @@ public class ContractAction extends ActionSupport{
 	
 	private int day;
 	
+	private int cmd;
+	
+	private int rst;
+	
+	private String msg;
+	
 	//分页查询
 	public String pagelist(){
 		list = accs.queryUser(acc, page);
@@ -64,30 +70,49 @@ public class ContractAction extends ActionSupport{
 	}
 
 	//新增合同
-	@SuppressWarnings("unused")
-	public String add(){
-		int i = accs.addUser(acc);
-		return "add";
+	public String insertContract(){
+		rst = accs.addUser(acc);
+		if(rst == 0){
+			msg="新增成功";
+		}else{
+			msg="新增失败";
+		}
+		return pagelist();
 	}
 	
 	//修改合同
-	@SuppressWarnings("unused")
 	public String update(){
-		int i = accs.updateUser(acc);
-		return "update";
+		rst = accs.updateUser(acc);
+		if(rst == 0){
+			msg="修改成功";
+		}else{
+			msg="修改失败";
+		}
+		return pagelist();
 	}
 	
 	//删除合同
-	@SuppressWarnings("unused")
 	public String delete(){
-		int i = accs.deleteUser(acc.getId());
-		return "delete";
+		rst = accs.deleteUser(acc.getId());
+		if(rst == 0){
+			msg="删除成功";
+		}else{
+			msg="删除失败";
+		}
+		return pagelist();
+	}
+	
+	//打开新增页面
+	public String add(){
+		setCmd(0);
+		return "add";
 	}
 	
 	//根据Id查询合同
 	public String findById(){
-		acc = accs.queryUserById(acc.getId());
-		return "findById";
+		setCmd(1);
+		setAcc(accs.queryUserById(acc.getId()));
+		return "add";
 	}
 	
 	//通过用户Id查询需要预警的合同信息
@@ -224,5 +249,29 @@ public class ContractAction extends ActionSupport{
 
 	public void setDay(int day) {
 		this.day = day;
+	}
+
+	public int getCmd() {
+		return cmd;
+	}
+
+	public void setCmd(int cmd) {
+		this.cmd = cmd;
+	}
+
+	public int getRst() {
+		return rst;
+	}
+
+	public void setRst(int rst) {
+		this.rst = rst;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 }
