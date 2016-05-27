@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rrtimes.acm.domain.AtCstReportDict;
+import com.rrtimes.acm.domain.PageObject;
 
 /**
  * @Title:       AtCstReportDictService.java
@@ -35,5 +36,5 @@ public interface AtCstReportDictService {
 	
 	public AtCstReportDict queryById(int id);
 	
-	public List<AtCstReportDict> queryByMap(Map<String,Object> map);
+	public List<AtCstReportDict> queryByMap(AtCstReportDict acrd,PageObject page);
 }

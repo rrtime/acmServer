@@ -31,7 +31,7 @@ public interface AtUserGroupRelService {
 	
 	public int update(AtUserGroupRel augr);
 	
-	public int delete(int id);
+	public int delete(int userId);
 	
 	public List<AtUserGroupRel> queryByMap(Map<String,Object> map);
 	

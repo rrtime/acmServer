@@ -86,13 +86,13 @@ public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 	@Override
 	public int insert(AtSysNotice asn) {
 		// TODO Auto-generated method stub
-		return asnm.insert(asn);
+		return asnm.insert(asn)>0?0:1;
 	}
 
 	@Override
 	public int update(AtSysNotice asn) {
 		// TODO Auto-generated method stub
-		return asnm.update(asn);
+		return asnm.update(asn)>0?0:1;
 	}
 
 	@Override

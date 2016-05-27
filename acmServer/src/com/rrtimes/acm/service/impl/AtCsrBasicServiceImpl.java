@@ -8,6 +8,8 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.io.BufferedReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,12 +93,12 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 	}
 	@Override
 	public int addUser(AtCsrBasic aso){
-		return asom.insert(aso);
+		return asom.insert(aso)>0?0:1;
 	}
 	@Override
 	public int updateUser(AtCsrBasic aso) {
 		// TODO Auto-generated method stub
-		return asom.update(aso);
+		return asom.update(aso)>0?0:1;
 	}
 	@Override
 	public int deleteUser(int id) {
@@ -110,11 +112,28 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 	}
 	
 	@Override
-	public void importUser(List<AtCsrBasic> list,int oid) {
+	public void importUser(BufferedReader br,int oid) {
 		// TODO Auto-generated method stub
-		for(int i=0;i<list.size();i++){
-			list.get(i).setCpCode(String.valueOf(oid));
-			asom.insert(list.get(i));
+		try {
+			String stemp;
+	        while ((stemp = br.readLine()) != null) {
+	            String[] str = stemp.split(",");
+	            AtCsrBasic acb = new AtCsrBasic();
+	            acb.setCsrType(Integer.parseInt(str[0]));
+	            acb.setCsrIdentifer(str[1]);
+	            acb.setCsrCode(str[2]);
+	            acb.setRegAddress(str[3]);
+	            acb.setOfficeAddress(str[4]);
+	            acb.setFinanceLeader(str[5]);
+	            acb.setTaxLeader(str[6]);
+	            acb.setOperator(str[7]);
+	            acb.setRemark(str[8]);
+	            acb.setCpCode(String.valueOf(oid));
+	            asom.insert(acb);
+	        }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	@Override

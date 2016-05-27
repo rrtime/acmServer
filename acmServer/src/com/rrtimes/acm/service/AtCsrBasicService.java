@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service;
 
+import java.io.BufferedReader;
 import java.util.List;
 
 import com.rrtimes.acm.domain.AtCsrBasic;
@@ -42,7 +43,7 @@ public interface AtCsrBasicService {
 	public AtCsrBasic queryUserById(int id);
 	
 	//初始化通过excel导入用户
-	public void importUser(List<AtCsrBasic> list,int oid);
+	public void importUser(BufferedReader br,int oid);
 	
 	//根据部门用户查询客户信息
 	public List<AtCsrBasic> queryBasicByUser(String userAccount);

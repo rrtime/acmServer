@@ -43,7 +43,7 @@ public interface AtUserService {
 	public AtUser queryUserById(int id);
 	
 	//根据用户账号查询所属部门的人员信息
-	public List<AtUser> queryUserByMap(Map<String,Object> map);
+	public List<AtUser> queryUserByMap(AtUser aUser);
 	
 	//新增用户或组时，i_name不能重复
 	public boolean queryByInameToinsert(String Iname);

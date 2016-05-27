@@ -8,17 +8,33 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Service;
 
+import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
+import com.rrtimes.acm.persistence.AcmSysOrgMapper;
 import com.rrtimes.acm.persistence.AtUserMapper;
+import com.rrtimes.acm.service.AcmSysOrgService;
 import com.rrtimes.acm.service.AtUserService;
 
 /**
@@ -115,19 +131,19 @@ public class AtUserServiceImpl implements AtUserService{
 	
 	@Override
 	public int addUser(AtUser aso){
-		return asom.insert(aso);
+		return asom.insert(aso)>0?0:1;
 	}
 	
 	@Override
 	public int updateUser(AtUser aso) {
 		// TODO Auto-generated method stub
-		return asom.update(aso);
+		return asom.update(aso)>0?0:1;
 	}
 	
 	@Override
 	public int deleteUser(int id) {
 		// TODO Auto-generated method stub
-		return asom.delete(id);
+		return asom.delete(id)>0?0:1;
 	}
 	
 	@Override
@@ -137,8 +153,10 @@ public class AtUserServiceImpl implements AtUserService{
 	}
 	
 	@Override
-	public List<AtUser> queryUserByMap(Map<String, Object> map) {
+	public List<AtUser> queryUserByMap(AtUser atUser) {
 		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("oid", atUser.getOid());
 		return asom.findByMap(map);
 	}
 

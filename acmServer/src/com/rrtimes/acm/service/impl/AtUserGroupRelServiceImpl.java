@@ -49,9 +49,9 @@ public class AtUserGroupRelServiceImpl implements AtUserGroupRelService{
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int userId) {
 		// TODO Auto-generated method stub
-		return augrm.delete(id);
+		return augrm.delete(userId);
 	}
 
 	@Override

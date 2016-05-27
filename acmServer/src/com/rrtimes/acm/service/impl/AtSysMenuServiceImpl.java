@@ -18,9 +18,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.rrtimes.acm.domain.AtSysMenu;
+import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtSysMenuMapper;
+import com.rrtimes.acm.persistence.AcmSysOrgMapper;
 import com.rrtimes.acm.service.AtSysMenuService;
+import com.rrtimes.acm.service.AcmSysOrgService;
 
 /**
  * @Title:       AcmSysOrgServiceImpl.java
@@ -85,17 +88,17 @@ public class AtSysMenuServiceImpl implements AtSysMenuService{
 	}
 	@Override
 	public int addMenu(AtSysMenu aso){
-		return asom.insert(aso);
+		return asom.insert(aso)>0?0:1;
 	}
 	@Override
 	public int updateMenu(AtSysMenu aso) {
 		// TODO Auto-generated method stub
-		return asom.update(aso);
+		return asom.update(aso)>0?0:1;
 	}
 	@Override
 	public int deleteMenu(int id) {
 		// TODO Auto-generated method stub
-		return asom.delete(id);
+		return asom.delete(id)>0?0:1;
 	}
 	@Override
 	public AtSysMenu queryMenuById(int id) {

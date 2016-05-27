@@ -42,13 +42,13 @@ public class AtCompanyAgentServiceImpl implements AtCompanyAgentService{
 	@Override
 	public int insert(AtCompanyAgent aca) {
 		// TODO Auto-generated method stub
-		return acam.insert(aca);
+		return acam.insert(aca)>0?0:1;
 	}
 
 	@Override
 	public int update(AtCompanyAgent aca) {
 		// TODO Auto-generated method stub
-		return acam.update(aca);
+		return acam.update(aca)>0?0:1;
 	}
 
 	@Override

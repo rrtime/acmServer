@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import com.rrtimes.acm.domain.AtCstContract;
@@ -88,24 +89,23 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 	}
 	@Override
 	public int addUser(AtCstContract aso){
-		return asom.insert(aso);
+		return asom.insert(aso)>0?0:1;
 	}
 	@Override
 	public int updateUser(AtCstContract aso) {
 		// TODO Auto-generated method stub
-		return asom.update(aso);
+		return asom.update(aso)>0?0:1;
 	}
 	@Override
 	public int deleteUser(int id) {
 		// TODO Auto-generated method stub
-		return asom.delete(id);
+		return asom.delete(id)>0?0:1;
 	}
 	@Override
 	public AtCstContract queryUserById(int id) {
 		// TODO Auto-generated method stub
 		return asom.findById(id);
 	}
-	@SuppressWarnings("static-access")
 	@Override
 	public List<AtCstContract> queryContractByUserIdAndDay(int userId,int day) {
 		// TODO Auto-generated method stub
@@ -131,7 +131,6 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 		// TODO Auto-generated method stub
 		return asom.findByUserId(userId);
 	}
-	@SuppressWarnings({ "deprecation", "static-access" })
 	@Override
 	public List<AtCstContract> queryMonthContractByUserId(int userId,int day) {
 		// TODO Auto-generated method stub

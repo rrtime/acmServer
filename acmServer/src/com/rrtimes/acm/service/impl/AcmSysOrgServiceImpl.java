@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,13 +58,13 @@ public class AcmSysOrgServiceImpl implements AcmSysOrgService{
 	
 	@Override
 	public int addOrg(AcmSysOrg aso){
-		return asom.insert(aso);
+		return asom.insert(aso)>0?0:1;
 	}
 	
 	@Override
 	public int updateOrg(AcmSysOrg aso) {
 		// TODO Auto-generated method stub
-		return asom.update(aso);
+		return asom.update(aso)>0?0:1;
 	}
 	
 	@Override

@@ -103,22 +103,27 @@ public class AtCstFtServiceImpl implements AtCstFtService{
 	}
 	@Override
 	public int addUser(AtCstFt aso){
-		return asom.insert(aso);
+		return asom.insert(aso)>0?0:1;
 	}
 	@Override
 	public int updateUser(AtCstFt aso) {
 		// TODO Auto-generated method stub
-		return asom.update(aso);
+		return asom.update(aso)>0?0:1;
 	}
 	@Override
 	public int deleteUser(int id) {
 		// TODO Auto-generated method stub
-		return asom.delete(id);
+		return asom.delete(id)>0?0:1;
 	}
 	@Override
 	public AtCstFt queryUserById(int id) {
 		// TODO Auto-generated method stub
 		return asom.findById(id);
+	}
+	@Override
+	public List<AtCstFt> queryByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return asom.findByUserId(userId);
 	}
 	
 	

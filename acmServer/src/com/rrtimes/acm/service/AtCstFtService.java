@@ -41,5 +41,6 @@ public interface AtCstFtService {
 	//通过id查询用户信息 
 	public AtCstFt queryUserById(int id);
 	
-	
+	//根据用户查看该用户下的客户的财税信息
+	public List<AtCstFt> queryByUserId(int userId);
 }
