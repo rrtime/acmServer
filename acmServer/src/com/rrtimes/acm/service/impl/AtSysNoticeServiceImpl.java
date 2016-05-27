@@ -57,8 +57,10 @@ public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 	public List<AtSysNotice> queryNoticeByGUserId(int userId) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("oid", "%"+aum.findById(userId).getOid()+"%");
-		map.put("userId", "%"+userId+"%");
+//		map.put("oid", "%"+aum.findById(userId).getOid()+"%");
+//		map.put("userId", "%"+userId+"%");
+		map.put("oid", aum.findById(userId).getOid());
+		map.put("userId", userId);
 		return asnm.findNoticeByGUserId(map);
 	}
 
@@ -66,8 +68,10 @@ public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 	public List<AtSysNotice> queryNoticeByTUserId(int userId) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("oid", "%"+aum.findById(userId).getOid()+"%");
-		map.put("userId", "%"+userId+"%");
+//		map.put("oid", "%"+aum.findById(userId).getOid()+"%");
+//		map.put("userId", "%"+userId+"%");
+		map.put("oid", aum.findById(userId).getOid());
+		map.put("userId", userId);
 		return asnm.findNoticeByTUserId(map);
 	}
 

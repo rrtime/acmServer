@@ -139,16 +139,18 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
-    FROM AT_CST_CONTRACT  
+    FROM AT_CST_CONTRACT c 
     WHERE 
-      CSR_IDENTIFER in
+      EXISTS
       (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	  )
       AND END_TIME
       BETWEEN 
@@ -172,17 +174,20 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
-    FROM AT_CST_CONTRACT  
+    FROM AT_CST_CONTRACT c 
     WHERE 
        1=1
-       and CSR_IDENTIFER in
+       and 
+       EXISTS
        (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	   )
        and CURDATE()= date_format(END_TIME,'%Y-%m-%d')
   </select>
@@ -239,16 +244,18 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
-    FROM AT_CST_CONTRACT  
+    FROM AT_CST_CONTRACT c 
     WHERE 
-      CSR_IDENTIFER in
+      EXISTS
        (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	   )
   </select>
   
@@ -278,14 +285,16 @@
 	         c.REMARK as remark
 	          from AT_CST_CONTRACT c LEFT JOIN AT_CST_FEE f on
     c.ID=f.NID where  NOW() > f.END_TIME
-    and c.CSR_IDENTIFER in
+    and EXISTS
        (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	   )
   </select>
   

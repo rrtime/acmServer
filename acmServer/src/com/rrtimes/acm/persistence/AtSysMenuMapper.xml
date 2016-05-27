@@ -117,14 +117,19 @@
 	  SHOW_INDEX as showIndex,
 	  CREATE_TIME as createTime,
 	  UPDATE_TIME as updateTime,
-	  REMARK as remark from AT_SYS_MENU 
-	where id in
+	  REMARK as remark from AT_SYS_MENU m
+	where 
+	EXISTS
 	(
-		select TREE_ID from AT_SYS_MODEL where MENU_CODE in 
+		select TREE_ID from AT_SYS_MODEL l where EXISTS 
 		(
 			select DISTINCT MENU_CODE 
-			from AT_HOLD_FUNCTION where ACTOR_ID = #{userId}
+			from AT_HOLD_FUNCTION f 
+			where f.ACTOR_ID = #{userId}
+			and f.MENU_CODE = l.MENU_CODE
 		)
+		and 
+		m.ID = l.TREE_ID
 	)
   </select>
   

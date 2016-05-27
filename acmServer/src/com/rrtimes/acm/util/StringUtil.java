@@ -86,13 +86,7 @@ public class StringUtil {
 			return false;
 		}
 	}
-	public static boolean isEmpty(String str){
-		if(str==null || "".equals(str){
-			return true;
-		}else{
-			return false;
-		}
-	}
+	
 	/**
 	 * 判断List是否为空
 	 * @param list

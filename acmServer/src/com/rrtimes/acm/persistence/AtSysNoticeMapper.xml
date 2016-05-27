@@ -183,7 +183,7 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_SYS_NOTICE  
-    WHERE N_TYPE=2 and N_STATUS=1 and OIDS like #{oid} or UIDS like #{uid}
+    WHERE N_TYPE=2 and N_STATUS=1 and locate(#{oid}, OIDS)>0 or locate(#{uid}, UIDS)>0 
   </select>
   
   <select id="findCGnoticeByUserId" parameterType="int" resultType="AtSysNotice">
@@ -246,7 +246,7 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_SYS_NOTICE  
-    WHERE N_TYPE=1 and OIDS like #{oid} or UIDS like #{uid}
+    WHERE N_TYPE=1 and locate(#{oid}, OIDS)>0 or locate(#{uid}, UIDS)>0
   </select>
   
   <select id="findCTnoticeByUserId" parameterType="int" resultType="AtSysNotice">
