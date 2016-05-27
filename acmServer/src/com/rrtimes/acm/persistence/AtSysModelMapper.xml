@@ -108,13 +108,13 @@
 	 	    	and MENU_CODE = #{menuCode}
 	 		</if>
 	 		<if test="mname != null and mname != ''">
-	 	    	and M_NAME like #{mname}
+	 	    	and LOCATE(#{mname},M_NAME) > 0
 	 		</if>
 	  		<if test="isConShownum >= 0">
 	  	    	and IS_CON_SHOWNUM = #{isConShownum}
 	  		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0
 	  		</if>
 	    	ORDER BY showIndex
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -130,13 +130,13 @@
  	    	and MENU_CODE = #{menuCode}
  		</if>
  		<if test="mname != null and mname != ''">
- 	    	and M_NAME like #{mname}
+ 	    	and LOCATE(#{mname},M_NAME) > 0
  		</if>
   		<if test="isConShownum >= 0">
   	    	and IS_CON_SHOWNUM = #{isConShownum}
   		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK like #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   

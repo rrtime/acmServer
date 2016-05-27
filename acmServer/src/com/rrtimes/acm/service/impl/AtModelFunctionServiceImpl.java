@@ -75,7 +75,7 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 			map.put("menuCode", atModelFunction.getMenuCode());
 		}
 		if(!StringUtil.isEmtryStr(atModelFunction.getFname())){
-			map.put("fname", "%" + atModelFunction.getFname() + "%");
+			map.put("fname", atModelFunction.getFname());
 		}
 		if(atModelFunction.getControlType() >= 0){
 			map.put("controlType", atModelFunction.getControlType());
@@ -90,7 +90,7 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 			map.put("operator", atModelFunction.getOperator() );
 		}
 		if(!StringUtil.isEmtryStr(atModelFunction.getRemark())){
-			map.put("remark", "%" + atModelFunction.getRemark() + "%");
+			map.put("remark", atModelFunction.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atModelFunctionMapper.findByCount(map));

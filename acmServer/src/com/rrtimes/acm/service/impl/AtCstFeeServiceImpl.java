@@ -77,7 +77,7 @@ public class AtCstFeeServiceImpl implements AtCstFeeService {
 			map.put("operator", atCstFee.getOperator() );
 		}
 		if(!StringUtil.isEmtryStr(atCstFee.getRemark())){
-			map.put("remark", "%" + atCstFee.getRemark() + "%");
+			map.put("remark", atCstFee.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atCstFeeMapper.findByCount(map));

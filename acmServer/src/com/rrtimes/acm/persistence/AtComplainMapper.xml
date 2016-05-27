@@ -130,7 +130,7 @@
 	  	    	and CN_TYPE = #{cnType}
 	  		</if>
 	  		<if test="cnTheme != null and cnTheme != ''">
-	 	    	and CN_THEME like #{cnTheme}
+	 	    	and LOCATE(#{cnTheme},CN_THEME) > 0 
 	 		</if>
 	  		<if test="cnPrincipal != null and cnPrincipal != ''">
 	 	    	and CN_PRINCIPAL = #{cnPrincipal}
@@ -142,7 +142,7 @@
 	  	    	and OPERATOR = #{operator}
 	  		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0
 	  		</if>
 	    	ORDER BY createTime DESC
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -186,7 +186,7 @@
   	    	and CN_TYPE = #{cnType}
   		</if>
   		<if test="cnTheme != null and cnTheme != ''">
- 	    	and CN_THEME like #{cnTheme}
+ 	    	and LOCATE(#{cnTheme},CN_THEME) > 0 
  		</if>
   		<if test="cnPrincipal != null and cnPrincipal != ''">
  	    	and CN_PRINCIPAL = #{cnPrincipal}
@@ -198,7 +198,7 @@
   	    	and OPERATOR = #{operator}
   		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK = #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   

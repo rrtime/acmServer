@@ -89,13 +89,13 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 			map.put("menuCode", atSysModel.getMenuCode());
 		}
 		if(!StringUtil.isEmtryStr(atSysModel.getMname())){
-			map.put("mname", "%" + atSysModel.getMname() + "%");
+			map.put("mname", atSysModel.getMname());
 		}
 		if(atSysModel.getIsConShownum() >= 0){
 			map.put("isConShownum", atSysModel.getIsConShownum());
 		}
 		if(!StringUtil.isEmtryStr(atSysModel.getRemark())){
-			map.put("remark", "%" + atSysModel.getRemark() + "%");
+			map.put("remark", atSysModel.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atSysModelMapper.findByCount(map));

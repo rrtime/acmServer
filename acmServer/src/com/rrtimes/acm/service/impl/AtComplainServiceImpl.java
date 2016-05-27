@@ -74,7 +74,7 @@ public class AtComplainServiceImpl implements AtComplainService {
 			map.put("cnType", atComplain.getCnType());
 		}
 		if(!StringUtil.isEmtryStr(atComplain.getCnTheme())){
-			map.put("cnTheme", "%" + atComplain.getCnTheme() + "%");
+			map.put("cnTheme", atComplain.getCnTheme());
 		}
 		if(!StringUtil.isEmtryStr(atComplain.getCnPrincipal())){
 			map.put("cnPrincipal", atComplain.getCnPrincipal());
@@ -86,7 +86,7 @@ public class AtComplainServiceImpl implements AtComplainService {
 			map.put("operator", atComplain.getOperator() );
 		}
 		if(!StringUtil.isEmtryStr(atComplain.getRemark())){
-			map.put("remark", "%" + atComplain.getRemark() + "%");
+			map.put("remark", atComplain.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atComplainMapper.findByCount(map));

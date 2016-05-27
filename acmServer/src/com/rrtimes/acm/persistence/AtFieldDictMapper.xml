@@ -129,13 +129,13 @@
 	 	    	and MENU_CODE = #{menuCode}
 	 		</if>
 	 		<if test="fname != null and fname != ''">
-	 	    	and F_NAME like #{fname}
+	 	    	and LOCATE(#{fname},F_NAME) > 0
 	 		</if>
 	 		<if test="ftitle != null and ftitle != ''">
-	 	    	and F_TITLE like #{ftitle}
+	 	    	and LOCATE(#{ftitle},F_TITLE) > 0
 	 		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0
 	  		</if>
 	    	ORDER BY createTime DESC
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -147,14 +147,14 @@
  		<if test="menuCode != null and menuCode != ''">
  	    	and MENU_CODE = #{menuCode}
  		</if>
- 		<if test="funName != null and funName != ''">
- 	    	and FUN_NAME like #{funName}
+ 		<if test="fname != null and fname != ''">
+ 	    	and LOCATE(#{fname},F_NAME) > 0
  		</if>
  		<if test="ftitle != null and ftitle != ''">
- 	    	and F_TITLE like #{ftitle}
+ 	    	and LOCATE(#{ftitle},F_TITLE) > 0
  		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK like #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   

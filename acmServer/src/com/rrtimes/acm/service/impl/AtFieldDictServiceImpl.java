@@ -65,13 +65,13 @@ public class AtFieldDictServiceImpl implements AtFieldDictService {
 			map.put("menuCode", atFieldDict.getMenuCode());
 		}
 		if(!StringUtil.isEmtryStr(atFieldDict.getFname())){
-			map.put("fname", "%" + atFieldDict.getFname() + "%");
+			map.put("fname", atFieldDict.getFname());
 		}
 		if(!StringUtil.isEmtryStr(atFieldDict.getFtitle())){
-			map.put("ftitle", "%" + atFieldDict.getFtitle() + "%");
+			map.put("ftitle", atFieldDict.getFtitle());
 		}
 		if(!StringUtil.isEmtryStr(atFieldDict.getRemark())){
-			map.put("remark", "%" + atFieldDict.getRemark() + "%");
+			map.put("remark", atFieldDict.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atFieldDictMapper.findByCount(map));

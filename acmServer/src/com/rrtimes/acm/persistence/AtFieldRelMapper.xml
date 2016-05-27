@@ -104,7 +104,7 @@
 	 	    	and MENU_CODE = #{menuCode}
 	 		</if>
 	 		<if test="rname != null and rname != ''">
-	 	    	and R_NAME like #{rname}
+	 	    	and LOCATE(#{rName},R_NAME) > 0
 	 		</if>
 	 		<if test="privilegeType >= 0">
 	 	    	and PRIVILEGETYPE = #{privilegeType}
@@ -116,7 +116,7 @@
 	 	    	and UID = #{uid}
 	 		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0
 	  		</if>
 	    	ORDER BY createTime DESC
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -129,7 +129,7 @@
  	    	and MENU_CODE = #{menuCode}
  		</if>
  		<if test="rname != null and rname != ''">
- 	    	and R_NAME like #{rName}
+ 	    	and LOCATE(#{rName},R_NAME) > 0
  		</if>
  		<if test="privilegeType >= 0">
  	    	and PRIVILEGETYPE = #{privilegeType}
@@ -141,7 +141,7 @@
  	    	and UID = #{uid}
  		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK like #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   

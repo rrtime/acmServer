@@ -68,7 +68,7 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 			map.put("cnIdentifer", atCstVisit.getCnIdentifer());
 		}
 		if(!StringUtil.isEmtryStr(atCstVisit.getCnCustomer())){
-			map.put("cnCustomer", "%" + atCstVisit.getCnCustomer() + "%");
+			map.put("cnCustomer", atCstVisit.getCnCustomer());
 		}
 		if(atCstVisit.getCnType() >= 0){
 			map.put("cnType", atCstVisit.getCnType());
@@ -80,7 +80,7 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 			map.put("operator", atCstVisit.getOperator() );
 		}
 		if(!StringUtil.isEmtryStr(atCstVisit.getRemark())){
-			map.put("remark", "%" + atCstVisit.getRemark() + "%");
+			map.put("remark", atCstVisit.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atCstVisitMapper.findByCount(map));

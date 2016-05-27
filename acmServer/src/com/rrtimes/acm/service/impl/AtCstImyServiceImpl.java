@@ -80,7 +80,7 @@ public class AtCstImyServiceImpl implements AtCstImyService {
 			map.put("operator", atCstImy.getOperator() );
 		}
 		if(!StringUtil.isEmtryStr(atCstImy.getRemark())){
-			map.put("remark", "%" + atCstImy.getRemark() + "%");
+			map.put("remark", atCstImy.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atCstImyMapper.findByCount(map));

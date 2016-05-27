@@ -105,7 +105,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 			map.put("menuCode", atFieldRel.getMenuCode());
 		}
 		if(!StringUtil.isEmtryStr(atFieldRel.getRname())){
-			map.put("rname", "%" + atFieldRel.getRname() + "%");
+			map.put("rname", atFieldRel.getRname());
 		}
 		if(atFieldRel.getPrivilegeType() >= 0){
 			map.put("privilegeType", atFieldRel.getPrivilegeType());
@@ -117,7 +117,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 			map.put("uid", atFieldRel.getUid());
 		}
 		if(!StringUtil.isEmtryStr(atFieldRel.getRemark())){
-			map.put("remark", "%" + atFieldRel.getRemark() + "%");
+			map.put("remark", atFieldRel.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atFieldRelMapper.findByCount(map));

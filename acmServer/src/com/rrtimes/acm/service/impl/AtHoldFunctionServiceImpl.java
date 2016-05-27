@@ -111,7 +111,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 			map.put("menuCode", atHoldFunction.getMenuCode());
 		}
 		if(!StringUtil.isEmtryStr(atHoldFunction.getFunName())){
-			map.put("funName", "%" + atHoldFunction.getFunName() + "%");
+			map.put("funName", atHoldFunction.getFunName());
 		}
 		if(atHoldFunction.getFunId() >= 0){
 			map.put("funId", atHoldFunction.getFunId());
@@ -123,7 +123,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 			map.put("operator", atHoldFunction.getOperator() );
 		}
 		if(!StringUtil.isEmtryStr(atHoldFunction.getRemark())){
-			map.put("remark", "%" + atHoldFunction.getRemark() + "%");
+			map.put("remark", atHoldFunction.getRemark());
 		}
 		// 数据总量查询
 		page.setSumCloum(atHoldFunctionMapper.findByCount(map));
