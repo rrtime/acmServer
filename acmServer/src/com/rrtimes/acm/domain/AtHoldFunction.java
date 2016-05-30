@@ -8,10 +8,10 @@
  */
 package com.rrtimes.acm.domain;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import com.rrtimes.acm.iinterface.ISerializable;
-import com.sun.jmx.snmp.Timestamp;
 
 /**
  * @Title:       AtHoldFunction.java

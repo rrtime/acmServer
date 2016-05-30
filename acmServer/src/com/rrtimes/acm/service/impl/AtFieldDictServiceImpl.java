@@ -44,7 +44,7 @@ public class AtFieldDictServiceImpl implements AtFieldDictService {
 
 	@Override
 	public int modAtFieldDict(AtFieldDict atFieldDict) {
-		return atFieldDictMapper.update(atFieldDict);
+		return atFieldDictMapper.update(atFieldDict)>0?0:1;
 	}
 
 	@Override

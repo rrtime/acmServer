@@ -49,7 +49,7 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 
 	@Override
 	public int modAtModelFunction(AtModelFunction atModelFunction) {
-		return atModelFunctionMapper.update(atModelFunction);
+		return atModelFunctionMapper.update(atModelFunction)>0?0:1;
 	}
 
 	@Override

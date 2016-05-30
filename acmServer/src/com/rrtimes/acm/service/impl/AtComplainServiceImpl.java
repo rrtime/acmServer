@@ -44,7 +44,7 @@ public class AtComplainServiceImpl implements AtComplainService {
 
 	@Override
 	public int modAtComplain(AtComplain atComplain) {
-		return atComplainMapper.update(atComplain);
+		return atComplainMapper.update(atComplain)>0?0:1;
 	}
 
 	@Override

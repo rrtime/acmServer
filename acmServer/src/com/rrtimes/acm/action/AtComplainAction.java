@@ -140,14 +140,6 @@ public class AtComplainAction extends ActionSupport {
 	}
 
 	/**
-	 * 分页查询
-	 * @return
-	 */
-	public List<AtComplain> queryAtComplainListForPage(){
-		return atComplainService.queryListByPage(atComplain, page);
-	}
-	
-	/**
 	 * 改变投诉记录状态
 	 */
 	public int changeCnStatus(){

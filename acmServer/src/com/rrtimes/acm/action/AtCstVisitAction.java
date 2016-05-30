@@ -9,6 +9,7 @@
 package com.rrtimes.acm.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -69,14 +70,19 @@ public class AtCstVisitAction extends ActionSupport {
 	 * */
 	public String addAtCstVisitInfo()
 	{
-		rst = atCstVisitService.addAtCstVisit(atCstVisit);
-		// 设置界面提示信息
-		if( rst == 0 ){
-			msg = "新增操作已成功。";
-		}else{
-			msg = "新增操作未成功。";
+		try{
+			atCstVisit.setCnTime(new Date());
+			rst = atCstVisitService.addAtCstVisit(atCstVisit);
+			// 设置界面提示信息
+			if( rst == 0 ){
+				msg = "新增操作已成功。";
+			}else{
+				msg = "新增操作未成功。";
+			}
+			this.page.setCurrentPage(1);
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		this.page.setCurrentPage(1);
 		return queryAtCstVisitList();
 	}
 	

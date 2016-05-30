@@ -44,7 +44,7 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 
 	@Override
 	public int modAtCstVisit(AtCstVisit atCstVisit) {
-		return atCstVisitMapper.update(atCstVisit);
+		return atCstVisitMapper.update(atCstVisit)>0?0:1;
 	}
 
 	@Override

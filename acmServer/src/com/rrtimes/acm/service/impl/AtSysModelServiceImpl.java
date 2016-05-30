@@ -52,7 +52,7 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 
 	@Override
 	public int modAtSysModel(AtSysModel atSysModel) {
-		return atSysModelMapper.update(atSysModel);
+		return atSysModelMapper.update(atSysModel)>0?0:1;
 	}
 
 	@Override

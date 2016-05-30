@@ -44,7 +44,7 @@ public class AtCstImyServiceImpl implements AtCstImyService {
 
 	@Override
 	public int modAtCstImy(AtCstImy atCstImy) {
-		return atCstImyMapper.update(atCstImy);
+		return atCstImyMapper.update(atCstImy)>0?0:1;
 	}
 
 	@Override
