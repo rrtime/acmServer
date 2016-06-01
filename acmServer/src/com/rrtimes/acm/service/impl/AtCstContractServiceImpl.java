@@ -110,7 +110,6 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
-//			map.put("csrIdentifer", csrIdentifer);
 			map.put("userId", userId);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = sdf.parse(sdf.format(new Date()));
@@ -128,7 +127,9 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 	@Override
 	public List<AtCstContract> queryContractByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asom.findByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asom.findByUserId(map);
 	}
 	@Override
 	public List<AtCstContract> queryMonthContractByUserId(int userId,int day) {
@@ -208,7 +209,9 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 	@Override
 	public List<AtCstContract> queryQFByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asom.findQFByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asom.findQFByUserId(map);
 	}
 	@Override
 	public int queryQFCountByUserId(int userId) {

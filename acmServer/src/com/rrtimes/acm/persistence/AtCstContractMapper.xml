@@ -159,7 +159,7 @@
       #{day}
   </select>
   
-  <select id="findByUserId"  resultType="AtCstContract">
+  <select id="findByUserId" parameterType="Map" resultType="AtCstContract">
   	SELECT
   		 ID as id,
 	  		 CSR_IDENTIFER as csrIdentifer,
@@ -176,8 +176,6 @@
 	         REMARK as remark
     FROM AT_CST_CONTRACT c 
     WHERE 
-       1=1
-       and 
        EXISTS
        (
 		  select CSR_IDENTIFER from AT_CSR_BASIC b
@@ -268,7 +266,7 @@
 	#{datend}
   </select>
   
-   <select id="findQFByUserId" parameterType="int" resultType="AtCstContract">
+   <select id="findQFByUserId" parameterType="Map" resultType="AtCstContract">
   	select 
 			 c.ID as id,
 	  		 c.CSR_IDENTIFER as csrIdentifer,
