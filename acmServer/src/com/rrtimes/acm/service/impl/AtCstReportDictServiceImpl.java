@@ -34,7 +34,6 @@ import com.rrtimes.acm.service.AtCstReportDictService;
  * @author lil
  * 
  */
-@Service
 public class AtCstReportDictServiceImpl implements AtCstReportDictService{
 
 	@Resource AtCstReportDictMapper acrdm;

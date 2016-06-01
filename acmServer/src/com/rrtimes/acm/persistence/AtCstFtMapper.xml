@@ -212,7 +212,7 @@
     WHERE CSR_IDENTIFER=#{csrIdentifer}
   </select>
   
-  <select id="findByUserId" parameterType="int" resultType="AtCstFt">
+  <select id="findByUserId" parameterType="Map" resultType="AtCstFt">
   	SELECT
   		 ID as id,
 	  		 CSR_IDENTIFER as csrIdentifer,
@@ -234,10 +234,12 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
-    FROM AT_CST_FT  
-    WHERE CSR_IDENTIFER=
+    FROM AT_CST_FT a
+    WHERE 
+    EXISTS
     (
-		select CSR_IDENTIFER from AT_CSR_BASIC where OPERATOR=#{userId}
+		select CSR_IDENTIFER from AT_CSR_BASIC c where c.OPERATOR=#{userId}
+		and a.CSR_IDENTIFER = c.CSR_IDENTIFER
 	)
   </select>
   

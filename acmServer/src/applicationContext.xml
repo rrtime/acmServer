@@ -74,6 +74,14 @@
 	<bean id="afrsi" class="com.rrtimes.acm.service.impl.AtFieldRelServiceImpl" />
 	<bean id="demoService" class="com.rrtimes.acm.service.impl.AcmSysOrgServiceImpl" />
 	<bean id="demoService1" class="com.rrtimes.acm.service.impl.AtUserServiceImpl" />
+	<bean id="acasi" class="com.rrtimes.acm.service.impl.AtCompanyAgentServiceImpl" />
+	<bean id="acbsi" class="com.rrtimes.acm.service.impl.AtCsrBasicServiceImpl" />
+	<bean id="accsi" class="com.rrtimes.acm.service.impl.AtCstContractServiceImpl" />
+	<bean id="acfsi" class="com.rrtimes.acm.service.impl.AtCstFtServiceImpl" />
+	<bean id="acrdsi" class="com.rrtimes.acm.service.impl.AtCstReportDictServiceImpl" />
+	<bean id="asms" class="com.rrtimes.acm.service.impl.AtSysMenuServiceImpl" />
+	<bean id="asnsi" class="com.rrtimes.acm.service.impl.AtSysNoticeServiceImpl" />
+	<bean id="augrsi" class="com.rrtimes.acm.service.impl.AtUserGroupRelServiceImpl" />
 
 	<!-- 提供方应用信息，用于计算依赖关系-->
 	<dubbo:application name="xixi_provider" />
@@ -106,4 +114,12 @@
 	
 	<dubbo:service interface="com.rrtimes.acm.service.AcmSysOrgService" ref="demoService" />
 	<dubbo:service interface="com.rrtimes.acm.service.AtUserService" ref="demoService1" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCompanyAgentService" ref="acasi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCsrBasicService" ref="acbsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstContractService" ref="accsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstFtService" ref="acfsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstReportDictService" ref="acrdsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtSysMenuService" ref="asms" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtSysNoticeService" ref="asnsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtUserGroupRelService" ref="augrsi" />
 </beans>

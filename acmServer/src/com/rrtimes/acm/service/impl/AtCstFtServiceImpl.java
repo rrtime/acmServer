@@ -34,7 +34,6 @@ import com.rrtimes.acm.service.AtCstFtService;
  * @author lil
  * 
  */
-@Service
 public class AtCstFtServiceImpl implements AtCstFtService{
 	
 	@Resource
@@ -123,7 +122,9 @@ public class AtCstFtServiceImpl implements AtCstFtService{
 	@Override
 	public List<AtCstFt> queryByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asom.findByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asom.findByUserId(map);
 	}
 	
 	

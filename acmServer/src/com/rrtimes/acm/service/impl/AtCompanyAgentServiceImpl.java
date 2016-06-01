@@ -33,7 +33,6 @@ import com.rrtimes.acm.service.AtCompanyAgentService;
  * @author lil
  * 
  */
-@Service
 public class AtCompanyAgentServiceImpl implements AtCompanyAgentService{
     
 	@Resource

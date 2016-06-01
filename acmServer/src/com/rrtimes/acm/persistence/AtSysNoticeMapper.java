@@ -39,13 +39,13 @@ public interface AtSysNoticeMapper {
 	
 	public List<AtSysNotice> findByPage(Map<String,Object> map);
 	
-	public List<AtSysNotice> findGnoticeByUserId(int userId);
+	public List<AtSysNotice> findGnoticeByUserId(Map<String,Object> map);
 	
-	public List<AtSysNotice> findCGnoticeByUserId(int userId);
+	public List<AtSysNotice> findCGnoticeByUserId(Map<String,Object> map);
 	
-	public List<AtSysNotice> findTnoticeByUserId(int userId);
+	public List<AtSysNotice> findTnoticeByUserId(Map<String,Object> map);
 	
-	public List<AtSysNotice> findCTnoticeByUserId(int userId);
+	public List<AtSysNotice> findCTnoticeByUserId(Map<String,Object> map);
 	
 	public List<AtSysNotice> findNoticeByGUserId(Map<String,Object> map);
 	
