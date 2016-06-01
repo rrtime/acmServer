@@ -8,7 +8,6 @@
  */
 package com.rrtimes.acm.service.impl;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,6 @@ import com.rrtimes.acm.service.AcmSysOrgService;
  * @author lil
  * 
  */
-@Service
 public class AcmSysOrgServiceImpl implements AcmSysOrgService{
 	
 	@Resource
@@ -76,7 +74,6 @@ public class AcmSysOrgServiceImpl implements AcmSysOrgService{
 	@Override
 	public AcmSysOrg queryOrgById(int id) {
 		// TODO Auto-generated method stub
-		System.out.println("id========="+id);
 		return asom.findById(id);
 	}
 	

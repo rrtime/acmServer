@@ -103,7 +103,7 @@
     WHERE ID=#{id}
   </select>
   
-  <select id="findByUserId" parameterType="int" resultType="AtSysMenu">
+  <select id="findByUserId" parameterType="Map" resultType="AtSysMenu">
   	select 
       ID as id,
 	  M_TITLE as mtitle,

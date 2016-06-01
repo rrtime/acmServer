@@ -108,6 +108,8 @@ public class AtSysMenuServiceImpl implements AtSysMenuService{
 	@Override
 	public List<AtSysMenu> queryByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asom.findByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asom.findByUserId(map);
 	}
 }

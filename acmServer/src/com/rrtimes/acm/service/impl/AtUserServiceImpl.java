@@ -49,7 +49,6 @@ import com.rrtimes.acm.service.AtUserService;
  * @author lil
  * 
  */
-@Service
 public class AtUserServiceImpl implements AtUserService{
 	
 	@Resource

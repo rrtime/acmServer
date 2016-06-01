@@ -149,7 +149,7 @@
 	    	<if test="cpCode!=null">and CP_CODE = #{cpCode}</if>
 	    	<if test="oid!=null">and OID = #{oid}</if>
 	    	<if test="iType!=null">and I_TYPE = #{iType}</if>
-	    	<if test="iName!=null">and I_NAME = #{iName}</if>
+	    	<if test="iname!=null">and I_NAME = #{iname}</if>
 	    	<if test="loginPwd!=null">and LOGIN_PWD = #{loginPwd}</if>
 	    	<if test="userName!=null">and USER_NAME = #{userName}</if>
 	    	<if test="sex!=null">and SEX = #{sex}</if>
@@ -264,7 +264,7 @@
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark 
     FROM AT_USER 
-    WHERE I_NAME=#{iName} and LOGIN_PWD=#{loginPwd}
+    WHERE I_NAME=#{iname} and LOGIN_PWD=#{loginPwd}
   </select>
   
   <select id="findByINameToinsert" parameterType="String" resultType="AtUser">
@@ -295,14 +295,14 @@
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark 
     FROM AT_USER 
-    WHERE I_NAME=#{iName}
+    WHERE I_NAME=#{iname}
   </select>
   
    <select id="findCountByINameToupdate" parameterType="String" resultType="AtUser">
   	SELECT
   		 count(*) 
     FROM AT_USER 
-    WHERE I_NAME=#{iName}
+    WHERE I_NAME=#{iname}
   </select>
   
   <select id="findByINameToupdate" parameterType="String" resultType="AtUser">
@@ -333,7 +333,7 @@
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark  
     FROM AT_USER 
-    WHERE I_NAME=#{iName}
+    WHERE I_NAME=#{iname}
   </select>
   
   <select id="findByCount" parameterType="Map" resultType="int">
@@ -344,7 +344,7 @@
 	    <if test="cpCode!=null">and CP_CODE = #{cpCode}</if>
 	    	<if test="oid!=null">and OID = #{oid}</if>
 	    	<if test="iType!=null">and I_TYPE = #{iType}</if>
-	    	<if test="iName!=null">and I_NAME = #{iName}</if>
+	    	<if test="iname!=null">and I_NAME = #{iname}</if>
 	    	<if test="loginPwd!=null">and LOGIN_PWD = #{loginPwd}</if>
 	    	<if test="userName!=null">and USER_NAME = #{userName}</if>
 	    	<if test="sex!=null">and SEX = #{sex}</if>
