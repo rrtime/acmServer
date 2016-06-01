@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtHoldFunction;
@@ -49,12 +53,15 @@ public class AtHoldFunctionAction extends ActionSupport {
 	private List<AtHoldFunction> atHoldFunctionList = new ArrayList<AtHoldFunction>();
 	
 	private AtHoldFunction atHoldFunction = new AtHoldFunction();
-	
+	//要授权的用户或用户组
 	private AtUser atUser = new AtUser();
 	
 	private AtSysMenu atSysMenu = new AtSysMenu();
 	
 	private PageObject page = new PageObject();
+	
+	//格式是“menuCode:funName:funId,menuCode:funName:funId,menuCode:funName::funId”
+	private String idInfos;
 	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
@@ -63,6 +70,9 @@ public class AtHoldFunctionAction extends ActionSupport {
 	// 0 新增  1 修改  2 查看详情
 	private int cmd = 0;
 	
+	HttpSession session = ServletActionContext.getRequest().getSession();
+	//操作员即当前登陆人
+	AtUser atUser1 = (AtUser) session.getAttribute("user");
 	
 	/**
 	 * 跳转至功能详细操作字典新增页面
@@ -78,7 +88,8 @@ public class AtHoldFunctionAction extends ActionSupport {
 	 * */
 	public String addAtHoldFunctionInfo()
 	{
-		rst = atHoldFunctionService.addAtHoldFunction(atHoldFunctionList);
+		rst = atHoldFunctionService.addAtHoldFunction(idInfos,atUser,atUser1.getUserName());
+//		rst = atHoldFunctionService.addAtHoldFunction(idInfos,atUser,"y");
 		// 设置界面提示信息
 		if( rst == 0 ){
 			msg = "新增操作已成功。";
@@ -105,7 +116,8 @@ public class AtHoldFunctionAction extends ActionSupport {
 	 * */
 	public String modAtHoldFunction()
 	{
-		rst = atHoldFunctionService.modAtHoldFunction(atHoldFunctionList, atUser.getId(), atSysMenu.getId());
+		rst = atHoldFunctionService.modAtHoldFunction(idInfos, atUser, atSysMenu.getId(),atUser1.getUserName());
+//		rst = atHoldFunctionService.modAtHoldFunction(idInfos, atUser, atSysMenu.getId(),"y");
 		// 设置界面提示信息
 		if( rst == 0 ){
 			msg = "修改操作已成功。";
@@ -246,6 +258,14 @@ public class AtHoldFunctionAction extends ActionSupport {
 
 	public void setAtSysMenu(AtSysMenu atSysMenu) {
 		this.atSysMenu = atSysMenu;
+	}
+
+	public String getIdInfos() {
+		return idInfos;
+	}
+
+	public void setIdInfos(String idInfos) {
+		this.idInfos = idInfos;
 	}
 
 	

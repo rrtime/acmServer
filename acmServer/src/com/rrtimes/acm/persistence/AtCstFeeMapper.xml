@@ -48,6 +48,7 @@
 	  		<if test="endTime != null">
 	  	    	,END_TIME = #{endTime}
 	  		</if>
+	  			,OPERATOR = #{operator}
 	  			,UPDATE_TIME = #{updateTime}
 	  		<if test="remark != null">
 	  			,REMARK = #{remark}

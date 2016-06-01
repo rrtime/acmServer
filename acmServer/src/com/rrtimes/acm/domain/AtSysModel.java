@@ -84,14 +84,6 @@ public class AtSysModel implements ISerializable{
 		this.menuCode = menuCode;
 	}
 
-	public String getMname() {
-		return mname;
-	}
-
-	public void setMname(String mname) {
-		this.mname = mname;
-	}
-
 	public String getMdesc() {
 		return mdesc;
 	}
@@ -170,6 +162,14 @@ public class AtSysModel implements ISerializable{
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 	
 	

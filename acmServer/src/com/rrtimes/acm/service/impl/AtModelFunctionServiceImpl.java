@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 
 	@Override
 	public int modAtModelFunction(AtModelFunction atModelFunction) {
+		atModelFunction.setUpdateTime(new Date());
 		return atModelFunctionMapper.update(atModelFunction)>0?0:1;
 	}
 

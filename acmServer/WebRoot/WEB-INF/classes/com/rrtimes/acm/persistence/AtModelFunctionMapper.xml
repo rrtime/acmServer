@@ -155,7 +155,7 @@
 	 	    	and MENU_CODE = #{menuCode}
 	 		</if>
 	 		<if test="fname != null and fname != ''">
-	 	    	and F_NAME like #{fname}
+	 	    	and LOCATE(#{fname},F_NAME) > 0
 	 		</if>
 	 		<if test="controlType >= 0">
 	 	    	and CONTROL_TYPE = #{controlType}
@@ -170,7 +170,7 @@
 	 	    	and OPERATOR = #{operator}
 	 		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0
 	  		</if>
 	    	ORDER BY showIndex
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -183,7 +183,7 @@
  	    	and MENU_CODE = #{menuCode}
  		</if>
  		<if test="fname != null and fname != ''">
- 	    	and F_NAME like #{fname}
+ 	    	and LOCATE(#{fname},F_NAME) > 0
  		</if>
  		<if test="controlType >= 0">
  	    	and CONTROL_TYPE = #{controlType}
@@ -198,7 +198,7 @@
  	    	and OPERATOR = #{operator}
  		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK like #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   

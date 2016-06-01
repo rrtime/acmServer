@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class AtComplainServiceImpl implements AtComplainService {
 
 	@Override
 	public int modAtComplain(AtComplain atComplain) {
+		atComplain.setUpdateTime(new Date());
 		return atComplainMapper.update(atComplain)>0?0:1;
 	}
 

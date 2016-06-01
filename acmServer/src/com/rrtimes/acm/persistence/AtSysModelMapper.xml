@@ -36,7 +36,7 @@
   			UPDATE_TIME = #{updateTime}
   	    	,TREE_ID = #{treeId}
   	    	,MENU_CODE = #{menuCode}
-  	    	,M_NAME = #{mName}
+  	    	,M_NAME = #{mname}
   		<if test="mdesc != null and mdesc != ''">
   	    	,M_DESC = #{mdesc}
   		</if>

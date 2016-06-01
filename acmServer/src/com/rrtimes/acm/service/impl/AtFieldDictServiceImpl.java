@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class AtFieldDictServiceImpl implements AtFieldDictService {
 
 	@Override
 	public int modAtFieldDict(AtFieldDict atFieldDict) {
+		atFieldDict.setUpdateTime(new Date());
 		return atFieldDictMapper.update(atFieldDict)>0?0:1;
 	}
 

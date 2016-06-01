@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.rrtimes.acm.domain.AtHoldFunction;
 import com.rrtimes.acm.domain.AtModelFunction;
 import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtSysModel;
+import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtHoldFunctionMapper;
 import com.rrtimes.acm.service.AtHoldFunctionService;
@@ -41,12 +43,20 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	private AtHoldFunctionMapper atHoldFunctionMapper;
 	
 	@Override
-	public int addAtHoldFunction(List<AtHoldFunction> atHoldFunctionList) {
+	public int addAtHoldFunction(String idInfos,AtUser atUser,String operator) {
 		int result = 0;
 		try{
-			if(StringUtil.isListNotNull(atHoldFunctionList)){
-				for(int i=0;i<atHoldFunctionList.size();i++){
-					int insertResult = atHoldFunctionMapper.insert(atHoldFunctionList.get(i));
+			if(!StringUtil.isEmtryStr(idInfos)){
+				String[] infos = idInfos.split(",");
+				for(int i=0;i<infos.length;i++){
+					AtHoldFunction atHoldFunction = new AtHoldFunction();
+					atHoldFunction.setMenuCode(infos[i].split(":")[0]);
+					atHoldFunction.setFunName(infos[i].split(":")[1]);
+					atHoldFunction.setFunId(Integer.valueOf(infos[i].split(":")[2]));
+					atHoldFunction.setActorId(atUser.getId());
+					atHoldFunction.setOperator(operator);
+					atHoldFunction.setRemark("");
+					int insertResult = atHoldFunctionMapper.insert(atHoldFunction);
 					if(insertResult <= 0){//插入失败
 						result = 1;
 						break;
@@ -61,12 +71,12 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	}
 
 	@Override
-	public int modAtHoldFunction(List<AtHoldFunction> atHoldFunctionList,int actorId,int treeId) {
+	public int modAtHoldFunction(String idInfos,AtUser atUser,int treeId,String operator) {
 		int result = 0;
 		try{
 			//首先查询该用户或者组是否已有功能操作权限
 			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("actorId", actorId);
+			map.put("actorId", atUser.getId());
 			map.put("treeId", treeId);
 			List<Map<String, Object>> holdFunctionList = atHoldFunctionMapper.getModelFunctionByActorIdAndTreeId(map);
 			//如果有，则先删除
@@ -74,9 +84,18 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 				atHoldFunctionMapper.delHoldFunctionByActorIdAndTreeId(map);
 			}
 			//再重新插入
-			if(StringUtil.isListNotNull(atHoldFunctionList)){
-				for(int i=0;i<atHoldFunctionList.size();i++){
-					int insertResult = atHoldFunctionMapper.insert(atHoldFunctionList.get(i));
+			if(!StringUtil.isEmtryStr(idInfos)){
+				String[] infos = idInfos.split(",");
+				for(int i=0;i<infos.length;i++){
+					AtHoldFunction atHoldFunction = new AtHoldFunction();
+					atHoldFunction.setMenuCode(infos[i].split(":")[0]);
+					atHoldFunction.setFunName(infos[i].split(":")[1]);
+					atHoldFunction.setFunId(Integer.valueOf(infos[i].split(":")[2]));
+					atHoldFunction.setActorId(atUser.getId());
+					atHoldFunction.setOperator(operator);
+					atHoldFunction.setUpdateTime(new Date());
+					atHoldFunction.setRemark("");
+					int insertResult = atHoldFunctionMapper.insert(atHoldFunction);
 					if(insertResult <= 0){//插入失败
 						result = 1;
 						break;

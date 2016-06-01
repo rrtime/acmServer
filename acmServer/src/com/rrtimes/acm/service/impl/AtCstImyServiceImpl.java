@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class AtCstImyServiceImpl implements AtCstImyService {
 
 	@Override
 	public int modAtCstImy(AtCstImy atCstImy) {
+		atCstImy.setUpdateTime(new Date());
 		return atCstImyMapper.update(atCstImy)>0?0:1;
 	}
 

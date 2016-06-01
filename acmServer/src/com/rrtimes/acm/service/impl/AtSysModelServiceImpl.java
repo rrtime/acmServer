@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 
 	@Override
 	public int modAtSysModel(AtSysModel atSysModel) {
+		atSysModel.setUpdateTime(new Date());
 		return atSysModelMapper.update(atSysModel)>0?0:1;
 	}
 

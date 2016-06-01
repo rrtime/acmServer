@@ -47,6 +47,7 @@ public class AtCstFeeServiceImpl implements AtCstFeeService {
 
 	@Override
 	public int modAtCstFee(AtCstFee atCstFee) {
+		atCstFee.setUpdateTime(new Date());
 		return atCstFeeMapper.update(atCstFee)>0?0:1;
 	}
 
