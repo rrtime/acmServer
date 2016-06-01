@@ -145,7 +145,7 @@
 	  	    	and OPERATOR = #{operator}
 	  		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0 
 	  		</if>
 	    	ORDER BY createTime DESC
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -173,7 +173,7 @@
   	    	and OPERATOR = #{operator}
   		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK like #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   

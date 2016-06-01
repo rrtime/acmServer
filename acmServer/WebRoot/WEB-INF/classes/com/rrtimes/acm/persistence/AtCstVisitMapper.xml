@@ -109,7 +109,7 @@
 	 	    	and CN_IDENTIFER = #{cnIdentifer}
 	 		</if>
 	 		<if test="cnCustomer != null and cnCustomer != ''">
-	 	    	and CN_CUSTOMER like #{cnCustomer}
+	 	    	and LOCATE(#{cnCustomer},CN_CUSTOMER) > 0
 	 		</if>
 	  		<if test="cnType > 0">
 	  	    	and CN_TYPE = #{cnType}
@@ -121,7 +121,7 @@
 	  	    	and OPERATOR = #{operator}
 	  		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0
 	  		</if>
 	    	ORDER BY createTime DESC
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -137,7 +137,7 @@
  	    	and CN_IDENTIFER = #{cnIdentifer}
  		</if>
  		<if test="cnCustomer != null and cnCustomer != ''">
- 	    	and CN_CUSTOMER like #{cnCustomer}
+ 	    	and LOCATE(#{cnCustomer},CN_CUSTOMER) > 0
  		</if>
   		<if test="cnType > 0">
   	    	and CN_TYPE = #{cnType}
@@ -149,7 +149,7 @@
   	    	and OPERATOR = #{operator}
   		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK like #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   
