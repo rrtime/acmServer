@@ -35,7 +35,7 @@
 			<result name="atFieldDictDetail" type="dispatcher">/WEB-INF/jsp/atFieldDict/addAtFieldDict.jsp</result>
 		</action>
 		<!-- 用户字段权限关系 -->
- 		<action name="atFiledRelMag" class="com.rrtimes.acm.action.AtFieldRelAction">
+ 		<action name="atFieldRelMag" class="com.rrtimes.acm.action.AtFieldRelAction">
 			<result name="addAtFiledRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
 			<result name="modAtFiledRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
 			<result name="atFiledRelList" type="dispatcher">/WEB-INF/jsp/atFieldRel/atFieldRelList.jsp</result>
