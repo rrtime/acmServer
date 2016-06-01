@@ -21,7 +21,7 @@
 			<result name="atModelFunctionDetail" type="dispatcher">/WEB-INF/jsp/atModelFunction/addAtModelFunction.jsp</result>
 		</action>
 		<!-- 系统功能操作权限 -->
- 		<action name="atatHoldFunctionMag" class="com.rrtimes.acm.action.AtHoldFunctionAction">
+ 		<action name="atHoldFunctionMag" class="com.rrtimes.acm.action.AtHoldFunctionAction">
 			<result name="addAtHoldFunction" type="dispatcher">/WEB-INF/jsp/atHoldFunction/addHoldFunction.jsp</result>
 			<result name="modAtHoldFunction" type="dispatcher">/WEB-INF/jsp/atHoldFunction/addHoldFunction.jsp</result>
 			<result name="atHoldFunctionList" type="dispatcher">/WEB-INF/jsp/atHoldFunction/atHoldFunctionList.jsp</result>
