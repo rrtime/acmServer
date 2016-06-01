@@ -132,10 +132,10 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 		if(!StringUtil.isEmtryStr(atHoldFunction.getFunName())){
 			map.put("funName", atHoldFunction.getFunName());
 		}
-		if(atHoldFunction.getFunId() >= 0){
+		if(atHoldFunction.getFunId() > 0){
 			map.put("funId", atHoldFunction.getFunId());
 		}
-		if(atHoldFunction.getActorId() >= 0){
+		if(atHoldFunction.getActorId() > 0){
 			map.put("actorId", atHoldFunction.getActorId());
 		}
 		if(!StringUtil.isEmtryStr(atHoldFunction.getOperator())){

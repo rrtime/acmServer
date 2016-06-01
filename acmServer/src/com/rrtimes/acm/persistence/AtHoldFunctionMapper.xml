@@ -30,10 +30,10 @@
   		<if test="funName != null and funName != ''">
   	    	,FUN_NAME = #{funName}
   		</if>
-  		<if test="funId >= 0">
+  		<if test="funId > 0">
   	    	,FUN_ID = #{funId}
   		</if>
-  		<if test="actorId >= 0">
+  		<if test="actorId > 0">
   	    	,ACTOR_ID = #{actorId}
   		</if>
   			,OPERATOR = #{operator}
@@ -80,10 +80,10 @@
 	 		<if test="funName != null and funName != ''">
 	 	    	and LOCATE(#{funName},FUN_NAME) > 0
 	 		</if>
-	 		<if test="funId >= 0">
+	 		<if test="funId > 0">
 	 	    	and FUN_ID = #{funId}
 	 		</if>
-	 		<if test="actorId >= 0">
+	 		<if test="actorId > 0">
 	 	    	and ACTOR_ID = #{actorId}
 	 		</if>
 	  		<if test="operator != null and operator != ''">
@@ -105,10 +105,10 @@
  		<if test="funName != null and funName != ''">
  	    	and LOCATE(#{funName},FUN_NAME) > 0
  		</if>
- 		<if test="funId >= 0">
+ 		<if test="funId > 0">
  	    	and FUN_ID = #{funId}
  		</if>
- 		<if test="actorId >= 0">
+ 		<if test="actorId > 0">
  	    	and ACTOR_ID = #{actorId}
  		</if>
   		<if test="operator != null and operator != ''">
@@ -245,7 +245,7 @@
   
   <delete id="delHoldFunctionByActorIdAndTreeId" parameterType="Map">
   	DELETE FROM AT_HOLD_FUNCTION WHERE ACTOR_ID = #{actorId}
-  		<if test="treeId >= 0">
+  		<if test="treeId > 0">
  	    	and MENU_CODE in 
   	    	(
   	    		select asm.MENU_CODE from AT_SYS_MODEL asm 

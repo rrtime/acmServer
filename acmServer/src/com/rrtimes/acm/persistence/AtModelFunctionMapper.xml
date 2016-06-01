@@ -51,10 +51,10 @@
   	    	,MENU_CODE = #{menuCode}
   	    	,F_NAME = #{fname}
   	    	,F_TITLE = #{ftitle}
-  		<if test="tableIndex >= 0">
+  		<if test="tableIndex > 0">
   	    	,TABLE_INDEX = #{tableIndex}
   		</if>
-  		<if test="isSystem >= 0">
+  		<if test="isSystem > 0">
   	    	,IS_SYSTEM = #{isSystem}
   		</if>
   		<if test="funCode != null and funCode != ''">
@@ -63,16 +63,16 @@
   		<if test="funDesc != null and funDesc != ''">
   	    	,FUN_DESC = #{funDesc}
   		</if>
-  		<if test="idParent >= 0">
+  		<if test="idParent > 0">
   	    	,ID_PARENT = #{idParent}
   		</if>
-  		<if test="controlType >= 0">
+  		<if test="controlType > 0">
   	    	,CONTROL_TYPE = #{controlType}
   		</if>
-  		<if test="isHastag >= 0">
+  		<if test="isHastag > 0">
   	    	,IS_HASTAG = #{isHastag}
   		</if>
-  		<if test="category >= 0">
+  		<if test="category > 0">
   	    	,CATEGORY = #{category}
   		</if>
   		<if test="isConShownum != null and isConShownum != ''">
@@ -84,7 +84,7 @@
   		<if test="controlPage != null and controlPage != ''">
   	    	,CONTROL_PAGE = #{controlPage}
   		</if>
-  		<if test="showIndex >= 0">
+  		<if test="showIndex > 0">
   	    	,SHOW_INDEX = #{showIndex}
   		</if>
   			,OPERATOR = #{operator}
@@ -157,13 +157,13 @@
 	 		<if test="fname != null and fname != ''">
 	 	    	and LOCATE(#{fname},F_NAME) > 0
 	 		</if>
-	 		<if test="controlType >= 0">
+	 		<if test="controlType > 0">
 	 	    	and CONTROL_TYPE = #{controlType}
 	 		</if>
-	 		<if test="isHastag >= 0">
+	 		<if test="isHastag > 0">
 	 	    	and IS_HASTAG = #{isHastag}
 	 		</if>
-	  		<if test="isConShownum >= 0">
+	  		<if test="isConShownum > 0">
 	  	    	and IS_CON_SHOWNUM = #{isConShownum}
 	  		</if>
 	  		<if test="operator != null and operator != ''">
@@ -185,13 +185,13 @@
  		<if test="fname != null and fname != ''">
  	    	and LOCATE(#{fname},F_NAME) > 0
  		</if>
- 		<if test="controlType >= 0">
+ 		<if test="controlType > 0">
  	    	and CONTROL_TYPE = #{controlType}
  		</if>
- 		<if test="isHastag >= 0">
+ 		<if test="isHastag > 0">
  	    	and IS_HASTAG = #{isHastag}
  		</if>
-  		<if test="isConShownum >= 0">
+  		<if test="isConShownum > 0">
   	    	and IS_CON_SHOWNUM = #{isConShownum}
   		</if>
   		<if test="operator != null and operator != ''">

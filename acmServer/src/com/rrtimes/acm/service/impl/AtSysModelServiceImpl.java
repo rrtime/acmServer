@@ -84,7 +84,7 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 	public List<AtSysModel> queryListByPage(AtSysModel atSysModel, PageObject page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数
-		if(atSysModel.getTreeId() >= 0){
+		if(atSysModel.getTreeId() > 0){
 			map.put("treeId", atSysModel.getTreeId());
 		}
 		if(!StringUtil.isEmtryStr(atSysModel.getMenuCode())){
@@ -93,7 +93,7 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 		if(!StringUtil.isEmtryStr(atSysModel.getMname())){
 			map.put("mname", atSysModel.getMname());
 		}
-		if(atSysModel.getIsConShownum() >= 0){
+		if(atSysModel.getIsConShownum() > 0){
 			map.put("isConShownum", atSysModel.getIsConShownum());
 		}
 		if(!StringUtil.isEmtryStr(atSysModel.getRemark())){

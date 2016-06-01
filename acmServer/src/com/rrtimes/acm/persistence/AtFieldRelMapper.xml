@@ -34,10 +34,10 @@
   		<if test="rname != null and rname != ''">
   	    	,R_NAME = #{rname}
   		</if>
-  		<if test="privilegeType >= 0">
+  		<if test="privilegeType > 0">
   	    	,PRIVILEGETYPE = #{privilegeType}
   		</if>
-  		<if test="isUserGroup >= 0">
+  		<if test="isUserGroup > 0">
   	    	,ISUSERGROUP = #{isUserGroup}
   		</if>
   		<if test="operator != null and operator != ''">
@@ -56,10 +56,10 @@
   
   <delete id="delAtFieldRelByUidAndTreeId" parameterType="int">
   	DELETE FROM AT_FIELD_REL WHERE 1 = 1 
-  		<if test="uid >= 0">
+  		<if test="uid > 0">
   	    	and UID = #{uid}
   		</if>
-  		<if test="treeId >= 0">
+  		<if test="treeId > 0">
   	    	and MENU_CODE in 
   	    	(
   	    		select asm.MENU_CODE from AT_SYS_MODEL asm 
@@ -106,13 +106,13 @@
 	 		<if test="rname != null and rname != ''">
 	 	    	and LOCATE(#{rName},R_NAME) > 0
 	 		</if>
-	 		<if test="privilegeType >= 0">
+	 		<if test="privilegeType > 0">
 	 	    	and PRIVILEGETYPE = #{privilegeType}
 	 		</if>
-	 		<if test="fid >= 0">
+	 		<if test="fid > 0">
 	 	    	and FID = #{fid}
 	 		</if>
-	 		<if test="uid >= 0">
+	 		<if test="uid > 0">
 	 	    	and UID = #{uid}
 	 		</if>
 	  		<if test="remark != null and remark != ''">
@@ -131,13 +131,13 @@
  		<if test="rname != null and rname != ''">
  	    	and LOCATE(#{rName},R_NAME) > 0
  		</if>
- 		<if test="privilegeType >= 0">
+ 		<if test="privilegeType > 0">
  	    	and PRIVILEGETYPE = #{privilegeType}
  		</if>
- 		<if test="fid >= 0">
+ 		<if test="fid > 0">
  	    	and FID = #{fid}
  		</if>
- 		<if test="uid >= 0">
+ 		<if test="uid > 0">
  	    	and UID = #{uid}
  		</if>
   		<if test="remark != null and remark != ''">
@@ -177,7 +177,7 @@
          REMARK as remark
     FROM AT_FIELD_REL c 
     	where 1 = 1
-    	<if test="uid >= 0">
+    	<if test="uid > 0">
  	    	and UID = #{uid}
  		</if>
   		<if test="menuCode != null and menuCode != ''">

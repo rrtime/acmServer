@@ -65,13 +65,13 @@ public class AtCstFeeServiceImpl implements AtCstFeeService {
 	public List<AtCstFee> queryListByPage(AtCstFee atCstFee, PageObject page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数
-		if(atCstFee.getNid() >= 0){
+		if(atCstFee.getNid() > 0){
 			map.put("nid", atCstFee.getNid());
 		}
-		if(atCstFee.getCid() >= 0){
+		if(atCstFee.getCid() > 0){
 			map.put("cid", atCstFee.getCid());
 		}
-		if(atCstFee.getPayType() >= 0){
+		if(atCstFee.getPayType() > 0){
 			map.put("payType", atCstFee.getPayType());
 		}
 		if(!StringUtil.isEmtryStr(atCstFee.getOperator())){

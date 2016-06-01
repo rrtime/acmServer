@@ -79,13 +79,13 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 		if(!StringUtil.isEmtryStr(atModelFunction.getFname())){
 			map.put("fname", atModelFunction.getFname());
 		}
-		if(atModelFunction.getControlType() >= 0){
+		if(atModelFunction.getControlType() > 0){
 			map.put("controlType", atModelFunction.getControlType());
 		}
-		if(atModelFunction.getIsHastag() >= 0){
+		if(atModelFunction.getIsHastag() > 0){
 			map.put("isHastag", atModelFunction.getIsHastag());
 		}
-		if(atModelFunction.getIsConShownum() >= 0){
+		if(atModelFunction.getIsConShownum() > 0){
 			map.put("isConShownum", atModelFunction.getIsConShownum());
 		}
 		if(!StringUtil.isEmtryStr(atModelFunction.getOperator())){

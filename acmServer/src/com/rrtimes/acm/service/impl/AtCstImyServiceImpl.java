@@ -69,13 +69,13 @@ public class AtCstImyServiceImpl implements AtCstImyService {
 		if(!StringUtil.isEmtryStr(atCstImy.getCnIdentifer())){
 			map.put("cnIdentifer", atCstImy.getCnIdentifer());
 		}
-		if(atCstImy.getPayType() >= 0){
+		if(atCstImy.getPayType() > 0){
 			map.put("payType", atCstImy.getPayType());
 		}
-		if(atCstImy.getImyForm() >= 0){
+		if(atCstImy.getImyForm() > 0){
 			map.put("imyFrom", atCstImy.getImyForm());
 		}
-		if(atCstImy.getImyStatus() >= 0){
+		if(atCstImy.getImyStatus() > 0){
 			map.put("imyStatus", atCstImy.getImyStatus());
 		}
 		if(!StringUtil.isEmtryStr(atCstImy.getOperator())){

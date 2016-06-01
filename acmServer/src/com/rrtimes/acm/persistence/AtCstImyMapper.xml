@@ -60,7 +60,7 @@
 	  		<if test="imyResult != null">
 	  	    	,IMY_RESULT = #{imyResult}
 	  		</if>
-	  		<if test="imySum >= 0">
+	  		<if test="imySum > 0">
 	  	    	,IMY_SUM = #{imySum}
 	  		</if>
 	  		<if test="payType > 0">

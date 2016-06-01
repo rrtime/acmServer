@@ -48,7 +48,7 @@
 	  		<if test="cnContent != null">
 	  	    	,CN_CONTENT = #{cnContent}
 	  		</if>
-	  		<if test="cnResult >= 0">
+	  		<if test="cnResult > 0">
 	  	    	,CN_RESULT = #{cnResult}
 	  		</if>
 	  		<if test="operator != null">

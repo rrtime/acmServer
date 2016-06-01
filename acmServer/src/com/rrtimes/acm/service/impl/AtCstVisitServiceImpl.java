@@ -72,7 +72,7 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 		if(!StringUtil.isEmtryStr(atCstVisit.getCnCustomer())){
 			map.put("cnCustomer", atCstVisit.getCnCustomer());
 		}
-		if(atCstVisit.getCnType() >= 0){
+		if(atCstVisit.getCnType() > 0){
 			map.put("cnType", atCstVisit.getCnType());
 		}
 		if(atCstVisit.getCnResult() >= 0){

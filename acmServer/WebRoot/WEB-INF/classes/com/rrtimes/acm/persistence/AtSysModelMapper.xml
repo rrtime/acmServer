@@ -36,7 +36,7 @@
   			UPDATE_TIME = #{updateTime}
   	    	,TREE_ID = #{treeId}
   	    	,MENU_CODE = #{menuCode}
-  	    	,M_NAME = #{mName}
+  	    	,M_NAME = #{mname}
   		<if test="mdesc != null and mdesc != ''">
   	    	,M_DESC = #{mdesc}
   		</if>
@@ -49,7 +49,7 @@
   		<if test="controlPage != null and controlPage != ''">
   	    	,CONTROL_PAGE = #{controlPage}
   		</if>
-  		<if test="showIndex >= 0">
+  		<if test="showIndex > 0">
   	    	,SHOW_INDEX = #{showIndex}
   		</if>
   		<if test="remark != null and remark != ''">
@@ -101,20 +101,20 @@
 	         REMARK as remark
 	    FROM AT_SYS_MODEL c 
 	    	where 1 = 1
-	    	<if test="treeId >= 0">
+	    	<if test="treeId > 0">
  	    		and TREE_ID = #{treeId}
 	 		</if>
 	 		<if test="menuCode != null and menuCode != ''">
 	 	    	and MENU_CODE = #{menuCode}
 	 		</if>
 	 		<if test="mname != null and mname != ''">
-	 	    	and M_NAME like #{mname}
+	 	    	and LOCATE(#{mname},M_NAME) > 0
 	 		</if>
-	  		<if test="isConShownum >= 0">
+	  		<if test="isConShownum > 0">
 	  	    	and IS_CON_SHOWNUM = #{isConShownum}
 	  		</if>
 	  		<if test="remark != null and remark != ''">
-	  	    	and REMARK like #{remark}
+	  	    	and LOCATE(#{remark},REMARK) > 0
 	  		</if>
 	    	ORDER BY showIndex
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -123,20 +123,20 @@
   <select id="findByCount" resultType="int">
   	SELECT COUNT(*) FROM AT_SYS_MODEL c
   		where 1 = 1
-  		<if test="treeId >= 0">
+  		<if test="treeId > 0">
 	    	and TREE_ID = #{treeId}
  		</if>
  		<if test="menuCode != null and menuCode != ''">
  	    	and MENU_CODE = #{menuCode}
  		</if>
  		<if test="mname != null and mname != ''">
- 	    	and M_NAME like #{mname}
+ 	    	and LOCATE(#{mname},M_NAME) > 0
  		</if>
-  		<if test="isConShownum >= 0">
+  		<if test="isConShownum > 0">
   	    	and IS_CON_SHOWNUM = #{isConShownum}
   		</if>
   		<if test="remark != null and remark != ''">
-  	    	and REMARK like #{remark}
+  	    	and LOCATE(#{remark},REMARK) > 0
   		</if>
   </select>
   

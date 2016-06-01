@@ -130,13 +130,13 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 		if(!StringUtil.isEmtryStr(atFieldRel.getRname())){
 			map.put("rname", atFieldRel.getRname());
 		}
-		if(atFieldRel.getPrivilegeType() >= 0){
+		if(atFieldRel.getPrivilegeType() > 0){
 			map.put("privilegeType", atFieldRel.getPrivilegeType());
 		}
-		if(atFieldRel.getFid() >= 0){
+		if(atFieldRel.getFid() > 0){
 			map.put("fid", atFieldRel.getFid());
 		}
-		if(atFieldRel.getUid() >= 0){
+		if(atFieldRel.getUid() > 0){
 			map.put("uid", atFieldRel.getUid());
 		}
 		if(!StringUtil.isEmtryStr(atFieldRel.getRemark())){

@@ -49,7 +49,7 @@
   		<if test="controlPage != null and controlPage != ''">
   	    	,CONTROL_PAGE = #{controlPage}
   		</if>
-  		<if test="showIndex >= 0">
+  		<if test="showIndex > 0">
   	    	,SHOW_INDEX = #{showIndex}
   		</if>
   		<if test="remark != null and remark != ''">
@@ -101,7 +101,7 @@
 	         REMARK as remark
 	    FROM AT_SYS_MODEL c 
 	    	where 1 = 1
-	    	<if test="treeId >= 0">
+	    	<if test="treeId > 0">
  	    		and TREE_ID = #{treeId}
 	 		</if>
 	 		<if test="menuCode != null and menuCode != ''">
@@ -110,7 +110,7 @@
 	 		<if test="mname != null and mname != ''">
 	 	    	and LOCATE(#{mname},M_NAME) > 0
 	 		</if>
-	  		<if test="isConShownum >= 0">
+	  		<if test="isConShownum > 0">
 	  	    	and IS_CON_SHOWNUM = #{isConShownum}
 	  		</if>
 	  		<if test="remark != null and remark != ''">
@@ -123,7 +123,7 @@
   <select id="findByCount" resultType="int">
   	SELECT COUNT(*) FROM AT_SYS_MODEL c
   		where 1 = 1
-  		<if test="treeId >= 0">
+  		<if test="treeId > 0">
 	    	and TREE_ID = #{treeId}
  		</if>
  		<if test="menuCode != null and menuCode != ''">
@@ -132,7 +132,7 @@
  		<if test="mname != null and mname != ''">
  	    	and LOCATE(#{mname},M_NAME) > 0
  		</if>
-  		<if test="isConShownum >= 0">
+  		<if test="isConShownum > 0">
   	    	and IS_CON_SHOWNUM = #{isConShownum}
   		</if>
   		<if test="remark != null and remark != ''">

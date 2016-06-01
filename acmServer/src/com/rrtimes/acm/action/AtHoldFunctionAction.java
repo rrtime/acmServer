@@ -60,7 +60,7 @@ public class AtHoldFunctionAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
-	//格式是“menuCode:funName:funId,menuCode:funName:funId,menuCode:funName::funId”
+	//格式是“menuCode:funName:funId,menuCode:funName:funId,menuCode:funName:funId”
 	private String idInfos;
 	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )

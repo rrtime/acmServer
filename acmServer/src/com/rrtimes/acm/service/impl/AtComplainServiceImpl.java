@@ -69,10 +69,10 @@ public class AtComplainServiceImpl implements AtComplainService {
 		if(!StringUtil.isEmtryStr(atComplain.getCsrIdentifer())){
 			map.put("csrIdentifer", atComplain.getCsrIdentifer());
 		}
-		if(atComplain.getCnFrom() >= 0){
+		if(atComplain.getCnFrom() > 0){
 			map.put("cnFrom", atComplain.getCnFrom());
 		}
-		if(atComplain.getCnType() >= 0){
+		if(atComplain.getCnType() > 0){
 			map.put("cnType", atComplain.getCnType());
 		}
 		if(!StringUtil.isEmtryStr(atComplain.getCnTheme())){
@@ -81,7 +81,7 @@ public class AtComplainServiceImpl implements AtComplainService {
 		if(!StringUtil.isEmtryStr(atComplain.getCnPrincipal())){
 			map.put("cnPrincipal", atComplain.getCnPrincipal());
 		}
-		if(atComplain.getCnStatus() >= 0){
+		if(atComplain.getCnStatus() > 0){
 			map.put("cnStatus", atComplain.getCnStatus());
 		}
 		if(!StringUtil.isEmtryStr(atComplain.getOperator())){

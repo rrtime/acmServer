@@ -45,34 +45,34 @@
   		<if test="ftitle != null and ftitle != ''">
   	    	,F_TITLE = #{ftitle}
   		</if>
-  		<if test="orderIndex >= 0">
+  		<if test="orderIndex > 0">
   	    	,ORDER_INDEX = #{orderIndex}
   		</if>
-  		<if test="fdesc >= 0">
-  	    	,F_DESC = #{fdesc}
+  		<if test="fdesc != null and fdesc != ''">
+  			,F_DESC = #{fdesc}
   		</if>
   		<if test="remark != null and remark != ''">
   			,REMARK = #{remark}
   		</if>	
-  		<if test="isSystem >= 0">
+  		<if test="isSystem > 0">
   	    	,IS_SYSTEM = #{isSystem}
   		</if>
-  		<if test="isInauth >= 0">
+  		<if test="isInauth > 0">
   	    	,IS_INAUTH = #{isInauth}
   		</if>
-  		<if test="isHasread >= 0">
+  		<if test="isHasread > 0">
   	    	,IS_HASREAD = #{isHasread}
   		</if>
-  		<if test="isHasupdate >= 0">
+  		<if test="isHasupdate > 0">
   	    	,IS_HASUPDATE = #{isHasupdate}
   		</if>
-  		<if test="viewType >= 0">
+  		<if test="viewType > 0">
   	    	,VIEW_TYPE = #{viewType}
   		</if>  
-  		<if test="cateGory >= 0">
+  		<if test="cateGory > 0">
   	    	,CATE_GORY = #{cateGory}
   		</if>
-  		<if test="idParent >= 0">
+  		<if test="idParent > 0">
   	    	,ID_PARENT = #{idParent}
   		</if>      
 		WHERE
