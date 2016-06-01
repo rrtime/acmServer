@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.rrtimes.acm.domain.AtFieldRel;
+import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtFieldRelMapper;
 import com.rrtimes.acm.service.AtFieldRelService;
@@ -38,12 +40,22 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	private AtFieldRelMapper atFieldRelMapper;
 	
 	@Override
-	public int addAtFieldRel(List<AtFieldRel> atFieldRelList) {
+	public int addAtFieldRel(String idInfos,AtUser atUser,String operator) {
 		int result = 0;
 		try{
-			if(StringUtil.isListNotNull(atFieldRelList)){
-				for(int i=0;i<atFieldRelList.size();i++){
-					int insertResult = atFieldRelMapper.insert(atFieldRelList.get(i));
+			if(!StringUtil.isEmtryStr(idInfos)){
+				String[] dictIds = idInfos.split(",");
+				for(int i=0;i<dictIds.length;i++){
+					AtFieldRel atFieldRel = new AtFieldRel();
+					atFieldRel.setMenuCode(dictIds[i].split(":")[0]);
+					atFieldRel.setRname(dictIds[i].split(":")[1]);
+					atFieldRel.setPrivilegeType(Integer.valueOf(dictIds[i].split(":")[2]));
+					atFieldRel.setFid(Integer.valueOf(dictIds[i].split(":")[3]));
+					atFieldRel.setUid(atUser.getId());
+					atFieldRel.setIsUserGroup(1);
+					atFieldRel.setOperator(operator);
+					atFieldRel.setRemark("");
+					int insertResult = atFieldRelMapper.insert(atFieldRel);
 					if(insertResult <= 0){//插入失败
 						result = 1;
 						break;
@@ -58,12 +70,12 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	}
 
 	@Override
-	public int modAtFieldRel(List<AtFieldRel> atFieldRelList,int uid,int treeId) {
+	public int modAtFieldRel(String idInfos,AtUser atUser,String operator,int treeId) {
 		int result = 0;
 		try{
 			//首先查询该用户或者组是否已有功能操作权限
 			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("uid", uid);
+			map.put("uid", atUser.getId());
 			map.put("treeId", treeId);
 			List<Map<String,Object>> fieldRelList = atFieldRelMapper.findAtFieldRelByUidAndTreeId(map);
 			//如果有，则先删除
@@ -71,9 +83,20 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 				atFieldRelMapper.delAtFieldRelByUidAndTreeId(map);
 			}
 			//再重新插入
-			if(StringUtil.isListNotNull(atFieldRelList)){
-				for(int i=0;i<atFieldRelList.size();i++){
-					int insertResult = atFieldRelMapper.insert(atFieldRelList.get(i));
+			if(!StringUtil.isEmtryStr(idInfos)){
+				String[] dictIds = idInfos.split(",");
+				for(int i=0;i<dictIds.length;i++){
+					AtFieldRel atFieldRel = new AtFieldRel();
+					atFieldRel.setMenuCode(dictIds[i].split(":")[0]);
+					atFieldRel.setRname(dictIds[i].split(":")[1]);
+					atFieldRel.setPrivilegeType(Integer.valueOf(dictIds[i].split(":")[2]));
+					atFieldRel.setFid(Integer.valueOf(dictIds[i].split(":")[3]));
+					atFieldRel.setUid(atUser.getId());
+					atFieldRel.setIsUserGroup(1);
+					atFieldRel.setOperator(operator);
+					atFieldRel.setUpdateTime(new Date());
+					atFieldRel.setRemark("");
+					int insertResult = atFieldRelMapper.insert(atFieldRel);
 					if(insertResult <= 0){//插入失败
 						result = 1;
 						break;

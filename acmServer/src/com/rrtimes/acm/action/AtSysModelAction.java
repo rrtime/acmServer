@@ -94,12 +94,16 @@ public class AtSysModelAction extends ActionSupport {
 	 * */
 	public String modAtSysModelInfo()
 	{
-		rst = atSysModelService.modAtSysModel(atSysModel);
-		// 设置界面提示信息
-		if( rst == 0 ){
-			msg = "修改操作已成功。";
-		}else{
-			msg = "修改操作未成功。";
+		try{
+			rst = atSysModelService.modAtSysModel(atSysModel);
+			// 设置界面提示信息
+			if( rst == 0 ){
+				msg = "修改操作已成功。";
+			}else{
+				msg = "修改操作未成功。";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return queryAtSysModelList();
 	}

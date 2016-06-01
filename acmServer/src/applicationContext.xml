@@ -64,6 +64,14 @@
     
     <!-- 具体的实现bean -->
 	<bean id="acsi" class="com.rrtimes.acm.service.impl.AtComplainServiceImpl" />
+	<bean id="acli" class="com.rrtimes.acm.service.impl.AtCstVisitServiceImpl" />
+	<bean id="acii" class="com.rrtimes.acm.service.impl.AtCstImyServiceImpl" />
+	<bean id="acfi" class="com.rrtimes.acm.service.impl.AtCstFeeServiceImpl" />
+	<bean id="asmsi" class="com.rrtimes.acm.service.impl.AtSysModelServiceImpl" />
+	<bean id="amfsi" class="com.rrtimes.acm.service.impl.AtModelFunctionServiceImpl" />
+	<bean id="ahfsi" class="com.rrtimes.acm.service.impl.AtHoldFunctionServiceImpl" />
+	<bean id="afdsi" class="com.rrtimes.acm.service.impl.AtFieldDictServiceImpl" />
+	<bean id="afrsi" class="com.rrtimes.acm.service.impl.AtFieldRelServiceImpl" />
 	<bean id="demoService" class="com.rrtimes.acm.service.impl.AcmSysOrgServiceImpl" />
 	<bean id="demoService1" class="com.rrtimes.acm.service.impl.AtUserServiceImpl" />
 
@@ -71,7 +79,7 @@
 	<dubbo:application name="xixi_provider" />
 
 	<!-- 使用multicast广播注册中心暴露服务地址 -->
-            <dubbo:registry address="multicast://224.5.6.7:1234"/>
+    <dubbo:registry address="multicast://224.5.6.7:1234"/>
 		
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="20880" />
@@ -79,6 +87,23 @@
 	<!-- 声明需要暴露的服务接口 -->
 	<!-- 客户投诉信息 -->
 	<dubbo:service interface="com.rrtimes.acm.service.AtComplainService" ref="acsi" />
+	<!-- 客户回访记录 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstVisitService" ref="acli" />
+	<!-- 客户质量赔付记录 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstImyService" ref="acii" />
+	<!-- 客户收费记录 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstFeeService" ref="acfi" />
+	<!-- 菜单附属功能字典 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtSysModelService" ref="asmsi" />
+	<!-- 功能详细操作字典 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtModelFunctionService" ref="amfsi" />
+	<!-- 系统功能操作权限 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtHoldFunctionService" ref="ahfsi" />
+	<!-- 系统权限字段字典 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtFieldDictService" ref="afdsi" />
+	<!-- 用户字段权限关系 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtFieldRelService" ref="afrsi" />
+	
 	<dubbo:service interface="com.rrtimes.acm.service.AcmSysOrgService" ref="demoService" />
 	<dubbo:service interface="com.rrtimes.acm.service.AtUserService" ref="demoService1" />
 </beans>

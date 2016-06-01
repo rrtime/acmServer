@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rrtimes.acm.domain.AtFieldRel;
+import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
 
 /**
@@ -32,13 +33,13 @@ public interface AtFieldRelService {
 	 * 新增用户字段权限关系
 	 * 
 	 * */
-	public int addAtFieldRel(List<AtFieldRel> atFieldRelList);
+	public int addAtFieldRel(String idInfos,AtUser atUser,String operator);
 	
 	/**
 	 * 修改用户字段权限关系
 	 * 
 	 * */
-	public int modAtFieldRel(List<AtFieldRel> atFieldRelList,int uid,int treeId);
+	public int modAtFieldRel(String idInfos,AtUser atUser,String operator,int treeId);
 	
 	/**
 	 * 删除用户字段权限关系

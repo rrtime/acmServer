@@ -40,7 +40,7 @@
   			UPDATE_TIME = #{updateTime}
   	    	,MENU_CODE = #{menuCode}
   		<if test="fname != null and fname != ''">
-  	    	,F_NAME = #{fName}
+  	    	,F_NAME = #{fname}
   		</if>
   		<if test="ftitle != null and ftitle != ''">
   	    	,F_TITLE = #{ftitle}
@@ -182,7 +182,7 @@
   
   <select id="findAtFieldDictByTreeId" resultType="Map">
   	SELECT
-		asm.M_NAME AS mName,
+		asm.M_NAME AS mname,
 		asm.ID AS asmId,
 		afd.F_NAME AS fname,
 		afd.ID AS afdId,

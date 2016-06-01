@@ -15,6 +15,7 @@ import com.rrtimes.acm.domain.AtHoldFunction;
 import com.rrtimes.acm.domain.AtModelFunction;
 import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtSysModel;
+import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
 
 /**
@@ -35,13 +36,13 @@ public interface AtHoldFunctionService {
 	 * 新增系统功能操作权限
 	 * 
 	 * */
-	public int addAtHoldFunction(List<AtHoldFunction> atHoldFunctionList);
+	public int addAtHoldFunction(String idInfos,AtUser atUser,String operator);
 	
 	/**
 	 * 修改系统功能操作权限
 	 * 
 	 * */
-	public int modAtHoldFunction(List<AtHoldFunction> atHoldFunctionList,int actorId,int treeId);
+	public int modAtHoldFunction(String idInfos,AtUser atUser,int treeId,String operator);
 	
 	/**
 	 * 根据ActorId和treeId删除功能操作权限数据

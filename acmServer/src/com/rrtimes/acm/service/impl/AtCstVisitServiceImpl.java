@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 
 	@Override
 	public int modAtCstVisit(AtCstVisit atCstVisit) {
+		atCstVisit.setUpdateTime(new Date());
 		return atCstVisitMapper.update(atCstVisit)>0?0:1;
 	}
 
