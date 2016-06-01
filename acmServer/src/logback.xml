@@ -20,7 +20,7 @@
 		</layout>
 	</appender>
 	
-	<logger name="com.tstar">
+	<logger name="com.rrtimes">
 		<level value="DEBUG" />
 	</logger>
 	
