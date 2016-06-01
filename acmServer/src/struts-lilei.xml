@@ -8,6 +8,7 @@
 		</action>
 		<action name="company" class="com.rrtimes.acm.action.CompanyAgentAction">
 			<!--  <result name="suc" type="dispatcher"></result>-->
+			<result name="findById" type="dispatcher">/test.jsp</result>
 		</action>
 		<action name="basic" class="com.rrtimes.acm.action.AtCsrBasicAction">
 		</action>

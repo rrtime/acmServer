@@ -33,29 +33,29 @@
   <update id="update" parameterType="AtCompanyAgent">
   	UPDATE AT_COMPANY_AGENT
   		SET
-            CP_CODE = #{cpCode,jdbcType=VARCHAR}
-    		,CP_NAME = #{cpName,jdbcType=VARCHAR}
+            CP_CODE = #{cpCode}
+    		,CP_NAME = #{cpName}
 	  		<if test="cpNameAll != null">
-	  	    ,CP_NAME_ALL = #{cpNameAll,jdbcType=VARCHAR}
+	  	    ,CP_NAME_ALL = #{cpNameAll}
 	  		</if>
 	  		<if test="rgAddress != null">
-	  		,RG_ADDRESS = #{rgAddress,jdbcType=VARCHAR}
+	  		,RG_ADDRESS = #{rgAddress}
 	  		</if>
 	  		<if test="officeAddress != null">
-	  		,OFFICE_ADDRESS = #{officeAddress,jdbcType=VARCHAR}
+	  		,OFFICE_ADDRESS = #{officeAddress}
 	  		</if>
-	  		,CP_OWNER = #{cpOwner,jdbcType=VARCHAR}
-	  		,CP_AGENTER = #{cpAgenter,jdbcType=VARCHAR}
-	  		,CP_TEL = #{cpTel,jdbcType=VARCHAR}
+	  		,CP_OWNER = #{cpOwner}
+	  		,CP_AGENTER = #{cpAgenter}
+	  		,CP_TEL = #{cpTel}
 	  		<if test="cpEmail != null">
-	  		,CP_EMAIL = #{cpEmail,jdbcType=VARCHAR}
+	  		,CP_EMAIL = #{cpEmail}
 	  		</if>
 	  		<if test="useType != null">
-	  		,USE_TYPE = #{useType,jdbcType=DECIMAL}
+	  		,USE_TYPE = #{useType}
 	  		</if>
 	  		,UPDATE_TIME = #{updateTime}
 	  		<if test="remark != null">
-	  		,REMARK = #{remark,jdbcType=VARCHAR}
+	  		,REMARK = #{remark}
 	  		</if>	        
 		WHERE
 			ID=#{id}

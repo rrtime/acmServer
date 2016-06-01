@@ -47,4 +47,5 @@
 	<!-- yan begin -->
 	<include file="struts-yanxb.xml"/>
 	<!-- yan end -->
+	<include file="struts-lilei.xml"/>
 </struts>
