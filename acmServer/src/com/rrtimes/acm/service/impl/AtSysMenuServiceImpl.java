@@ -37,7 +37,6 @@ import com.rrtimes.acm.service.AcmSysOrgService;
  * @author lil
  * 
  */
-@Service
 public class AtSysMenuServiceImpl implements AtSysMenuService{
 	
 	@Resource

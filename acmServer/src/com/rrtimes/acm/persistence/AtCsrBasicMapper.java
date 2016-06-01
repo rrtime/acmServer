@@ -40,15 +40,15 @@ public interface AtCsrBasicMapper {
     
     public int findByCount(Map<String,Object> map);
     
-    public List<AtCsrBasic> findByUser(String userAccount);
+    public List<AtCsrBasic> findByUser(Map<String,Object> map);
     
-    public List<AtCsrBasic> findByAgent(String agentCode);
+    public List<AtCsrBasic> findByAgent(Map<String,Object> map);
     
-    public List<AtCsrBasic> findByOrg(int id);
+    public List<AtCsrBasic> findByOrg(Map<String,Object> map);
     
     public AtCsrBasic findAllById(int id);
     
-    public List<AtCsrBasic> findByUserId(int userId);
+    public List<AtCsrBasic> findByUserId(Map<String,Object> map);
     
-    public int findCountByUserId(int userId);
+    public int findCountByUserId(Map<String,Object> map);
 }

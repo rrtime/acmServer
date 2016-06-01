@@ -14,7 +14,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
+
 import com.rrtimes.acm.domain.AtSysNotice;
 import com.rrtimes.acm.persistence.AtSysNoticeMapper;
 import com.rrtimes.acm.persistence.AtUserMapper;
@@ -32,7 +33,6 @@ import com.rrtimes.acm.service.AtSysNoticeService;
  * @author lil
  * 
  */
-@Service
 public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 	
     @Resource
@@ -44,13 +44,17 @@ public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 	@Override
 	public List<AtSysNotice> queryGnoticeByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asnm.findGnoticeByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asnm.findGnoticeByUserId(map);
 	}
 
 	@Override
 	public List<AtSysNotice> queryTnoticeByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asnm.findTnoticeByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asnm.findTnoticeByUserId(map);
 	}
 
 	@Override
@@ -78,13 +82,17 @@ public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 	@Override
 	public List<AtSysNotice> queryCGnoticeByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asnm.findCGnoticeByUserId(userId);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("userId", userId);
+		return asnm.findCGnoticeByUserId(map);
 	}
 
 	@Override
 	public List<AtSysNotice> queryCTnoticeByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asnm.findCTnoticeByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+        map.put("userId", userId);
+		return asnm.findCTnoticeByUserId(map);
 	}
 
 	@Override

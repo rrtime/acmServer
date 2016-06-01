@@ -144,7 +144,7 @@
     WHERE ID=#{id}
   </select>
   
-  <select id="findByUser" parameterType="String" resultType="AtCsrBasic">
+  <select id="findByUser" parameterType="Map" resultType="AtCsrBasic">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -161,55 +161,55 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_CSR_BASIC  
-    WHERE CP_CODE = 
+    WHERE OPERATOR = #{userId}
+  </select>
+  
+  <select id="findByAgent" parameterType="Map" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC  
+    WHERE CP_CODE = #{cpCode}
+  </select>
+  
+  <select id="findByOrg" parameterType="Map" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC b
+    WHERE 
+    EXISTS 
     (
-    select cp_code from ACM_SYS_ORG where id = 
+      select id from AT_USER u where u.oid = 
       (
-      select oid from AT_USER where I_NAME = #{userAccount}
+      	select oid from AT_USER where id = #{userId}
       )
-    )
-  </select>
-  
-  <select id="findByAgent" parameterType="String" resultType="AtCsrBasic">
-  	SELECT
-  		 ID as id,
-	  		 CP_CODE as cpCode,
-	  		 CSR_TYPE as csrType,
-	         CSR_IDENTIFER as csrIdentifer,
-	         CSR_CODE as csrCode,
-	         REG_ADDRESS as regAddress,
-	         OFFICE_ADDRESS as officeAddress,
-	         CSR_OWNER as csrOwner,
-	         FINANCE_LEADER as financeLeader,
-	         TAX_LEADER as taxLeader,
-	         OPERATOR as operator,
-	         CREATE_TIME as createTime,
-	         UPDATE_TIME as updateTime,
-	         REMARK as remark
-    FROM AT_CSR_BASIC  
-    WHERE CP_CODE = #{agentCode}
-  </select>
-  
-  <select id="findByOrg" parameterType="int" resultType="AtCsrBasic">
-  	SELECT
-  		 ID as id,
-	  		 CP_CODE as cpCode,
-	  		 CSR_TYPE as csrType,
-	         CSR_IDENTIFER as csrIdentifer,
-	         CSR_CODE as csrCode,
-	         REG_ADDRESS as regAddress,
-	         OFFICE_ADDRESS as officeAddress,
-	         CSR_OWNER as csrOwner,
-	         FINANCE_LEADER as financeLeader,
-	         TAX_LEADER as taxLeader,
-	         OPERATOR as operator,
-	         CREATE_TIME as createTime,
-	         UPDATE_TIME as updateTime,
-	         REMARK as remark
-    FROM AT_CSR_BASIC  
-    WHERE CP_CODE = 
-    (
-    select cp_code from ACM_SYS_ORG where id = #{id}
+      and
+      b.OPERATOR = u.id
     )
   </select>
 
@@ -234,7 +234,7 @@
      b.ID = #{id}
   </select>
   
-  <select id="findByUserId" parameterType="int" resultType="AtCsrBasic">
+  <select id="findByUserId" parameterType="Map" resultType="AtCsrBasic">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -256,11 +256,11 @@
       and
       CP_CODE=
       (
-         SELECT ID FROM AT_USER WHERE ID = #{userId}
+         SELECT CP_CODE FROM AT_USER WHERE ID = #{userId}
       )
   </select>
   
-  <select id="findCountByUserId" parameterType="int" resultType="int">
+  <select id="findCountByUserId" parameterType="Map" resultType="int">
   	SELECT
   		 count(*)
     FROM AT_CSR_BASIC  
@@ -269,7 +269,7 @@
       and
       CP_CODE=
       (
-         SELECT ID FROM AT_USER WHERE ID = #{userId}
+         SELECT CP_CODE FROM AT_USER WHERE ID = #{userId}
       )
   </select>
   

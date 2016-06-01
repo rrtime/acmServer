@@ -41,7 +41,6 @@ import com.rrtimes.acm.service.AtCstContractService;
  * @author lil
  * 
  */
-@Service
 public class AtCstContractServiceImpl implements AtCstContractService{
 	
 	@Resource

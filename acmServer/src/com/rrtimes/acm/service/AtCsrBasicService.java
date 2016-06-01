@@ -46,7 +46,7 @@ public interface AtCsrBasicService {
 	public void importUser(BufferedReader br,int oid);
 	
 	//根据部门用户查询客户信息
-	public List<AtCsrBasic> queryBasicByUser(String userAccount);
+	public List<AtCsrBasic> queryBasicByUser(int userAccount);
 	
 	//根据代账公司查询客户信息
 	public List<AtCsrBasic> queryBasicByAgent(String agentCode);

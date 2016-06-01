@@ -31,7 +31,6 @@ import com.rrtimes.acm.service.AtUserGroupRelService;
  * @author lil
  * 
  */
-@Service
 public class AtUserGroupRelServiceImpl implements AtUserGroupRelService{
 
 	@Resource AtUserGroupRelMapper augrm;

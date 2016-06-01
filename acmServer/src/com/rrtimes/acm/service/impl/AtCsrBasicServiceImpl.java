@@ -38,7 +38,6 @@ import com.rrtimes.acm.service.AtCsrBasicService;
  * @author lil
  * 
  */
-@Service
 public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 	
 	@Resource
@@ -137,19 +136,25 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		}
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByUser(String userAccount) {
+	public List<AtCsrBasic> queryBasicByUser(int userAccount) {
 		// TODO Auto-generated method stub
-		return asom.findByUser(userAccount);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userAccount);
+		return asom.findByUser(map);
 	}
 	@Override
 	public List<AtCsrBasic> queryBasicByAgent(String agentCode) {
 		// TODO Auto-generated method stub
-		return asom.findByAgent(agentCode);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cpCode", agentCode);
+		return asom.findByAgent(map);
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByOrg(int orgid) {
+	public List<AtCsrBasic> queryBasicByOrg(int userId) {
 		// TODO Auto-generated method stub
-		return asom.findByOrg(orgid);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asom.findByOrg(map);
 	}
 	@Override
 	public AtCsrBasic queryBasicById(int id) {
@@ -162,11 +167,15 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 	@Override
 	public List<AtCsrBasic> queryBasicByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asom.findByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asom.findByUserId(map);
 	}
 	@Override
 	public int queryCountByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return asom.findCountByUserId(userId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return asom.findCountByUserId(map);
 	}
 }
