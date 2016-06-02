@@ -44,7 +44,7 @@ public interface AtCstContractMapper {
     
     public List<AtCstContract> findByUserId(Map<String,Object> map);
     
-    public List<AtCstContract> findPaydayByUserId(int userId);
+    public List<AtCstContract> findPaydayByUserId(Map<String,Object> map);
     
     public Map<String,Object> findByContractIdAndDaybefore(Map<String,Object> map);
     

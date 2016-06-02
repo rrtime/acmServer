@@ -140,7 +140,9 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 			SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM");
 			Calendar calendar = new GregorianCalendar(); 
 			Date date = sdf.parse(sdf.format(new Date()));
-			List<AtCstContract> acclist = asom.findPaydayByUserId(userId);
+			Map<String,Object> maparam = new HashMap<String,Object>();
+			maparam.put("userId", userId);
+			List<AtCstContract> acclist = asom.findPaydayByUserId(maparam);
 			for(int i=0;i<acclist.size();i++){
 				Date newdate = sdf.parse(sdfm.format(new Date())+"-"+acclist.get(i).getPayDay());
 				if(date.before(newdate)){//当前日期如果是本月$(day)之前，则要查询上个月$(day)之后到今天，当前合同是否有收费记录，没有就提醒
