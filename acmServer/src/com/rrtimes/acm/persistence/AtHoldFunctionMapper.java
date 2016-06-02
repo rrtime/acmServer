@@ -124,5 +124,19 @@ public interface AtHoldFunctionMapper {
 	 * @return
 	 */
 	public List<Map<String, Object>> getModelFunctionByActorIdAndTreeId(Map<String, Object> map);
-	
+
+	/**
+	 * 根据IDS查询功能详细操作字典列表
+	 * @param ids
+	 * @return
+	 */
+	public List<AtModelFunction> getModelFunctionListByIdArray(String[] funIds);
+
+	/**
+	 * 根据funId查询属于哪一个菜单树
+	 * @param funIds
+	 * @return
+	 */
+	public List<AtSysModel> getTreeIdByFunId(String funId);
+
 }

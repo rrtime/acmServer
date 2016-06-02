@@ -19,7 +19,6 @@ import com.rrtimes.acm.domain.AtHoldFunction;
 import com.rrtimes.acm.domain.AtModelFunction;
 import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtSysModel;
-import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtHoldFunctionMapper;
 import com.rrtimes.acm.service.AtHoldFunctionService;
@@ -42,88 +41,102 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	@Resource
 	private AtHoldFunctionMapper atHoldFunctionMapper;
 	
+	/**
+	 * 系统功能操作权限新增
+	 * @param funIds 功能字典ID数组
+	 * @param actorId 所要授权的用户或用户组
+	 * @param operator 操作员ID
+	 */
 	@Override
-	public int addAtHoldFunction(String idInfos,AtUser atUser,String operator) {
+	public int addAtHoldFunction(String[] funIds,int actorId,int operator) throws Exception{
 		int result = 0;
-		try{
-			if(!StringUtil.isEmtryStr(idInfos)){
-				String[] infos = idInfos.split(",");
-				for(int i=0;i<infos.length;i++){
-					AtHoldFunction atHoldFunction = new AtHoldFunction();
-					atHoldFunction.setMenuCode(infos[i].split(":")[0]);
-					atHoldFunction.setFunName(infos[i].split(":")[1]);
-					atHoldFunction.setFunId(Integer.valueOf(infos[i].split(":")[2]));
-					atHoldFunction.setActorId(atUser.getId());
-					atHoldFunction.setOperator(operator);
-					atHoldFunction.setRemark("");
-					int insertResult = atHoldFunctionMapper.insert(atHoldFunction);
-					if(insertResult <= 0){//插入失败
-						result = 1;
-						break;
-					}
+		//根据funId查询功能详细操作字典
+		List<AtModelFunction> modelFunctionList = atHoldFunctionMapper.getModelFunctionListByIdArray(funIds);
+		//循环插入
+		if(StringUtil.isListNotNull(modelFunctionList)){
+			int insertResult = 0;
+			AtHoldFunction atHoldFunction = new AtHoldFunction();
+			for(int i=0;i<modelFunctionList.size();i++){
+				atHoldFunction.setMenuCode(modelFunctionList.get(i).getMenuCode());
+				atHoldFunction.setFunName(modelFunctionList.get(i).getFname());
+				atHoldFunction.setFunId(modelFunctionList.get(i).getId());
+				atHoldFunction.setActorId(actorId);
+				atHoldFunction.setOperator(String.valueOf(operator));
+				atHoldFunction.setRemark("");
+				insertResult = atHoldFunctionMapper.insert(atHoldFunction);
+				if(insertResult <= 0){//插入失败
+					result = 1;
+					break;
 				}
 			}
-		}catch(Exception e){
-			result = 1;
-			e.printStackTrace();
 		}
 		return result;
 	}
 
+	/**
+	 * 系统功能操作权限修改
+	 * @param funIds 功能字典ID数组
+	 * @param actorId 所要授权的用户或用户组
+	 * @param operator 操作员ID
+	 */
 	@Override
-	public int modAtHoldFunction(String idInfos,AtUser atUser,int treeId,String operator) {
+	public int modAtHoldFunction(String[] funIds,int actorId,int operator) throws Exception {
 		int result = 0;
-		try{
-			//首先查询该用户或者组是否已有功能操作权限
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("actorId", atUser.getId());
-			map.put("treeId", treeId);
-			List<Map<String, Object>> holdFunctionList = atHoldFunctionMapper.getModelFunctionByActorIdAndTreeId(map);
-			//如果有，则先删除
-			if(StringUtil.isListNotNull(holdFunctionList)){
-				atHoldFunctionMapper.delHoldFunctionByActorIdAndTreeId(map);
-			}
-			//再重新插入
-			if(!StringUtil.isEmtryStr(idInfos)){
-				String[] infos = idInfos.split(",");
-				for(int i=0;i<infos.length;i++){
-					AtHoldFunction atHoldFunction = new AtHoldFunction();
-					atHoldFunction.setMenuCode(infos[i].split(":")[0]);
-					atHoldFunction.setFunName(infos[i].split(":")[1]);
-					atHoldFunction.setFunId(Integer.valueOf(infos[i].split(":")[2]));
-					atHoldFunction.setActorId(atUser.getId());
-					atHoldFunction.setOperator(operator);
-					atHoldFunction.setUpdateTime(new Date());
-					atHoldFunction.setRemark("");
-					int insertResult = atHoldFunctionMapper.insert(atHoldFunction);
-					if(insertResult <= 0){//插入失败
-						result = 1;
-						break;
-					}
+		//首先删除该用户或者组已有功能操作权限
+		this.delHoldFunctionByFunIdsAndActorId(funIds, actorId);
+		//根据funId查询功能详细操作字典
+		List<AtModelFunction> modelFunctionList = atHoldFunctionMapper.getModelFunctionListByIdArray(funIds);
+		//再重新插入
+		if(StringUtil.isListNotNull(modelFunctionList)){
+			int insertResult = 0;
+			AtHoldFunction atHoldFunction = new AtHoldFunction();
+			for(int i=0;i<modelFunctionList.size();i++){
+				atHoldFunction.setMenuCode(modelFunctionList.get(i).getMenuCode());
+				atHoldFunction.setFunName(modelFunctionList.get(i).getFname());
+				atHoldFunction.setFunId(modelFunctionList.get(i).getId());
+				atHoldFunction.setActorId(actorId);
+				atHoldFunction.setOperator(String.valueOf(operator));
+				atHoldFunction.setUpdateTime(new Date());
+				atHoldFunction.setRemark("");
+				insertResult = atHoldFunctionMapper.insert(atHoldFunction);
+				if(insertResult <= 0){//插入失败
+					result = 1;
+					break;
 				}
 			}
-		}catch(Exception e){
-			result = 1;
-			e.printStackTrace();
 		}
 		return result;
 	}
 
+	/**
+	 * 根据用户或用户组以及菜单树ID删除系统功能操作权限
+	 * @param actorId 用户或用户组ID
+	 * @param treeId 菜单树ID
+	 */
 	@Override
-	public int delHoldFunctionByActorIdAndTreeId(int actorId,int treeId) {
+	public int delHoldFunctionByActorIdAndTreeId(int actorId,int treeId) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("actorId", actorId);
 		map.put("treeId", treeId);
 		return atHoldFunctionMapper.delHoldFunctionByActorIdAndTreeId(map)>0?0:1;
 	}
 
+	/**
+	 * 查询详细信息
+	 * @param id 系统功能操作权限ID
+	 */
 	@Override
-	public AtHoldFunction queryDetailInfo(int id) {
+	public AtHoldFunction queryDetailInfo(int id) throws Exception {
 		return atHoldFunctionMapper.findById(id);
 	}
 
+	/**
+	 * 分页查询
+	 * @param atHoldFunction 筛选条件对象
+	 * @param page 分页对象
+	 */
 	@Override
-	public List<AtHoldFunction> queryListByPage(AtHoldFunction atHoldFunction, PageObject page) {
+	public List<AtHoldFunction> queryListByPage(AtHoldFunction atHoldFunction, PageObject page) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数
 		if(!StringUtil.isEmtryStr(atHoldFunction.getMenuCode())){
@@ -151,36 +164,82 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 		return atHoldFunctionMapper.findByPage(map);
 	}
 
+	/**
+	 * 根据menuCode查询系统功能操作权限
+	 * @param menuCode
+	 */
 	@Override
-	public List<AtHoldFunction> findHoldFunctionByMenuCode(String menuCode) {
+	public List<AtHoldFunction> findHoldFunctionByMenuCode(String menuCode) throws Exception {
 		return atHoldFunctionMapper.findHoldFunctionByMenuCode(menuCode);
 	}
 
+	/**
+	 * 根据funId查询系统功能操作权限
+	 * @param id
+	 * @return
+	 */
 	@Override
-	public List<AtHoldFunction> findHoldFunctionByFunId(int funId) {
+	public List<AtHoldFunction> findHoldFunctionByFunId(int funId) throws Exception {
 		return atHoldFunctionMapper.findHoldFunctionByFunId(funId);
 	}
 
+	/**
+	 * 根据用户或者用户组ID查询功能详细操作字典
+	 * @return
+	 */
 	@Override
-	public List<AtModelFunction> findModelFunctionByActorId(int actorId) {
+	public List<AtModelFunction> findModelFunctionByActorId(int actorId) throws Exception {
 		return atHoldFunctionMapper.findModelFunctionByActorId(actorId);
 	}
 
+	/**
+	 * 根据用户或者用户组ID查询菜单附属功能字典
+	 * @return
+	 */
 	@Override
-	public List<AtSysModel> findAtSysModelByActorId(int actorId) {
+	public List<AtSysModel> findAtSysModelByActorId(int actorId) throws Exception {
 		return atHoldFunctionMapper.findAtSysModelByActorId(actorId);
 	}
 
-	public List<AtSysMenu> findAtSysMenuByActorId(int actorId){
+	/**
+	 * 根据用户或者用户组ID查询菜单树字典
+	 * @return
+	 */
+	public List<AtSysMenu> findAtSysMenuByActorId(int actorId) throws Exception {
 		return atHoldFunctionMapper.findAtSysMenuByActorId(actorId);
 	}
 
+	/**
+	 * 根据actorId和菜单树ID查询功能详细操作字典
+	 * @param actorId
+	 * @param treeId
+	 * @return
+	 */
 	@Override
-	public List<Map<String, Object>> getModelFunctionByActorIdAndTreeId(int actorId, int treeId) {
+	public List<Map<String, Object>> getModelFunctionByActorIdAndTreeId(int actorId, int treeId) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("actorId", actorId);
 		map.put("treeId", treeId);
 		return atHoldFunctionMapper.getModelFunctionByActorIdAndTreeId(map);
+	}
+
+	/**
+	 * 根据功能详细操作字典IDS删除字体功能操作权限
+	 * @param funIds
+	 * @return
+	 */
+	@Override
+	public int delHoldFunctionByFunIdsAndActorId(String[] funIds,int actorId) throws Exception {
+		//根据ID查询属于哪一个菜单树
+		Map<String,Object> map = new HashMap<String,Object>();
+		int result = 0;
+		List<AtSysModel> treeIdList = atHoldFunctionMapper.getTreeIdByFunId(funIds[0]);
+		for(int i=0;i<treeIdList.size();i++){
+			map.put("actorId", actorId);
+			map.put("treeId", treeIdList.get(i).getTreeId());
+			result = atHoldFunctionMapper.delHoldFunctionByActorIdAndTreeId(map);
+		}
+		return result;
 	}
 
 }

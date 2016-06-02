@@ -60,8 +60,8 @@ public class AtHoldFunctionAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
-	//格式是“menuCode:funName:funId,menuCode:funName:funId,menuCode:funName:funId”
-	private String idInfos;
+	//功能ID
+	private String[] funIds;
 	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
@@ -72,7 +72,7 @@ public class AtHoldFunctionAction extends ActionSupport {
 	
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	//操作员即当前登陆人
-	AtUser atUser1 = (AtUser) session.getAttribute("user");
+	AtUser currentUser = (AtUser) session.getAttribute("atUser");
 	
 	/**
 	 * 跳转至功能详细操作字典新增页面
@@ -85,11 +85,12 @@ public class AtHoldFunctionAction extends ActionSupport {
 	
 	/**
 	 * 系统功能操作权限新增
+	 * @throws Exception 
 	 * */
-	public String addAtHoldFunctionInfo()
+	public String addAtHoldFunctionInfo() throws Exception
 	{
-		rst = atHoldFunctionService.addAtHoldFunction(idInfos,atUser,atUser1.getUserName());
-//		rst = atHoldFunctionService.addAtHoldFunction(idInfos,atUser,"y");
+		rst = atHoldFunctionService.addAtHoldFunction(funIds,atUser.getId(),currentUser.getId());
+//		rst = atHoldFunctionService.addAtHoldFunction(funIds,atUser.getId(),1);
 		// 设置界面提示信息
 		if( rst == 0 ){
 			msg = "新增操作已成功。";
@@ -102,9 +103,10 @@ public class AtHoldFunctionAction extends ActionSupport {
 	
 	/**
 	 * 跳转至功能详细操作字典修改页面
+	 * @throws Exception 
 	 * 
 	 * */
-	public String toModAtHoldFunctionPage(){
+	public String toModAtHoldFunctionPage() throws Exception{
 		this.setCmd(1);
 		this.setAtHoldFunction(atHoldFunctionService.queryDetailInfo(atHoldFunction.getId()));
 		return "modAtHoldFunction";
@@ -112,12 +114,13 @@ public class AtHoldFunctionAction extends ActionSupport {
 	
 	/**
 	 * 修改系统功能操作权限
+	 * @throws Exception 
 	 * 
 	 * */
-	public String modAtHoldFunction()
+	public String modAtHoldFunction() throws Exception
 	{
-		rst = atHoldFunctionService.modAtHoldFunction(idInfos, atUser, atSysMenu.getId(),atUser1.getUserName());
-//		rst = atHoldFunctionService.modAtHoldFunction(idInfos, atUser, atSysMenu.getId(),"y");
+		rst = atHoldFunctionService.modAtHoldFunction(funIds, atUser.getId(),currentUser.getId());
+//		rst = atHoldFunctionService.modAtHoldFunction(funIds, atUser.getId(),1);
 		// 设置界面提示信息
 		if( rst == 0 ){
 			msg = "修改操作已成功。";
@@ -129,8 +132,9 @@ public class AtHoldFunctionAction extends ActionSupport {
 	
 	/**
 	 * 查询当前系统功能操作权限列表
+	 * @throws Exception 
 	 * */
-	public String queryAtHoldFunctionList()
+	public String queryAtHoldFunctionList() throws Exception
 	{
 		this.setAtHoldFunctionList(atHoldFunctionService.queryListByPage(atHoldFunction, page));
 		return "atHoldFunctionList";
@@ -140,9 +144,20 @@ public class AtHoldFunctionAction extends ActionSupport {
 	 * 根据ActorId和treeId删除功能操作权限数据
 	 * @param actorId
 	 * @param treeId
+	 * @throws Exception 
 	 */
-	public int delAtHoldFunction(){
+	public int delAtHoldFunction() throws Exception{
 		return atHoldFunctionService.delHoldFunctionByActorIdAndTreeId(atUser.getId(), atSysMenu.getId());
+	}
+	
+	/**
+	 * 根据功能详细操作字典IDS删除字体功能操作权限
+	 * @param funIds
+	 * @return
+	 * @throws Exception 
+	 */
+	public int delHoldFunctionByFunIdsAndActorId() throws Exception{
+		return atHoldFunctionService.delHoldFunctionByFunIdsAndActorId(funIds,atUser.getId());
 	}
 	
 	/**
@@ -150,40 +165,45 @@ public class AtHoldFunctionAction extends ActionSupport {
 	 * @param actorId
 	 * @param treeId
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<Map<String, Object>> getModelFunctionByActorIdAndTreeId(){
+	public List<Map<String, Object>> getModelFunctionByActorIdAndTreeId() throws Exception{
 		return atHoldFunctionService.getModelFunctionByActorIdAndTreeId(atUser.getId(), atSysMenu.getId());
 	}
 	
 	/**
 	 * 根据用户或者用户组ID查询菜单树字典
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtSysMenu> findAtSysMenuByActorId(){
+	public List<AtSysMenu> findAtSysMenuByActorId() throws Exception{
 		return atHoldFunctionService.findAtSysMenuByActorId(atUser.getId());
 	}
 	
 	/**
 	 * 根据用户或者用户组ID查询菜单附属功能字典
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtSysModel> findAtSysModelByActorId(){
+	public List<AtSysModel> findAtSysModelByActorId() throws Exception{
 		return atHoldFunctionService.findAtSysModelByActorId(atUser.getId());
 	}
 	
 	/**
 	 * 根据用户或者用户组ID查询功能详细操作字典
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtModelFunction> findModelFunctionByActorId(){
+	public List<AtModelFunction> findModelFunctionByActorId() throws Exception{
 		return atHoldFunctionService.findModelFunctionByActorId(atUser.getId());
 	}
 	
 	/**
 	 * 根据menuCode查询系统功能操作权限
 	 * @param menuCode
+	 * @throws Exception 
 	 */
-	public List<AtHoldFunction> findHoldFunctionByMenuCode(){
+	public List<AtHoldFunction> findHoldFunctionByMenuCode() throws Exception{
 		return atHoldFunctionService.findHoldFunctionByMenuCode(atHoldFunction.getMenuCode());
 	}
 	
@@ -260,12 +280,20 @@ public class AtHoldFunctionAction extends ActionSupport {
 		this.atSysMenu = atSysMenu;
 	}
 
-	public String getIdInfos() {
-		return idInfos;
+	public String[] getFunIds() {
+		return funIds;
 	}
 
-	public void setIdInfos(String idInfos) {
-		this.idInfos = idInfos;
+	public void setFunIds(String[] funIds) {
+		this.funIds = funIds;
+	}
+
+	public AtUser getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(AtUser currentUser) {
+		this.currentUser = currentUser;
 	}
 
 	
