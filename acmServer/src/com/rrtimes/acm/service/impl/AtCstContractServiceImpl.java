@@ -144,16 +144,18 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 			Date date = sdf.parse(sdf.format(new Date()));
 			Map<String,Object> maparam = new HashMap<String,Object>();
 			maparam.put("userId", userId);
+			//根据当前用户登记的合同
 			List<AtCstContract> acclist = asom.findPaydayByUserId(maparam);
 			for(int i=0;i<acclist.size();i++){
 				Date newdate = sdf.parse(sdfm.format(new Date())+"-"+acclist.get(i).getPayDay());
 				if(date.before(newdate)){//当前日期如果是本月$(day)之前，则要查询上个月$(day)之后到今天，当前合同是否有收费记录，没有就提醒
 				    c.set(Calendar.MONTH, c.get(Calendar.MONTH)-1);
 				    Map<String,Object> mapparam = new HashMap<String,Object>();
-				    mapparam.put("contractId", acclist.get(i).getId());
-				    mapparam.put("date", sdf.format(sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay()+"")));
+				    mapparam.put("contractId", acclist.get(i).getId());//合同ID
+				    mapparam.put("date", sdf.format(sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay()+"")));//上个月的$(day)
+				    //查询当前合同从上个月到今天是否缴费
 					Map<String,Object> map = asom.findByContractIdAndDaybefore(mapparam);
-					if(map==null){
+					if(map==null){//没有缴费，则提醒
 						calendar.setTime(date);  
 					    calendar.add(calendar.DATE,day);//把日期往后增加一天.整数往后推,负数往前移动 
 					    Date datenew=calendar.getTime();   //这个时间就是日期往后推一天的结果
@@ -165,10 +167,11 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 					c.set(Calendar.MONTH, c.get(Calendar.MONTH)+1);
 				    Map<String,Object> mapparam = new HashMap<String,Object>();
 				    mapparam.put("contractId", acclist.get(i).getId());
-				    mapparam.put("datebegin", sdf.format(sdf.parse(sdfm.format(new Date())+"-"+acclist.get(i).getPayDay()+"")));
-				    mapparam.put("datend", sdf.format(sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay()+"")));
+				    mapparam.put("datebegin", sdf.format(sdf.parse(sdfm.format(new Date())+"-"+acclist.get(i).getPayDay()+"")));//本月$(day)
+				    mapparam.put("datend", sdf.format(sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay()+"")));//小个月$(day)
+				    //查询从本月到下个月的缴费
 					Map<String,Object> map = asom.findByContractIdAndDayaffer(mapparam);
-					if(map==null){
+					if(map==null){//没有缴费，则提醒
 					    c.set(Calendar.MONTH, c.get(Calendar.MONTH)+1);
 					    c.set(Calendar.DAY_OF_MONTH, 1);
 					    Date afferdate = sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay());
