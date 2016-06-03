@@ -218,7 +218,7 @@
 	FEE_TIME BETWEEN #{date} and CURDATE()
   </select>
   
-  <select id="findByContractIdAndDayaffer"  resultType="Map">
+  <select id="findByContractIdAndDayaffer"  parameterType="Map" resultType="Map">
   	select * from AT_CST_FEE
 	where nid=#{contractId}
 	and 
@@ -227,7 +227,7 @@
 	#{datend}
   </select>
   
-  <select id="findPaydayByUserId"  resultType="AtCstContract">
+  <select id="findPaydayByUserId" parameterType="Map" resultType="AtCstContract">
   	SELECT
 	        ID as id,
 	  		 CSR_IDENTIFER as csrIdentifer,

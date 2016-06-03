@@ -46,6 +46,11 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 	@Resource
 	private AtCstContractMapper asom;
 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM");
+	Calendar calendar = new GregorianCalendar();
+	Calendar c = Calendar.getInstance();
+	
 	@Override
 	public List<AtCstContract> queryUser(AtCstContract aso, PageObject page) {
 		// TODO Auto-generated method stub
@@ -136,9 +141,6 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 		// TODO Auto-generated method stub
 		List<AtCstContract> newlist = new ArrayList<AtCstContract>();
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM");
-			Calendar calendar = new GregorianCalendar(); 
 			Date date = sdf.parse(sdf.format(new Date()));
 			Map<String,Object> maparam = new HashMap<String,Object>();
 			maparam.put("userId", userId);
@@ -146,15 +148,13 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 			for(int i=0;i<acclist.size();i++){
 				Date newdate = sdf.parse(sdfm.format(new Date())+"-"+acclist.get(i).getPayDay());
 				if(date.before(newdate)){//当前日期如果是本月$(day)之前，则要查询上个月$(day)之后到今天，当前合同是否有收费记录，没有就提醒
-					Calendar c = Calendar.getInstance();
-				    System.out.println(c.getTime());
 				    c.set(Calendar.MONTH, c.get(Calendar.MONTH)-1);
 				    Map<String,Object> mapparam = new HashMap<String,Object>();
 				    mapparam.put("contractId", acclist.get(i).getId());
 				    mapparam.put("date", sdf.format(sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay()+"")));
 					Map<String,Object> map = asom.findByContractIdAndDaybefore(mapparam);
 					if(map==null){
-						calendar.setTime(date); 
+						calendar.setTime(date);  
 					    calendar.add(calendar.DATE,day);//把日期往后增加一天.整数往后推,负数往前移动 
 					    Date datenew=calendar.getTime();   //这个时间就是日期往后推一天的结果
 					    if(datenew.getDay()>=newdate.getDay() && sdf.parse(sdf.format(new Date())).getDay()<=newdate.getDay()){
@@ -162,19 +162,15 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 					    }
 					}
 				}else if(date.after(newdate)){//当前日期如果大于本月$(day)，则要查询本月$(day)到下个月$(day)，当前合同是否有收费记录，没有就提醒
-					Calendar cparam = Calendar.getInstance();
-					cparam.set(Calendar.MONTH, cparam.get(Calendar.MONTH)+1);
+					c.set(Calendar.MONTH, c.get(Calendar.MONTH)+1);
 				    Map<String,Object> mapparam = new HashMap<String,Object>();
 				    mapparam.put("contractId", acclist.get(i).getId());
 				    mapparam.put("datebegin", sdf.format(sdf.parse(sdfm.format(new Date())+"-"+acclist.get(i).getPayDay()+"")));
-				    mapparam.put("datend", sdf.format(sdf.parse(sdfm.format(cparam.getTime())+"-"+acclist.get(i).getPayDay()+"")));
+				    mapparam.put("datend", sdf.format(sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay()+"")));
 					Map<String,Object> map = asom.findByContractIdAndDayaffer(mapparam);
 					if(map==null){
-						Calendar c = Calendar.getInstance();
-					    System.out.println(c.getTime());
 					    c.set(Calendar.MONTH, c.get(Calendar.MONTH)+1);
 					    c.set(Calendar.DAY_OF_MONTH, 1);
-					    System.out.println("下个月的第一天: " + c.getTime());
 					    Date afferdate = sdf.parse(sdfm.format(c.getTime())+"-"+acclist.get(i).getPayDay());
 					    calendar.setTime(date); 
 					    calendar.add(calendar.DATE,day);//把日期往后增加一天.整数往后推,负数往前移动 
