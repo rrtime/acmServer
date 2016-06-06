@@ -29,37 +29,49 @@ public interface AtCstImyService {
 	
 	/**
 	 * 新增客户质量赔付记录
+	 * @throws Exception 
 	 * 
 	 * */
-	public int addAtCstImy(AtCstImy atCstImy);
+	public int addAtCstImy(AtCstImy atCstImy) throws Exception;
 	
 	/**
 	 * 修改客户质量赔付记录
+	 * @throws Exception 
 	 * 
 	 * */
-	public int modAtCstImy(AtCstImy atCstImy);
+	public int modAtCstImy(AtCstImy atCstImy) throws Exception;
 	
 	/**
 	 * 删除客户质量赔付记录
+	 * @throws Exception 
 	 * 
 	 * */
-	public int delAtCstImy(int id);
+	public int delAtCstImy(int id) throws Exception;
 	
 	/**
 	 * 查询客户质量赔付记录详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtCstImy queryDetailInfo(int id);
+	public AtCstImy queryDetailInfo(int id) throws Exception;
 	
 	/**
 	 * 查询客户质量赔付记录列表(分页)
+	 * @throws Exception 
 	 * 
 	 * */
-	public List<AtCstImy> queryListByPage(AtCstImy atCstImy, PageObject page);
+	public List<AtCstImy> queryListByPage(AtCstImy atCstImy, PageObject page) throws Exception;
 	
 	/**
-	 * 
+	 * 修改质量赔付状态
+	 * @return
+	 * @throws Exception 
+	 */
+	public int changeImyStatus(AtCstImy atCstImy) throws Exception;
+	
+	/**
+	 * 查询所有数据
 	 * @return
 	 */
-	public int changeImyStatus(AtCstImy atCstImy);
+	public List<AtCstImy> findAll();
 }

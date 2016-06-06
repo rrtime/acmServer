@@ -30,44 +30,57 @@ public interface AtModelFunctionService {
 	
 	/**
 	 * 新增功能详细操作字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public int addAtModelFunction(AtModelFunction atModelFunction);
+	public int addAtModelFunction(AtModelFunction atModelFunction) throws Exception;
 	
 	/**
 	 * 修改功能详细操作字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public int modAtModelFunction(AtModelFunction atModelFunction);
+	public int modAtModelFunction(AtModelFunction atModelFunction) throws Exception;
 	
 	/**
 	 * 删除功能详细操作字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public int delAtModelFunction(AtModelFunction atModelFunction);
+	public int delAtModelFunction(AtModelFunction atModelFunction) throws Exception;
 	
 	/**
 	 * 查询功能详细操作字典详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtModelFunction queryDetailInfo(int id);
+	public AtModelFunction queryDetailInfo(int id) throws Exception;
 	
 	/**
 	 * 查询功能详细操作字典列表(分页)
+	 * @throws Exception 
 	 * 
 	 * */
-	public List<AtModelFunction> queryListByPage(AtModelFunction atModelFunction, PageObject page);
+	public List<AtModelFunction> queryListByPage(AtModelFunction atModelFunction, PageObject page) throws Exception;
 	
 	/**
 	 * 根据menuCode查询功能详细操作字典
 	 * @param menuCode
+	 * @throws Exception 
 	 */
-	public List<AtModelFunction> findModelFunctionByMenuCode(String menuCode);
+	public List<AtModelFunction> findModelFunctionByMenuCode(String menuCode) throws Exception;
 	
 	/**
 	 * 根据treeId查询功能详细操作字典
 	 * @param treeId
+	 * @throws Exception 
 	 */
-	public List<Map<String,Object>> findModelFunctionByTreeId(int treeId);
+	public List<Map<String,Object>> findModelFunctionByTreeId(int treeId) throws Exception;
+
+	/**
+	 * 查找所有数据
+	 * @return
+	 */
+	public List<AtModelFunction> findAll();
 	
 }

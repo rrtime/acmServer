@@ -29,37 +29,49 @@ public interface AtComplainService {
 	
 	/**
 	 * 新增客户投诉信息
+	 * @throws Exception 
 	 * 
 	 * */
-	public int addAtComplain(AtComplain atComplain);
+	public int addAtComplain(AtComplain atComplain) throws Exception;
 	
 	/**
 	 * 修改客户投诉信息
+	 * @throws Exception 
 	 * 
 	 * */
-	public int modAtComplain(AtComplain atComplain);
+	public int modAtComplain(AtComplain atComplain) throws Exception;
 	
 	/**
 	 * 删除客户投诉信息
+	 * @throws Exception 
 	 * 
 	 * */
-	public int delAtComplain(int id);
+	public int delAtComplain(int id) throws Exception;
 	
 	/**
 	 * 查询客户投诉信息详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtComplain queryDetailInfo(int id);
+	public AtComplain queryDetailInfo(int id) throws Exception;
 	
 	/**
 	 * 查询客户投诉信息列表(分页)
+	 * @throws Exception 
 	 * 
 	 * */
-	public List<AtComplain> queryListByPage(AtComplain atComplain, PageObject page);
+	public List<AtComplain> queryListByPage(AtComplain atComplain, PageObject page) throws Exception;
 	
 	/**
 	 * 改变投诉记录状态
+	 * @throws Exception 
 	 */
-	public int changeCnStatus(AtComplain atComplain);
+	public int changeCnStatus(AtComplain atComplain) throws Exception;
+
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public List<AtComplain> findAll();
 	
 }

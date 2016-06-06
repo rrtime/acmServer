@@ -53,16 +53,18 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 		//根据funId查询功能详细操作字典
 		List<AtModelFunction> modelFunctionList = atHoldFunctionMapper.getModelFunctionListByIdArray(funIds);
 		//循环插入
-		if(StringUtil.isListNotNull(modelFunctionList)){
+		if(StringUtil.isListNotNull(modelFunctionList)){//功能操作字典不为空
 			int insertResult = 0;
 			AtHoldFunction atHoldFunction = new AtHoldFunction();
-			for(int i=0;i<modelFunctionList.size();i++){
+			for(int i=0;i<modelFunctionList.size();i++){//循环插入
+				//封装对象
 				atHoldFunction.setMenuCode(modelFunctionList.get(i).getMenuCode());
 				atHoldFunction.setFunName(modelFunctionList.get(i).getFname());
 				atHoldFunction.setFunId(modelFunctionList.get(i).getId());
 				atHoldFunction.setActorId(actorId);
 				atHoldFunction.setOperator(String.valueOf(operator));
 				atHoldFunction.setRemark("");
+				//插入
 				insertResult = atHoldFunctionMapper.insert(atHoldFunction);
 				if(insertResult <= 0){//插入失败
 					result = 1;
@@ -91,6 +93,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 			int insertResult = 0;
 			AtHoldFunction atHoldFunction = new AtHoldFunction();
 			for(int i=0;i<modelFunctionList.size();i++){
+				//封装对象
 				atHoldFunction.setMenuCode(modelFunctionList.get(i).getMenuCode());
 				atHoldFunction.setFunName(modelFunctionList.get(i).getFname());
 				atHoldFunction.setFunId(modelFunctionList.get(i).getId());
@@ -98,6 +101,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 				atHoldFunction.setOperator(String.valueOf(operator));
 				atHoldFunction.setUpdateTime(new Date());
 				atHoldFunction.setRemark("");
+				//插入
 				insertResult = atHoldFunctionMapper.insert(atHoldFunction);
 				if(insertResult <= 0){//插入失败
 					result = 1;
@@ -217,6 +221,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	 */
 	@Override
 	public List<Map<String, Object>> getModelFunctionByActorIdAndTreeId(int actorId, int treeId) throws Exception {
+		//参数
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("actorId", actorId);
 		map.put("treeId", treeId);
@@ -234,12 +239,20 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 		Map<String,Object> map = new HashMap<String,Object>();
 		int result = 0;
 		List<AtSysModel> treeIdList = atHoldFunctionMapper.getTreeIdByFunIdArray(funIds);
-		for(int i=0;i<treeIdList.size();i++){
+		for(int i=0;i<treeIdList.size();i++){//将该用户或用户组在每一个菜单树下的功能权限删除
 			map.put("actorId", actorId);
 			map.put("treeId", treeIdList.get(i).getTreeId());
 			result = atHoldFunctionMapper.delHoldFunctionByActorIdAndTreeId(map);
 		}
 		return result;
+	}
+
+	/**
+	 * 查询所有数据
+	 */
+	@Override
+	public List<AtHoldFunction> findAll() {
+		return atHoldFunctionMapper.findAll();
 	}
 
 }

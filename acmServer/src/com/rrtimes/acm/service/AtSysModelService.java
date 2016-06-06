@@ -29,39 +29,51 @@ public interface AtSysModelService {
 	
 	/**
 	 * 新增菜单附属功能字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public int addAtSysModel(AtSysModel atSysModel);
+	public int addAtSysModel(AtSysModel atSysModel) throws Exception;
 	
 	/**
 	 * 修改菜单附属功能字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public int modAtSysModel(AtSysModel atSysModel);
+	public int modAtSysModel(AtSysModel atSysModel) throws Exception;
 	
 	/**
 	 * 删除菜单附属功能字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public int delAtSysModel(AtSysModel atSysModel);
+	public int delAtSysModel(AtSysModel atSysModel) throws Exception;
 	
 	/**
 	 * 查询菜单附属功能字典详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtSysModel queryDetailInfo(int id);
+	public AtSysModel queryDetailInfo(int id) throws Exception;
 	
 	/**
 	 * 查询菜单附属功能字典列表(分页)
+	 * @throws Exception 
 	 * 
 	 * */
-	public List<AtSysModel> queryListByPage(AtSysModel atSysModel, PageObject page);
+	public List<AtSysModel> queryListByPage(AtSysModel atSysModel, PageObject page) throws Exception;
 	
 	/**
 	 * 根据菜单树ID查询菜单附属功能
 	 * @param treeId
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtSysModel> getAtSysModelByTreeId(int treeId);
+	public List<AtSysModel> getAtSysModelByTreeId(int treeId) throws Exception;
+
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public List<AtSysModel> findAll();
 	
 }

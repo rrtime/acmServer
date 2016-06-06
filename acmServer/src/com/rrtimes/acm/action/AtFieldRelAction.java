@@ -103,9 +103,10 @@ public class AtFieldRelAction extends ActionSupport {
 	
 	/**
 	 * 跳转至用户字段权限关系修改页面
+	 * @throws Exception 
 	 * 
 	 * */
-	public String toModAtFieldRelPage(){
+	public String toModAtFieldRelPage() throws Exception{
 		this.setCmd(1);
 		this.setAtFieldRel(atFieldRelService.queryDetailInfo(atFieldRel.getId()));
 		return "modAtFieldRel";
@@ -113,8 +114,9 @@ public class AtFieldRelAction extends ActionSupport {
 	
 	/**
 	 * 查询当前用户字段权限关系列表
+	 * @throws Exception 
 	 * */
-	public String queryAtFieldRelList()
+	public String queryAtFieldRelList() throws Exception
 	{
 		this.setAtFieldRelList(atFieldRelService.queryListByPage(atFieldRel, page));
 		return "atFieldRelList";
@@ -124,8 +126,9 @@ public class AtFieldRelAction extends ActionSupport {
 	 * 根据uid和treeId删除用户字段权限关系
 	 * @param uid
 	 * @param treeId
+	 * @throws Exception 
 	 */
-	public int delAtFieldRel(){
+	public int delAtFieldRel() throws Exception{
 		return atFieldRelService.delAtFieldRelByUidAndTreeId(atUser.getId(), atSysMenu.getId());
 	}
 	
@@ -152,8 +155,9 @@ public class AtFieldRelAction extends ActionSupport {
 	 * 根据用户或组ID和treeId查询用户字段权限关系
 	 * @param map
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId(){
+	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId() throws Exception{
 		return atFieldRelService.findAtFieldRelByUidAndTreeId(atUser.getId(), atSysMenu.getId());
 	}
 	
@@ -162,24 +166,27 @@ public class AtFieldRelAction extends ActionSupport {
 	 * @param uid
 	 * @param menuCode
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtFieldRel> findAtFieldRelByUidAndMenuCode(){
+	public List<AtFieldRel> findAtFieldRelByUidAndMenuCode() throws Exception{
 		return atFieldRelService.findAtFieldRelByUidAndMenuCode(atUser.getId(), atFieldRel.getMenuCode());
 	}
 	
 	/**
 	 * 查询用户字段权限关系列表(分页)
+	 * @throws Exception 
 	 * 
 	 * */
-	public List<AtFieldRel> queryListByPage(){
+	public List<AtFieldRel> queryListByPage() throws Exception{
 		return atFieldRelService.queryListByPage(atFieldRel, page);
 	}
 	
 	/**
 	 * 查询用户字段权限关系详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtFieldRel queryDetailInfo(){
+	public AtFieldRel queryDetailInfo() throws Exception{
 		return atFieldRelService.queryDetailInfo(atFieldRel.getId());
 	}
 

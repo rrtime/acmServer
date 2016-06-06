@@ -38,35 +38,40 @@ public interface AtFieldRelService {
 	
 	/**
 	 * 删除用户字段权限关系
+	 * @throws Exception 
 	 * 
 	 * */
-	public int delAtFieldRel(int id);
+	public int delAtFieldRel(int id) throws Exception;
 	
 	/**
 	 * 删除用户字段权限关系
+	 * @throws Exception 
 	 * 
 	 * */
-	public int delAtFieldRelByUidAndTreeId(int uid,int treeId);
+	public int delAtFieldRelByUidAndTreeId(int uid,int treeId) throws Exception;
 	
 	/**
 	 * 查询用户字段权限关系详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtFieldRel queryDetailInfo(int id);
+	public AtFieldRel queryDetailInfo(int id) throws Exception;
 	
 	/**
 	 * 查询用户字段权限关系列表(分页)
+	 * @throws Exception 
 	 * 
 	 * */
-	public List<AtFieldRel> queryListByPage(AtFieldRel atFieldRel, PageObject page);
+	public List<AtFieldRel> queryListByPage(AtFieldRel atFieldRel, PageObject page) throws Exception;
 	
 	/**
 	 * 根据用户或组ID和menuCode查询用户字段权限关系
 	 * @param uid
 	 * @param menuCode
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtFieldRel> findAtFieldRelByUidAndMenuCode(int uid,String menuCode);
+	public List<AtFieldRel> findAtFieldRelByUidAndMenuCode(int uid,String menuCode) throws Exception;
 	
 	/**
 	 * 
@@ -79,8 +84,9 @@ public interface AtFieldRelService {
 	 * 根据用户或组ID和treeId查询用户字段权限关系
 	 * @param map
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId(int uid,int treeId);
+	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId(int uid,int treeId) throws Exception;
 
 	/**
 	 * 根据系统权限字段IDS删除用户字段权限关系
@@ -88,6 +94,6 @@ public interface AtFieldRelService {
 	 * @return
 	 * @throws Exception 
 	 */
-	public int delFieldRelByDictIdsAndUid(String[] dictIds, int id);
+	public int delFieldRelByDictIdsAndUid(String[] dictIds, int id) throws Exception;
 	
 }

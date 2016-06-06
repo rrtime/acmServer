@@ -117,5 +117,11 @@ public interface AtHoldFunctionService {
 	 * @throws Exception 
 	 */
 	public int delHoldFunctionByFunIdsAndActorId(String[] funIds,int actorId) throws Exception;
+
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public List<AtHoldFunction> findAll();
 	
 }

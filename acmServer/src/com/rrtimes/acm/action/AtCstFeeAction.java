@@ -69,8 +69,9 @@ public class AtCstFeeAction extends ActionSupport {
 	
 	/**
 	 * 客户收费记录业务新增
+	 * @throws Exception 
 	 * */
-	public String addAtCstFeeInfo()
+	public String addAtCstFeeInfo() throws Exception
 	{
 		rst = atCstFeeService.addAtCstFee(atCstFee);
 		// 设置界面提示信息
@@ -85,8 +86,9 @@ public class AtCstFeeAction extends ActionSupport {
 	
 	/**
 	 * 跳转至客户收费记录修改页面
+	 * @throws Exception 
 	 * */
-	public String toModAtCstFeePage()
+	public String toModAtCstFeePage() throws Exception
 	{
 		this.setCmd(1);
 		this.setAtCstFee(atCstFeeService.queryDetailInfo(atCstFee.getId()));
@@ -95,8 +97,9 @@ public class AtCstFeeAction extends ActionSupport {
 	
 	/**
 	 * 客户收费记录修改业务
+	 * @throws Exception 
 	 * */
-	public String modAtCstFeeInfo()
+	public String modAtCstFeeInfo() throws Exception
 	{
 		rst = atCstFeeService.modAtCstFee(atCstFee);
 		// 设置界面提示信息
@@ -110,8 +113,9 @@ public class AtCstFeeAction extends ActionSupport {
 
 	/**
 	 * 查询当前收费记录列表
+	 * @throws Exception 
 	 * */
-	public String queryAtCstFeeList()
+	public String queryAtCstFeeList() throws Exception
 	{
 		this.setAtCstFeeList(atCstFeeService.queryListByPage(atCstFee, page));
 		return "atCstFeeList";
@@ -119,8 +123,9 @@ public class AtCstFeeAction extends ActionSupport {
 	
 	/**
 	 * 查询当前收费记录详情
+	 * @throws Exception 
 	 * */
-	public String atCstFeeDetail()
+	public String atCstFeeDetail() throws Exception
 	{
 		this.setCmd(2);
 		this.setAtCstFee(atCstFeeService.queryDetailInfo(atCstFee.getId()));
@@ -129,8 +134,9 @@ public class AtCstFeeAction extends ActionSupport {
 
 	/**
 	 * 删除当前收费记录
+	 * @throws Exception 
 	 * */
-	public String delAtCstFeeInfo()
+	public String delAtCstFeeInfo() throws Exception
 	{
 		rst = atCstFeeService.delAtCstFee(atCstFee.getId());
 		// 设置界面提示信息
@@ -145,32 +151,36 @@ public class AtCstFeeAction extends ActionSupport {
 	/**
 	 * 分页查询
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtCstFee> queryAtCstFeeListForPage(){
+	public List<AtCstFee> queryAtCstFeeListForPage() throws Exception{
 		return atCstFeeService.queryListByPage(atCstFee, page);
 	}
 	
 	/**
 	 * 查询所有的客户收费记录
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtCstFee> queryAllFeeList(){
+	public List<AtCstFee> queryAllFeeList() throws Exception{
 		return atCstFeeService.findAll();
 	}
 	
 	/**
 	 * 提醒客户缴费或续费列表
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtCstFee> getRemindFeeList(){
+	public List<AtCstFee> getRemindFeeList() throws Exception{
 		return atCstFeeService.getRemindFeeList(days, atCstFee.getOperator());
 	}
 	
 	/**
 	 * 统计收费提醒数量
 	 * @return
+	 * @throws Exception 
 	 */
-	public int countRemindFee(){
+	public int countRemindFee() throws Exception{
 		return atCstFeeService.countRemindFee(days, atCstFee.getOperator());
 	}
 	

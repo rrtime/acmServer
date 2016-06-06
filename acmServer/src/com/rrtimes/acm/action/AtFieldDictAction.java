@@ -68,8 +68,9 @@ public class AtFieldDictAction extends ActionSupport {
 	
 	/**
 	 * 系统权限字段字典新增
+	 * @throws Exception 
 	 * */
-	public String addAtFieldDictInfo()
+	public String addAtFieldDictInfo() throws Exception
 	{
 		rst = atFieldDictService.addAtFieldDict(atFieldDict);
 		// 设置界面提示信息
@@ -85,9 +86,10 @@ public class AtFieldDictAction extends ActionSupport {
 	
 	/**
 	 * 跳转至系统权限字段字典修改页面
+	 * @throws Exception 
 	 * 
 	 * */
-	public String toModAtFieldDictPage(){
+	public String toModAtFieldDictPage() throws Exception{
 		this.setCmd(1);
 		this.setAtFieldDict(atFieldDictService.queryDetailInfo(atFieldDict.getId()));
 		return "modAtFieldDict";
@@ -95,8 +97,9 @@ public class AtFieldDictAction extends ActionSupport {
 	
 	/**
 	 * 修改系统权限字段字典
+	 * @throws Exception 
 	 * */
-	public String modAtFieldDictInfo()
+	public String modAtFieldDictInfo() throws Exception
 	{
 		rst = atFieldDictService.modAtFieldDict(atFieldDict);
 		// 设置界面提示信息
@@ -111,23 +114,26 @@ public class AtFieldDictAction extends ActionSupport {
 	/**
 	 * 根据主键ID删除系统权限字段字典
 	 * @return
+	 * @throws Exception 
 	 */
-	public int delAtFieldDictById(){
+	public int delAtFieldDictById() throws Exception{
 		return atFieldDictService.delAtFieldDict(atFieldDict.getId());
 	}
 	
 	/**
 	 * 查询系统权限字段字典详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtFieldDict queryDetailInfo(int id){
+	public AtFieldDict queryDetailInfo(int id) throws Exception{
 		return atFieldDictService.queryDetailInfo(atFieldDict.getId());
 	}
 	
 	/**
 	 * 查询当前系统权限字段字典列表
+	 * @throws Exception 
 	 * */
-	public String queryAtFieldDictList()
+	public String queryAtFieldDictList() throws Exception
 	{
 		this.setAtFieldDictList(atFieldDictService.queryListByPage(atFieldDict, page));
 		return "atFieldDictList";
@@ -137,11 +143,20 @@ public class AtFieldDictAction extends ActionSupport {
 	 * 根据菜单树ID查询系统权限字段字典
 	 * @param treeId
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<Map<String, Object>> findAtFieldDictByTreeId(){
+	public List<Map<String, Object>> findAtFieldDictByTreeId() throws Exception{
 		return atFieldDictService.findAtFieldDictByTreeId(atSysModel.getTreeId());
 	}
 	
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public String findAll(){
+		this.setAtFieldDictList(atFieldDictService.findAll());
+		return "atFieldDictList";
+	}
 	
 
 	public AtFieldDictService getAtFieldDictService() {

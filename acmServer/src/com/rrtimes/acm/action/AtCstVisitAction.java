@@ -67,29 +67,27 @@ public class AtCstVisitAction extends ActionSupport {
 	
 	/**
 	 * 客户回访记录业务新增
+	 * @throws Exception 
 	 * */
-	public String addAtCstVisitInfo()
+	public String addAtCstVisitInfo() throws Exception
 	{
-		try{
-			atCstVisit.setCnTime(new Date());
-			rst = atCstVisitService.addAtCstVisit(atCstVisit);
-			// 设置界面提示信息
-			if( rst == 0 ){
-				msg = "新增操作已成功。";
-			}else{
-				msg = "新增操作未成功。";
-			}
-			this.page.setCurrentPage(1);
-		}catch(Exception e){
-			e.printStackTrace();
+		atCstVisit.setCnTime(new Date());
+		rst = atCstVisitService.addAtCstVisit(atCstVisit);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "新增操作已成功。";
+		}else{
+			msg = "新增操作未成功。";
 		}
+		this.page.setCurrentPage(1);
 		return queryAtCstVisitList();
 	}
 	
 	/**
 	 * 跳转至客户回访记录修改页面
+	 * @throws Exception 
 	 * */
-	public String toModAtCstVisitPage()
+	public String toModAtCstVisitPage() throws Exception
 	{
 		this.setCmd(1);
 		this.setAtCstVisit(atCstVisitService.queryDetailInfo(atCstVisit.getId()));
@@ -98,8 +96,9 @@ public class AtCstVisitAction extends ActionSupport {
 	
 	/**
 	 * 客户回访记录修改业务
+	 * @throws Exception 
 	 * */
-	public String modAtCstVisitInfo()
+	public String modAtCstVisitInfo() throws Exception
 	{
 		rst = atCstVisitService.modAtCstVisit(atCstVisit);
 		// 设置界面提示信息
@@ -113,8 +112,9 @@ public class AtCstVisitAction extends ActionSupport {
 
 	/**
 	 * 查询当前客户回访记录列表
+	 * @throws Exception 
 	 * */
-	public String queryAtCstVisitList()
+	public String queryAtCstVisitList() throws Exception
 	{
 		this.setAtCstVisitList(atCstVisitService.queryListByPage(atCstVisit, page));
 		return "atCstVisitList";
@@ -122,8 +122,9 @@ public class AtCstVisitAction extends ActionSupport {
 	
 	/**
 	 * 查询当前客户回访记录详情
+	 * @throws Exception 
 	 * */
-	public String atCstVisitDetail()
+	public String atCstVisitDetail() throws Exception
 	{
 		this.setCmd(2);
 		this.setAtCstVisit(atCstVisitService.queryDetailInfo(atCstVisit.getId()));
@@ -132,8 +133,9 @@ public class AtCstVisitAction extends ActionSupport {
 
 	/**
 	 * 删除当前客户回访记录
+	 * @throws Exception 
 	 * */
-	public String delAtCstVisitInfo()
+	public String delAtCstVisitInfo() throws Exception
 	{
 		rst = atCstVisitService.delAtCstVisit(atCstVisit.getId());
 		// 设置界面提示信息
@@ -148,11 +150,20 @@ public class AtCstVisitAction extends ActionSupport {
 	/**
 	 * 分页查询
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtCstVisit> queryAtCstVisitListForPage(){
+	public List<AtCstVisit> queryAtCstVisitListForPage() throws Exception{
 		return atCstVisitService.queryListByPage(atCstVisit, page);
 	}
 
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public String findAll(){
+		this.setAtCstVisitList(atCstVisitService.findAll());
+		return "atCstVisitList";
+	}
 	
 	
 	public AtCstVisitService getAtCstVisitService() {

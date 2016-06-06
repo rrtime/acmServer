@@ -150,7 +150,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * @param uid
 	 */
 	@Override
-	public int delFieldRelByDictIdsAndUid(String[] dictIds, int uid) {
+	public int delFieldRelByDictIdsAndUid(String[] dictIds, int uid) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		int result = 0;
 		if(dictIds != null){
@@ -169,7 +169,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * 根据ID删除用户字段权限关系
 	 */
 	@Override
-	public int delAtFieldRel(int id) {
+	public int delAtFieldRel(int id) throws Exception {
 		return atFieldRelMapper.delete(id)>0?0:1;
 	}
 
@@ -178,7 +178,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * 
 	 * */
 	@Override
-	public AtFieldRel queryDetailInfo(int id) {
+	public AtFieldRel queryDetailInfo(int id) throws Exception {
 		return atFieldRelMapper.findById(id);
 	}
 
@@ -187,7 +187,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * 
 	 * */
 	@Override
-	public List<AtFieldRel> queryListByPage(AtFieldRel atFieldRel, PageObject page) {
+	public List<AtFieldRel> queryListByPage(AtFieldRel atFieldRel, PageObject page) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数
 		if(!StringUtil.isEmtryStr(atFieldRel.getMenuCode())){//功能编码
@@ -222,7 +222,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * @return
 	 */
 	@Override
-	public List<AtFieldRel> findAtFieldRelByUidAndMenuCode(int uid,String menuCode) {
+	public List<AtFieldRel> findAtFieldRelByUidAndMenuCode(int uid,String menuCode) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("uid", uid);
 		map.put("menuCode", menuCode);
@@ -234,7 +234,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * 
 	 * */
 	@Override
-	public int delAtFieldRelByUidAndTreeId(int uid, int treeId) {
+	public int delAtFieldRelByUidAndTreeId(int uid, int treeId) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("uid", uid);
 		map.put("treeId", treeId);
@@ -255,7 +255,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * @return
 	 */
 	@Override
-	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId(int uid, int treeId) {
+	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId(int uid, int treeId) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("uid", uid);
 		map.put("treeId", treeId);
@@ -276,63 +276,59 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 		//将json解析为list
 		List<Map<String,Object>> jsonList = (List<Map<String, Object>>) JsonUtil.jsonParse(jsonStr);
 		int result = 0;
-		try{
-			StringBuffer sbFunIds = new StringBuffer();//功能操作ID串
-			StringBuffer sbDictIds = new StringBuffer();//字段字典ID串
-			StringBuffer sbPriTypes = new StringBuffer();//字段权限ID串
-			for(int i=0;i<jsonList.size();i++){//将所有的ID拼接成字符串
-				//1、拼接功能操作ID串
-				List<Map<String,Object>> funIdList = (List<Map<String, Object>>) jsonList.get(i).get("funId");
-				if(StringUtil.isListNotNull(funIdList)){//funId不为空的时候
-					for(int m=0;m<funIdList.size();m++){//获取每一个funId
-						String funId = (String) funIdList.get(m).get("id");
-						if(m==funIdList.size()-1){//当为最后一个ID时，不需要最后的“,”
-							if(i==jsonList.size()-1){
-								sbFunIds.append(funId);
-							}else{
-								sbFunIds.append(funId).append(",");
-							}
+		StringBuffer sbFunIds = new StringBuffer();//功能操作ID串
+		StringBuffer sbDictIds = new StringBuffer();//字段字典ID串
+		StringBuffer sbPriTypes = new StringBuffer();//字段权限ID串
+		for(int i=0;i<jsonList.size();i++){//将所有的ID拼接成字符串
+			//1、拼接功能操作ID串
+			List<Map<String,Object>> funIdList = (List<Map<String, Object>>) jsonList.get(i).get("funId");
+			if(StringUtil.isListNotNull(funIdList)){//funId不为空的时候
+				for(int m=0;m<funIdList.size();m++){//获取每一个funId
+					String funId = (String) funIdList.get(m).get("id");
+					if(m==funIdList.size()-1){//当为最后一个ID时，不需要最后的“,”
+						if(i==jsonList.size()-1){
+							sbFunIds.append(funId);
 						}else{
 							sbFunIds.append(funId).append(",");
 						}
+					}else{
+						sbFunIds.append(funId).append(",");
 					}
 				}
-				//2、拼接字段字典ID串
-				List<Map<String,Object>> dictIdList = (List<Map<String, Object>>) jsonList.get(i).get("dictId");
-				if(StringUtil.isListNotNull(dictIdList)){//dictId不为空时
-					for(int m=0;m<dictIdList.size();m++){//获取每一个dictId以及对应的权限码
-						String dictId = (String) dictIdList.get(m).get("id");//字段ID
-						String privilegeType = (String) dictIdList.get(m).get("privilegeType");//权限码
-						if(m==dictIdList.size()-1){//当为最后一个ID时，不需要最后的“,”
-							if(i==jsonList.size()-1){
-								sbDictIds.append(dictId);
-								sbPriTypes.append(privilegeType);
-							}else{
-								sbDictIds.append(dictId).append(",");
-								sbPriTypes.append(privilegeType).append(",");
-							}
+			}
+			//2、拼接字段字典ID串
+			List<Map<String,Object>> dictIdList = (List<Map<String, Object>>) jsonList.get(i).get("dictId");
+			if(StringUtil.isListNotNull(dictIdList)){//dictId不为空时
+				for(int m=0;m<dictIdList.size();m++){//获取每一个dictId以及对应的权限码
+					String dictId = (String) dictIdList.get(m).get("id");//字段ID
+					String privilegeType = (String) dictIdList.get(m).get("privilegeType");//权限码
+					if(m==dictIdList.size()-1){//当为最后一个ID时，不需要最后的“,”
+						if(i==jsonList.size()-1){
+							sbDictIds.append(dictId);
+							sbPriTypes.append(privilegeType);
 						}else{
 							sbDictIds.append(dictId).append(",");
 							sbPriTypes.append(privilegeType).append(",");
 						}
+					}else{
+						sbDictIds.append(dictId).append(",");
+						sbPriTypes.append(privilegeType).append(",");
 					}
 				}
 			}
-			if(!StringUtil.isEmtryStr(sbFunIds.toString())){//funId不为空
-				//将字符串转换成数组
-				String[] funIds = sbFunIds.toString().split(",");
-				//调用插入方法
-				result = this.grantHoldFunction(funIds, uid, operator);
-			}
-			if(!StringUtil.isEmtryStr(sbDictIds.toString())){//dictId不为空
-				//将字符串转换成数组
-				String[] dictIds = sbDictIds.toString().split(",");
-				String[] priTypes = sbPriTypes.toString().split(",");
-				//调用插入方法
-				result = this.grantDictToUserOrRole(dictIds, priTypes, uid, operator);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
+		}
+		if(!StringUtil.isEmtryStr(sbFunIds.toString())){//funId不为空
+			//将字符串转换成数组
+			String[] funIds = sbFunIds.toString().split(",");
+			//调用插入方法
+			result = this.grantHoldFunction(funIds, uid, operator);
+		}
+		if(!StringUtil.isEmtryStr(sbDictIds.toString())){//dictId不为空
+			//将字符串转换成数组
+			String[] dictIds = sbDictIds.toString().split(",");
+			String[] priTypes = sbPriTypes.toString().split(",");
+			//调用插入方法
+			result = this.grantDictToUserOrRole(dictIds, priTypes, uid, operator);
 		}
 		return result;
     }

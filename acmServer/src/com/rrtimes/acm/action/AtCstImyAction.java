@@ -66,8 +66,9 @@ public class AtCstImyAction extends ActionSupport {
 	
 	/**
 	 * 客户客户质量赔付记录业务新增
+	 * @throws Exception 
 	 * */
-	public String addAtCstImyInfo()
+	public String addAtCstImyInfo() throws Exception
 	{
 		rst = atCstImyService.addAtCstImy(atCstImy);
 		// 设置界面提示信息
@@ -82,8 +83,9 @@ public class AtCstImyAction extends ActionSupport {
 	
 	/**
 	 * 跳转至客户质量赔付记录修改页面
+	 * @throws Exception 
 	 * */
-	public String toModAtCstImyPage()
+	public String toModAtCstImyPage() throws Exception
 	{
 		this.setCmd(1);
 		this.setAtCstImy(atCstImyService.queryDetailInfo(atCstImy.getId()));
@@ -92,8 +94,9 @@ public class AtCstImyAction extends ActionSupport {
 	
 	/**
 	 * 客户质量赔付记录修改业务
+	 * @throws Exception 
 	 * */
-	public String modAtCstImyInfo()
+	public String modAtCstImyInfo() throws Exception
 	{
 		rst = atCstImyService.modAtCstImy(atCstImy);
 		// 设置界面提示信息
@@ -107,8 +110,9 @@ public class AtCstImyAction extends ActionSupport {
 
 	/**
 	 * 查询当前客户质量赔付记录列表
+	 * @throws Exception 
 	 * */
-	public String queryAtCstImyList()
+	public String queryAtCstImyList() throws Exception
 	{
 		this.setAtCstImyList(atCstImyService.queryListByPage(atCstImy, page));
 		return "atCstVisitList";
@@ -116,8 +120,9 @@ public class AtCstImyAction extends ActionSupport {
 	
 	/**
 	 * 查询当前客户质量赔付记录详情
+	 * @throws Exception 
 	 * */
-	public String atCstImyDetail()
+	public String atCstImyDetail() throws Exception
 	{
 		this.setCmd(2);
 		this.setAtCstImy(atCstImyService.queryDetailInfo(atCstImy.getId()));
@@ -126,8 +131,9 @@ public class AtCstImyAction extends ActionSupport {
 
 	/**
 	 * 删除当前客户质量赔付记录
+	 * @throws Exception 
 	 * */
-	public String delAtCstImyInfo()
+	public String delAtCstImyInfo() throws Exception
 	{
 		rst = atCstImyService.delAtCstImy(atCstImy.getId());
 		// 设置界面提示信息
@@ -142,19 +148,29 @@ public class AtCstImyAction extends ActionSupport {
 	/**
 	 * 分页查询
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtCstImy> queryAtCstImyListForPage(){
+	public List<AtCstImy> queryAtCstImyListForPage() throws Exception{
 		return atCstImyService.queryListByPage(atCstImy, page);
 	}
 
 	/**
 	 * 改变质量赔付的状态
 	 * @return
+	 * @throws Exception 
 	 */
-	public int changeImyStatus(){
+	public int changeImyStatus() throws Exception{
 		return atCstImyService.changeImyStatus(atCstImy);
 	}
 	
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public String findAll(){
+		this.setAtCstImyList(atCstImyService.findAll());
+		return "atCstVisitList";
+	}
 	
 	public AtCstImyService getAtCstImyService() {
 		return atCstImyService;

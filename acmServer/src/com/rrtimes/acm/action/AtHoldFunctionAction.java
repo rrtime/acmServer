@@ -171,6 +171,14 @@ public class AtHoldFunctionAction extends ActionSupport {
 		return atHoldFunctionService.findHoldFunctionByMenuCode(atHoldFunction.getMenuCode());
 	}
 	
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public String findAll(){
+		this.setAtHoldFunctionList(atHoldFunctionService.findAll());
+		return "atHoldFunctionList";
+	}
 	
 	public AtHoldFunctionService getAtHoldFunctionService() {
 		return atHoldFunctionService;

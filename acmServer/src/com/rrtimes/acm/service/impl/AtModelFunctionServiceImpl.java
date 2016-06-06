@@ -43,19 +43,34 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 	@Resource
 	private AtHoldFunctionMapper atHoldFunctionMapper;
 	
+	/**
+	 * 新增功能详细操作字典
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int addAtModelFunction(AtModelFunction atModelFunction) {
+	public int addAtModelFunction(AtModelFunction atModelFunction) throws Exception {
 		return atModelFunctionMapper.insert(atModelFunction)>0?0:1;
 	}
 
+	/**
+	 * 修改功能详细操作字典
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int modAtModelFunction(AtModelFunction atModelFunction) {
+	public int modAtModelFunction(AtModelFunction atModelFunction) throws Exception {
 		atModelFunction.setUpdateTime(new Date());
 		return atModelFunctionMapper.update(atModelFunction)>0?0:1;
 	}
 
+	/**
+	 * 删除功能详细操作字典
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int delAtModelFunction(AtModelFunction atModelFunction) {
+	public int delAtModelFunction(AtModelFunction atModelFunction) throws Exception {
 		//首先需要查询功能详细操作表和系统功能操作权限表是否有引用到该附属功能，如果有，返回1
 		List<AtHoldFunction> atHoldFunctionList = atHoldFunctionMapper.findHoldFunctionByFunId(atModelFunction.getId());
 		if(atHoldFunctionList != null && atHoldFunctionList.size() > 0){
@@ -64,13 +79,23 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 		return atModelFunctionMapper.delete(atModelFunction.getId())>0?0:1;
 	}
 
+	/**
+	 * 查询功能详细操作字典详情
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public AtModelFunction queryDetailInfo(int id) {
+	public AtModelFunction queryDetailInfo(int id) throws Exception {
 		return atModelFunctionMapper.findById(id);
 	}
 
+	/**
+	 * 查询功能详细操作字典列表(分页)
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public List<AtModelFunction> queryListByPage(AtModelFunction atModelFunction, PageObject page) {
+	public List<AtModelFunction> queryListByPage(AtModelFunction atModelFunction, PageObject page) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数
 		if(!StringUtil.isEmtryStr(atModelFunction.getMenuCode())){
@@ -101,13 +126,32 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 		return atModelFunctionMapper.findByPage(map);
 	}
 
+	/**
+	 * 根据menuCode查询功能详细操作字典
+	 * @param menuCode
+	 * @throws Exception 
+	 */
 	@Override
-	public List<AtModelFunction> findModelFunctionByMenuCode(String menuCode){
+	public List<AtModelFunction> findModelFunctionByMenuCode(String menuCode) throws Exception {
 		return atModelFunctionMapper.findModelFunctionByMenuCode(menuCode);
 	}
 
+	/**
+	 * 根据treeId查询功能详细操作字典
+	 * @param treeId
+	 * @throws Exception 
+	 */
 	@Override
-	public List<Map<String,Object>> findModelFunctionByTreeId(int treeId) {
+	public List<Map<String,Object>> findModelFunctionByTreeId(int treeId) throws Exception {
 		return atModelFunctionMapper.findModelFunctionByTreeId(treeId);
+	}
+
+	/**
+	 * 查找所有数据
+	 * @return
+	 */
+	@Override
+	public List<AtModelFunction> findAll() {
+		return atModelFunctionMapper.findAll();
 	}
 }

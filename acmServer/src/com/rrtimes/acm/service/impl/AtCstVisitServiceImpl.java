@@ -38,29 +38,54 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 	@Resource
 	private AtCstVisitMapper atCstVisitMapper;
 	
+	/**
+	 * 新增客户回访记录
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int addAtCstVisit(AtCstVisit atCstVisit) {
+	public int addAtCstVisit(AtCstVisit atCstVisit) throws Exception {
 		return atCstVisitMapper.insert(atCstVisit)>0?0:1;
 	}
 
+	/**
+	 * 修改客户回访记录
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int modAtCstVisit(AtCstVisit atCstVisit) {
+	public int modAtCstVisit(AtCstVisit atCstVisit) throws Exception {
 		atCstVisit.setUpdateTime(new Date());
 		return atCstVisitMapper.update(atCstVisit)>0?0:1;
 	}
 
+	/**
+	 * 删除客户回访记录
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int delAtCstVisit(int id) {
+	public int delAtCstVisit(int id) throws Exception {
 		return atCstVisitMapper.delete(id)>0?0:1;
 	}
 
+	/**
+	 * 查询客户回访记录详情
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public AtCstVisit queryDetailInfo(int id) {
+	public AtCstVisit queryDetailInfo(int id) throws Exception {
 		return atCstVisitMapper.findById(id);
 	}
 
+	/**
+	 * 查询客户回访记录列表(分页)
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public List<AtCstVisit> queryListByPage(AtCstVisit atCstVisit, PageObject page) {
+	public List<AtCstVisit> queryListByPage(AtCstVisit atCstVisit, PageObject page) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数
 		if(!StringUtil.isEmtryStr(atCstVisit.getCpCode())){
@@ -89,6 +114,15 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 		map.put("page", page);
 		//返回分页结果
 		return atCstVisitMapper.findByPage(map);
+	}
+	
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	@Override
+	public List<AtCstVisit> findAll(){
+		return atCstVisitMapper.findAll();
 	}
 
 }

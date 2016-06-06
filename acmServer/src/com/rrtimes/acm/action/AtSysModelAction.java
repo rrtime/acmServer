@@ -64,8 +64,9 @@ public class AtSysModelAction extends ActionSupport {
 	
 	/**
 	 * 菜单附属功能字典新增
+	 * @throws Exception 
 	 * */
-	public String addAtCstFeeInfo()
+	public String addAtCstFeeInfo() throws Exception
 	{
 		rst = atSysModelService.addAtSysModel(atSysModel);
 		// 设置界面提示信息
@@ -81,9 +82,10 @@ public class AtSysModelAction extends ActionSupport {
 	
 	/**
 	 * 跳转至菜单附属功能字典修改页面
+	 * @throws Exception 
 	 * 
 	 * */
-	public String toModAtSysModelPage(){
+	public String toModAtSysModelPage() throws Exception{
 		this.setCmd(1);
 		this.setAtSysModel(atSysModelService.queryDetailInfo(atSysModel.getId()));
 		return "modAtSysModel";
@@ -91,19 +93,16 @@ public class AtSysModelAction extends ActionSupport {
 	
 	/**
 	 * 修改菜单附属功能字典
+	 * @throws Exception 
 	 * */
-	public String modAtSysModelInfo()
+	public String modAtSysModelInfo() throws Exception
 	{
-		try{
-			rst = atSysModelService.modAtSysModel(atSysModel);
-			// 设置界面提示信息
-			if( rst == 0 ){
-				msg = "修改操作已成功。";
-			}else{
-				msg = "修改操作未成功。";
-			}
-		}catch(Exception e){
-			e.printStackTrace();
+		rst = atSysModelService.modAtSysModel(atSysModel);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "修改操作已成功。";
+		}else{
+			msg = "修改操作未成功。";
 		}
 		return queryAtSysModelList();
 	}
@@ -111,23 +110,26 @@ public class AtSysModelAction extends ActionSupport {
 	/**
 	 * 根据主键ID删除菜单附属功能
 	 * @return
+	 * @throws Exception 
 	 */
-	public int delAtSysModelById(){
+	public int delAtSysModelById() throws Exception{
 		return atSysModelService.delAtSysModel(atSysModel);
 	}
 	
 	/**
 	 * 查询菜单附属功能字典详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtSysModel queryDetailInfo(){
+	public AtSysModel queryDetailInfo() throws Exception{
 		return atSysModelService.queryDetailInfo(atSysModel.getId());
 	}
 	
 	/**
 	 * 查询当前菜单附属功能字典列表
+	 * @throws Exception 
 	 * */
-	public String queryAtSysModelList()
+	public String queryAtSysModelList() throws Exception
 	{
 		this.setAtSysModelList(atSysModelService.queryListByPage(atSysModel, page));
 		return "atSysModelList";
@@ -137,11 +139,20 @@ public class AtSysModelAction extends ActionSupport {
 	 * 根据菜单树ID查询菜单附属功能
 	 * @param treeId
 	 * @return
+	 * @throws Exception 
 	 */
-	public List<AtSysModel> getAtSysModelByTreeId(){
+	public List<AtSysModel> getAtSysModelByTreeId() throws Exception{
 		return atSysModelService.getAtSysModelByTreeId(atSysModel.getTreeId());
 	}
 	
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	public String findAll(){
+		this.setAtSysModelList(atSysModelService.findAll());
+		return "atSysModelList";
+	}
 	
 	
 	

@@ -66,8 +66,9 @@ public class AtModelFunctionAction extends ActionSupport {
 	
 	/**
 	 * 功能详细操作字典新增
+	 * @throws Exception 
 	 * */
-	public String addAtModelFunctionInfo()
+	public String addAtModelFunctionInfo() throws Exception
 	{
 		rst = atModelFunctionService.addAtModelFunction(atModelFunction);
 		// 设置界面提示信息
@@ -82,9 +83,10 @@ public class AtModelFunctionAction extends ActionSupport {
 	
 	/**
 	 * 跳转至功能详细操作字典修改页面
+	 * @throws Exception 
 	 * 
 	 * */
-	public String toModAtModelFunctionPage(){
+	public String toModAtModelFunctionPage() throws Exception{
 		this.setCmd(1);
 		this.setAtModelFunction(atModelFunctionService.queryDetailInfo(atModelFunction.getId()));
 		return "modAtModelFunction";
@@ -92,9 +94,10 @@ public class AtModelFunctionAction extends ActionSupport {
 	
 	/**
 	 * 修改功能详细操作字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public String modAtModelFunctionInfo()
+	public String modAtModelFunctionInfo() throws Exception
 	{
 		rst = atModelFunctionService.modAtModelFunction(atModelFunction);
 		// 设置界面提示信息
@@ -108,8 +111,9 @@ public class AtModelFunctionAction extends ActionSupport {
 	
 	/**
 	 * 查询当前功能详细操作字典列表
+	 * @throws Exception 
 	 * */
-	public String queryAtModelFunctionList()
+	public String queryAtModelFunctionList() throws Exception
 	{
 		this.setAtModelFunctionList(atModelFunctionService.queryListByPage(atModelFunction, page));
 		return "atModelFunctionList";
@@ -117,44 +121,57 @@ public class AtModelFunctionAction extends ActionSupport {
 
 	/**
 	 * 删除功能详细操作字典
+	 * @throws Exception 
 	 * 
 	 * */
-	public int delAtModelFunction(){
+	public int delAtModelFunction() throws Exception{
 		return atModelFunctionService.delAtModelFunction(atModelFunction);
 	}
 	
 	/**
 	 * 查询功能详细操作字典详情
+	 * @throws Exception 
 	 * 
 	 * */
-	public AtModelFunction queryDetailInfo(){
+	public AtModelFunction queryDetailInfo() throws Exception{
 		return atModelFunctionService.queryDetailInfo(atModelFunction.getId());
 	}
 	
 	/**
 	 * 查询功能详细操作字典列表(分页)
+	 * @throws Exception 
 	 * 
 	 * */
-	public List<AtModelFunction> queryListByPage(){
+	public List<AtModelFunction> queryListByPage() throws Exception{
 		return atModelFunctionService.queryListByPage(atModelFunction,page);
 	}
 	
 	/**
 	 * 根据menuCode查询功能详细操作字典
 	 * @param menuCode
+	 * @throws Exception 
 	 */
-	public List<AtModelFunction> findModelFunctionByMenuCode(){
+	public List<AtModelFunction> findModelFunctionByMenuCode() throws Exception{
 		return atModelFunctionService.findModelFunctionByMenuCode(atModelFunction.getMenuCode());
 	}
 	
 	/**
 	 * 根据treeId查询功能详细操作字典
 	 * @param treeId
+	 * @throws Exception 
 	 */
-	public List<Map<String,Object>> findModelFunctionByTreeId(){
+	public List<Map<String,Object>> findModelFunctionByTreeId() throws Exception{
 		return atModelFunctionService.findModelFunctionByTreeId(atModelFunction.getTreeId());
 	}
 	
+	/**
+	 * 查找所有数据
+	 * @return
+	 */
+	public String findAll(){
+		this.setAtModelFunctionList(atModelFunctionService.findAll());
+		return "atModelFunctionList";
+	}
 	
 
 	public AtModelFunctionService getAtModelFunctionService() {

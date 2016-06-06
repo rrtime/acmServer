@@ -46,19 +46,34 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 	@Resource
 	private AtHoldFunctionMapper atHoldFunctionMapper;
 	
+	/**
+	 * 新增菜单附属功能字典
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int addAtSysModel(AtSysModel atSysModel) {
+	public int addAtSysModel(AtSysModel atSysModel) throws Exception {
 		return atSysModelMapper.insert(atSysModel)>0?0:1;
 	}
 
+	/**
+	 * 修改菜单附属功能字典
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int modAtSysModel(AtSysModel atSysModel) {
+	public int modAtSysModel(AtSysModel atSysModel) throws Exception {
 		atSysModel.setUpdateTime(new Date());
 		return atSysModelMapper.update(atSysModel)>0?0:1;
 	}
 
+	/**
+	 * 删除菜单附属功能字典
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public int delAtSysModel(AtSysModel atSysModel) {
+	public int delAtSysModel(AtSysModel atSysModel) throws Exception {
 		//首先需要查询功能详细操作表和系统功能操作权限表是否有引用到该附属功能，如果有，则提示
 		if(atSysModel != null){
 			List<AtModelFunction> atModelFunctionList = atModelFunctionMapper.findModelFunctionByMenuCode(atSysModel.getMenuCode());
@@ -75,13 +90,23 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 		return atSysModelMapper.delete(atSysModel.getId())>0?0:1;
 	}
 
+	/**
+	 * 查询菜单附属功能字典详情
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public AtSysModel queryDetailInfo(int id) {
+	public AtSysModel queryDetailInfo(int id) throws Exception {
 		return atSysModelMapper.findById(id);
 	}
 
+	/**
+	 * 查询菜单附属功能字典列表(分页)
+	 * @throws Exception 
+	 * 
+	 * */
 	@Override
-	public List<AtSysModel> queryListByPage(AtSysModel atSysModel, PageObject page) {
+	public List<AtSysModel> queryListByPage(AtSysModel atSysModel, PageObject page) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//参数
 		if(atSysModel.getTreeId() > 0){
@@ -105,9 +130,24 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 		return atSysModelMapper.findByPage(map);
 	}
 
+	/**
+	 * 根据菜单树ID查询菜单附属功能
+	 * @param treeId
+	 * @return
+	 * @throws Exception 
+	 */
 	@Override
-	public List<AtSysModel> getAtSysModelByTreeId(int treeId){
+	public List<AtSysModel> getAtSysModelByTreeId(int treeId) throws Exception {
 		return atSysModelMapper.getAtSysModelByTreeId(treeId);
+	}
+	
+	/**
+	 * 查询所有数据
+	 * @return
+	 */
+	@Override
+	public List<AtSysModel> findAll(){
+		return atSysModelMapper.findAll();
 	}
 
 }
