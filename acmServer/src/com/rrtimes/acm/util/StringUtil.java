@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.rrtimes.acm.domain.AtSysModel;
+
 
 /**
  * @Title:       StringUtil.java
@@ -113,13 +113,10 @@ public class StringUtil {
 		StringBuffer strBuff = new StringBuffer();
 		try{
 			for(int i=0;i<ids.length;i++){
-				String[] splitIds = ids[0].split(",");
-				for(int j=0;j<splitIds.length;j++){
-					if(j==splitIds.length-1){
-						strBuff.append(splitIds[j]);
-					}else{
-						strBuff.append(splitIds[j]).append(",");
-					}
+				if(i==ids.length-1){
+					strBuff.append(ids[i]);
+				}else{
+					strBuff.append(ids[i]).append(",");
 				}
 			}
 		}catch(Exception e){
@@ -136,10 +133,7 @@ public class StringUtil {
 	public static List<Integer> arrayToList(String[] ids){
 		List<Integer> list = new ArrayList<Integer>();
 		for(int i=0;i<ids.length;i++){
-			String[] splitIds = ids[0].split(",");
-			for(int j=0;j<splitIds.length;j++){
-				list.add(Integer.valueOf(splitIds[j]));
-			}
+			list.add(Integer.valueOf(ids[i]));
 		}
 		return list;
 	}
@@ -151,38 +145,5 @@ public class StringUtil {
 		// TODO Auto-generated method stub
 		System.out.println("-------------"+checkTimeIsSameDay(new Date()));
 	}
-
-	
-	public static String[] arrToArray(String[] funIds) {
-		String[] array = null;
-		if(funIds !=null && funIds.length > 0){
-			String[] splitIds = funIds[0].split(",");
-			array = new String[splitIds.length];
-			for(int i=0;i<funIds.length;i++){
-				for(int j=0;j<splitIds.length;j++){
-					array[j] = splitIds[j];
-				}
-			}
-		}
-		return array;
-	}
-
-	/**
-	 * 将List转换为Array
-	 * @param treeIdList
-	 * @return
-	 */
-	public static String[] listToArray(List<AtSysModel> treeIdList) {
-		String[] array = null;
-		if(isListNotNull(treeIdList)){
-			array = new String[treeIdList.size()];
-			for(int i=0;i<treeIdList.size();i++){
-				array[i] = String.valueOf(treeIdList.get(i).getTreeId());
-			}
-		}
-		return array;
-	}
-	
-	
 
 }
