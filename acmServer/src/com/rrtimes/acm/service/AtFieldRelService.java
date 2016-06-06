@@ -11,8 +11,8 @@ package com.rrtimes.acm.service;
 import java.util.List;
 import java.util.Map;
 
+
 import com.rrtimes.acm.domain.AtFieldRel;
-import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
 
 /**
@@ -31,15 +31,10 @@ public interface AtFieldRelService {
 	
 	/**
 	 * 新增用户字段权限关系
+	 * @throws Exception 
 	 * 
 	 * */
-	public int addAtFieldRel(String idInfos,AtUser atUser,String operator);
-	
-	/**
-	 * 修改用户字段权限关系
-	 * 
-	 * */
-	public int modAtFieldRel(String idInfos,AtUser atUser,String operator,int treeId);
+	public int grantToUserOrRole(String jsonStr,int uid,int operator) throws Exception;
 	
 	/**
 	 * 删除用户字段权限关系
@@ -86,5 +81,13 @@ public interface AtFieldRelService {
 	 * @return
 	 */
 	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId(int uid,int treeId);
+
+	/**
+	 * 根据系统权限字段IDS删除用户字段权限关系
+	 * @param dictIds
+	 * @return
+	 * @throws Exception 
+	 */
+	public int delFieldRelByDictIdsAndUid(String[] dictIds, int id);
 	
 }

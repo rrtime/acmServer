@@ -84,24 +84,6 @@ public class AtHoldFunctionAction extends ActionSupport {
 	}
 	
 	/**
-	 * 系统功能操作权限新增
-	 * @throws Exception 
-	 * */
-	public String addAtHoldFunctionInfo() throws Exception
-	{
-		rst = atHoldFunctionService.addAtHoldFunction(funIds,atUser.getId(),currentUser.getId());
-//		rst = atHoldFunctionService.addAtHoldFunction(funIds,atUser.getId(),1);
-		// 设置界面提示信息
-		if( rst == 0 ){
-			msg = "新增操作已成功。";
-		}else{
-			msg = "新增操作未成功。";
-		}
-		this.page.setCurrentPage(1);
-		return queryAtHoldFunctionList();
-	}
-	
-	/**
 	 * 跳转至功能详细操作字典修改页面
 	 * @throws Exception 
 	 * 
@@ -110,24 +92,6 @@ public class AtHoldFunctionAction extends ActionSupport {
 		this.setCmd(1);
 		this.setAtHoldFunction(atHoldFunctionService.queryDetailInfo(atHoldFunction.getId()));
 		return "modAtHoldFunction";
-	}
-	
-	/**
-	 * 修改系统功能操作权限
-	 * @throws Exception 
-	 * 
-	 * */
-	public String modAtHoldFunction() throws Exception
-	{
-		rst = atHoldFunctionService.modAtHoldFunction(funIds, atUser.getId(),currentUser.getId());
-//		rst = atHoldFunctionService.modAtHoldFunction(funIds, atUser.getId(),1);
-		// 设置界面提示信息
-		if( rst == 0 ){
-			msg = "修改操作已成功。";
-		}else{
-			msg = "修改操作未成功。";
-		}
-		return queryAtHoldFunctionList();
 	}
 	
 	/**

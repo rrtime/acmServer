@@ -133,10 +133,10 @@ public interface AtHoldFunctionMapper {
 	public List<AtModelFunction> getModelFunctionListByIdArray(String[] funIds);
 
 	/**
-	 * 根据funId查询属于哪一个菜单树
+	 * 根据功能操作字典ID查询所属菜单树
 	 * @param funIds
 	 * @return
 	 */
-	public List<AtSysModel> getTreeIdByFunId(String funId);
+	public List<AtSysModel> getTreeIdByFunIdArray(String[] funIds);
 
 }

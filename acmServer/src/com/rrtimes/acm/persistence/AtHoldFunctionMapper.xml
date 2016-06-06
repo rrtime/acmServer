@@ -205,7 +205,7 @@
   		 asm.TREE_ID as treeId,
   		 asm.MENU_CODE as menuCode,
          asm.M_NAME as mname,
-         asm.M_DESC as mDesc,
+         asm.M_DESC as mdesc,
          asm.IS_SYSTEM as isSystem,
          asm.CATEGORY as category,
          asm.IS_CON_SHOWNUM as isConShownum,
@@ -258,7 +258,7 @@
   	SELECT
   		 asmn.ID as id,
   		 asmn.M_TITLE as mTitle,
-  		 asmn.M_DESC as mDesc,
+  		 asmn.M_DESC as mdesc,
          asmn.PARENT_ID as parentId,
          asmn.TFLAG as tflag,
          asmn.INID as inid,
@@ -318,5 +318,89 @@
 		AND ahf.MENU_CODE = asm.MENU_CODE
 		and asm.TREE_ID = asmn.ID
 		and asmn.ID = #{treeId}
+  </select>
+  
+  <select id="getModelFunctionListByIds" resultType="AtModelFunction">
+  	SELECT
+  		 amf.ID as id,
+  		 amf.MENU_CODE as menuCode,
+         amf.F_NAME as fname,
+         amf.F_TITLE as fTitle,
+         amf.TABLE_INDEX as tableIndex,
+		 amf.IS_SYSTEM as isSystem,
+		 amf.FUN_CODE as funCode,
+		 amf.FUN_DESC as funDesc,
+		 amf.ID_PARENT as idParent,
+		 amf.CONTROL_ID as controlId,
+		 amf.CONTROL_TYPE as controlType,
+		 amf.IS_HASTAG as isHastag,
+         amf.CATEGORY as category,
+		 amf.SHOW_INDEX as showIndex,
+         amf.IS_CON_SHOWNUM as isConShownum,
+         amf.CONTROL_NUM as controlNum,
+         amf.CONTROL_PAGE as controlPage,
+         amf.CREATE_TIME as createTime,
+         amf.OPERATOR as operator,
+	     amf.UPDATE_TIME as updateTime,
+         amf.REMARK as remark
+    FROM AT_MODEL_FUNCTION amf
+	    WHERE 
+	    <foreach collection="array" item="ids" open="(" close=")" separator="OR"> 
+			ID = #{ids} 
+		</foreach> 
+  </select>
+  
+  <select id="getModelFunctionListByIdArray" resultType="AtModelFunction">
+  	SELECT
+  		 amf.ID as id,
+  		 amf.MENU_CODE as menuCode,
+         amf.F_NAME as fname,
+         amf.F_TITLE as fTitle,
+         amf.TABLE_INDEX as tableIndex,
+		 amf.IS_SYSTEM as isSystem,
+		 amf.FUN_CODE as funCode,
+		 amf.FUN_DESC as funDesc,
+		 amf.ID_PARENT as idParent,
+		 amf.CONTROL_ID as controlId,
+		 amf.CONTROL_TYPE as controlType,
+		 amf.IS_HASTAG as isHastag,
+         amf.CATEGORY as category,
+		 amf.SHOW_INDEX as showIndex,
+         amf.IS_CON_SHOWNUM as isConShownum,
+         amf.CONTROL_NUM as controlNum,
+         amf.CONTROL_PAGE as controlPage,
+         amf.CREATE_TIME as createTime,
+         amf.OPERATOR as operator,
+	     amf.UPDATE_TIME as updateTime,
+         amf.REMARK as remark
+    FROM AT_MODEL_FUNCTION amf
+	    WHERE 
+	    <foreach collection="array" item="funIds" open="(" close=")" separator="OR"> 
+			ID = #{funIds} 
+		</foreach> 
+  </select>
+  
+  <select id="getTreeIdByFunIdArray" resultType="AtSysModel">
+  	SELECT
+  		 asm.ID as id,
+  		 asm.TREE_ID as treeId,
+  		 asm.MENU_CODE as menuCode,
+         asm.M_NAME as mname,
+         asm.M_DESC as mdesc,
+         asm.IS_SYSTEM as isSystem,
+         asm.CATEGORY as category,
+         asm.IS_CON_SHOWNUM as isConShownum,
+         asm.CONTROL_NUM as controlNum,
+         asm.CONTROL_PAGE as controlPage,
+         asm.SHOW_INDEX as showIndex,
+         asm.CREATE_TIME as createTime,
+	     asm.UPDATE_TIME as updateTime,
+         asm.REMARK as remark
+    FROM AT_SYS_MODEL asm, AT_MODEL_FUNCTION amf
+	    where 
+			<foreach collection="array" item="funIds" open="(" close=")" separator="OR"> 
+				amf.ID = #{funIds} 
+			</foreach>
+			and amf.MENU_CODE = asm.MENU_CODE
   </select>
 </mapper>

@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+
 import org.apache.struts2.ServletActionContext;
 
 
@@ -57,8 +58,8 @@ public class AtFieldRelAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
-	//格式是“menuCode:rname:privilegeType:fid,menuCode:rname:privilegeType:fid,menuCode:rname:privilegeType:fid”
-	private String idInfos;
+	//功能ID
+	private String[] dictIds;
 	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
@@ -67,13 +68,15 @@ public class AtFieldRelAction extends ActionSupport {
 	// 0 新增  1 修改  2 查看详情
 	private int cmd = 0;
 	
+	String jsonStr = "";
+
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	//操作员即当前登陆人
-	AtUser atUser1 = (AtUser) session.getAttribute("user");
+	AtUser currentUser = (AtUser) session.getAttribute("user");
 	
 	
 	/**
-	 * 跳转至系统权限字段字典新增页面
+	 * 跳转至用户字段权限关系新增页面
 	 * 
 	 * */
 	public String toAddAtFieldRelPage(){
@@ -82,47 +85,30 @@ public class AtFieldRelAction extends ActionSupport {
 	}
 	
 	/**
-	 * 用户字段权限关系新增
+	 * 用户字段权限关系新增、修改（授权）
+	 * @throws Exception 
 	 * */
-	public String addAtFieldRelInfo()
+	public String grantToUserOrRole() throws Exception
 	{
-		rst = atFieldRelService.addAtFieldRel(idInfos,atUser,atUser1.getUserName());
-//		rst = atFieldRelService.addAtFieldRel(idInfos,atUser,"y");
+		rst = atFieldRelService.grantToUserOrRole(jsonStr,atUser.getId(),currentUser.getId());
 		// 设置界面提示信息
 		if( rst == 0 ){
-			msg = "新增操作已成功。";
+			msg = "操作已成功。";
 		}else{
-			msg = "新增操作未成功。";
+			msg = "操作未成功。";
 		}
 		this.page.setCurrentPage(1);
 		return queryAtFieldRelList();
 	}
 	
 	/**
-	 * 跳转至系统权限字段字典修改页面
+	 * 跳转至用户字段权限关系修改页面
 	 * 
 	 * */
 	public String toModAtFieldRelPage(){
 		this.setCmd(1);
 		this.setAtFieldRel(atFieldRelService.queryDetailInfo(atFieldRel.getId()));
 		return "modAtFieldRel";
-	}
-	
-	/**
-	 * 修改用户字段权限关系
-	 * 
-	 * */
-	public String modAtFieldRel()
-	{
-		rst = atFieldRelService.modAtFieldRel(idInfos,atUser,atUser1.getUserName(),atSysMenu.getId());
-//		rst = atFieldRelService.modAtFieldRel(idInfos,atUser,"y",atSysMenu.getId());
-		// 设置界面提示信息
-		if( rst == 0 ){
-			msg = "修改操作已成功。";
-		}else{
-			msg = "修改操作未成功。";
-		}
-		return queryAtFieldRelList();
 	}
 	
 	/**
@@ -141,6 +127,16 @@ public class AtFieldRelAction extends ActionSupport {
 	 */
 	public int delAtFieldRel(){
 		return atFieldRelService.delAtFieldRelByUidAndTreeId(atUser.getId(), atSysMenu.getId());
+	}
+	
+	/**
+	 * 根据系统权限字段IDS删除用户字段权限关系
+	 * @param dictIds
+	 * @return
+	 * @throws Exception 
+	 */
+	public int delFieldRelByDictIdsAndActorId() throws Exception{
+		return atFieldRelService.delFieldRelByDictIdsAndUid(dictIds,atUser.getId());
 	}
 	
 	/**
@@ -186,8 +182,6 @@ public class AtFieldRelAction extends ActionSupport {
 	public AtFieldRel queryDetailInfo(){
 		return atFieldRelService.queryDetailInfo(atFieldRel.getId());
 	}
-	
-	
 
 	public AtFieldRelService getAtFieldRelService() {
 		return atFieldRelService;
@@ -261,13 +255,28 @@ public class AtFieldRelAction extends ActionSupport {
 		this.atSysMenu = atSysMenu;
 	}
 
-	public String getIdInfos() {
-		return idInfos;
+	public String[] getDictIds() {
+		return dictIds;
 	}
 
-	public void setIdInfos(String idInfos) {
-		this.idInfos = idInfos;
+	public void setDictIds(String[] dictIds) {
+		this.dictIds = dictIds;
 	}
 
+	public AtUser getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(AtUser currentUser) {
+		this.currentUser = currentUser;
+	}
+	
+	public String getJsonStr() {
+		return jsonStr;
+	}
+
+	public void setJsonStr(String jsonStr) {
+		this.jsonStr = jsonStr;
+	}
 	
 }

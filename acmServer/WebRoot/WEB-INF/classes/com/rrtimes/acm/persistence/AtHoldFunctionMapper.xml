@@ -380,7 +380,7 @@
 		</foreach> 
   </select>
   
-  <select id="getTreeIdByFunId" resultType="AtSysModel">
+  <select id="getTreeIdByFunIdArray" resultType="AtSysModel">
   	SELECT
   		 asm.ID as id,
   		 asm.TREE_ID as treeId,
@@ -398,7 +398,9 @@
          asm.REMARK as remark
     FROM AT_SYS_MODEL asm, AT_MODEL_FUNCTION amf
 	    where 
-			amf.ID = #{funId} 
+			<foreach collection="array" item="funIds" open="(" close=")" separator="OR"> 
+				amf.ID = #{funIds} 
+			</foreach>
 			and amf.MENU_CODE = asm.MENU_CODE
   </select>
 </mapper>

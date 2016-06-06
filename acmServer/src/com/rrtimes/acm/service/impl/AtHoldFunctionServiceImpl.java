@@ -233,7 +233,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 		//根据ID查询属于哪一个菜单树
 		Map<String,Object> map = new HashMap<String,Object>();
 		int result = 0;
-		List<AtSysModel> treeIdList = atHoldFunctionMapper.getTreeIdByFunId(funIds[0]);
+		List<AtSysModel> treeIdList = atHoldFunctionMapper.getTreeIdByFunIdArray(funIds);
 		for(int i=0;i<treeIdList.size();i++){
 			map.put("actorId", actorId);
 			map.put("treeId", treeIdList.get(i).getTreeId());

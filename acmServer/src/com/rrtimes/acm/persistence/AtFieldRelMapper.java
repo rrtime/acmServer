@@ -11,7 +11,9 @@ package com.rrtimes.acm.persistence;
 import java.util.List;
 import java.util.Map;
 
+import com.rrtimes.acm.domain.AtFieldDict;
 import com.rrtimes.acm.domain.AtFieldRel;
+import com.rrtimes.acm.domain.AtSysModel;
 
 /**
  * @Title:       AtFieldRelMapper.java
@@ -97,5 +99,19 @@ public interface AtFieldRelMapper {
 	 * @return
 	 */
 	public List<Map<String,Object>> findAtFieldRelByUidAndTreeId(Map<String, Object> map);
+
+	/**
+	 * 根据dictIds查询系统权限字段字典
+	 * @param dictIds
+	 * @return
+	 */
+	public List<AtFieldDict> getFieldDictListByIdArray(String[] dictIds);
+
+	/**
+	 * 根据字典ID查询所属菜单树
+	 * @param dictIds
+	 * @return
+	 */
+	public List<AtSysModel> getTreeIdByDictIdArray(String[] dictIds);
 	
 }

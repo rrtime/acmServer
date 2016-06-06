@@ -181,7 +181,7 @@
  	    	and UID = #{uid}
  		</if>
   		<if test="menuCode != null and menuCode != ''">
-  	    	and MENU_CODE like #{menuCode}
+  	    	and MENU_CODE = #{menuCode}
   		</if>
     	ORDER BY createTime
   </select>
@@ -207,6 +207,85 @@
 	WHERE
 		asm.TREE_ID = #{treeId}
 	AND asm.MENU_CODE = afr.MENU_CODE
+	AND afr.MENU_CODE = afd.MENU_CODE
+	AND afr.FID = afd.ID
+	AND afr.UID = #{uid}
+  </select>
+  
+  <select id="getTreeIdByDictIdArray" resultType="AtSysModel">
+  	SELECT
+  		 asm.ID as id,
+  		 asm.TREE_ID as treeId,
+  		 asm.MENU_CODE as menuCode,
+         asm.M_NAME as mname,
+         asm.M_DESC as mdesc,
+         asm.IS_SYSTEM as isSystem,
+         asm.CATEGORY as category,
+         asm.IS_CON_SHOWNUM as isConShownum,
+         asm.CONTROL_NUM as controlNum,
+         asm.CONTROL_PAGE as controlPage,
+         asm.SHOW_INDEX as showIndex,
+         asm.CREATE_TIME as createTime,
+	     asm.UPDATE_TIME as updateTime,
+         asm.REMARK as remark
+    FROM AT_SYS_MODEL asm, AT_FIELD_DICT afd
+	    where 
+			<foreach collection="array" item="dictIds" open="(" close=")" separator="OR"> 
+				afd.ID = #{dictIds} 
+			</foreach>
+			and afd.MENU_CODE = asm.MENU_CODE
+  </select>
+  
+  <select id="getFieldDictListByIdArray" resultType="AtFieldDict">
+  	SELECT
+  		 afd.ID as id,
+  		 afd.MENU_CODE as menuCode,
+         afd.F_NAME as fname,
+         afd.F_TITLE as ftitle,
+         afd.ORDER_INDEX as orderIndex,
+		 afd.IS_SYSTEM as isSystem,
+		 afd.IS_INAUTH as isInauth,
+         afd.IS_HASREAD as isHasread,
+         afd.IS_HASUPDATE as isHasupdate,
+         afd.VIEW_TYPE as viewType,
+		 afd.CATE_GORY as cateGory,
+		 afd.ID_PARENT as idParent,
+         afd.F_DESC as fdesc,
+         afd.CREATE_TIME as createTime,
+	     afd.UPDATE_TIME as updateTime,
+         afd.REMARK as remark
+    FROM AT_FIELD_DICT afd
+	    WHERE 
+	    <foreach collection="array" item="dictIds" open="(" close=")" separator="OR"> 
+			ID = #{dictIds} 
+		</foreach> 
+  </select>
+  
+  <select id="findAtFieldRelByUid" resultType="Map">
+  	SELECT
+  		 asm.M_NAME as mname,
+  		 afd.ID as id,
+  		 afd.MENU_CODE as menuCode,
+         afd.F_NAME as fname,
+         afd.F_TITLE as ftitle,
+         afd.ORDER_INDEX as orderIndex,
+		 afd.IS_SYSTEM as isSystem,
+		 afd.IS_INAUTH as isInauth,
+         afd.IS_HASREAD as isHasread,
+         afd.IS_HASUPDATE as isHasupdate,
+         afd.VIEW_TYPE as viewType,
+		 afd.CATE_GORY as cateGory,
+		 afd.ID_PARENT as idParent,
+         afd.F_DESC as fdesc,
+         afd.CREATE_TIME as createTime,
+	     afd.UPDATE_TIME as updateTime,
+         afd.REMARK as remark
+    FROM
+		AT_FIELD_REL afr,
+		AT_SYS_MODEL asm,
+		AT_FIELD_DICT afd
+	WHERE
+		asm.MENU_CODE = afr.MENU_CODE
 	AND afr.MENU_CODE = afd.MENU_CODE
 	AND afr.FID = afd.ID
 	AND afr.UID = #{uid}
