@@ -11,6 +11,8 @@ package com.rrtimes.acm.domain;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.rrtimes.acm.iinterface.ISerializable;
+
 /**
  * @Title:       AcmSysMenu.java
  * @Package:     com.rrtimes.acm.domain
@@ -23,8 +25,12 @@ import java.util.Date;
  * @author lil
  * 
  */
-public class AcmSysMenu {
-    private int Id;                  //主键ID
+public class AcmSysMenu implements ISerializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5309436215362750095L;
+	private int Id;                  //主键ID
     private String MenuName;         //菜单名称
     private String MenuDesc;         //菜单描述
     private String MenuIco;          //菜单图标
