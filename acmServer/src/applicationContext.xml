@@ -34,7 +34,7 @@
 		<property name="user" value="${acm.username}"/>
 		<property name="password" value="${acm.password}"/>
 	</bean>
-	
+	<!-- 
 	<bean id="shardPlugin" class="com.google.code.shardbatis.plugin.ShardPlugin ">
 		<property name="properties">
 			<props>
@@ -44,16 +44,17 @@
 			</props>
 		</property>
 	</bean>
-	
+	 -->
 	<bean id="acm.sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis-configuration.xml"/>
 		<property name="dataSource" ref="acm.dataSource" />
 		<property name="typeAliasesPackage" value="com.rrtimes.acm.domain" />
+		<!--
 		<property name="plugins">
 			<list>
 				<ref bean="shardPlugin" />
 			</list>
-		</property>
+		</property>-->
 	</bean>
 	
 	<!-- scan for mappers and let them be autowired -->
