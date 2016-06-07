@@ -4,7 +4,7 @@
 	<groupId>com.rrtimes.acm</groupId>
 	<artifactId>acmServer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>acmServer</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -233,6 +233,9 @@
 						<include>config/process.properties</include>
 						<include>log4j.properties</include>
 					</includes>
+					<archive><!-- 不生成描述文件 -->
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -260,16 +263,44 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>${project.build.name}</warName>
+					<warName>acmClient</warName>
 					<webResources>
-						<resource>
-							<!-- 元配置文件的目录，相对于pom.xml文件的路径 -->
-							<directory>WebRoot/WEB-INF</directory>
-							<!-- 目标路径 -->
-							<targetPath>${project.build.directory}</targetPath>
+						<resource>	 <!-- this is relative to the pom.xml directory -->
+							<directory>WebRoot</directory>
 						</resource>
 					</webResources>
+					<packagingExcludes>WEB-INF/classes/**/service/**
+					,WEB-INF/classes/**/constant/**
+					,WEB-INF/classes/**/iinterface/**
+					,WEB-INF/classes/**/persistence/**
+					,WEB-INF/classes/**/util/**
+					,WEB-INF/classes/**/test/**
+					,WEB-INF/classes/config/**
+					<!-- ,WEB-INF/lib/**/* -->
+					,WEB-INF/META-INF/maven/**
+					,WEB-INF/META-INF/spring/**
+					,WEB-INF/classes/applicationContext.xml
+					,WEB-INF/classes/shard_config.xml
+					,WEB-INF/classes/mybatis-configuration.xml</packagingExcludes>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
 				</configuration>
+			</plugin>
+			<!-- 配置在package设置为war时能同时打jar也打出 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<executions>
+					<execution>
+						<id>my-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
