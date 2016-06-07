@@ -35,6 +35,7 @@
 		<property name="password" value="${acm.password}"/>
 	</bean>
 	
+	<!-- 
 	<bean id="shardPlugin" class="com.google.code.shardbatis.plugin.ShardPlugin ">
 		<property name="properties">
 			<props>
@@ -44,16 +45,17 @@
 			</props>
 		</property>
 	</bean>
-	
+	 -->
 	<bean id="acm.sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis-configuration.xml"/>
 		<property name="dataSource" ref="acm.dataSource" />
 		<property name="typeAliasesPackage" value="com.rrtimes.acm.domain" />
+		<!-- 
 		<property name="plugins">
 			<list>
 				<ref bean="shardPlugin" />
 			</list>
-		</property>
+		</property>-->
 	</bean>
 	
 	<!-- scan for mappers and let them be autowired -->
@@ -64,14 +66,31 @@
     
     <!-- 具体的实现bean -->
 	<bean id="acsi" class="com.rrtimes.acm.service.impl.AtComplainServiceImpl" />
+	<bean id="acli" class="com.rrtimes.acm.service.impl.AtCstVisitServiceImpl" />
+	<bean id="acii" class="com.rrtimes.acm.service.impl.AtCstImyServiceImpl" />
+	<bean id="acfi" class="com.rrtimes.acm.service.impl.AtCstFeeServiceImpl" />
+	<bean id="asmsi" class="com.rrtimes.acm.service.impl.AtSysModelServiceImpl" />
+	<bean id="amfsi" class="com.rrtimes.acm.service.impl.AtModelFunctionServiceImpl" />
+	<bean id="ahfsi" class="com.rrtimes.acm.service.impl.AtHoldFunctionServiceImpl" />
+	<bean id="afdsi" class="com.rrtimes.acm.service.impl.AtFieldDictServiceImpl" />
+	<bean id="afrsi" class="com.rrtimes.acm.service.impl.AtFieldRelServiceImpl" />
 	<bean id="demoService" class="com.rrtimes.acm.service.impl.AcmSysOrgServiceImpl" />
 	<bean id="demoService1" class="com.rrtimes.acm.service.impl.AtUserServiceImpl" />
+	<bean id="acasi" class="com.rrtimes.acm.service.impl.AtCompanyAgentServiceImpl" />
+	<bean id="acbsi" class="com.rrtimes.acm.service.impl.AtCsrBasicServiceImpl" />
+	<bean id="accsi" class="com.rrtimes.acm.service.impl.AtCstContractServiceImpl" />
+	<bean id="acfsi" class="com.rrtimes.acm.service.impl.AtCstFtServiceImpl" />
+	<bean id="acrdsi" class="com.rrtimes.acm.service.impl.AtCstReportDictServiceImpl" />
+	<bean id="asms" class="com.rrtimes.acm.service.impl.AtSysMenuServiceImpl" />
+	<bean id="asnsi" class="com.rrtimes.acm.service.impl.AtSysNoticeServiceImpl" />
+	<bean id="augrsi" class="com.rrtimes.acm.service.impl.AtUserGroupRelServiceImpl" />
 
 	<!-- 提供方应用信息，用于计算依赖关系-->
 	<dubbo:application name="xixi_provider" />
 
-	<!-- 使用multicast广播注册中心暴露服务地址 -->
-            <dubbo:registry address="multicast://224.5.6.7:1234"/>
+	<!-- 使用multicast广播注册中心暴露服务地址
+    <dubbo:registry address="multicast://224.5.6.7:1234"/> -->
+    <dubbo:registry address="zookeeper://192.168.0.203:2181"/>
 		
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="20880" />
@@ -79,6 +98,31 @@
 	<!-- 声明需要暴露的服务接口 -->
 	<!-- 客户投诉信息 -->
 	<dubbo:service interface="com.rrtimes.acm.service.AtComplainService" ref="acsi" />
+	<!-- 客户回访记录 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstVisitService" ref="acli" />
+	<!-- 客户质量赔付记录 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstImyService" ref="acii" />
+	<!-- 客户收费记录 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstFeeService" ref="acfi" />
+	<!-- 菜单附属功能字典 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtSysModelService" ref="asmsi" />
+	<!-- 功能详细操作字典 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtModelFunctionService" ref="amfsi" />
+	<!-- 系统功能操作权限 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtHoldFunctionService" ref="ahfsi" />
+	<!-- 系统权限字段字典 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtFieldDictService" ref="afdsi" />
+	<!-- 用户字段权限关系 -->
+	<dubbo:service interface="com.rrtimes.acm.service.AtFieldRelService" ref="afrsi" />
+	
 	<dubbo:service interface="com.rrtimes.acm.service.AcmSysOrgService" ref="demoService" />
 	<dubbo:service interface="com.rrtimes.acm.service.AtUserService" ref="demoService1" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCompanyAgentService" ref="acasi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCsrBasicService" ref="acbsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstContractService" ref="accsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstFtService" ref="acfsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtCstReportDictService" ref="acrdsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtSysMenuService" ref="asms" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtSysNoticeService" ref="asnsi" />
+	<dubbo:service interface="com.rrtimes.acm.service.AtUserGroupRelService" ref="augrsi" />
 </beans>
