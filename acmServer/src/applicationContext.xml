@@ -87,40 +87,41 @@
 	<!-- 提供方应用信息，用于计算依赖关系-->
 	<dubbo:application name="xixi_provider" />
 
-	<!-- 使用multicast广播注册中心暴露服务地址 -->
+	<!-- 使用multicast广播注册中心暴露服务地址
     <dubbo:registry address="multicast://224.5.6.7:1234"/>
+    <dubbo:registry address="zookeeper://192.168.0.203:2181"/> -->
 		
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="20880" />
 
 	<!-- 声明需要暴露的服务接口 -->
 	<!-- 客户投诉信息 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtComplainService" ref="acsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtComplainService" ref="acsi" />
 	<!-- 客户回访记录 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtCstVisitService" ref="acli" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCstVisitService" ref="acli" />
 	<!-- 客户质量赔付记录 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtCstImyService" ref="acii" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCstImyService" ref="acii" />
 	<!-- 客户收费记录 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtCstFeeService" ref="acfi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCstFeeService" ref="acfi" />
 	<!-- 菜单附属功能字典 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtSysModelService" ref="asmsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtSysModelService" ref="asmsi" />
 	<!-- 功能详细操作字典 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtModelFunctionService" ref="amfsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtModelFunctionService" ref="amfsi" />
 	<!-- 系统功能操作权限 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtHoldFunctionService" ref="ahfsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtHoldFunctionService" ref="ahfsi" />
 	<!-- 系统权限字段字典 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtFieldDictService" ref="afdsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtFieldDictService" ref="afdsi" />
 	<!-- 用户字段权限关系 -->
-	<dubbo:service interface="com.rrtimes.acm.service.AtFieldRelService" ref="afrsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtFieldRelService" ref="afrsi" />
 	
-	<dubbo:service interface="com.rrtimes.acm.service.AcmSysOrgService" ref="demoService" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtUserService" ref="demoService1" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtCompanyAgentService" ref="acasi" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtCsrBasicService" ref="acbsi" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtCstContractService" ref="accsi" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtCstFtService" ref="acfsi" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtCstReportDictService" ref="acrdsi" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtSysMenuService" ref="asms" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtSysNoticeService" ref="asnsi" />
-	<dubbo:service interface="com.rrtimes.acm.service.AtUserGroupRelService" ref="augrsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AcmSysOrgService" ref="demoService" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtUserService" ref="demoService1" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCompanyAgentService" ref="acasi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCsrBasicService" ref="acbsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCstContractService" ref="accsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCstFtService" ref="acfsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtCstReportDictService" ref="acrdsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtSysMenuService" ref="asms" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtSysNoticeService" ref="asnsi" />
+	<dubbo:service interface="com.rrtimes.acm.serviceI.AtUserGroupRelService" ref="augrsi" />
 </beans>
