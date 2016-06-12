@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.AtCstContract;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtCstContractMapper;
-import com.rrtimes.acm.service.AtCstContractService;
+import com.rrtimes.acm.serviceI.AtCstContractService;
 
 /**
  * @Title:       AcmSysOrgServiceImpl.java

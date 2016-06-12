@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtUserGroupRel;
-import com.rrtimes.acm.service.AtUserGroupRelService;
+import com.rrtimes.acm.serviceI.AtUserGroupRelService;
 
 /**
  * @Title:       UserGroupRelAction.java

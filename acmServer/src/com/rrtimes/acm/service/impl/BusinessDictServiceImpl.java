@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.BusinessDict;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.BusinessDictMapper;
-import com.rrtimes.acm.service.BusinessDictService;
+import com.rrtimes.acm.serviceI.BusinessDictService;
 
 /**
  * @Title:       BusinessDictServiceImpl.java

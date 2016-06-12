@@ -21,7 +21,7 @@ import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtSysModel;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtHoldFunctionMapper;
-import com.rrtimes.acm.service.AtHoldFunctionService;
+import com.rrtimes.acm.serviceI.AtHoldFunctionService;
 import com.rrtimes.acm.util.StringUtil;
 
 /**

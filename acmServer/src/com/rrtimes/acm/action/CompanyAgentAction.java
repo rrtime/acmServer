@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtCompanyAgent;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtCompanyAgentService;
+import com.rrtimes.acm.serviceI.AtCompanyAgentService;
 
 /**
  * @Title:       CompanyAgentAction.java

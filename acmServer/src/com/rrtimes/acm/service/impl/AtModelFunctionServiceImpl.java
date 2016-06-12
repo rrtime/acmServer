@@ -20,7 +20,7 @@ import com.rrtimes.acm.domain.AtModelFunction;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtHoldFunctionMapper;
 import com.rrtimes.acm.persistence.AtModelFunctionMapper;
-import com.rrtimes.acm.service.AtModelFunctionService;
+import com.rrtimes.acm.serviceI.AtModelFunctionService;
 import com.rrtimes.acm.util.StringUtil;
 
 /**

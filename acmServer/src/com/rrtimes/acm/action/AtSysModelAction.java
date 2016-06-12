@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtSysModel;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtSysModelService;
+import com.rrtimes.acm.serviceI.AtSysModelService;
 
 /**
  * @Title:       AtSysModelAction.java

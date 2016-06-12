@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AcmSysOrgMapper;
-import com.rrtimes.acm.service.AcmSysOrgService;
+import com.rrtimes.acm.serviceI.AcmSysOrgService;
 
 /**
  * @Title:       AcmSysOrgServiceImpl.java

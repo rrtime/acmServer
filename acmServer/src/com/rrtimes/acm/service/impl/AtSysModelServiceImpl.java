@@ -22,7 +22,7 @@ import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtHoldFunctionMapper;
 import com.rrtimes.acm.persistence.AtModelFunctionMapper;
 import com.rrtimes.acm.persistence.AtSysModelMapper;
-import com.rrtimes.acm.service.AtSysModelService;
+import com.rrtimes.acm.serviceI.AtSysModelService;
 import com.rrtimes.acm.util.StringUtil;
 
 /**

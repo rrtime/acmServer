@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtSysMenuService;
+import com.rrtimes.acm.serviceI.AtSysMenuService;
 
 /**
  * @Title:       GroupJigouAction.java

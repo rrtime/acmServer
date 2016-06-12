@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.CdrResource;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.CdrResourceMapper;
-import com.rrtimes.acm.service.CdrResourceService;
+import com.rrtimes.acm.serviceI.CdrResourceService;
 
 /**
  * @Title:       CdrResourceServiceImpl.java

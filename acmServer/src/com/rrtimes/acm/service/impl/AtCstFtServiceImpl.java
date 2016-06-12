@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.AtCstFt;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtCstFtMapper;
-import com.rrtimes.acm.service.AtCstFtService;
+import com.rrtimes.acm.serviceI.AtCstFtService;
 
 /**
  * @Title:       AcmSysOrgServiceImpl.java

@@ -90,6 +90,11 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.8.9</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
 		</dependency>
 		<!-- spring相关 -->
 		<dependency>
@@ -221,7 +226,7 @@
 					</archive>
 					<includes>
 						<!-- 后台需要的包 -->
-						<include>**/service/**</include>
+						<include>**/service**/**</include>
 						<include>**/constant/**</include>
 						<include>**/domain/**</include>
 						<include>**/iinterface/**</include>
@@ -233,9 +238,6 @@
 						<include>config/process.properties</include>
 						<include>log4j.properties</include>
 					</includes>
-					<archive><!-- 不生成描述文件 -->
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -259,6 +261,34 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- 打接口包 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>service</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<classifier>interface</classifier>
+							<includes>
+								<!-- 设置为serviceI以和service.impl区别开 -->
+								<include>**/action/**</include>
+								<include>**/domain/**</include>
+								<include>**/serviceI/**</include>
+								<include>**/iinterface/**</include>
+								<include>struts-**.xml</include>
+							</includes>
+							<archive><!-- 不生成描述文件 -->
+								<addMavenDescriptor>false</addMavenDescriptor>
+							</archive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -269,19 +299,21 @@
 							<directory>WebRoot</directory>
 						</resource>
 					</webResources>
-					<packagingExcludes>WEB-INF/classes/**/service/**
-					,WEB-INF/classes/**/constant/**
-					,WEB-INF/classes/**/iinterface/**
-					,WEB-INF/classes/**/persistence/**
-					,WEB-INF/classes/**/util/**
-					,WEB-INF/classes/**/test/**
-					,WEB-INF/classes/config/**
-					<!-- ,WEB-INF/lib/**/* -->
-					,WEB-INF/META-INF/maven/**
-					,WEB-INF/META-INF/spring/**
-					,WEB-INF/classes/applicationContext.xml
-					,WEB-INF/classes/shard_config.xml
-					,WEB-INF/classes/mybatis-configuration.xml</packagingExcludes>
+					<packagingExcludes>
+						WEB-INF/classes/**/service/**
+						,WEB-INF/classes/**/constant/**
+						,WEB-INF/classes/**/iinterface/**
+						,WEB-INF/classes/**/persistence/**
+						,WEB-INF/classes/**/util/**
+						,WEB-INF/classes/**/test/**
+						,WEB-INF/classes/config/**
+						<!-- ,WEB-INF/lib/**/* -->
+						,WEB-INF/META-INF/maven/**
+						,WEB-INF/META-INF/spring/**
+						,WEB-INF/classes/applicationContext.xml
+						,WEB-INF/classes/shard_config.xml
+						,WEB-INF/classes/mybatis-configuration.xml
+					</packagingExcludes>
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>

@@ -22,7 +22,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtSysNotice;
 import com.rrtimes.acm.domain.AtUser;
-import com.rrtimes.acm.service.AtSysNoticeService;
+import com.rrtimes.acm.serviceI.AtSysNoticeService;
 
 /**
  * @Title:       NoticeAction.java

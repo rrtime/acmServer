@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtModelFunction;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtModelFunctionService;
+import com.rrtimes.acm.serviceI.AtModelFunctionService;
 
 /**
  * @Title:       AtModelFunctionAction.java

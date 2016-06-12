@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.rrtimes.acm.domain.AtUserGroupRel;
 import com.rrtimes.acm.persistence.AtUserGroupRelMapper;
-import com.rrtimes.acm.service.AtUserGroupRelService;
+import com.rrtimes.acm.serviceI.AtUserGroupRelService;
 
 /**
  * @Title:       AtUserGroupRelServiceImpl.java

@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtFieldDict;
 import com.rrtimes.acm.domain.AtSysModel;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtFieldDictService;
+import com.rrtimes.acm.serviceI.AtFieldDictService;
 
 /**
  * @Title:       AtFieldDictAction.java

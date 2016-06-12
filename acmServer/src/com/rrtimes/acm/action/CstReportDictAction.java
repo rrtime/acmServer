@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtCstReportDict;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtCstReportDictService;
+import com.rrtimes.acm.serviceI.AtCstReportDictService;
 
 /**
  * @Title:       CstReportDictAction.java

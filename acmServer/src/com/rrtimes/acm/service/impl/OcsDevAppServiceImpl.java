@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.DevApp;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.DevAppMapper;
-import com.rrtimes.acm.service.OcsDevAppService;
+import com.rrtimes.acm.serviceI.OcsDevAppService;
 
 /**
  * @Title:       OcsDevAppServiceImpl.java

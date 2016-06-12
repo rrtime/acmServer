@@ -24,7 +24,7 @@ import com.rrtimes.acm.domain.AtSysModel;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtFieldRelMapper;
 import com.rrtimes.acm.persistence.AtHoldFunctionMapper;
-import com.rrtimes.acm.service.AtFieldRelService;
+import com.rrtimes.acm.serviceI.AtFieldRelService;
 import com.rrtimes.acm.util.JsonUtil;
 import com.rrtimes.acm.util.StringUtil;
 

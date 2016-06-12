@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.AtSysNotice;
 import com.rrtimes.acm.persistence.AtSysNoticeMapper;
 import com.rrtimes.acm.persistence.AtUserMapper;
-import com.rrtimes.acm.service.AtSysNoticeService;
+import com.rrtimes.acm.serviceI.AtSysNoticeService;
 
 /**
  * @Title:       AtSysNoticeServiceImpl.java

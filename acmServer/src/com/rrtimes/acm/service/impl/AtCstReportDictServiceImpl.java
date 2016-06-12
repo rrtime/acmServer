@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import com.rrtimes.acm.domain.AtCstReportDict;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtCstReportDictMapper;
-import com.rrtimes.acm.service.AtCstReportDictService;
+import com.rrtimes.acm.serviceI.AtCstReportDictService;
 
 /**
  * @Title:       AtCstReportDictServiceImpl.java

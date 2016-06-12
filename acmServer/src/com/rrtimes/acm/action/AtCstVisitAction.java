@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtCstVisit;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtCstVisitService;
+import com.rrtimes.acm.serviceI.AtCstVisitService;
 
 /**
  * @Title:       AtCstVisitAction.java

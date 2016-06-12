@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 import com.rrtimes.acm.domain.AtCstFee;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtCstFeeMapper;
-import com.rrtimes.acm.service.AtCstFeeService;
+import com.rrtimes.acm.serviceI.AtCstFeeService;
 import com.rrtimes.acm.util.StringUtil;
 
 /**

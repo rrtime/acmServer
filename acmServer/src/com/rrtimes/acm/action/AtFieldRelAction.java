@@ -24,7 +24,7 @@ import com.rrtimes.acm.domain.AtFieldRel;
 import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtFieldRelService;
+import com.rrtimes.acm.serviceI.AtFieldRelService;
 
 /**
  * @Title:       AtFieldRelAction.java

@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtCstContract;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
-import com.rrtimes.acm.service.AtCstContractService;
+import com.rrtimes.acm.serviceI.AtCstContractService;
 
 /**
  * @Title:       ContractAction.java

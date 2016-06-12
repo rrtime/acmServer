@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 import com.rrtimes.acm.domain.AtFieldDict;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtFieldDictMapper;
-import com.rrtimes.acm.service.AtFieldDictService;
+import com.rrtimes.acm.serviceI.AtFieldDictService;
 import com.rrtimes.acm.util.StringUtil;
 
 /**

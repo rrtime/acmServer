@@ -24,7 +24,7 @@ import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtCsrBasicMapper;
 import com.rrtimes.acm.persistence.AtCstContractMapper;
 import com.rrtimes.acm.persistence.AtCstFtMapper;
-import com.rrtimes.acm.service.AtCsrBasicService;
+import com.rrtimes.acm.serviceI.AtCsrBasicService;
 
 /**
  * @Title:       AcmSysOrgServiceImpl.java

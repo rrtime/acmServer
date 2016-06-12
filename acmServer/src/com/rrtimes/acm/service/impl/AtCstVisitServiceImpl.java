@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 import com.rrtimes.acm.domain.AtCstVisit;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtCstVisitMapper;
-import com.rrtimes.acm.service.AtCstVisitService;
+import com.rrtimes.acm.serviceI.AtCstVisitService;
 import com.rrtimes.acm.util.StringUtil;
 
 /**
