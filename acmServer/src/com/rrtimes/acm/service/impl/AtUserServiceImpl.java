@@ -189,7 +189,7 @@ public class AtUserServiceImpl implements AtUserService{
 	public AtUser queryByUser(AtUser user) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("iName", user.getIname());
+		map.put("iname", user.getIname());
 		map.put("loginPwd", user.getLoginPwd());
 		map.put("status", 0);
 		
