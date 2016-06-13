@@ -14,7 +14,9 @@
   		 CATEGORY,
   		 IS_ENDNODE,
   		 SHOW_INDEX,
-         REMARK )
+         REMARK,
+         SHOW_CLASS,
+         M_URL )
   	VALUES(
   	     #{mtitle},
   	     #{mdesc},
@@ -25,7 +27,9 @@
   	     #{category},
   	     #{isEndnode},
   		 #{showIndex},
-         #{remark}  )
+         #{remark},
+         #{showClass},
+         #{murl}  )
   </insert> 
   
   <update id="update" parameterType="AtSysMenu">
@@ -42,6 +46,8 @@
             <if test="showIndex">,SHOW_INDEX = #{showIndex}</if>
             ,UPDATE_TIME = #{updateTime}
             <if test="remark!=null">,REMARK = #{remark}</if>
+            <if test="showClass!=null">,SHOW_CLASEE = #{showClass}</if>
+            <if test="murl!=null">,M_URL = #{murl}</if>
 		WHERE
 			ID=#{id}
   </update>
@@ -66,7 +72,9 @@
 	  		 SHOW_INDEX as showIndex,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SHOW_CLASS as showClass,
+	         M_URL as murl
 	    FROM AT_SYS_MENU  
 	    	WHERE 1 = 1
 	    	<if test="id!=null">and ID = #{id}</if>
@@ -80,6 +88,8 @@
 	    	<if test="isEndnode!=null">and IS_ENDNODE = #{isEndnode}</if>
 	    	<if test="showIndex!=null">and SHOW_INDEX = #{showIndex}</if>
 	    	<if test="remark!=null">and REMARK = #{remark}</if>
+	    	<if test="showClass!=null">and SHOW_CLASS = #{showClass}</if>
+	    	<if test="murl!=null">and M_URL = #{murl}</if>
 	    	ORDER BY CREATE_TIME DESC 
 	    	limit #{page.pageSize} offset #{page.offset}
   </select>
@@ -98,7 +108,9 @@
 	  		 SHOW_INDEX as showIndex,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SHOW_CLASS as showClass,
+	         M_URL as murl
     FROM AT_SYS_MENU  
     WHERE ID=#{id}
   </select>
@@ -117,7 +129,9 @@
 	  SHOW_INDEX as showIndex,
 	  CREATE_TIME as createTime,
 	  UPDATE_TIME as updateTime,
-	  REMARK as remark from AT_SYS_MENU m
+	  REMARK as remark,
+	  SHOW_CLASS as showClass,
+	  M_URL as murl from AT_SYS_MENU m
 	where 
 m.ID = 
 (
@@ -139,7 +153,9 @@ select
 	  SHOW_INDEX as showIndex,
 	  CREATE_TIME as createTime,
 	  UPDATE_TIME as updateTime,
-	  REMARK as remark from AT_SYS_MENU e
+	  REMARK as remark,
+	  SHOW_CLASS as showClass,
+	  M_URL as murl from AT_SYS_MENU e
 	where 
 e.ID =(
 select 
@@ -168,7 +184,9 @@ select
 	  SHOW_INDEX as showIndex,
 	  CREATE_TIME as createTime,
 	  UPDATE_TIME as updateTime,
-	  REMARK as remark from AT_SYS_MENU n
+	  REMARK as remark,
+	  SHOW_CLASS as showClass,
+	  M_URL as murl from AT_SYS_MENU n
 	where 
 n.ID = (
 select  

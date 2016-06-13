@@ -44,6 +44,8 @@ public class AtSysMenu implements ISerializable{
     private Timestamp createTime;                //创建时间
     private Date updateTime;                     //修改时间
     private String remark;                       //备注
+    private String showClass;
+    private String murl;
 	public int getId() {
 		return id;
 	}
@@ -122,5 +124,17 @@ public class AtSysMenu implements ISerializable{
 	}
 	public void setMdesc(String mdesc) {
 		this.mdesc = mdesc;
+	}
+	public String getShowClass() {
+		return showClass;
+	}
+	public void setShowClass(String showClass) {
+		this.showClass = showClass;
+	}
+	public String getMurl() {
+		return murl;
+	}
+	public void setMurl(String murl) {
+		this.murl = murl;
 	}
 }
