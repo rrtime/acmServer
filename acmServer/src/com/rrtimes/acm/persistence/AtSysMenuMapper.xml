@@ -46,7 +46,7 @@
             <if test="showIndex">,SHOW_INDEX = #{showIndex}</if>
             ,UPDATE_TIME = #{updateTime}
             <if test="remark!=null">,REMARK = #{remark}</if>
-            <if test="showClass!=null">,SHOW_CLASEE = #{showClass}</if>
+            <if test="showClass!=null">,SHOW_CLASS = #{showClass}</if>
             <if test="murl!=null">,M_URL = #{murl}</if>
 		WHERE
 			ID=#{id}
