@@ -42,5 +42,6 @@ public interface AtCstFtMapper {
     
     public AtCstFt findByCsrIdentifer(String csrIdentifer);
     
-    public List<AtCstFt> findByUserId(Map<String,Object> map);
+
+	public List<AtCstFt> findByUserId(Map<String, Object> map);
 }

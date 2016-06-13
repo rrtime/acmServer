@@ -15,7 +15,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtUser;
-import com.rrtimes.acm.service.AtUserService;
+import com.rrtimes.acm.serviceI.AtUserService;
 
 /**
  * @Title:       UserManagerAction.java

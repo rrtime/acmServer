@@ -113,5 +113,6 @@ public interface AtFieldRelMapper {
 	 * @return
 	 */
 	public List<AtSysModel> getTreeIdByDictIdArray(String[] dictIds);
+
 	
 }

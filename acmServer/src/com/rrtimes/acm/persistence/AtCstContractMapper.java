@@ -42,7 +42,6 @@ public interface AtCstContractMapper {
     
     public List<AtCstContract> findByUserIdAndDay(Map<String,Object> map);
     
-    public List<AtCstContract> findByUserId(Map<String,Object> map);
     
     public List<AtCstContract> findPaydayByUserId(Map<String,Object> map);
     
@@ -53,4 +52,6 @@ public interface AtCstContractMapper {
     public AtCstContract findByCsrIdentifer(String csrIdentifer);
     
     public List<AtCstContract> findQFByUserId(Map<String,Object> map);
+
+	public List<AtCstContract> findByUserId(Map<String, Object> map);
 }

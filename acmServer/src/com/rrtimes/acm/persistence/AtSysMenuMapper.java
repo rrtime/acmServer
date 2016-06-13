@@ -39,5 +39,6 @@ public interface AtSysMenuMapper {
     
     public int findByCount(Map<String,Object> map);
     
-    public List<AtSysMenu> findByUserId(Map<String,Object> map);
+
+	public List<AtSysMenu> findByUserId(Map<String, Object> map);
 }
