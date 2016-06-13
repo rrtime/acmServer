@@ -114,5 +114,11 @@ public interface AtFieldRelMapper {
 	 */
 	public List<AtSysModel> getTreeIdByDictIdArray(String[] dictIds);
 
+	/**
+	 * 根据用户或用户组ID查询字段权限关系
+	 * @return
+	 */
+	public List<AtFieldRel> getAtFieldRelListByUid(int uid);
+
 	
 }

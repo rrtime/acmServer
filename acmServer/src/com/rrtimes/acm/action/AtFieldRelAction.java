@@ -189,6 +189,17 @@ public class AtFieldRelAction extends ActionSupport {
 	public AtFieldRel queryDetailInfo() throws Exception{
 		return atFieldRelService.queryDetailInfo(atFieldRel.getId());
 	}
+	
+	/**
+	 * 根据用户或用户组ID查询字段权限关系
+	 * @return
+	 */
+	public String getAtFieldRelListByUid(){
+		this.setAtFieldRelList(atFieldRelService.getAtFieldRelListByUid(atUser.getId()));
+		return "atFieldRelList";
+	}
+	
+	
 
 	public AtFieldRelService getAtFieldRelService() {
 		return atFieldRelService;

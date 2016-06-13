@@ -290,4 +290,23 @@
 	AND afr.FID = afd.ID
 	AND afr.UID = #{uid}
   </select>
+  
+  <select id="getAtFieldRelListByUid" resultType="AtFieldRel">
+  	SELECT
+  		 afr.ID as id,
+  		 afr.MENU_CODE as menuCode,
+         afr.R_NAME as rname,
+         afr.PRIVILEGETYPE as privilegeType,
+         afr.FID as fid,
+		 afr.UID as uid,
+		 afr.ISUSERGROUP as isUserGroup,
+         afr.OPERATOR as operator,
+         afr.CREATE_TIME as createTime,
+	     afr.UPDATE_TIME as updateTime,
+         afr.REMARK as remark
+    FROM
+		AT_FIELD_REL afr
+	WHERE
+		afr.UID = #{uid}
+  </select>
 </mapper>

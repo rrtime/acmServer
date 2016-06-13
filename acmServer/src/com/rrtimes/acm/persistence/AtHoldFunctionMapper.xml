@@ -403,4 +403,21 @@
 			</foreach>
 			and amf.MENU_CODE = asm.MENU_CODE
   </select>
+  
+  <select id="getHoldFunctionListByActorId" resultType="AtHoldFunction">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         FUN_NAME as funName,
+         IS_USER_GROUP as isUserGroup,
+         FUN_ID as funId,
+		 ACTOR_ID as actorId,
+         CREATE_TIME as createTime,
+         OPERATOR as operator,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_HOLD_FUNCTION c 
+    where c.ACTOR_ID = #{actorId}
+    	ORDER BY createTime
+  </select>
 </mapper>

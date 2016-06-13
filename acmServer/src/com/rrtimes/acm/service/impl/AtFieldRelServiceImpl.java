@@ -333,4 +333,13 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 		return result;
     }
 
+	/**
+	 * 根据用户或用户组ID查询字段权限关系
+	 * @return
+	 */
+	@Override
+	public List<AtFieldRel> getAtFieldRelListByUid(int uid) {
+		return atFieldRelMapper.getAtFieldRelListByUid(uid);
+	}
+
 }

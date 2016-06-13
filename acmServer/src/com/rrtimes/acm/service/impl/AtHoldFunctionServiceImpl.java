@@ -255,4 +255,14 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 		return atHoldFunctionMapper.findAll();
 	}
 
+	/**
+	 * 根据用户或用户组ID查询功能操作权限
+	 * @param actorId
+	 * @return
+	 */
+	@Override
+	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId) {
+		return atHoldFunctionMapper.getHoldFunctionListByActorId(actorId);
+	}
+
 }

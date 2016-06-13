@@ -138,6 +138,13 @@ public interface AtHoldFunctionMapper {
 	 * @return
 	 */
 	public List<AtSysModel> getTreeIdByFunIdArray(String[] funIds);
+	
+	/**
+	 * 根据用户或用户组ID查询功能操作权限
+	 * @param actorId
+	 * @return
+	 */
+	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId);
 
 
 }

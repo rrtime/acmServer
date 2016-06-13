@@ -180,6 +180,18 @@ public class AtHoldFunctionAction extends ActionSupport {
 		return "atHoldFunctionList";
 	}
 	
+	/**
+	 * 根据用户或用户组ID查询功能操作权限
+	 * @param actorId
+	 * @return
+	 */
+	public String getHoldFunctionListByActorId(){
+		this.setAtHoldFunctionList(atHoldFunctionService.getHoldFunctionListByActorId(atUser.getId()));
+		return "atHoldFunctionList";
+	}
+	
+	
+	
 	public AtHoldFunctionService getAtHoldFunctionService() {
 		return atHoldFunctionService;
 	}

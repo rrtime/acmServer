@@ -95,5 +95,11 @@ public interface AtFieldRelService {
 	 * @throws Exception 
 	 */
 	public int delFieldRelByDictIdsAndUid(String[] dictIds, int id) throws Exception;
+
+	/**
+	 * 根据用户或用户组ID查询字段权限关系
+	 * @return
+	 */
+	public List<AtFieldRel> getAtFieldRelListByUid(int uid);
 	
 }
