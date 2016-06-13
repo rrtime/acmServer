@@ -119,20 +119,14 @@
 	  UPDATE_TIME as updateTime,
 	  REMARK as remark from AT_SYS_MENU m
 	where 
-	EXISTS
-	(
-		select TREE_ID from AT_SYS_MODEL l where EXISTS 
-		(
-			select DISTINCT MENU_CODE 
-			from AT_HOLD_FUNCTION f 
-			where f.ACTOR_ID = #{userId}
-			and f.MENU_CODE = l.MENU_CODE
-		)
-		and 
-		m.ID = l.TREE_ID
-	)
-  UNION
-    select 
+m.ID = 
+(
+select DISTINCT TREE_ID from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
+WHERE
+f.ACTOR_ID = #{userId} and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
+)
+UNION
+select 
       ID as id,
 	  M_TITLE as mtitle,
 	  M_DESC as mdesc,
@@ -147,28 +141,21 @@
 	  UPDATE_TIME as updateTime,
 	  REMARK as remark from AT_SYS_MENU e
 	where 
-	EXISTS
-  (
-		select 
-			DISTINCT PARENT_ID 
-			 from AT_SYS_MENU m
-		where 
-		EXISTS
-		(
-			select TREE_ID from AT_SYS_MODEL l where EXISTS 
-			(
-				select DISTINCT MENU_CODE 
-				from AT_HOLD_FUNCTION f 
-				where f.ACTOR_ID = #{userId}
-				and f.MENU_CODE = l.MENU_CODE
-			)
-			and 
-			m.ID = l.TREE_ID
-		)
-    and e.ID = m.PARENT_ID
-  )
-  UNION
-    select 
+e.ID =(
+select 
+	  DISTINCT PARENT_ID 
+    from AT_SYS_MENU m
+	where 
+m.ID = 
+(
+select DISTINCT TREE_ID from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
+WHERE
+f.ACTOR_ID = #{userId} and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
+)
+and e.ID=m.PARENT_ID
+)
+UNION
+select 
       ID as id,
 	  M_TITLE as mtitle,
 	  M_DESC as mdesc,
@@ -183,34 +170,26 @@
 	  UPDATE_TIME as updateTime,
 	  REMARK as remark from AT_SYS_MENU n
 	where 
-	EXISTS
-  (
-		select 
-			DISTINCT PARENT_ID 
-			 from AT_SYS_MENU e
-		where 
-		EXISTS
-		(
-			select 
-				DISTINCT PARENT_ID 
-				 from AT_SYS_MENU m
-			where 
-			EXISTS
-			(
-				select TREE_ID from AT_SYS_MODEL l where EXISTS 
-				(
-					select DISTINCT MENU_CODE 
-					from AT_HOLD_FUNCTION f 
-					where f.ACTOR_ID = #{userId}
-					and f.MENU_CODE = l.MENU_CODE
-				)
-				and 
-				m.ID = l.TREE_ID
-			)
-			and e.ID = m.PARENT_ID
-		)
-    and n.ID = e.PARENT_ID
-  )
+n.ID = (
+select  
+	  DISTINCT PARENT_ID 
+	   from AT_SYS_MENU e
+	where 
+e.ID =(
+select 
+	  DISTINCT PARENT_ID 
+    from AT_SYS_MENU m
+	where 
+m.ID = 
+(
+select DISTINCT TREE_ID from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
+WHERE
+f.ACTOR_ID = #{userId} and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
+)
+and e.ID=m.PARENT_ID
+)
+and n.ID = e.PARENT_ID
+)
   </select>
   
   <select id="findByCount" parameterType="Map" resultType="int">
