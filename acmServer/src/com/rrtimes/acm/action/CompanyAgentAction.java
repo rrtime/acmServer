@@ -101,6 +101,11 @@ public class CompanyAgentAction extends ActionSupport{
 		atCompanyAgent = acas.queryById(atCompanyAgent.getId());
 		return "findById";
 	}
+	
+	public String queryBycpCode(){
+		atCompanyAgent = acas.queryBycpCode(atCompanyAgent.getCpCode());
+		return "queryBycpCode";
+	}
 	public AtCompanyAgent getAtCompanyAgent() {
 		return atCompanyAgent;
 	}

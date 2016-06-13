@@ -139,6 +139,26 @@
     WHERE ID=#{id}
   </select>
   
+   <select id="findBycpCode" parameterType="Map" resultType="AtCompanyAgent">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CP_NAME as cpName,
+	         CP_NAME_ALL as cpNameAll,
+	         RG_ADDRESS as rgAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CP_OWNER as cpOwner,
+	         CP_AGENTER as cpAgenter,
+	         CP_TEL as cpTel,
+	         CP_EMAIL as cpEmail,
+	         USE_TYPE as useType,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_COMPANY_AGENT  
+    WHERE CP_CODE=#{cpCode}
+  </select>
+  
   <select id="findByCount" parameterType="Map" resultType="int">
 	    SELECT
 	         count(*)

@@ -37,4 +37,7 @@ public interface AtCompanyAgentService {
 	public List<AtCompanyAgent> queryByPage(AtCompanyAgent aca,PageObject page);
 	
 	public AtCompanyAgent queryById(int id);
+	
+	//根据cpCode查询代账机构
+	public AtCompanyAgent queryBycpCode(String cpCode);
 }

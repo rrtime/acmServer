@@ -8,6 +8,7 @@
  */
 package com.rrtimes.acm.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +58,14 @@ public class AtUserGroupRelServiceImpl implements AtUserGroupRelService{
 	public List<AtUserGroupRel> queryByMap(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return augrm.findByMap(map);
+	}
+
+	@Override
+	public AtUserGroupRel queryByUserId(int userId) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return augrm.findByUserId(map);
 	}
 
 }

@@ -19,8 +19,10 @@ import org.springframework.stereotype.Service;
 
 import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AcmSysOrg;
+import com.rrtimes.acm.domain.AtUserGroupRel;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtSysMenuMapper;
+import com.rrtimes.acm.persistence.AtUserGroupRelMapper;
 import com.rrtimes.acm.serviceI.AcmSysOrgService;
 import com.rrtimes.acm.serviceI.AtSysMenuService;
 import com.rrtimes.acm.persistence.AcmSysOrgMapper;
@@ -41,6 +43,8 @@ public class AtSysMenuServiceImpl implements AtSysMenuService{
 	
 	@Resource
 	private AtSysMenuMapper asom;
+	@Resource
+	private AtUserGroupRelMapper augrm;
 
 	@Override
 	public List<AtSysMenu> queryMenu(AtSysMenu aso, PageObject page) {
@@ -109,6 +113,10 @@ public class AtSysMenuServiceImpl implements AtSysMenuService{
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
+		AtUserGroupRel augr = augrm.findByUserId(map);
+		if(augr!=null){
+			map.put("userId", augr.getGid());
+		}
 		return asom.findByUserId(map);
 	}
 }

@@ -40,4 +40,6 @@ public interface AtUserGroupRelMapper {
     public int findByCount(Map<String,Object> map);
     
     public  List<AtUserGroupRel> findByMap(Map<String,Object> map);
+    
+    public AtUserGroupRel findByUserId(Map<String,Object> map);
 }

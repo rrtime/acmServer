@@ -39,4 +39,6 @@ public interface AtCompanyAgentMapper {
     public List<AtCompanyAgent> findByPage(Map<String,Object> map);
     
     public int findByCount(Map<String,Object> map);
+    
+    public AtCompanyAgent findBycpCode(Map<String,Object> map);
 }

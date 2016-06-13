@@ -71,4 +71,12 @@ public class AtCompanyAgentServiceImpl implements AtCompanyAgentService{
 		return acam.findById(id);
 	}
 
+	@Override
+	public AtCompanyAgent queryBycpCode(String cpCode) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cpCode", cpCode);
+		return acam.findBycpCode(map);
+	}
+
 }
