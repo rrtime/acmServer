@@ -123,5 +123,12 @@ public interface AtHoldFunctionService {
 	 * @return
 	 */
 	public List<AtHoldFunction> findAll();
+
+	/**
+	 * 根据用户或用户组ID查询功能操作权限
+	 * @param actorId
+	 * @return
+	 */
+	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId);
 	
 }
