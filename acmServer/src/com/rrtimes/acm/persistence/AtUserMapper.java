@@ -58,4 +58,6 @@ public interface AtUserMapper {
     public int findCountByOrgId(Map<String,Object> map);
     
     public List<AtUser> findjsBycpCode(Map<String,Object> map);
+    
+    public List<AtUser> findByCpCodeAll(Map<String,Object> map);
 }

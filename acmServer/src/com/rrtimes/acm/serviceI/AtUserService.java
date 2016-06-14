@@ -62,4 +62,7 @@ public interface AtUserService {
 	
 	//查询所在代账公司的所有角色
 	public List<AtUser> queryjsBycpCode(String cpCode);
+	
+	//根据代账公司查询当前公司的人员信息(不分页)
+	public List<AtUser> queryBycpCodeAll(String cpCode);
 }

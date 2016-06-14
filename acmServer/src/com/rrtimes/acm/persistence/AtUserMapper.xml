@@ -367,6 +367,37 @@
     WHERE CP_CODE=#{cpCode} and I_TYPE = 2
   </select>
   
+  <select id="findByCpCodeAll" parameterType="Map" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark  
+    FROM AT_USER 
+    WHERE CP_CODE=#{cpCode} and I_TYPE = 1
+  </select>
+  
   <select id="findByCpCode" parameterType="Map" resultType="AtUser">
   	SELECT
   		 ID as id,
