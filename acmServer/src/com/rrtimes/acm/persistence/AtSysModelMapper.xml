@@ -63,6 +63,14 @@
   	DELETE FROM AT_SYS_MODEL WHERE ID=#{id}
   </delete>
   
+  <delete id="batchDeleteAtSysModel">
+  	DELETE FROM AT_SYS_MODEL  
+  			where 
+			<foreach collection="array" item="ids" open="(" close=")" separator="OR"> 
+				ID = #{ids} 
+			</foreach>
+  </delete>
+  
   <select id="findById" parameterType="int" resultType="AtSysModel">
   	SELECT
   		 c.ID as id,

@@ -244,13 +244,13 @@
   </select>
   
   <delete id="delHoldFunctionByActorIdAndTreeId" parameterType="Map">
-  	DELETE FROM AT_HOLD_FUNCTION WHERE ACTOR_ID = #{actorId}
+  	DELETE FROM AT_HOLD_FUNCTION ahf WHERE ahf.ACTOR_ID = #{actorId}
   		<if test="treeId > 0">
- 	    	and MENU_CODE in 
-  	    	(
-  	    		select asm.MENU_CODE from AT_SYS_MODEL asm 
-  	    		where asm.TREE_ID = #{treeId}
-  	    	)
+ 	    	and EXISTS (
+					SELECT 1 FROM AT_SYS_MODEL asm 
+						WHERE asm.TREE_ID = #{treeId} 
+						  AND asm.MENU_CODE = ahf.MENU_CODE
+				)
  		</if>
   </delete>
   

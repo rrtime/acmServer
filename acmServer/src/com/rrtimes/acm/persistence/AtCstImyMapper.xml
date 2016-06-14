@@ -82,6 +82,14 @@
   	DELETE FROM AT_CST_IMY WHERE ID=#{id}
   </delete>
   
+  <delete id="batchDeleteAtCstImy">
+  	DELETE FROM AT_CST_IMY  
+  			where 
+			<foreach collection="array" item="ids" open="(" close=")" separator="OR"> 
+				ID = #{ids} 
+			</foreach>
+  </delete>
+  
   <select id="findById" parameterType="int" resultType="AtCstImy">
   	SELECT
   		 c.ID as id,

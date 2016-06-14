@@ -75,6 +75,14 @@
   	DELETE FROM AT_COMPLAIN WHERE ID=#{id}
   </delete>
   
+  <delete id="batchDeleteAtComplain">
+  	DELETE FROM AT_COMPLAIN  
+  			where 
+			<foreach collection="array" item="ids" open="(" close=")" separator="OR"> 
+				ID = #{ids} 
+			</foreach>
+  </delete>
+  
   <select id="findById" parameterType="int" resultType="AtComplain">
   	SELECT
   		 c.ID as id,

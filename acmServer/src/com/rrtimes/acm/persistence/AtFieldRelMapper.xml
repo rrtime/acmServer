@@ -55,16 +55,16 @@
   </delete>
   
   <delete id="delAtFieldRelByUidAndTreeId" parameterType="int">
-  	DELETE FROM AT_FIELD_REL WHERE 1 = 1 
+  	DELETE FROM AT_FIELD_REL afr WHERE 1 = 1 
   		<if test="uid > 0">
-  	    	and UID = #{uid}
+  	    	and afr.UID = #{uid}
   		</if>
   		<if test="treeId > 0">
-  	    	and MENU_CODE in 
-  	    	(
-  	    		select asm.MENU_CODE from AT_SYS_MODEL asm 
-  	    		where asm.TREE_ID = #{treeId}
-  	    	)
+  	    	and EXISTS (
+					SELECT 1 FROM AT_SYS_MODEL asm 
+						WHERE asm.TREE_ID = #{treeId} 
+						  AND asm.MENU_CODE = afr.MENU_CODE
+				)
   		</if>
   </delete>
   
