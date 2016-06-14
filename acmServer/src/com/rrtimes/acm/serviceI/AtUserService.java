@@ -59,4 +59,7 @@ public interface AtUserService {
 	
 	//根据部门查询当前部门的人员信息
 	public List<AtUser> queryByOrgId(int orgId,PageObject page);
+	
+	//查询所在代账公司的所有角色
+	public List<AtUser> queryjsBycpCode(String cpCode);
 }

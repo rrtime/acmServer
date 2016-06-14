@@ -191,6 +191,12 @@ public class SysUserAction extends ActionSupport{
 		return "queryByOrgId";
 	}
 	
+	//根据所在的代账公司查询所有角色
+	public String queryjsBycpCode(){
+		list = aus.queryjsBycpCode(atUser.getCpCode());
+		return "queryjsBycpCode";
+	}
+	
 	public AtUser getAtUser() {
 		return atUser;
 	}

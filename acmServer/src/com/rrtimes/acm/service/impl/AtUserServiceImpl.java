@@ -223,4 +223,12 @@ public class AtUserServiceImpl implements AtUserService{
 		map.put("page", page);
 		return asom.findByOrgId(map);
 	}
+
+	@Override
+	public List<AtUser> queryjsBycpCode(String cpCode) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cpCode", cpCode);
+		return asom.findjsBycpCode(map);
+	}
 }

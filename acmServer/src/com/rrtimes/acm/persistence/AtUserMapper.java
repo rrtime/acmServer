@@ -56,4 +56,6 @@ public interface AtUserMapper {
     public List<AtUser> findByOrgId(Map<String,Object> map);
     
     public int findCountByOrgId(Map<String,Object> map);
+    
+    public List<AtUser> findjsBycpCode(Map<String,Object> map);
 }
