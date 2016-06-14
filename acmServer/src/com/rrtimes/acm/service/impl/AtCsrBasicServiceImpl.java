@@ -154,10 +154,10 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		return asom.findByAgent(map);
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByOrg(int userId,PageObject page) {
+	public List<AtCsrBasic> queryBasicByOrg(int orgId,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("userId", userId);
+		map.put("orgId", orgId);
 		page.setSumCloum(asom.findByOrgCount(map));
 		map.put("page", page);
 		return asom.findByOrg(map);

@@ -220,10 +220,7 @@
     WHERE 
     EXISTS 
     (
-      select id from AT_USER u where u.oid = 
-      (
-      	select oid from AT_USER where id = #{userId}
-      )
+      select u.id from AT_USER u where u.oid = #{orgId}
       and
       b.OPERATOR = u.id
     )
@@ -237,10 +234,7 @@
     WHERE 
     EXISTS 
     (
-      select id from AT_USER u where u.oid = 
-      (
-      	select oid from AT_USER where id = #{userId}
-      )
+      select u.id from AT_USER where u.oid = #{orgId}
       and
       b.OPERATOR = u.id
     )
