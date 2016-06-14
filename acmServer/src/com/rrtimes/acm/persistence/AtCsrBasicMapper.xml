@@ -162,6 +162,14 @@
 	         REMARK as remark
     FROM AT_CSR_BASIC  
     WHERE OPERATOR = #{userId}
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByUserCount" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*)
+    FROM AT_CSR_BASIC  
+    WHERE OPERATOR = #{userId}
   </select>
   
   <select id="findByAgent" parameterType="Map" resultType="AtCsrBasic">
@@ -182,6 +190,14 @@
 	         REMARK as remark
     FROM AT_CSR_BASIC  
     WHERE CP_CODE = #{cpCode}
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByAgentCount" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*)
+    FROM AT_CSR_BASIC  
+    WHERE CP_CODE = #{cpCode}
   </select>
   
   <select id="findByOrg" parameterType="Map" resultType="AtCsrBasic">
@@ -200,6 +216,23 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
+    FROM AT_CSR_BASIC b
+    WHERE 
+    EXISTS 
+    (
+      select id from AT_USER u where u.oid = 
+      (
+      	select oid from AT_USER where id = #{userId}
+      )
+      and
+      b.OPERATOR = u.id
+    )
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByOrgCount" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*)
     FROM AT_CSR_BASIC b
     WHERE 
     EXISTS 
@@ -258,6 +291,7 @@
       (
          SELECT CP_CODE FROM AT_USER WHERE ID = #{userId}
       )
+      limit #{page.pageSize} offset #{page.offset}
   </select>
   
   <select id="findCountByUserId" parameterType="Map" resultType="int">

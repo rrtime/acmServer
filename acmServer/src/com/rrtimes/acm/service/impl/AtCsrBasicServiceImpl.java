@@ -136,24 +136,30 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		}
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByUser(int userAccount) {
+	public List<AtCsrBasic> queryBasicByUser(int userAccount,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userAccount);
+		page.setSumCloum(asom.findByUserCount(map));
+		map.put("page", page);
 		return asom.findByUser(map);
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByAgent(String agentCode) {
+	public List<AtCsrBasic> queryBasicByAgent(String agentCode,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("cpCode", agentCode);
+		page.setSumCloum(asom.findByAgentCount(map));
+		map.put("page", page);
 		return asom.findByAgent(map);
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByOrg(int userId) {
+	public List<AtCsrBasic> queryBasicByOrg(int userId,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
+		page.setSumCloum(asom.findByOrgCount(map));
+		map.put("page", page);
 		return asom.findByOrg(map);
 	}
 	@Override
@@ -165,10 +171,12 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		return aso;
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByUserId(int userId) {
+	public List<AtCsrBasic> queryBasicByUserId(int userId,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
+		page.setSumCloum(asom.findCountByUserId(map));
+		map.put("page", page);
 		return asom.findByUserId(map);
 	}
 	@Override

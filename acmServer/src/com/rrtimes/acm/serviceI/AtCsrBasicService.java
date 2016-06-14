@@ -46,19 +46,19 @@ public interface AtCsrBasicService {
 	public void importUser(BufferedReader br,int oid);
 	
 	//根据部门用户查询客户信息
-	public List<AtCsrBasic> queryBasicByUser(int userAccount);
+	public List<AtCsrBasic> queryBasicByUser(int userAccount,PageObject page);
 	
 	//根据代账公司查询客户信息
-	public List<AtCsrBasic> queryBasicByAgent(String agentCode);
+	public List<AtCsrBasic> queryBasicByAgent(String agentCode,PageObject page);
 	
 	//根据部门查询客户信息
-	public List<AtCsrBasic> queryBasicByOrg(int orgid);
+	public List<AtCsrBasic> queryBasicByOrg(int orgid,PageObject page);
 	
 	//根据客户id查询客户信息、合同信息、客户财税信息
 	public AtCsrBasic queryBasicById(int id);
 	
 	//根据用户Id查询需要跟进的客户并设置预警时间
-	public List<AtCsrBasic> queryBasicByUserId(int userId); 
+	public List<AtCsrBasic> queryBasicByUserId(int userId,PageObject page); 
 	
 	//根据用户Id查询需要跟进的客户的个数并设置预警时间
 	public int queryCountByUserId(int userId);

@@ -43,7 +43,11 @@ public interface AtCsrBasicMapper {
     
     public List<AtCsrBasic> findByAgent(Map<String,Object> map);
     
+    public int findByAgentCount(Map<String,Object> map);
+    
     public List<AtCsrBasic> findByOrg(Map<String,Object> map);
+    
+    public int findByOrgCount(Map<String,Object> map);
     
     public AtCsrBasic findAllById(int id);
     
@@ -52,4 +56,6 @@ public interface AtCsrBasicMapper {
     public int findCountByUserId(Map<String,Object> map);
 
 	public List<AtCsrBasic> findByUser(Map<String, Object> map);
+	
+	public int findByUserCount(Map<String, Object> map);
 }
