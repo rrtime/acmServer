@@ -244,13 +244,13 @@
   </select>
   
   <delete id="delHoldFunctionByActorIdAndTreeId" parameterType="Map">
-  	DELETE FROM AT_HOLD_FUNCTION WHERE ACTOR_ID = #{actorId}
+  	DELETE FROM AT_HOLD_FUNCTION ahf WHERE ahf.ACTOR_ID = #{actorId}
   		<if test="treeId > 0">
- 	    	and MENU_CODE in 
-  	    	(
-  	    		select asm.MENU_CODE from AT_SYS_MODEL asm 
-  	    		where asm.TREE_ID = #{treeId}
-  	    	)
+ 	    	and EXISTS (
+					SELECT 1 FROM AT_SYS_MODEL asm 
+						WHERE asm.TREE_ID = #{treeId} 
+						  AND asm.MENU_CODE = ahf.MENU_CODE
+				)
  		</if>
   </delete>
   
@@ -402,5 +402,22 @@
 				amf.ID = #{funIds} 
 			</foreach>
 			and amf.MENU_CODE = asm.MENU_CODE
+  </select>
+  
+  <select id="getHoldFunctionListByActorId" resultType="AtHoldFunction">
+  	SELECT
+  		 c.ID as id,
+  		 MENU_CODE as menuCode,
+         FUN_NAME as funName,
+         IS_USER_GROUP as isUserGroup,
+         FUN_ID as funId,
+		 ACTOR_ID as actorId,
+         CREATE_TIME as createTime,
+         OPERATOR as operator,
+	     UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_HOLD_FUNCTION c 
+    where c.ACTOR_ID = #{actorId}
+    	ORDER BY createTime
   </select>
 </mapper>

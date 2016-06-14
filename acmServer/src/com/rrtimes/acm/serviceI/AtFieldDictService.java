@@ -75,6 +75,13 @@ public interface AtFieldDictService {
 	 * 查询所有数据
 	 * @return
 	 */
-	public List<AtFieldDict> findAll();
+	public List<AtFieldDict> findAll() throws Exception;
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtFieldDict(int[] ids) throws Exception;
 	
 }

@@ -78,4 +78,10 @@ public interface AtComplainMapper {
 	 * */
 	public int findByCount(Map<String, Object> map);
 
+	/**
+	 * 批量删除
+	 * @return
+	 */
+	public int batchDeleteAtComplain(int[] ids);
+
 }

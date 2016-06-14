@@ -122,13 +122,13 @@ public interface AtHoldFunctionService {
 	 * 查询所有数据
 	 * @return
 	 */
-	public List<AtHoldFunction> findAll();
+	public List<AtHoldFunction> findAll() throws Exception;
 
 	/**
 	 * 根据用户或用户组ID查询功能操作权限
 	 * @param actorId
 	 * @return
 	 */
-	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId);
+	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId) throws Exception;
 	
 }

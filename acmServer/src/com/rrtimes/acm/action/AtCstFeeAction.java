@@ -46,6 +46,9 @@ public class AtCstFeeAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
+	//要删除的收费记录IDS
+	private int[] ids;
+	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
 	//消息
@@ -147,6 +150,22 @@ public class AtCstFeeAction extends ActionSupport {
 		}
 		return queryAtCstFeeList();
 	}
+	
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public String batchDeleteAtCstFee() throws Exception{
+		rst = atCstFeeService.batchDeleteAtCstFee(ids);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "删除操作已成功。";
+		}else{
+			msg = "删除操作未成功。";
+		}
+		return queryAtCstFeeList();
+	}
 
 	/**
 	 * 分页查询
@@ -162,8 +181,9 @@ public class AtCstFeeAction extends ActionSupport {
 	 * @return
 	 * @throws Exception 
 	 */
-	public List<AtCstFee> queryAllFeeList() throws Exception{
-		return atCstFeeService.findAll();
+	public String queryAllFeeList() throws Exception{
+//		return atCstFeeService.findAll();
+		return queryAtCstFeeList();
 	}
 	
 	/**
@@ -246,6 +266,14 @@ public class AtCstFeeAction extends ActionSupport {
 
 	public void setDays(int days) {
 		this.days = days;
+	}
+
+	public int[] getIds() {
+		return ids;
+	}
+
+	public void setIds(int[] ids) {
+		this.ids = ids;
 	}
 	
 }

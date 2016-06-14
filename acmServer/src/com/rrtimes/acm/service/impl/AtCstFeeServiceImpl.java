@@ -169,4 +169,14 @@ public class AtCstFeeServiceImpl implements AtCstFeeService {
 		return atCstFeeMapper.findAll();
 	}
 
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	@Override
+	public int batchDeleteAtCstFee(int[] ids) throws Exception {
+		return atCstFeeMapper.batchDeleteAtCstFee(ids)>0?0:1;
+	}
+
 }

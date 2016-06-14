@@ -134,8 +134,18 @@ public class AtCstImyServiceImpl implements AtCstImyService {
 	 * @return
 	 */
 	@Override
-	public List<AtCstImy> findAll(){
+	public List<AtCstImy> findAll() throws Exception {
 		return atCstImyMapper.findAll();
+	}
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	@Override
+	public int batchDeleteAtCstImy(int[] ids) throws Exception {
+		return atCstImyMapper.batchDeleteAtCstImy(ids)>0?0:1;
 	}
 
 }

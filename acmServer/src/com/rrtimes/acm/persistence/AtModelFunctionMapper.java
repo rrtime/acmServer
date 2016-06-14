@@ -90,4 +90,11 @@ public interface AtModelFunctionMapper {
 	 */
 	public List<Map<String,Object>> findModelFunctionByTreeId(int treeId);
 
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtModelFunction(int[] ids);
+
 }

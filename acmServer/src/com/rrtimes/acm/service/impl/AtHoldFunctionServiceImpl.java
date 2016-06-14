@@ -251,7 +251,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	 * 查询所有数据
 	 */
 	@Override
-	public List<AtHoldFunction> findAll() {
+	public List<AtHoldFunction> findAll() throws Exception {
 		return atHoldFunctionMapper.findAll();
 	}
 
@@ -261,7 +261,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	 * @return
 	 */
 	@Override
-	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId) {
+	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId) throws Exception {
 		return atHoldFunctionMapper.getHoldFunctionListByActorId(actorId);
 	}
 

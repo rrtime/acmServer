@@ -245,7 +245,7 @@ public class AtFieldRelServiceImpl implements AtFieldRelService {
 	 * 查询所有数据
 	 */
 	@Override
-	public List<AtFieldRel> findAll() {
+	public List<AtFieldRel> findAll() throws Exception {
 		return atFieldRelMapper.findAll();
 	}
 

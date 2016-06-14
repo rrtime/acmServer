@@ -121,8 +121,18 @@ public class AtCstVisitServiceImpl implements AtCstVisitService {
 	 * @return
 	 */
 	@Override
-	public List<AtCstVisit> findAll(){
+	public List<AtCstVisit> findAll() throws Exception {
 		return atCstVisitMapper.findAll();
+	}
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	@Override
+	public int batchDeleteAtCstVisit(int[] ids) throws Exception {
+		return atCstVisitMapper.batchDeleteAtCstVisit(ids)>0?0:1;
 	}
 
 }

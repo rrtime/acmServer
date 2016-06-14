@@ -87,5 +87,12 @@ public interface AtCstFeeService {
 	 * 
 	 * */
 	public List<AtCstFee> findAll() throws Exception;
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtCstFee(int[] ids) throws Exception;
 	
 }

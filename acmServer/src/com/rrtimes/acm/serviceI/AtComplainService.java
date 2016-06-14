@@ -72,6 +72,12 @@ public interface AtComplainService {
 	 * 查询所有数据
 	 * @return
 	 */
-	public List<AtComplain> findAll();
+	public List<AtComplain> findAll() throws Exception;
+
+	/**
+	 * 批量删除
+	 * @return
+	 */
+	public int batchDeleteAtComplain(int[] ids) throws Exception;
 	
 }

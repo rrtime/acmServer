@@ -50,6 +50,9 @@ public class AtFieldDictAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
+	//要删除的字典信息IDS
+	private int[] ids;
+	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
 	//消息
@@ -121,6 +124,22 @@ public class AtFieldDictAction extends ActionSupport {
 	}
 	
 	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public String batchDeleteAtFieldDict() throws Exception{
+		rst = atFieldDictService.batchDeleteAtFieldDict(ids);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "删除操作已成功。";
+		}else{
+			msg = "删除操作未成功。";
+		}
+		return queryAtFieldDictList();
+	}
+	
+	/**
 	 * 查询系统权限字段字典详情
 	 * @throws Exception 
 	 * 
@@ -152,10 +171,12 @@ public class AtFieldDictAction extends ActionSupport {
 	/**
 	 * 查询所有数据
 	 * @return
+	 * @throws Exception 
 	 */
-	public String findAll(){
-		this.setAtFieldDictList(atFieldDictService.findAll());
-		return "atFieldDictList";
+	public String findAll() throws Exception{
+//		this.setAtFieldDictList(atFieldDictService.findAll());
+//		return "atFieldDictList";
+		return queryAtFieldDictList();
 	}
 	
 
@@ -213,6 +234,22 @@ public class AtFieldDictAction extends ActionSupport {
 
 	public void setCmd(int cmd) {
 		this.cmd = cmd;
+	}
+
+	public AtSysModel getAtSysModel() {
+		return atSysModel;
+	}
+
+	public void setAtSysModel(AtSysModel atSysModel) {
+		this.atSysModel = atSysModel;
+	}
+
+	public int[] getIds() {
+		return ids;
+	}
+
+	public void setIds(int[] ids) {
+		this.ids = ids;
 	}
 	
 	

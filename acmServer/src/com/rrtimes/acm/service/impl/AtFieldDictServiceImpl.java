@@ -123,8 +123,18 @@ public class AtFieldDictServiceImpl implements AtFieldDictService {
 	 * @return
 	 */
 	@Override
-	public List<AtFieldDict> findAll() {
+	public List<AtFieldDict> findAll() throws Exception {
 		return atFieldDictMapper.findAll();
+	}
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	@Override
+	public int batchDeleteAtFieldDict(int[] ids) throws Exception {
+		return atFieldDictMapper.batchDeleteAtFieldDict(ids)>0?0:1;
 	}
 
 

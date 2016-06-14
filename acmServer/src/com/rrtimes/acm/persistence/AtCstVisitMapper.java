@@ -78,4 +78,11 @@ public interface AtCstVisitMapper {
 	 * */
 	public int findByCount(Map<String, Object> map);
 
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtCstVisit(int[] ids);
+
 }

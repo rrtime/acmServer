@@ -46,6 +46,9 @@ public class AtComplainAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
+	//要删除的投诉信息IDS
+	private int[] ids;
+	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
 	//消息
@@ -130,12 +133,28 @@ public class AtComplainAction extends ActionSupport {
 	}
 
 	/**
-	 * 删除当前客户投诉信息
+	 * 删除当前客户投诉信息(单个)
 	 * @throws Exception 
 	 * */
 	public String delAtComplainInfo() throws Exception
 	{
 		rst = atComplainService.delAtComplain(atComplain.getId());
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "删除操作已成功。";
+		}else{
+			msg = "删除操作未成功。";
+		}
+		return queryAtComplainList();
+	}
+	
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public String batchDeleteAtComplain() throws Exception{
+		rst = atComplainService.batchDeleteAtComplain(ids);
 		// 设置界面提示信息
 		if( rst == 0 ){
 			msg = "删除操作已成功。";
@@ -156,10 +175,12 @@ public class AtComplainAction extends ActionSupport {
 	/**
 	 * 查询所有数据
 	 * @return
+	 * @throws Exception 
 	 */
-	public String findAll(){
-		this.setAtComplainList(atComplainService.findAll());
-		return "atComplainList";
+	public String findAll() throws Exception{
+//		this.setAtComplainList(atComplainService.findAll());
+//		return "atComplainList";
+		return queryAtComplainList();
 	}
 
 	
@@ -218,5 +239,14 @@ public class AtComplainAction extends ActionSupport {
 	public void setCmd(int cmd) {
 		this.cmd = cmd;
 	}
+
+	public int[] getIds() {
+		return ids;
+	}
+
+	public void setIds(int[] ids) {
+		this.ids = ids;
+	}
+	
 
 }

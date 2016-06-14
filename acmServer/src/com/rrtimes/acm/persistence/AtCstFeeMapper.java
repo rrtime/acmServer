@@ -90,6 +90,13 @@ public interface AtCstFeeMapper {
 	 * @return
 	 */
 	public int getRemindFeeCount(Map<String,Object> paramMap);
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtCstFee(int[] ids);
 	
 	
 }

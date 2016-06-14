@@ -81,6 +81,13 @@ public interface AtModelFunctionService {
 	 * 查找所有数据
 	 * @return
 	 */
-	public List<AtModelFunction> findAll();
+	public List<AtModelFunction> findAll() throws Exception;
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtModelFunction(int[] ids) throws Exception;
 	
 }

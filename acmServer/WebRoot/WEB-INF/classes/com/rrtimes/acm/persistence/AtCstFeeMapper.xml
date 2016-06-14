@@ -61,6 +61,14 @@
   	DELETE FROM AT_CST_FEE WHERE ID=#{id}
   </delete>
   
+  <delete id="batchDeleteAtCstFee">
+  	DELETE FROM AT_CST_FEE  
+  			where 
+			<foreach collection="array" item="ids" open="(" close=")" separator="OR"> 
+				ID = #{ids} 
+			</foreach>
+  </delete>
+  
   <select id="findById" parameterType="int" resultType="AtCstFee">
   	SELECT
   		 c.ID as id,

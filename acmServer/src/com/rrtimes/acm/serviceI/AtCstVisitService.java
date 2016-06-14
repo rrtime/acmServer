@@ -66,6 +66,13 @@ public interface AtCstVisitService {
 	 * 查询所有数据
 	 * @return
 	 */
-	public List<AtCstVisit> findAll();
+	public List<AtCstVisit> findAll() throws Exception;
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtCstVisit(int[] ids) throws Exception;
 	
 }

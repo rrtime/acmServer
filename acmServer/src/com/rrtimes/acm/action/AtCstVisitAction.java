@@ -47,6 +47,9 @@ public class AtCstVisitAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
+	//要删除的回访记录IDS
+	private int[] ids;
+	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
 	//消息
@@ -146,6 +149,22 @@ public class AtCstVisitAction extends ActionSupport {
 		}
 		return queryAtCstVisitList();
 	}
+	
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public String batchDeleteAtCstVisit() throws Exception{
+		rst = atCstVisitService.batchDeleteAtCstVisit(ids);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "删除操作已成功。";
+		}else{
+			msg = "删除操作未成功。";
+		}
+		return queryAtCstVisitList();
+	}
 
 	/**
 	 * 分页查询
@@ -160,9 +179,10 @@ public class AtCstVisitAction extends ActionSupport {
 	 * 查询所有数据
 	 * @return
 	 */
-	public String findAll(){
-		this.setAtCstVisitList(atCstVisitService.findAll());
-		return "atCstVisitList";
+	public String findAll() throws Exception {
+//		this.setAtCstVisitList(atCstVisitService.findAll());
+//		return "atCstVisitList";
+		return queryAtCstVisitList();
 	}
 	
 	
@@ -220,6 +240,14 @@ public class AtCstVisitAction extends ActionSupport {
 
 	public void setCmd(int cmd) {
 		this.cmd = cmd;
+	}
+
+	public int[] getIds() {
+		return ids;
+	}
+
+	public void setIds(int[] ids) {
+		this.ids = ids;
 	}
 	
 }

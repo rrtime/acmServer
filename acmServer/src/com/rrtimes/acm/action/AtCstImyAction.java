@@ -46,6 +46,9 @@ public class AtCstImyAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
+	//要删除的质量赔付信息IDS
+	private int[] ids;
+	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
 	//消息
@@ -144,6 +147,22 @@ public class AtCstImyAction extends ActionSupport {
 		}
 		return queryAtCstImyList();
 	}
+	
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public String batchDeleteAtCstImy() throws Exception{
+		rst = atCstImyService.batchDeleteAtCstImy(ids);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "删除操作已成功。";
+		}else{
+			msg = "删除操作未成功。";
+		}
+		return queryAtCstImyList();
+	}
 
 	/**
 	 * 分页查询
@@ -167,9 +186,10 @@ public class AtCstImyAction extends ActionSupport {
 	 * 查询所有数据
 	 * @return
 	 */
-	public String findAll(){
-		this.setAtCstImyList(atCstImyService.findAll());
-		return "atCstVisitList";
+	public String findAll() throws Exception{
+//		this.setAtCstImyList(atCstImyService.findAll());
+//		return "atCstVisitList";
+		return queryAtCstImyList();
 	}
 	
 	public AtCstImyService getAtCstImyService() {
@@ -226,6 +246,14 @@ public class AtCstImyAction extends ActionSupport {
 
 	public void setCmd(int cmd) {
 		this.cmd = cmd;
+	}
+
+	public int[] getIds() {
+		return ids;
+	}
+
+	public void setIds(int[] ids) {
+		this.ids = ids;
 	}
 
 	

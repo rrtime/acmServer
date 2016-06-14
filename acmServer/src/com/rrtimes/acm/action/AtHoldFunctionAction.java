@@ -175,9 +175,10 @@ public class AtHoldFunctionAction extends ActionSupport {
 	 * 查询所有数据
 	 * @return
 	 */
-	public String findAll(){
-		this.setAtHoldFunctionList(atHoldFunctionService.findAll());
-		return "atHoldFunctionList";
+	public String findAll() throws Exception{
+//		this.setAtHoldFunctionList(atHoldFunctionService.findAll());
+//		return "atHoldFunctionList";
+		return queryAtHoldFunctionList();
 	}
 	
 	/**
@@ -185,7 +186,7 @@ public class AtHoldFunctionAction extends ActionSupport {
 	 * @param actorId
 	 * @return
 	 */
-	public String getHoldFunctionListByActorId(){
+	public String getHoldFunctionListByActorId() throws Exception{
 		this.setAtHoldFunctionList(atHoldFunctionService.getHoldFunctionListByActorId(atUser.getId()));
 		return "atHoldFunctionList";
 	}

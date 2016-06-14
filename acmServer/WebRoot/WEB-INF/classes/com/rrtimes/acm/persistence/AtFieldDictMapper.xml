@@ -83,6 +83,14 @@
   	DELETE FROM AT_FIELD_DICT WHERE ID=#{id}
   </delete>
   
+  <delete id="batchDeleteAtFieldDict">
+  	DELETE FROM AT_FIELD_DICT  
+  			where 
+			<foreach collection="array" item="ids" open="(" close=")" separator="OR"> 
+				ID = #{ids} 
+			</foreach>
+  </delete>
+  
   <select id="findById" parameterType="int" resultType="AtFieldDict">
   	SELECT
   		 c.ID as id,

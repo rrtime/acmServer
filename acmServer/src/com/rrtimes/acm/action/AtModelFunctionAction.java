@@ -48,6 +48,9 @@ public class AtModelFunctionAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
+	//要删除的字典IDS
+	private int[] ids;
+	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
 	//消息
@@ -129,6 +132,22 @@ public class AtModelFunctionAction extends ActionSupport {
 	}
 	
 	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public String batchDeleteAtModelFunction() throws Exception{
+		rst = atModelFunctionService.batchDeleteAtModelFunction(ids);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "删除操作已成功。";
+		}else{
+			msg = "删除操作未成功。";
+		}
+		return queryAtModelFunctionList();
+	}
+	
+	/**
 	 * 查询功能详细操作字典详情
 	 * @throws Exception 
 	 * 
@@ -167,10 +186,12 @@ public class AtModelFunctionAction extends ActionSupport {
 	/**
 	 * 查找所有数据
 	 * @return
+	 * @throws Exception 
 	 */
-	public String findAll(){
-		this.setAtModelFunctionList(atModelFunctionService.findAll());
-		return "atModelFunctionList";
+	public String findAll() throws Exception{
+//		this.setAtModelFunctionList(atModelFunctionService.findAll());
+//		return "atModelFunctionList";
+		return queryAtModelFunctionList();
 	}
 	
 
@@ -229,6 +250,14 @@ public class AtModelFunctionAction extends ActionSupport {
 
 	public void setCmd(int cmd) {
 		this.cmd = cmd;
+	}
+
+	public int[] getIds() {
+		return ids;
+	}
+
+	public void setIds(int[] ids) {
+		this.ids = ids;
 	}
 	
 	

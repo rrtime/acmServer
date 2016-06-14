@@ -85,4 +85,11 @@ public interface AtFieldDictMapper {
 	 */
 	public List<Map<String, Object>> findAtFieldDictByTreeId(int treeId);
 
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtFieldDict(int[] ids);
+
 }

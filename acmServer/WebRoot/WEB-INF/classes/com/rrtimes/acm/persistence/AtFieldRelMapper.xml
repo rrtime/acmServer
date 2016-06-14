@@ -55,16 +55,16 @@
   </delete>
   
   <delete id="delAtFieldRelByUidAndTreeId" parameterType="int">
-  	DELETE FROM AT_FIELD_REL WHERE 1 = 1 
+  	DELETE FROM AT_FIELD_REL afr WHERE 1 = 1 
   		<if test="uid > 0">
-  	    	and UID = #{uid}
+  	    	and afr.UID = #{uid}
   		</if>
   		<if test="treeId > 0">
-  	    	and MENU_CODE in 
-  	    	(
-  	    		select asm.MENU_CODE from AT_SYS_MODEL asm 
-  	    		where asm.TREE_ID = #{treeId}
-  	    	)
+  	    	and EXISTS (
+					SELECT 1 FROM AT_SYS_MODEL asm 
+						WHERE asm.TREE_ID = #{treeId} 
+						  AND asm.MENU_CODE = afr.MENU_CODE
+				)
   		</if>
   </delete>
   
@@ -289,5 +289,24 @@
 	AND afr.MENU_CODE = afd.MENU_CODE
 	AND afr.FID = afd.ID
 	AND afr.UID = #{uid}
+  </select>
+  
+  <select id="getAtFieldRelListByUid" resultType="AtFieldRel">
+  	SELECT
+  		 afr.ID as id,
+  		 afr.MENU_CODE as menuCode,
+         afr.R_NAME as rname,
+         afr.PRIVILEGETYPE as privilegeType,
+         afr.FID as fid,
+		 afr.UID as uid,
+		 afr.ISUSERGROUP as isUserGroup,
+         afr.OPERATOR as operator,
+         afr.CREATE_TIME as createTime,
+	     afr.UPDATE_TIME as updateTime,
+         afr.REMARK as remark
+    FROM
+		AT_FIELD_REL afr
+	WHERE
+		afr.UID = #{uid}
   </select>
 </mapper>

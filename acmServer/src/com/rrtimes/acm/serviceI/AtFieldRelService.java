@@ -78,7 +78,7 @@ public interface AtFieldRelService {
 	 * 用户字段权限关系查询
 	 * 
 	 * */
-	public List<AtFieldRel> findAll();
+	public List<AtFieldRel> findAll() throws Exception;
 	
 	/**
 	 * 根据用户或组ID和treeId查询用户字段权限关系

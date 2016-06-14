@@ -99,6 +99,14 @@
   	DELETE FROM AT_MODEL_FUNCTION WHERE ID=#{id}
   </delete>
   
+  <delete id="batchDeleteAtModelFunction">
+  	DELETE FROM AT_MODEL_FUNCTION  
+  			where 
+			<foreach collection="array" item="ids" open="(" close=")" separator="OR"> 
+				ID = #{ids} 
+			</foreach>
+  </delete>
+  
   <select id="findById" parameterType="int" resultType="AtModelFunction">
   	SELECT
   		 c.ID as id,

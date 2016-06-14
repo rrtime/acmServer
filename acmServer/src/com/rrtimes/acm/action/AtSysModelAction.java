@@ -46,6 +46,9 @@ public class AtSysModelAction extends ActionSupport {
 	
 	private PageObject page = new PageObject();
 	
+	//要删除的IDS
+	private int[] ids;
+	
 	// 插入、修改、删除业务处理结果( 0 成功, 1 失败 )
 	private int rst = 1;
 	//消息
@@ -117,6 +120,22 @@ public class AtSysModelAction extends ActionSupport {
 	}
 	
 	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public String batchDeleteAtSysModel() throws Exception{
+		rst = atSysModelService.batchDeleteAtSysModel(ids);
+		// 设置界面提示信息
+		if( rst == 0 ){
+			msg = "删除操作已成功。";
+		}else{
+			msg = "删除操作未成功。";
+		}
+		return queryAtSysModelList();
+	}
+	
+	/**
 	 * 查询菜单附属功能字典详情
 	 * @throws Exception 
 	 * 
@@ -148,10 +167,12 @@ public class AtSysModelAction extends ActionSupport {
 	/**
 	 * 查询所有数据
 	 * @return
+	 * @throws Exception 
 	 */
-	public String findAll(){
-		this.setAtSysModelList(atSysModelService.findAll());
-		return "atSysModelList";
+	public String findAll() throws Exception{
+//		this.setAtSysModelList(atSysModelService.findAll());
+//		return "atSysModelList";
+		return queryAtSysModelList();
 	}
 	
 	
@@ -210,6 +231,14 @@ public class AtSysModelAction extends ActionSupport {
 
 	public void setCmd(int cmd) {
 		this.cmd = cmd;
+	}
+
+	public int[] getIds() {
+		return ids;
+	}
+
+	public void setIds(int[] ids) {
+		this.ids = ids;
 	}
 
 	

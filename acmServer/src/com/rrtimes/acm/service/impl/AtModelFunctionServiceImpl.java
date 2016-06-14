@@ -151,7 +151,17 @@ public class AtModelFunctionServiceImpl implements AtModelFunctionService {
 	 * @return
 	 */
 	@Override
-	public List<AtModelFunction> findAll() {
+	public List<AtModelFunction> findAll() throws Exception {
 		return atModelFunctionMapper.findAll();
+	}
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	@Override
+	public int batchDeleteAtModelFunction(int[] ids) throws Exception {
+		return atModelFunctionMapper.batchDeleteAtModelFunction(ids)>0?0:1;
 	}
 }

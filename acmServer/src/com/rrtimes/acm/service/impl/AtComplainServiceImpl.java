@@ -148,8 +148,17 @@ public class AtComplainServiceImpl implements AtComplainService {
 	 * @return
 	 */
 	@Override
-	public List<AtComplain> findAll() {
+	public List<AtComplain> findAll() throws Exception {
 		return atComplainMapper.findAll();
+	}
+
+	/**
+	 * 批量删除
+	 * @return
+	 */
+	@Override
+	public int batchDeleteAtComplain(int[] ids) throws Exception {
+		return atComplainMapper.batchDeleteAtComplain(ids)>0?0:1;
 	}
 
 }

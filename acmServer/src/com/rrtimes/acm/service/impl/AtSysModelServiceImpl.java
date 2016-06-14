@@ -146,8 +146,18 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 	 * @return
 	 */
 	@Override
-	public List<AtSysModel> findAll(){
+	public List<AtSysModel> findAll() throws Exception {
 		return atSysModelMapper.findAll();
+	}
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	@Override
+	public int batchDeleteAtSysModel(int[] ids) throws Exception {
+		return atSysModelMapper.batchDeleteAtSysModel(ids)>0?0:1;
 	}
 
 }

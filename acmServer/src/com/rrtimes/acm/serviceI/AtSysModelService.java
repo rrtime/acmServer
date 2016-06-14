@@ -74,6 +74,13 @@ public interface AtSysModelService {
 	 * 查询所有数据
 	 * @return
 	 */
-	public List<AtSysModel> findAll();
+	public List<AtSysModel> findAll() throws Exception;
+
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtSysModel(int[] ids) throws Exception;
 	
 }

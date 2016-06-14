@@ -85,4 +85,11 @@ public interface AtSysModelMapper {
 	 */
 	public List<AtSysModel> getAtSysModelByTreeId(int treeId);
 
+	/**
+	 * 批量删除
+	 * @return
+	 * @throws Exception 
+	 */
+	public int batchDeleteAtSysModel(int[] ids);
+
 }

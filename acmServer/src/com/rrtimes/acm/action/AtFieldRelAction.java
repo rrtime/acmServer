@@ -147,8 +147,9 @@ public class AtFieldRelAction extends ActionSupport {
 	 * 用户字段权限关系查询
 	 * 
 	 * */
-	public List<AtFieldRel> findAll(){
-		return atFieldRelService.findAll();
+	public String findAll() throws Exception {
+//		return atFieldRelService.findAll();
+		return queryAtFieldRelList();
 	}
 	
 	/**
