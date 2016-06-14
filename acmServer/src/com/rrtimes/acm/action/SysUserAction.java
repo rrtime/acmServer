@@ -24,7 +24,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.rrtimes.acm.domain.AcmSysOrg;
+import com.rrtimes.acm.domain.AtCompanyAgent;
 import com.rrtimes.acm.domain.AtUser;
+import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.serviceI.AtUserGroupRelService;
 import com.rrtimes.acm.serviceI.AtUserService;
 
@@ -53,6 +56,12 @@ public class SysUserAction extends ActionSupport{
 	private AtUserGroupRelService augrs;
 
 	private AtUser atUser = new AtUser();
+	
+	private AtCompanyAgent aca = new AtCompanyAgent();
+	
+	private AcmSysOrg aso = new AcmSysOrg();
+	
+	private PageObject page = new PageObject();
 	
 	private List<AtUser> list = new ArrayList<AtUser>();
 	
@@ -170,6 +179,18 @@ public class SysUserAction extends ActionSupport{
 		return "add";
 	}
 	
+	//根据代账公司查询员工信息
+	public String queryBycpCode(){
+		list = aus.queryBycpCode(aca.getCpCode(), page);
+		return "queryBycpCode";
+	}
+	
+	//根据部门查询员工信息
+	public String queryByOrgId(){
+		list = aus.queryByOrgId(aso.getId(), page);
+		return "queryByOrgId";
+	}
+	
 	public AtUser getAtUser() {
 		return atUser;
 	}
@@ -209,6 +230,29 @@ public class SysUserAction extends ActionSupport{
 		this.msg = msg;
 	}
 
+	public AtCompanyAgent getAca() {
+		return aca;
+	}
+
+	public void setAca(AtCompanyAgent aca) {
+		this.aca = aca;
+	}
+
+	public AcmSysOrg getAso() {
+		return aso;
+	}
+
+	public void setAso(AcmSysOrg aso) {
+		this.aso = aso;
+	}
+
+	public PageObject getPage() {
+		return page;
+	}
+
+	public void setPage(PageObject page) {
+		this.page = page;
+	}
 
 	
 }

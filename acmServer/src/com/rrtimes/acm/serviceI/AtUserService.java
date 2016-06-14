@@ -53,4 +53,10 @@ public interface AtUserService {
 	
 	//根据用户名和密码查询用户对象信息
 	public AtUser queryByUser(AtUser user);
+	
+	//根据代账公司查询当前公司的人员信息
+	public List<AtUser> queryBycpCode(String cpCode,PageObject page);
+	
+	//根据部门查询当前部门的人员信息
+	public List<AtUser> queryByOrgId(int orgId,PageObject page);
 }

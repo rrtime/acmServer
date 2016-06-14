@@ -203,4 +203,24 @@ public class AtUserServiceImpl implements AtUserService{
 		System.out.println("result======"+atuser.getResult());
 		return atuser;
 	}
+
+	@Override
+	public List<AtUser> queryBycpCode(String cpCode, PageObject page) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cpCode", cpCode);
+		page.setSumCloum(asom.findCountByCpCode(map));
+		map.put("page", page);
+		return asom.findByCpCode(map);
+	}
+
+	@Override
+	public List<AtUser> queryByOrgId(int orgId, PageObject page) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("orgId", orgId);
+		page.setSumCloum(asom.findCountByOrgId(map));
+		map.put("page", page);
+		return asom.findByOrgId(map);
+	}
 }

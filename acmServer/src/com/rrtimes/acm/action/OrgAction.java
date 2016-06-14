@@ -52,7 +52,7 @@ public class OrgAction extends ActionSupport{
 	
 	private String msg;
 	
-	//分页查询（查询当前代账公司的组织机构）
+	//查询（查询当前代账公司的组织机构）
 	public String list(){
 		list = asos.queryAll(aso.getCpCode());
 		return "list";

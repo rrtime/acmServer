@@ -48,4 +48,12 @@ public interface AtUserMapper {
     public AtUser findByINameToupdate(String iName);
     
     public AtUser findByUser(Map<String,Object> map);
+    
+    public List<AtUser> findByCpCode(Map<String,Object> map);
+    
+    public int findCountByCpCode(Map<String,Object> map);
+    
+    public List<AtUser> findByOrgId(Map<String,Object> map);
+    
+    public int findCountByOrgId(Map<String,Object> map);
 }
