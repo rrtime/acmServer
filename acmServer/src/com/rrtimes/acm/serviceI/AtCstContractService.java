@@ -63,6 +63,9 @@ public interface AtCstContractService {
 	public List<AtCstContract> queryQFByUserId(int userId);
 	
 	//通过用户Id查询欠费的合同信息的个数
-	public int queryQFCountByUserId(int userId);
+	public int queryQFCountByUserId(int userId); 
+	
+	//根据客户id查询合同记录
+	public List<AtCstContract> queryByBasicId(String csrIdentifer);
 	
 }

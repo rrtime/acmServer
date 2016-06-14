@@ -219,5 +219,12 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 		// TODO Auto-generated method stub
 		return queryQFByUserId(userId).size();
 	}
+	@Override
+	public List<AtCstContract> queryByBasicId(String csrIdentifer) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("csrIdentifer", csrIdentifer);
+		return asom.findByCsrIdentifer(map);
+	}
 	
 }

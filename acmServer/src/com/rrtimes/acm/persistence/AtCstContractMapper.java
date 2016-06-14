@@ -49,9 +49,10 @@ public interface AtCstContractMapper {
     
     public Map<String,Object> findByContractIdAndDayaffer(Map<String,Object> map);
     
-    public AtCstContract findByCsrIdentifer(String csrIdentifer);
+    public List<AtCstContract> findByCsrIdentifer(Map<String,Object> map);
     
     public List<AtCstContract> findQFByUserId(Map<String,Object> map);
 
 	public List<AtCstContract> findByUserId(Map<String, Object> map);
+	
 }

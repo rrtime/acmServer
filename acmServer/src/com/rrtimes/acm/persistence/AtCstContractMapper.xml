@@ -190,7 +190,7 @@
        and CURDATE()= date_format(END_TIME,'%Y-%m-%d')
   </select>
   
-  <select id="findByCsrIdentifer"  resultType="AtCstContract">
+  <select id="findByCsrIdentifer" parameterType="Map" resultType="AtCstContract">
   	SELECT
   		 ID as id,
 	  		 CSR_IDENTIFER as csrIdentifer,

@@ -20,6 +20,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.rrtimes.acm.domain.AtCsrBasic;
 import com.rrtimes.acm.domain.AtCstContract;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
@@ -48,6 +49,8 @@ public class ContractAction extends ActionSupport{
 	private AtCstContractService accs;
 	
 	private AtCstContract acc = new AtCstContract();
+	
+	private AtCsrBasic acb = new AtCsrBasic();
 	
 	private List<AtCstContract> list = new ArrayList<AtCstContract>();
 	
@@ -210,6 +213,11 @@ public class ContractAction extends ActionSupport{
 			e.printStackTrace();
 		}
 	}
+	//根据客户编号查询合同记录
+	public String queryByBasicId(){
+		list = accs.queryByBasicId(acb.getCsrIdentifer());
+		return "suc";
+	}
 	
 	public AtCstContract getAcc() {
 		return acc;
@@ -273,5 +281,13 @@ public class ContractAction extends ActionSupport{
 
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+
+	public AtCsrBasic getAcb() {
+		return acb;
+	}
+
+	public void setAcb(AtCsrBasic acb) {
+		this.acb = acb;
 	}
 }
