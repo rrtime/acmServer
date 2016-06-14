@@ -4,7 +4,7 @@
 	<groupId>com.rrtimes.acm</groupId>
 	<artifactId>acmServer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>acmServer</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -280,7 +280,7 @@
 								<include>**/domain/**</include>
 								<include>**/serviceI/**</include>
 								<include>**/iinterface/**</include>
-								<include>struts-**.xml</include>
+								<!-- <include>struts-**.xml</include> -->
 							</includes>
 							<archive><!-- 不生成描述文件 -->
 								<addMavenDescriptor>false</addMavenDescriptor>
