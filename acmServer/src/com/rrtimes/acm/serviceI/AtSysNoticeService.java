@@ -11,6 +11,7 @@ package com.rrtimes.acm.serviceI;
 import java.util.List;
 
 import com.rrtimes.acm.domain.AtSysNotice;
+import com.rrtimes.acm.domain.PageObject;
 
 /**
  * @Title:       AtSysNoticeService.java
@@ -53,6 +54,6 @@ public interface AtSysNoticeService {
 	public AtSysNotice queryById(int id);
 	
 	//根据userId和status查询通知公告
-	public List<AtSysNotice> queryNoticeByUserIdAndStatus(int userId,int nstatus);
+	public List<AtSysNotice> queryNoticeByUserIdAndStatus(int userId,int nstatus,PageObject page);
 	
 }

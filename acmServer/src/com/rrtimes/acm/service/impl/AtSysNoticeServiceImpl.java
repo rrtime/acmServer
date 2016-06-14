@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rrtimes.acm.domain.AtSysNotice;
+import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtSysNoticeMapper;
 import com.rrtimes.acm.persistence.AtUserMapper;
 import com.rrtimes.acm.serviceI.AtSysNoticeService;
@@ -121,11 +122,13 @@ public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 
 	@Override
 	public List<AtSysNotice> queryNoticeByUserIdAndStatus(int userId,
-			int nstatus) {
+			int nstatus,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
 		map.put("nstatus", nstatus);
+		page.setSumCloum(asnm.findCountByUserIdAndStatus(map));
+		map.put("page", page);
 		return asnm.findNoticeByUserIdAndStatus(map);
 	}
 

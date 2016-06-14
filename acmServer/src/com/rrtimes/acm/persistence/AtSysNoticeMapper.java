@@ -53,4 +53,6 @@ public interface AtSysNoticeMapper {
 	public List<AtSysNotice> findGnoticeByUserId(Map<String, Object> map);
 	
 	public List<AtSysNotice> findNoticeByUserIdAndStatus(Map<String,Object> map);
+	
+	public int findCountByUserIdAndStatus(Map<String,Object> map);
 }

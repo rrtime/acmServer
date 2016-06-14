@@ -22,6 +22,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtSysNotice;
 import com.rrtimes.acm.domain.AtUser;
+import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.serviceI.AtSysNoticeService;
 
 /**
@@ -49,6 +50,8 @@ public class NoticeAction extends ActionSupport{
 	private AtSysNotice atSysNotice = new AtSysNotice();
 	
 	private AtUser atUser = new AtUser();
+	
+	private PageObject page = new PageObject();
 	
 	private List<AtSysNotice> list = new ArrayList<AtSysNotice>();
 	
@@ -178,7 +181,7 @@ public class NoticeAction extends ActionSupport{
 	
 	//根据userId和status查询通知公告
 	public String queryNotice(){
-		list = asns.queryNoticeByUserIdAndStatus(atUser.getId(), atSysNotice.getNstatus());
+		list = asns.queryNoticeByUserIdAndStatus(atUser.getId(), atSysNotice.getNstatus(),page);
 		return "suc";
 	}
 	
@@ -229,5 +232,12 @@ public class NoticeAction extends ActionSupport{
 	public void setAtUser(AtUser atUser) {
 		this.atUser = atUser;
 	}
+    
+	public PageObject getPage() {
+		return page;
+	}
 
+	public void setPage(PageObject page) {
+		this.page = page;
+	}
 }

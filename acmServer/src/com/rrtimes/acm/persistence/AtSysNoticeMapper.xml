@@ -326,5 +326,12 @@
 	         REMARK as remark
     FROM AT_SYS_NOTICE  
     WHERE N_STATUS=#{nstatus} and UID=#{userId} 
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  <select id="findCountByUserIdAndStatus" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*)
+    FROM AT_SYS_NOTICE  
+    WHERE N_STATUS=#{nstatus} and UID=#{userId} 
   </select>
 </mapper>
