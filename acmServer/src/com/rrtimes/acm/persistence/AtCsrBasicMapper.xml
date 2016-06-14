@@ -161,7 +161,11 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_CSR_BASIC  
-    WHERE OPERATOR = #{userId}
+    WHERE 
+    OPERATOR = #{userId}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
     limit #{page.pageSize} offset #{page.offset}
   </select>
   
@@ -169,7 +173,11 @@
   	SELECT
   		 count(*)
     FROM AT_CSR_BASIC  
-    WHERE OPERATOR = #{userId}
+    WHERE 
+    OPERATOR = #{userId}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
   </select>
   
   <select id="findByAgent" parameterType="Map" resultType="AtCsrBasic">
@@ -189,7 +197,11 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_CSR_BASIC  
-    WHERE CP_CODE = #{cpCode}
+    WHERE 
+    CP_CODE = #{cpCode}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
     limit #{page.pageSize} offset #{page.offset}
   </select>
   
@@ -197,7 +209,11 @@
   	SELECT
   		 count(*)
     FROM AT_CSR_BASIC  
-    WHERE CP_CODE = #{cpCode}
+    WHERE 
+    CP_CODE = #{cpCode}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
   </select>
   
   <select id="findByOrg" parameterType="Map" resultType="AtCsrBasic">
@@ -224,6 +240,9 @@
       and
       b.OPERATOR = u.id
     )
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
     limit #{page.pageSize} offset #{page.offset}
   </select>
   
@@ -238,6 +257,9 @@
       and
       b.OPERATOR = u.id
     )
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
   </select>
 
   <select id="findAllById" parameterType="int" resultType="AtCsrBasic">

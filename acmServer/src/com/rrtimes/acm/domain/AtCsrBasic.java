@@ -10,6 +10,7 @@ package com.rrtimes.acm.domain;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import com.rrtimes.acm.iinterface.ISerializable;
 
@@ -44,13 +45,8 @@ public class AtCsrBasic implements ISerializable{
       private Timestamp createTime;    //创建时间
       private Date updateTime;         //修改时间
       private String remark;           //备注
-      private AtCstContract acc;       //合同信息表关联---------一对一
-      public AtCstContract getAcc() {
-		return acc;
-	}
-	public void setAcc(AtCstContract acc) {
-		this.acc = acc;
-	}
+      private List<AtCstContract> acc;       //合同信息表关联---------一对多
+      
 	public AtCstFt getAcf() {
 		return acf;
 	}
@@ -141,5 +137,11 @@ public class AtCsrBasic implements ISerializable{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public List<AtCstContract> getAcc() {
+		return acc;
+	}
+	public void setAcc(List<AtCstContract> acc) {
+		this.acc = acc;
 	}
 } 

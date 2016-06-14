@@ -159,19 +159,19 @@ public class AtCsrBasicAction extends ActionSupport{
        
 		//根据部门用户查询客户信息
 		public String findBasicByUser(){
-			asoList = asoservice.queryBasicByUser(atUser.getId(),page);
+			asoList = asoservice.queryBasicByUser(atUser.getId(),aso,page);
 			return "queryBasicByUser";
 		}
 		
 		//根据代账公司查询客户信息
 		public String findBasicByAgent(){
-			asoList = asoservice.queryBasicByAgent(atUser.getCpCode(),page);
+			asoList = asoservice.queryBasicByAgent(atUser.getCpCode(),aso,page);
 			return "queryBasicByAgent";
 		}
 		
 		//根据部门查询客户信息
 		public String findBasicByOrg(){
-			asoList = asoservice.queryBasicByOrg(atUser.getOid(),page);
+			asoList = asoservice.queryBasicByOrg(atUser.getOid(),aso,page);
 			return "queryBasicByOrg";
 		}
 		

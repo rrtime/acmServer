@@ -136,28 +136,37 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		}
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByUser(int userAccount,PageObject page) {
+	public List<AtCsrBasic> queryBasicByUser(int userAccount,AtCsrBasic aso,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userAccount);
+		if(!StringUtils.isEmpty(aso.getCsrIdentifer())){
+			map.put("csrIdentifer", aso.getCsrIdentifer());
+		}
 		page.setSumCloum(asom.findByUserCount(map));
 		map.put("page", page);
 		return asom.findByUser(map);
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByAgent(String agentCode,PageObject page) {
+	public List<AtCsrBasic> queryBasicByAgent(String agentCode,AtCsrBasic aso,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("cpCode", agentCode);
+		if(!StringUtils.isEmpty(aso.getCsrIdentifer())){
+			map.put("csrIdentifer", aso.getCsrIdentifer());
+		}
 		page.setSumCloum(asom.findByAgentCount(map));
 		map.put("page", page);
 		return asom.findByAgent(map);
 	}
 	@Override
-	public List<AtCsrBasic> queryBasicByOrg(int orgId,PageObject page) {
+	public List<AtCsrBasic> queryBasicByOrg(int orgId,AtCsrBasic aso,PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("orgId", orgId);
+		if(!StringUtils.isEmpty(aso.getCsrIdentifer())){
+			map.put("csrIdentifer", aso.getCsrIdentifer());
+		}
 		page.setSumCloum(asom.findByOrgCount(map));
 		map.put("page", page);
 		return asom.findByOrg(map);
@@ -166,7 +175,9 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 	public AtCsrBasic queryBasicById(int id) {
 		// TODO Auto-generated method stub
 		AtCsrBasic aso = asom.findById(id);
-		aso.setAcc(accm.findByCsrIdentifer(aso.getCsrIdentifer()));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("csrIdentifer", aso.getCsrIdentifer());
+		aso.setAcc(accm.findByCsrIdentifer(map));
 		aso.setAcf(acfm.findByCsrIdentifer(aso.getCsrIdentifer()));
 		return aso;
 	}
