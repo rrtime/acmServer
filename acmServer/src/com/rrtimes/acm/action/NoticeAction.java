@@ -176,6 +176,12 @@ public class NoticeAction extends ActionSupport{
 		}
 	}
 	
+	//根据userId和status查询通知公告
+	public String queryNotice(){
+		list = asns.queryNoticeByUserIdAndStatus(atUser.getId(), atSysNotice.getNstatus());
+		return "suc";
+	}
+	
 	public AtSysNotice getAtSysNotice() {
 		return atSysNotice;
 	}

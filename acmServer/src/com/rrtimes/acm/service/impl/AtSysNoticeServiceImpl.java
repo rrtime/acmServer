@@ -119,4 +119,14 @@ public class AtSysNoticeServiceImpl implements AtSysNoticeService{
 		return asnm.findById(id);
 	}
 
+	@Override
+	public List<AtSysNotice> queryNoticeByUserIdAndStatus(int userId,
+			int nstatus) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		map.put("nstatus", nstatus);
+		return asnm.findNoticeByUserIdAndStatus(map);
+	}
+
 }

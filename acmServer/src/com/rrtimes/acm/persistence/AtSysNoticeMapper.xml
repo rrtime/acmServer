@@ -307,4 +307,24 @@
 	  		</if>	
   </select>
 
+  <select id="findNoticeByUserIdAndStatus" parameterType="Map" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_STATUS=#{nstatus} and UID=#{userId} 
+  </select>
 </mapper>
