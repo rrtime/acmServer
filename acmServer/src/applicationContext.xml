@@ -34,6 +34,7 @@
 		<property name="user" value="${acm.username}"/>
 		<property name="password" value="${acm.password}"/>
 	</bean>
+	
 	<!-- 
 	<bean id="shardPlugin" class="com.google.code.shardbatis.plugin.ShardPlugin ">
 		<property name="properties">
