@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtUserDesktopMapper">
+
+  <insert id="insert" parameterType="AtUserDesktop">
+  	INSERT INTO AT_USER_DESKTOP(
+  		 USER_ID,
+  		 D_TYPE,
+  		 MID,
+  		 VIEW_SORT,
+         OPERATOR,
+         REMARK )
+  	VALUES(
+  	     #{userId},
+  		 #{dtype},
+  		 #{mid},
+  		 #{viewSort},
+  		 #{operator},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtUserDesktop">
+  	UPDATE AT_USER_DESKTOP
+  		SET
+            USER_ID = #{userId}
+	  		<if test="dtype != null">
+	  	    ,D_TYPE = #{dtype}
+	  		</if>
+	  		,MID = #{mid}
+	  		<if test="viewSort != null">
+	  	    ,VIEW_SORT = #{viewSort}
+	  		</if>
+	  		,OPERATOR = #{operator}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_USER_DESKTOP WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtUserDesktop">
+	  	SELECT
+	  		 ID as id,
+	  		 USER_ID as userId,
+	  		 D_TYPE as dtype,
+	  		 MID as mid,
+	  		 VIEW_SORT as viewSort,
+	  		 CREATE_TIME as createTime,
+	         OPERATOR as operator,
+	         REMARK as remark
+	    FROM AT_USER_DESKTOP  
+	    	WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="userId!=null">
+	    	and USER_ID = #{userId}
+	    	</if>
+	    	<if test="mid != null">
+	  	    and MID = #{mid}
+	  		</if>
+	  		<if test="viewSort != null">
+	  		and VIEW_SORT = #{viewSort}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtUserDesktop">
+  	SELECT
+  		 ID as id,
+	  		 USER_ID as userId,
+	  		 D_TYPE as dtype,
+	  		 MID as mid,
+	  		 VIEW_SORT as viewSort,
+	  		 CREATE_TIME as createTime,
+	         OPERATOR as operator,
+	         REMARK as remark
+    FROM AT_USER_DESKTOP  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_USER_DESKTOP 
+	    WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="userId!=null">
+	    	and USER_ID = #{userId}
+	    	</if>
+	    	<if test="mid != null">
+	  	    and MID = #{mid}
+	  		</if>
+	  		<if test="viewSort != null">
+	  		and VIEW_SORT = #{viewSort}
+	  		</if>
+	  		<if test="operator != null">
+	  		and OPERATOR = #{operator}
+	  		</if>
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+  </select>
+
+</mapper>
