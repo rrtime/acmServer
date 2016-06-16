@@ -77,8 +77,6 @@ public class SysUserAction extends ActionSupport{
 	
     private String oldpwd;
 	
-	private String newpwd;
-	
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	
 	//登录
@@ -213,8 +211,31 @@ public class SysUserAction extends ActionSupport{
 	public String userSet()
 	{
 		atUser = (AtUser)session.getAttribute("loginUser");
-		org = asoservice.queryOrgById(atUser.getOid());
+		org=asoservice.queryOrgById(atUser.getOid());
 		return "userset";
+	}
+	
+	//校验原始密码是否正确
+	public void checkpwd(){
+		try{
+			HttpServletResponse response = ServletActionContext.getResponse();
+			PrintWriter out;
+			JSONObject jo = new JSONObject();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			AtUser au = (AtUser)session.getAttribute("loginUser");
+			if(oldpwd.equals(au.getLoginPwd())){//如果输入的旧密码和原始密码相同
+				msg="0";
+			}else{
+				msg="1";
+			}
+			jo.put("status", msg );
+			out = response.getWriter();
+			out.print(jo);
+			out.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//修改登录用户的基本信息
@@ -247,16 +268,12 @@ public class SysUserAction extends ActionSupport{
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			AtUser au = (AtUser)session.getAttribute("loginUser");
-			if(oldpwd.equals(au.getLoginPwd()) && newpwd.equals(atUser.getLoginPwd())){//如果输入的旧密码和原始密码相同且新密码和确认密码相同
-				au.setLoginPwd(atUser.getLoginPwd());
-				int i = aus.updateUser(au);
-				if(i==0){
-					msg="修改成功";
-				}else{
-					msg="修改失败";
-				}
+			au.setLoginPwd(atUser.getLoginPwd());
+			int i = aus.updateUser(au);
+			if(i==0){//修改成功
+				msg="0";
 			}else{
-				msg="修改失败";
+				msg="1";
 			}
 			jo.put("status", msg );
 			out = response.getWriter();
@@ -344,14 +361,6 @@ public class SysUserAction extends ActionSupport{
 
 	public void setOldpwd(String oldpwd) {
 		this.oldpwd = oldpwd;
-	}
-
-	public String getNewpwd() {
-		return newpwd;
-	}
-
-	public void setNewpwd(String newpwd) {
-		this.newpwd = newpwd;
 	}
 	
 }
