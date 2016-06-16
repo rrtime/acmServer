@@ -189,7 +189,8 @@ public class SysUserAction extends ActionSupport{
 	
 	//根据代账公司查询员工信息
 	public String queryBycpCode(){
-		list = aus.queryBycpCode(aca.getCpCode(), page);
+		AtUser atUser = (AtUser)session.getAttribute("atUser");
+		list = aus.queryBycpCode(atUser.getCpCode(), page);
 		return "queryBycpCode";
 	}
 	
