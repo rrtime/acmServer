@@ -8,7 +8,13 @@
  		<!-- 系统登录拦截跳转管理 -->
  		<action name="login" class="com.rrtimes.acm.action.UserManagerAction">
 			<result name="login" type="dispatcher">/login.jsp</result>
-			<result name="suc" type="dispatcher">/WEB-INF/manager/index.jsp</result>
+			<result name="index" type="dispatcher">/WEB-INF/jsp/index/index.jsp</result>
+			<result name="content" type="dispatcher">/WEB-INF/jsp/index/content.jsp</result>
+			<result name="userset" type="dispatcher">/WEB-INF/jsp/index/userSet.jsp</result>
+			
+			<result name="userMag" type="dispatcher">/WEB-INF/jsp/system/userManager.jsp</result>
+			<result name="roleMag" type="dispatcher">/WEB-INF/jsp/system/roleManager.jsp</result>
+			
 		</action>
  		
     </package>

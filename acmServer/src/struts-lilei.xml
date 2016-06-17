@@ -4,12 +4,20 @@
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
  	<package name="struts-lilei" extends="struts-base" namespace="/xl">
+ 	
+ 		<!-- 公共拦截器 -->
+ 		<default-interceptor-ref name="loginInterceptorStack"/>
+ 		
  		<action name="user" class="com.rrtimes.acm.action.SysUserAction">
+ 		    <result name="userset" type="dispatcher">/WEB-INF/jsp/index/userSet.jsp</result>
+ 		    <result name="userMag" type="dispatcher">/WEB-INF/jsp/system/userManager.jsp</result>
 		</action>
+		
 		<action name="company" class="com.rrtimes.acm.action.CompanyAgentAction">
 			<!--  <result name="suc" type="dispatcher"></result>-->
 			<result name="findById" type="dispatcher">/test.jsp</result>
 		</action>
+		
 		<action name="basic" class="com.rrtimes.acm.action.AtCsrBasicAction">
 		</action>
 		<action name="contract" class="com.rrtimes.acm.action.ContractAction">

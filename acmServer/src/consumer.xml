@@ -1,64 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://code.alibabatech.com/schema/dubbo
+           http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+           "
+	default-lazy-init="false">
+	
+	<context:component-scan base-package="com.rrtimes.acm">
+		<!-- <context:exclude-filter type="regex" expression="com.xinwei.crm.resource.telephone.*"/>  -->
+	</context:component-scan>
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
 
-	<!-- 使用者应用信息，用于计算依赖关系 -->
-	<dubbo:application name="xixi_consumer" />
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="i_consumer" />
 
-	<!-- 使用multicast广播注册中心暴露服务地址 -->
-	<dubbo:registry address="zookeeper://192.168.0.203" />
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234"/> -->
+	<dubbo:registry address="zookeeper://192.168.0.203:2181" />
+	
+	<!-- Dubbo 客户端请求超时时间 -->
+	<dubbo:consumer timeout="30000"/>
 
-	<!-- 用dubbo协议在20880端口暴露服务 -->
-	<dubbo:protocol name="dubbo" port="20880" />
-
-	<!-- 声明需要暴露的服务接口 -->
-	<!-- 客户投诉信息 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtComplainService"
-		id="acsi" />
-	<!-- 客户回访记录 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCstVisitService"
-		id="acli" />
-	<!-- 客户质量赔付记录 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCstImyService"
-		id="acii" />
-	<!-- 客户收费记录 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCstFeeService"
-		id="acfi" />
-	<!-- 菜单附属功能字典 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtSysModelService"
-		id="asmsi" />
-	<!-- 功能详细操作字典 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtModelFunctionService"
-		id="amfsi" />
-	<!-- 系统功能操作权限 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtHoldFunctionService"
-		id="ahfsi" />
-	<!-- 系统权限字段字典 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtFieldDictService"
-		id="afdsi" />
-	<!-- 用户字段权限关系 -->
-	<dubbo:reference interface="com.rrtimes.acm.service.AtFieldRelService"
-		id="afrsi" />
-
-	<dubbo:reference interface="com.rrtimes.acm.service.AcmSysOrgService"
-		id="demoService" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtUserService"
-		id="demoService1" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCompanyAgentService"
-		id="acasi" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCsrBasicService"
-		id="acbsi" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCstContractService"
-		id="accsi" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCstFtService"
-		id="acfsi" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtCstReportDictService"
-		id="acrdsi" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtSysMenuService"
-		id="asms" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtSysNoticeService"
-		id="asnsi" />
-	<dubbo:reference interface="com.rrtimes.acm.service.AtUserGroupRelService"
-		id="augrsi" />
+	<!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->
+	<dubbo:reference id="aus" interface="com.rrtimes.acm.serviceI.AtUserService" />
+	<dubbo:reference id="asos" interface="com.rrtimes.acm.serviceI.AcmSysOrgService" />
+	<dubbo:reference id="d2" interface="com.rrtimes.acm.serviceI.AtSysMenuService"/>
+	<dubbo:reference id="d3" interface="com.rrtimes.acm.serviceI.AtCompanyAgentService"/>
+	<dubbo:reference id="augrs" interface="com.rrtimes.acm.serviceI.AtUserGroupRelService"/>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </beans>
