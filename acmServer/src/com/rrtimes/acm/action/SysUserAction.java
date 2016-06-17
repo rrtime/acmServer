@@ -107,6 +107,7 @@ public class SysUserAction extends ActionSupport{
 		return findUserByMap();
 	}
 	
+	
 	//新增用户校验用户名I_NAME
 	public void validateforinsert(){
 		boolean result = aus.queryByInameToinsert(atUser.getIname());
