@@ -1,0 +1,90 @@
+*{
+	margin:0;padding:0;list-style: none;border:0;font-family: "微软雅黑";
+}
+body{
+	font-size:12px;
+}
+.wrap{
+	width:99%;height:900px;background:#f1f1f1;border:1px solid #f1f1f1;
+}
+.main{
+	width:880px;height:670px;margin:5px auto;position: relative;
+}
+.main ul ,.main .xinxi{
+	float:left;
+}
+.main .xinxi{
+	display: none;
+}
+.main ul{
+	position:absolute;
+	left:0;top:0;
+	z-index: 9;
+}
+.main ul li{
+	width:100px;height:40px;
+	line-height: 40px;background:#f9f9f9;
+	border:1px solid #c5d0dc;
+	padding-left:10px;
+	margin-bottom:-1px;
+	font-size:14px;
+	cursor: pointer;
+}
+
+.main ul li.current{
+	border-left:2px solid #33a3ce;
+	border-right-color:#fff;
+	width:100px;
+	background:#fff;
+	font-weight: bold;
+}
+.main ul li span{
+	margin-left:10px;
+}
+.td span{
+	margin-left:15px;margin-right:30px;
+}
+/*yonghu*/
+.main .xinxi{
+	width:700px;height:425px;border:1px solid #c5d0dc;background:#fff;position: absolute;top:0;left:111px;z-index:2;
+}
+.main .xinxi table{
+	margin-top:25px;margin-left:40px;width:650px;height:354px;color:#333;
+}
+.main .mima table{
+	/*margin-top:25px;margin-left:40px;*/width:300px;height:134px;color:#333;margin:25px  auto 0;
+}
+.main .xinxi table tr{
+	height:10px;
+}
+.main .xinxi table th{
+	font-weight: normal;
+}
+.main .xinxi table input[type="text"],.main .mima table input[type="password"]{
+	width:220px;height:27px;border:1px solid #d5d5d5;
+}
+.main .xinxi  table input[type="text"].dz{
+	width:530px;height:27px;
+}
+.main .xinxi  table input[type="text"].bz{
+	width:530px;height:80px;
+}
+.main .xinxi  table input[type="text"].email,.tab input[type="text"].email,.tab .xm {
+	border:1px solid #33a3ce;background:#e6f3f9;
+}
+.main .xinxi input[type="submit"]{
+	width:65px;height:27px;background:#33A3CE;margin-left:500px;color:#fff;
+}
+.main .xinxi input[type="reset"],.grxxsz input[type="reset"]{
+	width:65px;height:27px;background:#abbac3;color:#fff;
+}
+.main .mima input[type="submit"]{
+	width:65px;height:27px;background:#33A3CE;margin-left:300px;color:#fff;
+}
+.main .mima input[type="reset"],.grxxsz input[type="reset"]{
+	width:65px;height:27px;background:#abbac3;color:#fff;
+}
+/*mima*/
+.main .mima{
+	z-index: 1;display: none;
+}

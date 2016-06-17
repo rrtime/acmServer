@@ -1,0 +1,210 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+ul {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+input{outline:none;}
+img {
+	border: none;
+}
+.clear {
+	clear: both;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+body {
+	background: #ebf4f9;
+}
+.wrapper {
+	width: 1075px;
+	margin: 0 auto;
+}
+.title {
+	background: #fff;
+	padding: 15px 0 11px;
+	box-shadow: 0 0 20px #dfe4ea;
+}
+.logo {
+	background: url(../images/logo.png) no-repeat;
+	width: 229px;
+	height: 37px;
+	overflow: hidden;
+	float: left;
+}
+.login-con {
+	padding-top: 60px;
+}
+.login-con .left-pic {
+	margin: 59px 0 0 104px;
+	width:392px;
+	height:328px;
+	overflow:hidden;
+}
+/*form-login*/
+.form-login {
+	width: 330px;
+	background: #fff;
+	padding-top: 34px;
+	padding-bottom: 30px;
+	box-shadow: 0px 5px 15px #CADDE6;
+	position: relative;
+}
+.form-login .head {
+	width: 95px;
+	height: 98px;
+	overflow: hidden;
+	display: block;
+	margin: 0 auto;
+	border: 4px solid #f2f2f2;
+	border-radius: 50%;
+}
+.form-login .head img {
+	width: 95px;
+	height: 98px;
+	overflow: hidden;
+	display: block;
+}
+.form-login .box {
+	width: 250px;
+	margin: 0 auto;
+	border-bottom: 1px solid #E8EFF2;
+	font-size: 12px;
+	overflow: hidden;
+}
+.form-login .box span{ float:left;background: url(../images/Group4.png) no-repeat;width:20px;
+	height:22px;
+	overflow:hidden; margin-top:14px;margin-top:15px;}
+.form-login .box input {
+	border: none;
+	font-size: 14px;
+	color: #B6B6B6;
+	padding-bottom: 11px;
+	padding-top: 20px;
+	margin-left: 12px;
+	background: #fff;
+	border:0;
+	outline:none;
+}
+.form-login .box.username span {
+	background-position: -4px -5px;
+	
+	
+}
+.form-login .box.pw span {
+	background-position: -4px -53px;
+}
+.form-login .box.yz span {
+	background-position: -4px -101px;
+}
+.opera-box {
+	width: 250px;
+	margin: 0 auto;
+	padding-top: 9px;
+	height:16px;
+	line-height:16px;
+	overflow:hidden;
+}
+.opera-box span {
+	float: left;
+	color: #666666;
+	font-size: 14px;
+}
+.opera-box a {
+	float: right;
+	font-size: 14px;
+	color: #EC651A;
+}
+/*筛选框*/
+.cbox {
+	display: block;
+	width: 14px;
+	height: 15px;
+	cursor: pointer;
+	margin-right: 5px;
+	position: relative;
+	background: url(../images/Group4.png) -4px -276px no-repeat;
+}
+
+.login-con .checked{
+	background: url(../images/Group4.png) -4px -154px no-repeat;
+}
+.cbox:active {
+	width: 14px;
+	height: 15px;
+	background: url(../images/Group4.png) -4px -179px no-repeat;
+}
+.cbox.checked:after {
+/*content: '';
+	position: absolute;*/
+	/*width: 9px;
+	height: 5px;*/
+	/*background: transparent;
+	top: 2px;
+	left: 3px;*/
+	 /*background:url(../images/Group4.png) no-repeat;*/
+	 /*background:url(../images/Group4.png) -4px -176px no-repeat;
+	width:11px;
+	height:10px;*/
+}
+.form-login .login-btn, .tip {
+	background-image: none;
+	border-bottom: none;
+}
+.form-login .login-btn {
+	background: #EC651A;
+	display: block;
+	width: 250px;
+	overflow: hidden;
+	text-align: center;
+	margin-left: 0;
+	padding: 0;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 32px;
+	margin:32px auto 0;
+	padding:11px 0;
+	border:none;
+	cursor:pointer;
+}
+.form-login  .tip{
+	font-size: 14px;
+	color: #E31515;
+	width:250px;
+	height:14px;
+	margin:10px auto 0;
+	padding-left:23px;
+}
+.form-login .short-input {
+	width: 112px;
+}
+.form-login .yz img {
+	margin-top: 13px;
+	width:68px;
+	height:30px;
+	overflow:hidden;
+}
+.dimension {
+	display: block;
+	background: url(../images/Group4.png) -3px -203px no-repeat;
+	width: 56px;
+	height: 58px;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.foot{ text-align:center; margin-top:40px; margin-bottom:18px; font-size:16px; color:#6F797D;}

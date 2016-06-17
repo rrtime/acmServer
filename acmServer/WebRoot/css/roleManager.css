@@ -1,0 +1,95 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	outline: none;
+}
+ul {
+	list-style: none;
+	margin-bottom: 0;
+}
+img {
+	border: none;
+}
+body {
+	font-size: 14px;
+	font-family: "微软雅黑";
+	min-width:1000px;
+	background:#f1f1f1;
+	color:#666;
+	padding:0 20px;
+	overflow-x:hidden;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.role-list{ margin-right:10px;}
+.total-role{ padding-top:15px;}
+/*role-definite*/
+.total-role .role-definite{ min-width:23%; border:1px solid #cccccc;float:left;}
+.total-role .role-list{ width:73%; float:right; margin-right:2%;}
+.total-role .role-definite .role-word{ height:38px; line-height:38px; overflow:hidden; padding-left:18px; color:#333333; border-bottom:1px solid #cccccc; background:#f5f5f5;}
+.opera{ background:#fff;}
+.opera-button{padding-left:22px; padding-top:10px; padding-bottom:4px; border-bottom:1px solid #cccccc;}
+.opera-button a{ padding:5px 10px 5px 25px; color:#fff; float:left; margin-right:18px;}
+.opera .opera-button .add-bg{ background:url(../images/operate-icon.png) 8px 7px no-repeat;background-color:#84b357;}
+.opera .opera-button .edit-bg{ background:url(../images/operate-icon.png) 8px -15px no-repeat; background-color:#2789ca;}
+.opera .opera-button .del-bg{ background:url(../images/operate-icon.png) 8px -38px no-repeat; background-color:#d15b47;}
+
+.role-list .find-opera a{}
+.role-list .find-opera a.save-btn{ float:left; background:#4aa0d9; display:block; padding:5px 15px; color:#fff;}
+.tree .tree-folder:before, .tree .tree-item:before{ border-top:1px dotted blue;}
+.tree .aa:before{ border-top:none;}
+．tree-folder-content{ display:block;}
+.widget-main .role-root{ background:url(../images/dotted.png) 2px -4px no-repeat; margin-left:26px; margin-top:8px;}
+.widget-main .role-root span{ color:#666;}
+.widget-main .role-root .icon-root{ font-size:17px; margin-right:10px; margin-left:13px;}
+
+/*.widget-main.padding-8{ padding:8px 8px 8px 55px;}*/
+.tree .tree-folder .tree-folder-header .tree-folder-name{ font-size:12px;}
+.find-opera{ margin-bottom:16px;}
+/*table-diction*/
+.table-diction{ width:100%; background:#fff; border:1px solid #cccccc;}
+.table-diction tr td{ border-left:1px solid #e0e0e0;border-top:1px solid #e0e0e0; height:38px; line-height:38px; overflow:hidden; vertical-align:middle; padding-left:12px;}
+.table-diction tr th{ border-top:1px solid #e0e0e0;}
+.table-diction tr th{ height:40px; line-height:40px; overflow:hidden; color:#333333; font-weight:bold; text-align:left; padding-left:18px; background:url(../images/grandice-bg.png) repeat-x;}
+
+
+.table-diction tr td .data-item{ float:left;/* margin-right:11px;*/}
+.table-diction tr td .data-item .empty-box{ background:url(../images/operate-icon.png) 0 -121px no-repeat; float:left; width:16px; height:16px; overflow:hidden; margin-top:12px;margin-right:3px; cursor:pointer;}
+.table-diction tr td .data-item .check-bg{ background:url(../images/operate-icon.png) 0 -85px no-repeat; float:left; width:16px; height:16px; overflow:hidden; margin-top:12px;margin-right:3px; cursor:pointer;}
+
+.table-diction tr td .data-item .check-word{ float:left; margin-right:5px; display:inline;}
+.mr10{ margin-right:10px;}
+
+/*footer*/
+.footer {
+	float:right;margin-top:15px;margin-right:20px
+}
+.footer input{
+	width:50px;
+	cursor:pointer;
+}
+.footer span{
+	width:20px;height:20px;background:#fff;display: inline-block;text-align: center;
+	line-height:20px;
+}
+.footer .span{
+	width:20px;height:20px;background:#438ee4;display: inline-block;text-align: center;
+	color:#fff;
+}
+
+
+.table-diction .table-grey{ background:#f7f7f7;}
+
+
+
+
+
