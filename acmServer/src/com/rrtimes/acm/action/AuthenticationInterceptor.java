@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
-import com.rrtimes.acm.domain.AtUser;
+import com.rrtimes.acm.domain.SystemLoginUser;
 import com.xinwei.system.action.util.WebUtil;
 
 /**
@@ -46,8 +46,8 @@ public class AuthenticationInterceptor extends AbstractInterceptor {
 	public String intercept(ActionInvocation invocation) throws Exception {
 		ActionContext actionContext = invocation.getInvocationContext();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		AtUser atUser = (AtUser)request.getSession().getAttribute("atUser");
-		if( atUser == null )
+		SystemLoginUser systemLoginUser = (SystemLoginUser)request.getSession().getAttribute("loginUser");
+		if( systemLoginUser == null )
 		{
 			//获取访问路径
 			actionContext.put("requestURL", WebUtil.getRequestURLWithParams());

@@ -8,8 +8,6 @@
  */
 package com.rrtimes.acm.domain;
 
-import com.rrtimes.acm.iinterface.ISerializable;
-
 /**
  * 
  * 分页功能实体类
@@ -22,13 +20,8 @@ import com.rrtimes.acm.iinterface.ISerializable;
  * 
  */
 
-public class PageObject implements ISerializable{
+public class PageObject{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5339119362142160602L;
-
 	private int pageSize = 10; 		// 每页显示记录数
 	
 	private int currentPage = 1;	// 当前页码

@@ -8,20 +8,13 @@
  */
 package com.rrtimes.acm.action;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.rrtimes.acm.domain.AtCompanyAgent;
-import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtUser;
-import com.rrtimes.acm.serviceI.AtCompanyAgentService;
-import com.rrtimes.acm.serviceI.AtSysMenuService;
 import com.rrtimes.acm.serviceI.AtUserService;
 
 /**
@@ -43,16 +36,6 @@ public class UserManagerAction extends ActionSupport {
 	
 	@Resource
 	private AtUserService atUserServcie;
-	
-	@Resource
-	private AtCompanyAgentService acas;
-	
-	@Resource
-	private AtSysMenuService asoservice;
-	
-	private AtCompanyAgent atCompanyAgent = new AtCompanyAgent();
-	
-	private List<AtSysMenu> asoList = new ArrayList<AtSysMenu>();
 	
 	private AtUser atUser = new AtUser();
 	
@@ -85,30 +68,20 @@ public class UserManagerAction extends ActionSupport {
 		try
 		{
 			this.setAtUser(atUserServcie.queryByUser(atUser));
-			// 判定是否为登录成功( 0 登录成功, -1 失败)
-			if( atUser.getResult() != -1 )
-			{
-				// 登录成功后更新用户最后登录平台时间信息
-				session.setAttribute("username", atUser.getIname());
-				session.setAttribute("loginUser", atUser);
-				session.setAttribute("atUser", this.getAtUser());
-				url = "index";
-				System.out.println("===================:"+atUser.getEmail());
-				// 获取当前用户权限信息
-				try
-				{
-					asoList = asoservice.queryByUserId(atUser.getId());
-				}catch(Exception ex)
-				{
-					ex.printStackTrace();
-					ex.toString();
-				}
-				// 获取用户的所在代账机构信息
-				this.setAtCompanyAgent(acas.queryBycpCode(atUser.getCpCode()));
-			}
-		}catch(Exception ex){
+		}catch(Exception ex)
+		{
 			ex.printStackTrace();
 			ex.toString();
+		}
+		// 判定是否为登录成功( 0 登录成功, -1 失败)
+		if( atUser.getResult() != -1 )
+		{
+			// 登录成功后更新用户最后登录平台时间信息
+			
+			session.setAttribute("username", atUser.getIname());
+			session.setAttribute("loginUser", atUser);
+			url = "index";
+			System.out.println("===================:"+atUser.getEmail());
 		}
 		// 存储 url
 		session.setAttribute("sysPath", ServletActionContext.getRequest().getContextPath());
@@ -116,38 +89,11 @@ public class UserManagerAction extends ActionSupport {
 	}
 	
 	/**
-	 * 首页我的桌面模块
-	 * */
-	public String content()
-	{
-		
-		return "content";
-	}
-	
-	/**
-	 * 用户管理
-	 * */
-	public String userList()
-	{
-		
-		return "userMag";
-	}
-	
-	/**
-	 * 角色管理
-	 * */
-	public String roleList()
-	{
-		
-		return "roleMag";
-	}
-	
-	/**
 	 * 跳转到退出界面
 	 * @return
 	 */
 	public String logoutPage(){
-		return firstLogin();
+		return "logoutPage";
 	}
 	
 	/**
@@ -207,22 +153,6 @@ public class UserManagerAction extends ActionSupport {
 
 	public void setAtUser(AtUser atUser) {
 		this.atUser = atUser;
-	}
-
-	public List<AtSysMenu> getAsoList() {
-		return asoList;
-	}
-
-	public void setAsoList(List<AtSysMenu> asoList) {
-		this.asoList = asoList;
-	}
-
-	public AtCompanyAgent getAtCompanyAgent() {
-		return atCompanyAgent;
-	}
-
-	public void setAtCompanyAgent(AtCompanyAgent atCompanyAgent) {
-		this.atCompanyAgent = atCompanyAgent;
 	}
 	
 

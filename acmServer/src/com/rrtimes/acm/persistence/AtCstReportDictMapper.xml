@@ -62,7 +62,6 @@
 	  		and REMARK = #{remark}
 	  		</if>	
 	    	ORDER BY CREATE_TIME DESC 
-	    	limit #{page.pageSize} offset #{page.offset}
   </select>
   
   <select id="findById" parameterType="int" resultType="AtCstReportDict">

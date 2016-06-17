@@ -298,7 +298,7 @@
     WHERE I_NAME=#{iname}
   </select>
   
-   <select id="findCountByINameToupdate" parameterType="String" resultType="int">
+   <select id="findCountByINameToupdate" parameterType="String" resultType="AtUser">
   	SELECT
   		 count(*) 
     FROM AT_USER 
@@ -426,17 +426,15 @@
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark  
     FROM AT_USER 
-    WHERE 
-    CP_CODE = #{cpCode} and I_TYPE = 1
+    WHERE CP_CODE=#{cpCode} and I_TYPE = 1
     limit #{page.pageSize} offset #{page.offset}
   </select>
   
-  <select id="findCountByCpCode" parameterType="Map" resultType="int">
+  <select id="findCountByCpCode" parameterType="Map" resultType="AtUser">
   	SELECT
   		 count(*) 
     FROM AT_USER 
-    WHERE 1=1 and 
-         CP_CODE= #{cpCode} and I_TYPE = 1
+    WHERE CP_CODE=#{cpCode} and I_TYPE = 1
   </select>
   
   <select id="findByOrgId" parameterType="Map" resultType="AtUser">
@@ -471,7 +469,7 @@
     limit #{page.pageSize} offset #{page.offset}
   </select>
   
-  <select id="findCountByOrgId" parameterType="Map" resultType="int">
+  <select id="findCountByOrgId" parameterType="Map" resultType="AtUser">
   	SELECT
   		 count(*) 
     FROM AT_USER 
