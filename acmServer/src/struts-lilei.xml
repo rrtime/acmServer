@@ -10,7 +10,7 @@
  		
  		<action name="user" class="com.rrtimes.acm.action.SysUserAction">
  		    <result name="userset" type="dispatcher">/WEB-INF/jsp/index/userSet.jsp</result>
- 		    <result name="userMag" type="dispatcher">/WEB-INF/jsp/system/userManager.jsp</result>
+ 		    <result name="queryBycpCode" type="dispatcher">/WEB-INF/jsp/system/userManager.jsp</result>
 		</action>
 		
 		<action name="company" class="com.rrtimes.acm.action.CompanyAgentAction">

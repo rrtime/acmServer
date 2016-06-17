@@ -8,19 +8,37 @@
 <script type="text/javascript">
 //修改密码
 function updatepwd(){
-        var loginPwd = $("#loginPwd").val();
-        var newpwd = $("#newpwd").val();
         var oldpwd = $("#oldpwd").val();
+        var loginPwd = $("#loginPwd").val();
 	    $.ajax({
 						type : "POST",
-						url : "../xl/user!updatepassword.do?atUser.loginPwd="+loginPwd+"&newpwd="+newpwd+"&oldpwd="+oldpwd,
+						url : "../xl/user!checkpwd.do?oldpwd="+oldpwd,
 						data : {},
 						async : false,
 						success : function(json) {//调用成功的话
 								var jsonData = JSON.parse(json); 
-								alert(jsonData.status);
+								if(jsonData.status=="0"){//旧密码和新密码相同
+									   $.ajax({
+											type : "POST",
+											url : "../xl/user!updatepassword.do?atUser.loginPwd="+loginPwd,
+											data : {},
+											async : false,
+											success : function(json) {//调用成功的话
+													var jsonData = JSON.parse(json); 
+													if(jsonData.status=="0"){//修改成功
+													   rest();
+													}
+											}
+										});
+								}
 						}
 					});
+	}
+	
+	function rest(){
+	   $("#oldpwd").val("");
+	   $("#loginPwd").val("");
+	   $("#newpwd").val("");
 	}
 </script>
 <html>
@@ -85,7 +103,6 @@ function updatepwd(){
 						</div>
 						<!--密码-->
 						<div class=" xinxi mima">
-						<form action="" >
 								<table>
 									<tbody>
 										<tr>
@@ -104,7 +121,6 @@ function updatepwd(){
 								</table>
 								<input calss="submit" type="button" value="保存" onclick="updatepwd()"/>
 								<input type="reset" value="重置"/>
-						</form>
 						</div>
 				
 				
