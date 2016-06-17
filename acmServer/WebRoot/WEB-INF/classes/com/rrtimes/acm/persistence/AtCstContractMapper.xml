@@ -139,16 +139,18 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
-    FROM AT_CST_CONTRACT  
+    FROM AT_CST_CONTRACT c 
     WHERE 
-      CSR_IDENTIFER in
+      EXISTS
       (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	  )
       AND END_TIME
       BETWEEN 
@@ -157,7 +159,7 @@
       #{day}
   </select>
   
-  <select id="findByUserId"  resultType="AtCstContract">
+  <select id="findByUserId" parameterType="Map" resultType="AtCstContract">
   	SELECT
   		 ID as id,
 	  		 CSR_IDENTIFER as csrIdentifer,
@@ -172,22 +174,23 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
-    FROM AT_CST_CONTRACT  
+    FROM AT_CST_CONTRACT c 
     WHERE 
-       1=1
-       and CSR_IDENTIFER in
+       EXISTS
        (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	   )
        and CURDATE()= date_format(END_TIME,'%Y-%m-%d')
   </select>
   
-  <select id="findByCsrIdentifer"  resultType="AtCstContract">
+  <select id="findByCsrIdentifer" parameterType="Map" resultType="AtCstContract">
   	SELECT
   		 ID as id,
 	  		 CSR_IDENTIFER as csrIdentifer,
@@ -215,7 +218,7 @@
 	FEE_TIME BETWEEN #{date} and CURDATE()
   </select>
   
-  <select id="findByContractIdAndDayaffer"  resultType="Map">
+  <select id="findByContractIdAndDayaffer"  parameterType="Map" resultType="Map">
   	select * from AT_CST_FEE
 	where nid=#{contractId}
 	and 
@@ -224,7 +227,7 @@
 	#{datend}
   </select>
   
-  <select id="findPaydayByUserId"  resultType="AtCstContract">
+  <select id="findPaydayByUserId" parameterType="Map" resultType="AtCstContract">
   	SELECT
 	        ID as id,
 	  		 CSR_IDENTIFER as csrIdentifer,
@@ -239,16 +242,18 @@
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
-    FROM AT_CST_CONTRACT  
+    FROM AT_CST_CONTRACT c 
     WHERE 
-      CSR_IDENTIFER in
+      EXISTS
        (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	   )
   </select>
   
@@ -261,7 +266,7 @@
 	#{datend}
   </select>
   
-   <select id="findQFByUserId" parameterType="int" resultType="AtCstContract">
+   <select id="findQFByUserId" parameterType="Map" resultType="AtCstContract">
   	select 
 			 c.ID as id,
 	  		 c.CSR_IDENTIFER as csrIdentifer,
@@ -278,14 +283,16 @@
 	         c.REMARK as remark
 	          from AT_CST_CONTRACT c LEFT JOIN AT_CST_FEE f on
     c.ID=f.NID where  NOW() > f.END_TIME
-    and c.CSR_IDENTIFER in
+    and EXISTS
        (
-		  select CSR_IDENTIFER from AT_CSR_BASIC 
+		  select CSR_IDENTIFER from AT_CSR_BASIC b
 			where 
-				OPERATOR=
-			 (
+			    c.CSR_IDENTIFER = b.CSR_IDENTIFER
+			    and
+				b.OPERATOR=
+			    (
 					select id from AT_USER where id=#{userId}
-			 )
+			    )
 	   )
   </select>
   

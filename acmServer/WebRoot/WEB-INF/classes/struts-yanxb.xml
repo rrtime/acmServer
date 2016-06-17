@@ -35,11 +35,11 @@
 			<result name="atFieldDictDetail" type="dispatcher">/WEB-INF/jsp/atFieldDict/addAtFieldDict.jsp</result>
 		</action>
 		<!-- 用户字段权限关系 -->
- 		<action name="atFiledRelMag" class="com.rrtimes.acm.action.AtFieldRelAction">
-			<result name="addAtFiledRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
-			<result name="modAtFiledRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
-			<result name="atFiledRelList" type="dispatcher">/WEB-INF/jsp/atFieldRel/atFieldRelList.jsp</result>
-			<result name="atFiledRelDetail" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
+ 		<action name="atFieldRelMag" class="com.rrtimes.acm.action.AtFieldRelAction">
+			<result name="addAtFieldRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
+			<result name="modAtFieldRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
+			<result name="atFieldRelList" type="dispatcher">/WEB-INF/jsp/atFieldRel/atFieldRelList.jsp</result>
+			<result name="atFieldRelDetail" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
 		</action>
 		<!-- 客户收费记录 -->
  		<action name="atCstFeeMag" class="com.rrtimes.acm.action.AtCstFeeAction">

@@ -149,7 +149,7 @@
 	    	<if test="cpCode!=null">and CP_CODE = #{cpCode}</if>
 	    	<if test="oid!=null">and OID = #{oid}</if>
 	    	<if test="iType!=null">and I_TYPE = #{iType}</if>
-	    	<if test="iName!=null">and I_NAME = #{iName}</if>
+	    	<if test="iname!=null">and I_NAME = #{iname}</if>
 	    	<if test="loginPwd!=null">and LOGIN_PWD = #{loginPwd}</if>
 	    	<if test="userName!=null">and USER_NAME = #{userName}</if>
 	    	<if test="sex!=null">and SEX = #{sex}</if>
@@ -201,7 +201,7 @@
 	  		REMARK as remark 
 	    FROM AT_USER 
 	    	WHERE 1 = 1
-	         and OID=#{oid,jdbcType=DECIMAL}
+	         and OID=#{oid}
 	    	ORDER BY CREATE_TIME DESC 
   </select>
   
@@ -264,7 +264,7 @@
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark 
     FROM AT_USER 
-    WHERE I_NAME=#{iName} and LOGIN_PWD=#{loginPwd}
+    WHERE I_NAME=#{iname} and LOGIN_PWD=#{loginPwd}
   </select>
   
   <select id="findByINameToinsert" parameterType="String" resultType="AtUser">
@@ -295,14 +295,14 @@
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark 
     FROM AT_USER 
-    WHERE I_NAME=#{iName}
+    WHERE I_NAME=#{iname}
   </select>
   
-   <select id="findCountByINameToupdate" parameterType="String" resultType="AtUser">
+   <select id="findCountByINameToupdate" parameterType="String" resultType="int">
   	SELECT
   		 count(*) 
     FROM AT_USER 
-    WHERE I_NAME=#{iName}
+    WHERE I_NAME=#{iname}
   </select>
   
   <select id="findByINameToupdate" parameterType="String" resultType="AtUser">
@@ -333,7 +333,149 @@
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark  
     FROM AT_USER 
-    WHERE I_NAME=#{iName}
+    WHERE I_NAME=#{iname}
+  </select>
+  
+  <select id="findjsBycpCode" parameterType="Map" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark  
+    FROM AT_USER 
+    WHERE CP_CODE=#{cpCode} and I_TYPE = 2
+  </select>
+  
+  <select id="findByCpCodeAll" parameterType="Map" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark  
+    FROM AT_USER 
+    WHERE CP_CODE=#{cpCode} and I_TYPE = 1
+  </select>
+  
+  <select id="findByCpCode" parameterType="Map" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark  
+    FROM AT_USER 
+    WHERE 
+    CP_CODE = #{cpCode} and I_TYPE = 1
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findCountByCpCode" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*) 
+    FROM AT_USER 
+    WHERE 1=1 and 
+         CP_CODE= #{cpCode} and I_TYPE = 1
+  </select>
+  
+  <select id="findByOrgId" parameterType="Map" resultType="AtUser">
+  	SELECT
+  		 ID as id,
+	  		CP_CODE as cpCode,
+	  		OID as oid,
+	  		I_TYPE as itype,
+	  		I_NAME as iname,
+	  		LOGIN_PWD as loginPwd,
+	  		USER_NAME as userName,
+	  		SEX as sex,
+	  		WORKER_NO as workerNo,
+	  		JOB_DUTY as jobDuty,
+	  		TELNO as telno,
+	  		EMAIL as email,
+	  		IS_USED as isUsed,
+	  		IS_ADMIN as isAdmin,
+	  		ORDER_NUM as orderNum,
+	  		AUTH_STATE as authState,
+	  		LAST_LOGIN_DATE as lastLoginDate,
+	  		STATUS as status,
+	  		LOGIN_IP as loginIp,
+	  		LOGIN_TIME as loginTime,
+	  		OPERATOR as operator,
+	  		CREATE_TIME as createTime,
+	  		LAST_OPERATOR as lastOperator,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark  
+    FROM AT_USER 
+    WHERE OID=#{orgId} and I_TYPE = 1
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findCountByOrgId" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*) 
+    FROM AT_USER 
+    WHERE OID=#{orgId} and I_TYPE = 1
   </select>
   
   <select id="findByCount" parameterType="Map" resultType="int">
@@ -344,7 +486,7 @@
 	    <if test="cpCode!=null">and CP_CODE = #{cpCode}</if>
 	    	<if test="oid!=null">and OID = #{oid}</if>
 	    	<if test="iType!=null">and I_TYPE = #{iType}</if>
-	    	<if test="iName!=null">and I_NAME = #{iName}</if>
+	    	<if test="iname!=null">and I_NAME = #{iname}</if>
 	    	<if test="loginPwd!=null">and LOGIN_PWD = #{loginPwd}</if>
 	    	<if test="userName!=null">and USER_NAME = #{userName}</if>
 	    	<if test="sex!=null">and SEX = #{sex}</if>

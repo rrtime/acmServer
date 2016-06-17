@@ -30,7 +30,7 @@
  		</interceptors>
  		
 		<global-results>
-			<result name="sys_login" type="dispatcher">/WEB-INF/jsp/system/loadLogin.jsp</result>
+			<result name="sys_login" type="dispatcher">/WEB-INF/jsp/loadLogin.jsp</result>
 			<result name="error">/WEB-INF/jsp/error.jsp</result>
 		</global-results>
 		
@@ -41,10 +41,8 @@
 		
     </package>
     
-	<!-- CaaS 计费模块 -->
+	<!-- 加载Struts配置相关文件 -->
 	<include file="struts-login.xml"/>
-	<include file="struts-charge.xml"/>
-	<!-- yan begin -->
-	<include file="struts-yanxb.xml"/>
-	<!-- yan end -->
+	<include file="struts-lilei.xml"/>
+	
 </struts>

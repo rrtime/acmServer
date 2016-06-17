@@ -144,7 +144,7 @@
     WHERE ID=#{id}
   </select>
   
-  <select id="findGnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  <select id="findGnoticeByUserId" parameterType="Map" resultType="AtSysNotice">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -183,10 +183,10 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_SYS_NOTICE  
-    WHERE N_TYPE=2 and N_STATUS=1 and OIDS like #{oid} or UIDS like #{uid}
+    WHERE N_TYPE=2 and N_STATUS=1 and locate(#{oid}, OIDS)>0 or locate(#{uid}, UIDS)>0 
   </select>
   
-  <select id="findCGnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  <select id="findCGnoticeByUserId" parameterType="Map" resultType="AtSysNotice">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -207,7 +207,7 @@
     WHERE N_TYPE=2 and N_STATUS=2 and UID=#{userId}
   </select>
   
-  <select id="findTnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  <select id="findTnoticeByUserId" parameterType="Map" resultType="AtSysNotice">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -246,10 +246,10 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_SYS_NOTICE  
-    WHERE N_TYPE=1 and OIDS like #{oid} or UIDS like #{uid}
+    WHERE N_TYPE=1 and locate(#{oid}, OIDS)>0 or locate(#{uid}, UIDS)>0
   </select>
   
-  <select id="findCTnoticeByUserId" parameterType="int" resultType="AtSysNotice">
+  <select id="findCTnoticeByUserId" parameterType="Map" resultType="AtSysNotice">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -307,4 +307,31 @@
 	  		</if>	
   </select>
 
+  <select id="findNoticeByUserIdAndStatus" parameterType="Map" resultType="AtSysNotice">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 N_TYPE as ntype,
+	         N_TITLE as ntitle,
+	         N_KEY as nkey,
+	         N_CONTENT as ncontent,
+	         N_STATUS as nstatus,
+	         N_HISTORY as nhistory,
+	         OIDS as oids,
+	         UIDS as uids,
+	         UID as uid,
+	         CREATE_TIME as createTime,
+	         LAST_UID as lastUid,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SYS_NOTICE  
+    WHERE N_STATUS=#{nstatus} and UID=#{userId} 
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  <select id="findCountByUserIdAndStatus" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*)
+    FROM AT_SYS_NOTICE  
+    WHERE N_STATUS=#{nstatus} and UID=#{userId} 
+  </select>
 </mapper>

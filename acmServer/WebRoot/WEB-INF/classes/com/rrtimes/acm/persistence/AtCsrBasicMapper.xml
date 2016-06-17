@@ -144,7 +144,7 @@
     WHERE ID=#{id}
   </select>
   
-  <select id="findByUser" parameterType="String" resultType="AtCsrBasic">
+  <select id="findByUser" parameterType="Map" resultType="AtCsrBasic">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -161,36 +161,26 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_CSR_BASIC  
-    WHERE CP_CODE = 
-    (
-    select cp_code from ACM_SYS_ORG where id = 
-      (
-      select oid from AT_USER where I_NAME = #{userAccount}
-      )
-    )
+    WHERE 
+    OPERATOR = #{userId}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
+    limit #{page.pageSize} offset #{page.offset}
   </select>
   
-  <select id="findByAgent" parameterType="String" resultType="AtCsrBasic">
+  <select id="findByUserCount" parameterType="Map" resultType="int">
   	SELECT
-  		 ID as id,
-	  		 CP_CODE as cpCode,
-	  		 CSR_TYPE as csrType,
-	         CSR_IDENTIFER as csrIdentifer,
-	         CSR_CODE as csrCode,
-	         REG_ADDRESS as regAddress,
-	         OFFICE_ADDRESS as officeAddress,
-	         CSR_OWNER as csrOwner,
-	         FINANCE_LEADER as financeLeader,
-	         TAX_LEADER as taxLeader,
-	         OPERATOR as operator,
-	         CREATE_TIME as createTime,
-	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+  		 count(*)
     FROM AT_CSR_BASIC  
-    WHERE CP_CODE = #{agentCode}
+    WHERE 
+    OPERATOR = #{userId}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
   </select>
   
-  <select id="findByOrg" parameterType="int" resultType="AtCsrBasic">
+  <select id="findByAgent" parameterType="Map" resultType="AtCsrBasic">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -207,10 +197,69 @@
 	         UPDATE_TIME as updateTime,
 	         REMARK as remark
     FROM AT_CSR_BASIC  
-    WHERE CP_CODE = 
+    WHERE 
+    CP_CODE = #{cpCode}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByAgentCount" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*)
+    FROM AT_CSR_BASIC  
+    WHERE 
+    CP_CODE = #{cpCode}
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
+  </select>
+  
+  <select id="findByOrg" parameterType="Map" resultType="AtCsrBasic">
+  	SELECT
+  		 ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CSR_BASIC b
+    WHERE 
+    EXISTS 
     (
-    select cp_code from ACM_SYS_ORG where id = #{id}
+      select u.id from AT_USER u where u.oid = #{orgId}
+      and
+      b.OPERATOR = u.id
     )
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
+    limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findByOrgCount" parameterType="Map" resultType="int">
+  	SELECT
+  		 count(*)
+    FROM AT_CSR_BASIC b
+    WHERE 
+    EXISTS 
+    (
+      select u.id from AT_USER where u.oid = #{orgId}
+      and
+      b.OPERATOR = u.id
+    )
+    <if test="csrIdentifer != null">
+	  	and CSR_IDENTIFER = #{csrIdentifer}
+	</if>
   </select>
 
   <select id="findAllById" parameterType="int" resultType="AtCsrBasic">
@@ -234,7 +283,7 @@
      b.ID = #{id}
   </select>
   
-  <select id="findByUserId" parameterType="int" resultType="AtCsrBasic">
+  <select id="findByUserId" parameterType="Map" resultType="AtCsrBasic">
   	SELECT
   		 ID as id,
 	  		 CP_CODE as cpCode,
@@ -256,11 +305,12 @@
       and
       CP_CODE=
       (
-         SELECT ID FROM AT_USER WHERE ID = #{userId}
+         SELECT CP_CODE FROM AT_USER WHERE ID = #{userId}
       )
+      limit #{page.pageSize} offset #{page.offset}
   </select>
   
-  <select id="findCountByUserId" parameterType="int" resultType="int">
+  <select id="findCountByUserId" parameterType="Map" resultType="int">
   	SELECT
   		 count(*)
     FROM AT_CSR_BASIC  
@@ -269,7 +319,7 @@
       and
       CP_CODE=
       (
-         SELECT ID FROM AT_USER WHERE ID = #{userId}
+         SELECT CP_CODE FROM AT_USER WHERE ID = #{userId}
       )
   </select>
   

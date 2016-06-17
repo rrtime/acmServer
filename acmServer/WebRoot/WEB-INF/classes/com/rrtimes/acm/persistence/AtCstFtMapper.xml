@@ -212,6 +212,37 @@
     WHERE CSR_IDENTIFER=#{csrIdentifer}
   </select>
   
+  <select id="findByUserId" parameterType="Map" resultType="AtCstFt">
+  	SELECT
+  		 ID as id,
+	  		 CSR_IDENTIFER as csrIdentifer,
+	  		 FT_INST as ftInst,
+	         RIDS as rids,
+	         RECEPIT_COUNT as recepitCount,
+	         OWN_TAX_STATION as ownTaxStation,
+	         OWN_DECLARE_TIME as ownDeclareTime,
+	         OWN_LEVY_TYPE as ownLevyType,
+	         OWN_TAX_TYPE as ownTaxType,
+	         OWN_TAX_RATE as ownTaxRate,
+	         ADD_TAX_OWNER as addTaxOwner,
+	         ADD_TAX_STATION as addTaxStation,
+	         ADD_TAX_DECLARE_TIME as addTaxDeclareTime,
+	         ADD_TAX_LEVY_TYPE as addTaxLevyType,
+	         ADD_TAX_TYPE as addTaxType,
+	         ADD_TAX_RATE as addTaxRate,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_CST_FT a
+    WHERE 
+    EXISTS
+    (
+		select CSR_IDENTIFER from AT_CSR_BASIC c where c.OPERATOR=#{userId}
+		and a.CSR_IDENTIFER = c.CSR_IDENTIFER
+	)
+  </select>
+  
   <select id="findByCount" parameterType="Map" resultType="int">
 	    SELECT
 	         count(*)

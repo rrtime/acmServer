@@ -4,7 +4,7 @@
 	<groupId>com.rrtimes.acm</groupId>
 	<artifactId>acmServer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>acmServer</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -280,7 +280,6 @@
 								<include>**/domain/**</include>
 								<include>**/serviceI/**</include>
 								<include>**/iinterface/**</include>
-								<!-- <include>struts-**.xml</include> -->
 							</includes>
 							<archive><!-- 不生成描述文件 -->
 								<addMavenDescriptor>false</addMavenDescriptor>
@@ -300,9 +299,9 @@
 						</resource>
 					</webResources>
 					<packagingExcludes>
-						WEB-INF/classes/**/service/**
+						WEB-INF/classes/**/bootstrap/**
+						,WEB-INF/classes/**/service/**
 						,WEB-INF/classes/**/constant/**
-						,WEB-INF/classes/**/iinterface/**
 						,WEB-INF/classes/**/persistence/**
 						,WEB-INF/classes/**/util/**
 						,WEB-INF/classes/**/test/**
@@ -313,6 +312,7 @@
 						,WEB-INF/classes/applicationContext.xml
 						,WEB-INF/classes/shard_config.xml
 						,WEB-INF/classes/mybatis-configuration.xml
+						,WEB-INF/classes/log4j.properties
 					</packagingExcludes>
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
