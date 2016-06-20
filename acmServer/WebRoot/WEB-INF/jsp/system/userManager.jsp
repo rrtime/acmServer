@@ -90,6 +90,15 @@
 						var jsonData = JSON.parse(json); 
 						$(".shadow-bg").css("display","block");
 	                    $(".grxxsz").css("display","block");
+	                    $("#savebt").show(); 
+	                    $("#username").attr("readonly",false);
+						$("#email").attr("readonly",false);
+						$("#telno").attr("readonly",false);
+						$("#iname").attr("readonly",false);
+						$("#workerNo").attr("readonly",false);
+						$("#jobDuty").attr("readonly",false);
+						$("#loginPwd").attr("readonly",false);
+						$("#remark").attr("readonly",false);
 	                    $("#atUserId").val(jsonData.atUserId);
 	                    $("#username").val(jsonData.username);
 	                    $("#email").val(jsonData.email);
@@ -193,7 +202,7 @@
             <div class="tree-modal">
             	<div class="system-role">
                 	<img src="../images/dotted.png" alt=""/>
-                    <a href="#">系统角色</a>
+                    <a href="#">公司组织架构</a>
                 </div>
                 <div class="tree-box easy-tree">
                     <ul class="tree-list">
@@ -201,7 +210,25 @@
                         <li>
                             <ul class="sort-a">
                                  <s:iterator value="#request.orglist" id="orglist" status="st">
-                                     <li><a href="#" onclick="findByOrgId('${id}')">${orgName}</a></li>
+                                     <s:if test="#orglist.oid==0">
+	                                     <li><a href="#"><s:property value="#orglist.orgName"/></a>
+	                                       <ul>
+	                                          <s:iterator value="#request.orglist" id="orglist2" status="st">
+	                                              <s:if test="#orglist2.oid==#orglist.id">
+	                                                  <li><a href="#"><s:property value="#orglist2.orgName"/></a>
+	                                                     <ul>
+	                                                        <s:iterator value="#request.orglist" id="orglist3" status="st">
+	                                                            <s:if test="#orglist3.oid==#orglist2.id">
+	                                                               <li><a href="#" onclick="findByOrgId('<s:property value="#orglist3.id"/>')"><s:property value="#orglist3.orgName"/></a></li>
+	                                                            </s:if>
+	                                                        </s:iterator>
+	                                                     </ul>
+	                                                  </li>
+	                                              </s:if>
+	                                          </s:iterator>
+	                                       </ul>
+	                                     </li>
+                                     </s:if>
                                  </s:iterator>
                                 <!--  <li><a href="#">管理员</a>
                                     <ul>

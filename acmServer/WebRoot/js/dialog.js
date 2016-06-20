@@ -18,6 +18,8 @@ jQuery(function($){
 		$(".opera-button .add-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
+			$("#orgName").val("");
+			$("#orgDesc").val("");
 		});
 		$(".reset").click(function(){
 			$(".shadow-bg").css("display","none");
