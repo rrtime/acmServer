@@ -68,4 +68,10 @@ public class AtUserGroupRelServiceImpl implements AtUserGroupRelService{
 		return augrm.findByUserId(map);
 	}
 
+	@Override
+	public int updateByUid(AtUserGroupRel augr) {
+		// TODO Auto-generated method stub
+		return augrm.updateByUid(augr);
+	}
+
 }

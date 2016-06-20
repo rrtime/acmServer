@@ -205,10 +205,10 @@ public class AtUserServiceImpl implements AtUserService{
 	}
 
 	@Override
-	public List<AtUser> queryBycpCode(String cpCode, PageObject page) {
+	public List<AtUser> queryBycpCode(AtUser au, PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("cpCode", cpCode);
+		map.put("cpCode", au.getCpCode());
 		page.setSumCloum(asom.findCountByCpCode(map));
 		map.put("page", page);
 		return asom.findByCpCode(map);
@@ -239,4 +239,26 @@ public class AtUserServiceImpl implements AtUserService{
 		map.put("cpCode", cpCode);
 		return asom.findByCpCodeAll(map);
 	}
+
+	@Override
+	public int queryByIname(String iname) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("iname", iname);
+		return asom.findByIname(map);
+	}
+
+	@Override
+	public List<AtUser> queryByUsername(AtUser au, PageObject page) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cpCode", au.getCpCode());
+		if(!StringUtils.isEmpty(au.getUserName())){
+			map.put("userName", au.getUserName());
+		}
+		page.setSumCloum(asom.findCountByCpCode(map));
+		map.put("page", page);
+		return asom.findByCpCode(map);
+	}
+
 }

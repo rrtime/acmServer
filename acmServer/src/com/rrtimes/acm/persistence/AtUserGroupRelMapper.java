@@ -31,6 +31,8 @@ public interface AtUserGroupRelMapper {
     
     public int update(AtUserGroupRel asu);
     
+    public int updateByUid(AtUserGroupRel asu);
+    
     public int delete(int userId);
     
     public AtUserGroupRel findById(int id);

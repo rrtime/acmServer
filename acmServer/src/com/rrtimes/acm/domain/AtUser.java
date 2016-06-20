@@ -56,6 +56,7 @@ public class AtUser implements ISerializable{
      private Date updateTime;            //修改时间
      private String remark;              //备注
      private int result;
+     private String orgName;
      public int getId() {
 		return id;
 	}
@@ -212,6 +213,12 @@ public class AtUser implements ISerializable{
 	}
 	public void setIname(String iname) {
 		this.iname = iname;
+	}
+	public String getOrgName() {
+		return orgName;
+	}
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 } 
  

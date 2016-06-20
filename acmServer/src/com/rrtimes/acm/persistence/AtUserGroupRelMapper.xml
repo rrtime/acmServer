@@ -29,6 +29,17 @@
 			ID=#{id}
   </update>
   
+   <update id="updateByUid" parameterType="AtUserGroupRel">
+  	UPDATE AT_USER_GROUP_REL
+  		SET
+	  		GID = #{gid}
+	  		<if test="remark!=null">
+	  		  ,REMARK = #{remark}
+	  		</if>
+		WHERE
+			UID = #{uid}
+  </update>
+  
   <delete id="delete" parameterType="int">
   	DELETE FROM AT_USER_GROUP_REL WHERE UID=#{userId}
   </delete>

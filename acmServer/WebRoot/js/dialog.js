@@ -27,6 +27,7 @@ jQuery(function($){
 		$(".opera-button .edit-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
+			editorg();
 		});
 		$(".reset").click(function(){
 			$(".shadow-bg").css("display","none");
@@ -50,6 +51,8 @@ jQuery(function($){
 		$(".find-opera .add-button").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".grxxsz").css("display","block");
+			findzu();
+			finddept();
 		});
 		
 		//个人信息设置tap切换
@@ -61,7 +64,8 @@ jQuery(function($){
 	
 	$(".opera-button .del-bg").click(function(){
 			$(".shadow-bg").css("display","block");
-			$(".mian").css("display","block");
+			//$(".mian").css("display","block");
+			$("#mian").css("display","block");
 		});
 	
 });

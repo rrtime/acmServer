@@ -38,4 +38,6 @@ public interface AtUserGroupRelService {
 	//根据userId查询是否是独立用户，不是的话返回组id
 	public AtUserGroupRel queryByUserId(int userId);
 	
+	public int updateByUid(AtUserGroupRel augr);
+	
 }

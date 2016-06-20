@@ -60,4 +60,7 @@ public interface AtUserMapper {
     public List<AtUser> findjsBycpCode(Map<String,Object> map);
     
     public List<AtUser> findByCpCodeAll(Map<String,Object> map);
+    
+    public int findByIname(Map<String,Object> map);
+    
 }

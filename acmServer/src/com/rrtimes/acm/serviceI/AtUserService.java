@@ -55,7 +55,10 @@ public interface AtUserService {
 	public AtUser queryByUser(AtUser user);
 	
 	//根据代账公司查询当前公司的人员信息
-	public List<AtUser> queryBycpCode(String cpCode,PageObject page);
+	public List<AtUser> queryBycpCode(AtUser au,PageObject page);
+	
+	//根据代账公司查询当前公司的人员信息
+	public List<AtUser> queryByUsername(AtUser au,PageObject page);
 	
 	//根据部门查询当前部门的人员信息
 	public List<AtUser> queryByOrgId(int orgId,PageObject page);
@@ -65,4 +68,6 @@ public interface AtUserService {
 	
 	//根据代账公司查询当前公司的人员信息(不分页)
 	public List<AtUser> queryBycpCodeAll(String cpCode);
+	
+	public int queryByIname(String iname);
 }

@@ -188,4 +188,27 @@
     where c.TREE_ID = #{treeId}
     	ORDER BY showIndex
   </select>
+  
+  <select id="queryAtSysModelByUserId" parameterType="Map" resultType="AtSysModel">
+	  select 
+	  	 l.ID as id,
+  		 l.TREE_ID as treeId,
+  		 l.MENU_CODE as menuCode,
+         l.M_NAME as mname,
+         l.M_DESC as mdesc,
+         l.IS_SYSTEM as isSystem,
+         l.CATEGORY as category,
+         l.IS_CON_SHOWNUM as isConShownum,
+         l.CONTROL_NUM as controlNum,
+         l.CONTROL_PAGE as controlPage,
+         l.SHOW_INDEX as showIndex,
+         l.CREATE_TIME as createTime,
+	     l.UPDATE_TIME as updateTime,
+         l.REMARK as remark 
+         from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
+           WHERE
+             f.ACTOR_ID = #{userId} 
+             and f.MENU_CODE = l.MENU_CODE 
+             and l.SHOW_INDEX is null
+  </select>
 </mapper>

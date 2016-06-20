@@ -91,5 +91,12 @@ public interface AtSysModelMapper {
 	 * @throws Exception 
 	 */
 	public int batchDeleteAtSysModel(int[] ids);
+	
+	/**
+	 * 根据功能id查询model
+	 * @return
+	 * @throws Exception 
+	 */
+	public List<AtSysModel> queryAtSysModelByUserId(Map<String,Object> map);
 
 }

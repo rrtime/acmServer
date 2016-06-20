@@ -83,4 +83,10 @@ public interface AtSysModelService {
 	 */
 	public int batchDeleteAtSysModel(int[] ids) throws Exception;
 	
+	/**
+	 * 根据功能id查询model
+	 * @return
+	 * @throws Exception 
+	 */
+	public List<AtSysModel> queryAtSysModelByUserId(int userId);
 }

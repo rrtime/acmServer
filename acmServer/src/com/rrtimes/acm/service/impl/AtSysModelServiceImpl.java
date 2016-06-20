@@ -160,4 +160,17 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 		return atSysModelMapper.batchDeleteAtSysModel(ids)>0?0:1;
 	}
 
+	/**
+	 * 根据功能id查询model
+	 * @return
+	 * @throws Exception 
+	 */
+	@Override
+	public List<AtSysModel> queryAtSysModelByUserId(int userId) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return atSysModelMapper.queryAtSysModelByUserId(map);
+	}
+
 }

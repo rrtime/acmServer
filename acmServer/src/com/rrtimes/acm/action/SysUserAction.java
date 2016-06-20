@@ -16,14 +16,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.AtCompanyAgent;
 import com.rrtimes.acm.domain.AtUser;
+import com.rrtimes.acm.domain.AtUserGroupRel;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.serviceI.AcmSysOrgService;
 import com.rrtimes.acm.serviceI.AtUserGroupRelService;
@@ -56,6 +59,12 @@ public class SysUserAction extends ActionSupport{
 	
 	@Resource
 	private AcmSysOrgService asoservice;
+	
+	@Resource
+	private AtUserGroupRelService augls;
+	
+	@Resource
+	private AcmSysOrgService asos;
 
 	private AtUser atUser = new AtUser();
 	
@@ -63,9 +72,13 @@ public class SysUserAction extends ActionSupport{
 	
 	private AcmSysOrg aso = new AcmSysOrg();
 	
+	private AtUserGroupRel augl = new AtUserGroupRel();
+	
 	private PageObject page = new PageObject();
 	
 	private List<AtUser> list = new ArrayList<AtUser>();
+	
+	private List<AcmSysOrg> orglist = new ArrayList<AcmSysOrg>();
 	
 	private AcmSysOrg org = new AcmSysOrg();
 	
@@ -76,6 +89,11 @@ public class SysUserAction extends ActionSupport{
 	private String msg;
 	
     private String oldpwd;
+    
+    private String ids;
+    
+
+	private String atUserId;
 	
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	
@@ -98,15 +116,68 @@ public class SysUserAction extends ActionSupport{
 	
 	//新增用户
 	public String insertUser(){
-		rst = aus.addUser(atUser);
-		if(rst==0){
-			msg="新增成功";
+		if(StringUtils.isEmpty(atUserId)){
+			boolean result = aus.queryByInameToinsert(atUser.getIname());
+			if(result){//不存在相同登录账号
+				AtUser au = (AtUser)session.getAttribute("atUser");
+				atUser.setCpCode(au.getCpCode());
+				atUser.setIsUsed(0);
+				atUser.setItype(1);
+				atUser.setIsAdmin(0);
+				atUser.setStatus(0);
+				atUser.setOperator(String.valueOf(au.getId()));
+				rst = aus.addUser(atUser);
+				int id = aus.queryByIname(atUser.getIname());
+				augl.setUid(id);
+				augls.insert(augl);
+				if(rst==0){
+					msg="新增成功";
+				}else{
+					msg="新增失败";
+				}
+			}else{
+				msg="新增失败";
+			}
+			return queryBycpCode();
 		}else{
-			msg="新增失败";
+			return update();
 		}
-		return findUserByMap();
 	}
 	
+	//新增组织机构
+		public String insertOrg(){
+				AtUser au = (AtUser)session.getAttribute("atUser");
+				org.setCpCode(au.getCpCode());
+				org.setOid(0);
+				org.setOperator(String.valueOf(au.getId()));
+				if(org.getId()>0){
+					rst=asos.updateOrg(org);
+					if(rst==0){
+						msg="修改成功";
+					}else{
+						msg="修改失败";
+					}
+				}else{
+					rst=asos.addOrg(org);
+					if(rst==0){
+						msg="新增成功";
+					}else{
+						msg="新增失败";
+					}
+				}
+				return queryBycpCode();
+		}
+	//删除org
+		public String deleteOrg(){
+			System.out.println(org.getId());
+			rst=asos.deleteOrg(org.getId());
+			if(rst==0){
+				msg="删除成功";
+			}else{
+				msg="删除失败";
+			}
+			return queryBycpCode();
+		}
 	//新增用户校验用户名I_NAME
 	public void validateforinsert(){
 		boolean result = aus.queryByInameToinsert(atUser.getIname());
@@ -131,13 +202,27 @@ public class SysUserAction extends ActionSupport{
 	
 	//修改用户
 	public String update(){
-		rst=aus.updateUser(atUser);
+		atUser.setId(Integer.parseInt(atUserId));
+		AtUser au = aus.queryUserById(atUser.getId());
+		au.setUserName(atUser.getUserName());
+		au.setSex(atUser.getSex());
+		au.setEmail(atUser.getEmail());
+		au.setTelno(atUser.getTelno());
+		au.setOid(atUser.getOid());
+		au.setIname(atUser.getIname());
+		au.setWorkerNo(atUser.getWorkerNo());
+		au.setJobDuty(atUser.getJobDuty());
+		au.setLoginPwd(atUser.getLoginPwd());
+		au.setRemark(atUser.getRemark());
+		rst=aus.updateUser(au);
+		augl.setUid(atUser.getId());
+		augls.updateByUid(augl);
 		if(rst==0){
 			msg="修改成功";
 		}else{
 			msg="修改失败";
 		}
-		return findUserByMap();
+		return queryBycpCode();
 	}
 	
 	//修改用户校验用户名I_NAME
@@ -164,21 +249,77 @@ public class SysUserAction extends ActionSupport{
 	
 	//删除用户
 	public String delete(){
-		rst= aus.deleteUser(atUser.getId());
-		augrs.delete(atUser.getId());
-		if(rst==0){
-			msg="删除成功";
-		}else{
-			msg="删除失败";
+			rst= aus.deleteUser(atUser.getId());
+			augrs.delete(atUser.getId());
+			if(rst==0){
+				msg="删除成功";
+			}else{
+				msg="删除失败";
+			}
+			return queryBycpCode();
+	}
+	
+	//批量删除用户
+	public String deletemore(){
+		String[] id = ids.split(",");
+		for(int i=0;i<id.length;i++){
+			rst= aus.deleteUser(Integer.parseInt(id[i]));
+			augrs.delete(Integer.parseInt(id[i]));
+			if(rst==0){
+				msg="删除成功";
+			}else{
+				msg="删除失败";
+			}
 		}
-		return findUserByMap();
+		return queryBycpCode();
 	}
 	
 	//按Id查询用户
-	public String findById(){
-		setCmd(1);
-		setAtUser(aus.queryUserById(atUser.getId()));
-		return "add";
+	public void findById(){
+		try{
+			HttpServletResponse response = ServletActionContext.getResponse();
+			PrintWriter out;
+			JSONObject jo = new JSONObject();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			setCmd(1);
+			setAtUser(aus.queryUserById(atUser.getId()));
+			jo.put("atUserId", atUser.getId());
+			jo.put("username", atUser.getUserName() );
+			jo.put("sex", atUser.getSex());
+			jo.put("email", atUser.getEmail());
+			jo.put("telno", atUser.getTelno());
+			jo.put("oid", atUser.getOid());
+			jo.put("iname", atUser.getIname());
+			jo.put("loginPwd", atUser.getLoginPwd());
+			jo.put("remark", atUser.getRemark());
+			jo.put("parentId", augls.queryByUserId(atUser.getId()).getGid());
+			jo.put("workerNo", atUser.getWorkerNo());
+			jo.put("jobDuty", atUser.getJobDuty());
+			list = aus.queryjsBycpCode(atUser.getCpCode());
+			JSONArray jsonArray = new JSONArray();
+			for(int i=0;i<list.size();i++){
+				JSONObject obj = new JSONObject();
+				obj.put("id", list.get(i).getId());
+				obj.put("iname", list.get(i).getIname());
+				jsonArray.add(i, obj);
+			}
+			jo.put("orglist", jsonArray );
+			orglist = asoservice.queryAll(atUser.getCpCode());
+			JSONArray jsonArray1 = new JSONArray();
+			for(int i=0;i<orglist.size();i++){
+				JSONObject obj = new JSONObject();
+				obj.put("id", orglist.get(i).getId());
+				obj.put("orgName", orglist.get(i).getOrgName());
+				jsonArray1.add(i, obj);
+			}
+			jo.put("deptlist", jsonArray1 );
+			out = response.getWriter();
+			out.print(jo);
+			out.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	//打开新增页面
@@ -190,8 +331,53 @@ public class SysUserAction extends ActionSupport{
 	//根据代账公司查询员工信息
 	public String queryBycpCode(){
 		AtUser atUser = (AtUser)session.getAttribute("atUser");
-		list = aus.queryBycpCode(atUser.getCpCode(), page);
+		list = aus.queryBycpCode(atUser, page);
+		orglist = asos.queryAll(atUser.getCpCode());
 		return "queryBycpCode";
+	}
+	
+	//根据代账公司的一个部门Id查询员工信息
+		public String findByOrgId(){
+			AtUser au = (AtUser)session.getAttribute("atUser");
+			list = aus.queryByOrgId(atUser.getOid(), page);
+			orglist = asos.queryAll(au.getCpCode());
+			ServletActionContext.getRequest().setAttribute("orgId", atUser.getOid());
+			return "queryBycpCode";
+		}
+	
+	//根据员工名称查询员工信息
+		public String queryByUsername(){
+			AtUser au = (AtUser)session.getAttribute("atUser");
+			atUser.setCpCode(au.getCpCode());
+			list = aus.queryByUsername(atUser, page);
+			orglist = asos.queryAll(au.getCpCode());
+			return "queryBycpCode";
+		}
+	
+	//根据cpCode查询当前代账公司的组
+	public void queryzuBycpCode(){
+		try{
+			HttpServletResponse response = ServletActionContext.getResponse();
+			PrintWriter out;
+			JSONObject jo = new JSONObject();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			AtUser atUser = (AtUser)session.getAttribute("atUser");
+			list = aus.queryjsBycpCode(atUser.getCpCode());
+			JSONArray jsonArray = new JSONArray();
+			for(int i=0;i<list.size();i++){
+				JSONObject obj = new JSONObject();
+				obj.put("id", list.get(i).getId());
+				obj.put("iname", list.get(i).getIname());
+				jsonArray.add(i, obj);
+			}
+			jo.put("jsonlist", jsonArray );
+			out = response.getWriter();
+			out.print(jo);
+			out.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//根据部门查询员工信息
@@ -363,5 +549,37 @@ public class SysUserAction extends ActionSupport{
 	public void setOldpwd(String oldpwd) {
 		this.oldpwd = oldpwd;
 	}
+
+	public AtUserGroupRel getAugl() {
+		return augl;
+	}
+
+	public void setAugl(AtUserGroupRel augl) {
+		this.augl = augl;
+	}
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+
+	public List<AcmSysOrg> getOrglist() {
+		return orglist;
+	}
+
+	public void setOrglist(List<AcmSysOrg> orglist) {
+		this.orglist = orglist;
+	}
 	
+    public String getAtUserId() {
+		return atUserId;
+	}
+
+	public void setAtUserId(String atUserId) {
+		this.atUserId = atUserId;
+	}
+
 }

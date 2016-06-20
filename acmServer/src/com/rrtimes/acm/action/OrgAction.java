@@ -8,10 +8,18 @@
  */
 package com.rrtimes.acm.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AcmSysOrg;
@@ -52,10 +60,38 @@ public class OrgAction extends ActionSupport{
 	
 	private String msg;
 	
+	HttpSession session = ServletActionContext.getRequest().getSession();
+	
 	//查询（查询当前代账公司的组织机构）
 	public String list(){
 		list = asos.queryAll(aso.getCpCode());
 		return "list";
+	}
+	
+	//查询当前代账公司的组织机构
+	public void querydeptBycpCode(){
+		try{
+			HttpServletResponse response = ServletActionContext.getResponse();
+			PrintWriter out;
+			JSONObject jo = new JSONObject();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			AtUser atUser = (AtUser)session.getAttribute("atUser");
+			list = asos.queryAll(atUser.getCpCode());
+			JSONArray jsonArray = new JSONArray();
+			for(int i=0;i<list.size();i++){
+				JSONObject obj = new JSONObject();
+				obj.put("id", list.get(i).getId());
+				obj.put("orgName", list.get(i).getOrgName());
+				jsonArray.add(i, obj);
+			}
+			jo.put("jsonlist", jsonArray );
+			out = response.getWriter();
+			out.print(jo);
+			out.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//通过组织机构oid查询当前的下级
@@ -93,10 +129,23 @@ public class OrgAction extends ActionSupport{
 	}
 	
 	//查询to修改
-	public String orgDetail(){
-		setCmd(1);
-		aso = asos.queryOrgById(aso.getId());
-		return "add";
+	public void orgDetail(){
+		try{
+			HttpServletResponse response = ServletActionContext.getResponse();
+			PrintWriter out;
+			JSONObject jo = new JSONObject();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			aso = asos.queryOrgById(aso.getId());
+			jo.put("orgName", aso.getOrgName() );
+			jo.put("orgDesc", aso.getOrgDesc() );
+			jo.put("orgId", aso.getId() );
+			out = response.getWriter();
+			out.print(jo);
+			out.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//修改自治机构

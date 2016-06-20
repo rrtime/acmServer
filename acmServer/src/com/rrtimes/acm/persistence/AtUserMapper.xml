@@ -18,14 +18,8 @@
   	     EMAIL,
   	     IS_USED,
   	     IS_ADMIN,
-  	     ORDER_NUM,
-  	     AUTH_STATE,
-  	     LAST_LOGIN_DATE,
   	     STATUS,
-  	     LOGIN_IP,
-  	     LOGIN_TIME,
   	     OPERATOR,
-  	     LAST_OPERATOR,
   	     REMARK
   		 )
   	VALUES(
@@ -40,16 +34,10 @@
   	     #{jobDuty},
   	     #{telno},
   	     #{email},
-  	     #{idUsed},
+  	     #{isUsed},
   	     #{isAdmin},
-  	     #{orderNum},
-  	     #{authState},
-  	     #{lastLoginDate},
   	     #{status},
-  	     #{loginIp},
-  	     #{loginTime},
   	     #{operator},
-  	     #{lastOperator},
   	     #{remark}  )
   </insert> 
   
@@ -203,6 +191,14 @@
 	    	WHERE 1 = 1
 	         and OID=#{oid}
 	    	ORDER BY CREATE_TIME DESC 
+  </select>
+  
+  <select id="findByIname" parameterType="Map" resultType="int">
+	  	SELECT
+	  		 ID as id
+	    FROM AT_USER 
+	    	WHERE 1 = 1
+	         and I_NAME=#{iname}
   </select>
   
   <select id="findById" parameterType="int" resultType="AtUser">
@@ -402,7 +398,9 @@
   	SELECT
   		 ID as id,
 	  		CP_CODE as cpCode,
-	  		OID as oid,
+	  		( 
+	  		   select ORG_NAME from ACM_SYS_ORG where ID = u.OID
+	  		) as orgName,
 	  		I_TYPE as itype,
 	  		I_NAME as iname,
 	  		LOGIN_PWD as loginPwd,
@@ -425,8 +423,10 @@
 	  		LAST_OPERATOR as lastOperator,
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark  
-    FROM AT_USER 
-    WHERE CP_CODE=#{cpCode} and I_TYPE = 1
+    FROM AT_USER u
+    WHERE CP_CODE=#{cpCode} 
+    <if test="userName!=null">and USER_NAME = #{userName}</if>
+    and I_TYPE = 1
     limit #{page.pageSize} offset #{page.offset}
   </select>
   
@@ -434,14 +434,18 @@
   	SELECT
   		 count(*) 
     FROM AT_USER 
-    WHERE CP_CODE=#{cpCode} and I_TYPE = 1
+    WHERE CP_CODE=#{cpCode} 
+    <if test="userName!=null">and USER_NAME = #{userName}</if>
+    and I_TYPE = 1
   </select>
   
   <select id="findByOrgId" parameterType="Map" resultType="AtUser">
   	SELECT
   		 ID as id,
 	  		CP_CODE as cpCode,
-	  		OID as oid,
+	  		( 
+	  		   select ORG_NAME from ACM_SYS_ORG where ID = u.OID
+	  		) as orgName,
 	  		I_TYPE as itype,
 	  		I_NAME as iname,
 	  		LOGIN_PWD as loginPwd,
@@ -464,7 +468,7 @@
 	  		LAST_OPERATOR as lastOperator,
 	  		UPDATE_TIME as updateTime,
 	  		REMARK as remark  
-    FROM AT_USER 
+    FROM AT_USER u
     WHERE OID=#{orgId} and I_TYPE = 1
     limit #{page.pageSize} offset #{page.offset}
   </select>
@@ -503,6 +507,14 @@
 	    	<if test="operator!=null">and OPERATOR = #{operator}</if>
 	    	<if test="lastOperator!=null">and LAST_OPERATOR = #{lastOperator}</if>
 	    	<if test="remark!=null">and REMARK = #{remark}</if>
+  </select>
+  
+  <select id="findByUserId" parameterType="Map" resultType="int">
+	    SELECT
+	         GID as gid
+	    FROM AT_USER 
+	    WHERE 1 = 1
+	      and UID=#{userId}
   </select>
 
 </mapper>
