@@ -339,10 +339,10 @@
         <div class="footer">
             <input type="button" value="首页">
             <input type="button" value="上一页">
-            <span class="span">1</span>
+            <span class="span">${page.currentPage }</span>
             <input type="button" value="下一页">
             <input type="button" value="尾页">
-            <b>总1条，共1页，每页</b>
+            <b>总${page.sumCloum}条，共${page.totalPage }页，每页</b>
             <select name="">
                 <option value="">25</option>
                 <option value="">50</option>
