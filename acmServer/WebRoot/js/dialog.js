@@ -22,6 +22,12 @@ jQuery(function($){
 			$("#roleName").val('');
 			$("#roleDesc").val('');
 			$("#addTip").css("display","none");
+			$("#orgName").val("");
+            $("#orgDesc").val("");
+            $("#orgId").val("");
+			var obj1 = $("#sysorgId").val();
+			var obj = $("#sysoId").val();
+			queryorgId(obj,obj1,'0');
 		});
 		$(".reset").click(function(){
 			$(".shadow-bg").css("display","none");
@@ -33,6 +39,10 @@ jQuery(function($){
 			$(".add-word").css("display","block");
 			$("#roleAddForm").attr("action","atRoleAction!updateRole.do");
 			$("#addTip").css("display","none");
+			var obj1 = $("#sysorgId").val();
+			var obj = $("#sysoId").val();
+			queryorgId(obj,obj1,'1');
+			editorg();
 		});
 		$(".reset").click(function(){
 			$(".shadow-bg").css("display","none");
@@ -60,6 +70,17 @@ jQuery(function($){
 		$(".find-opera .add-button").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".grxxsz").css("display","block");
+			$("#atUserId").val("");
+            $("#username").val("");
+            $("#email").val("");
+            $("#telno").val("");
+            $("#iname").val("");
+            $("#workerNo").val("");
+            $("#jobDuty").val("");
+            $("#loginPwd").val("");
+            $("#remark").val("");
+			findzu();
+			finddept();
 		});
 		
 		//个人信息设置tap切换
