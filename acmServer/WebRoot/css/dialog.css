@@ -139,7 +139,8 @@ h1{
 	width:200px;height:30px;
 	border:1px solid #d5d5d5;
 	margin-left:14px;	
-} 
+}
+
 .tab input[type="radio"]{
 	margin-left:14px;margin-bottom:5px;
 } 
@@ -163,7 +164,7 @@ background:#fff;
 .content{
 	border-bottom:1px solid #ccc;
 }
-.grxxsz input[type="submit"]{
+.grxxsz input[type="button"]{
 	width:65px;height:27px;background:#33A3CE;
 	margin-left:530px;color:#fff;
 	margin-top:12px;
@@ -192,5 +193,14 @@ background:#fff;
 .tab input[type="text"] .eamil{
 	padding:5px;
 }
+.tab .tab-tr td .tab-pw
+{width: 200px;
+height: 30px;
+line-height: 30px;
+overflow: hidden;
+border: 1px solid rgb(213, 213, 213);
+margin-left:14px;
+}
+
 
 

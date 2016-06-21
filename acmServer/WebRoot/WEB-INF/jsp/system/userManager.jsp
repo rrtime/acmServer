@@ -465,9 +465,9 @@
 											<th align="right">岗位职务：</th>
 											<td><input  type="text" id="jobDuty" name="atUser.jobDuty" value="" /></td>
 										</tr>
-										<tr>
+										<tr class="tab-tr">
 											<th align="right">登录密码：</th>
-											<td><input  type="password" id="loginPwd" name="atUser.loginPwd" value=""/></td>
+											<td><input class="tab-pw" style="width:200px; height:30px; line-height:30px; overflow:hidden; border:1px solid #d5d5d5;"  type="password" id="loginPwd" name="atUser.loginPwd" value=""/></td>
 										</tr>
 										<tr>
 											<th align="right">备注：</th>
