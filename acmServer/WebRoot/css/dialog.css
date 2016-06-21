@@ -55,6 +55,11 @@
 	width:65px;height:25px;background:#abbac3;line-height: 25px;text-align: center;
 	margin-top:10px;margin-left:5px;color:#fff; border:none; cursor:pointer;
 }
+.button{
+	width:65px;height:25px;background:#4aa0d9;line-height: 25px;text-align: center;
+	text-align: center;margin-left:185px;margin-top:10px;color:#fff;
+	border:none; cursor:pointer;
+}
 .shadow-bg{ background:rgba(0,0,0, .5); position:fixed; width:100%; height:100%; display:none; z-index:9; top:0; left:0;}
 .close-button{ float:right; width:15px; height:15px; margin-top:13px; margin-right:13px; overflow:hidden; cursor:pointer;}
 
@@ -63,14 +68,18 @@
 
 /*删除弹窗*/
 .mian{
-	width:270px;height:210px;background:#fff;border:1px solid #ccc; position:fixed; top:50%; left:50%; margin-left:-135px; margin-top:-105px; display:none;z-index:99;
+	width:270px;height:190px;background:#fff;border:1px solid #ccc; position:fixed; top:50%; left:50%; margin-left:-135px; margin-top:-105px; display:none;z-index:99;
+}
+/*提示弹窗*/
+.mainTip{
+	width:270px;height:180px;background:#fff;border:1px solid #ccc; position:fixed; top:50%; left:50%; margin-left:-135px; margin-top:-105px; display:none;z-index:99;
 }
 h1{
 	width:245px;height:40px;background:url(../images/pic13.png) 240px 14px no-repeat #f3f3f3;
 	font-size:14px;border-bottom:1px solid #ccc;line-height: 40px;padding-left:25px;;
 }
 .delete{
-	margin-top:45px;margin:40px auto 0;width:150px;height:40px;
+	margin-top:45px;margin:40px auto 0;width:220px;height:40px;
 }
 .delete img,.delete p{
 	float:left;
@@ -80,7 +89,7 @@ h1{
 }
 .submit1{
 	width:65px;height:25px;background:#ff9900;line-height: 25px;
-	text-align: center;margin-left:60px;margin-top:20px;color:#fff;
+	text-align: center;margin-left:70px;margin-top:20px;color:#fff;
 	border:none;
 	cursor:pointer;
 }
@@ -92,7 +101,7 @@ h1{
 }
 .mian-title{ font-size:14px;}
 .button{
-	background:#438ee4;color:#fff;height:25px;
+	background:#438ee4;color:#fff;height:25px;margin-left:105px;
 }
 
 /**/
@@ -139,8 +148,7 @@ h1{
 	width:200px;height:30px;
 	border:1px solid #d5d5d5;
 	margin-left:14px;	
-}
-
+} 
 .tab input[type="radio"]{
 	margin-left:14px;margin-bottom:5px;
 } 
@@ -164,7 +172,7 @@ background:#fff;
 .content{
 	border-bottom:1px solid #ccc;
 }
-.grxxsz input[type="button"]{
+.grxxsz input[type="submit"]{
 	width:65px;height:27px;background:#33A3CE;
 	margin-left:530px;color:#fff;
 	margin-top:12px;
@@ -193,14 +201,5 @@ background:#fff;
 .tab input[type="text"] .eamil{
 	padding:5px;
 }
-.tab .tab-tr td .tab-pw
-{width: 200px;
-height: 30px;
-line-height: 30px;
-overflow: hidden;
-border: 1px solid rgb(213, 213, 213);
-margin-left:14px;
-}
-
 
 
