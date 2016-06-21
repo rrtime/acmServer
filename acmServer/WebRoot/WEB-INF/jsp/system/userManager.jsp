@@ -337,11 +337,13 @@
         </table>
         <!--底部-->
         <div class="footer">
-            <input type="button" value="首页">
-            <input type="button" value="上一页">
+            <input type="hidden" id="currentPage" name="page.currentPage" value="${page.currentPage }"/>
+    		<input type="hidden" id="totalPage" value="${page.totalPage }"/>
+            <input type="button" value="首页" onclick="mSub('index')">
+            <input type="button" value="上一页" onclick="mSub('pr')">
             <span class="span">${page.currentPage }</span>
-            <input type="button" value="下一页">
-            <input type="button" value="尾页">
+            <input type="button" value="下一页" onclick="mSub('next')">
+            <input type="button" value="尾页" onclick="mSub('end')">
             <b>总${page.sumCloum}条，共${page.totalPage }页，每页</b>
             <select name="">
                 <option value="">25</option>
@@ -586,6 +588,7 @@
 <script src="../js/jquery-1.11.1.min.js"></script>
 <script src="../js/dialog.js"></script>
 <script src="../js/easyTree.js"></script>
+<script src="../js/mpage.js"></script>
 </body>
 </html>
 
