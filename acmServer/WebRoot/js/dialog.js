@@ -55,13 +55,13 @@ jQuery(function($){
 		
 		$(".find-opera .del-button").click(function(){
 			$(".shadow-bg").css("display","block");
-			$("#mian2").css("display","block");
+			$(".mian").css("display","block");
 		});
 		
 		
 		$(".reset1").click(function(){
 			$(".shadow-bg").css("display","none");
-			$(".mian").css("display","none");	
+			$(".mainDel").css("display","none");	
 		});
 		$(".close-button").click(function(){
 			$(".shadow-bg").css("display","none");
@@ -92,7 +92,7 @@ jQuery(function($){
 	
 	$(".opera-button .del-bg").click(function(){
 			$(".shadow-bg").css("display","block");
-			$("#mian").css("display","block");
+			$(".mainDel").css("display","block");
 		});
 	
 });

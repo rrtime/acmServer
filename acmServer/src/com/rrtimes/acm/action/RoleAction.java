@@ -141,6 +141,17 @@ public class RoleAction extends ActionSupport {
 			modelFunctionList = atSysModelFunctionService.findAll();
 			//取得系统权限字段字典
 			fieldDictList = atFieldDictService.findAll();
+			//如果存在一个以上角色则选中第一个
+			if(null != userList && userList.size() > 0){
+				//设置角色ID
+				roleId=userList.get(0).getId();
+				//设置角色对象
+				this.setAtUser(userList.get(userList.size()-1));
+				//取得系统功能操作权限列表
+				holdFunctionList = atHoldFunctionService.getHoldFunctionListByActorId(roleId);
+				//取得用户字段权限关系列表
+				fieldRelList = atFieldRelService.getAtFieldRelListByUid(roleId);
+			}
 		}
 		
 		//返回前台页面

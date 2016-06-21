@@ -61,7 +61,9 @@
 		<input type="hidden" name="roleId" value='<s:property value="roleId"/>' />
 		<div class="role-list">
 			<div class="find-opera clearfix">
+				<s:if test="menuList!=null && menuList.size() > 0">
 				<a id="saveRoleBtn" class="save-btn" href="#">保 存</a>
+				</s:if>
 			</div>
 			<table class="table-diction" border="1" cellspacing="0">
 				<tr>
@@ -220,7 +222,7 @@
 	<!--删除-->
 	<form id="roleDelForm" method="post" action="atRoleAction!deleteRole.do">
 	<input type="hidden" name="roleId" value='<s:property value="roleId"/>' />
-	<div class="mian">
+	<div class="mainDel">
 		<h1 class="mian-title">
 			提示<span class="close-button right"></span>
 		</h1>

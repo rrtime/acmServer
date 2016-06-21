@@ -67,7 +67,7 @@
 .mt35{ margin-top:35px;}
 
 /*删除弹窗*/
-.mian{
+.mainDel{
 	width:270px;height:190px;background:#fff;border:1px solid #ccc; position:fixed; top:50%; left:50%; margin-left:-135px; margin-top:-105px; display:none;z-index:99;
 }
 /*提示弹窗*/
