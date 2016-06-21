@@ -18,11 +18,10 @@ jQuery(function($){
 		$(".opera-button .add-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
-			var oid = $("#sysoId").val();
-			var orgId = $("#sysorgId").val();
-			queryorgId(oid,orgId,'0');
-			$("#orgName").val("");
-			$("#orgDesc").val("");
+			$("#roleAddForm").attr("action","atRoleAction!addRole.do");
+			$("#roleName").val('');
+			$("#roleDesc").val('');
+			$("#addTip").css("display","none");
 		});
 		$(".reset").click(function(){
 			$(".shadow-bg").css("display","none");
@@ -32,14 +31,16 @@ jQuery(function($){
 		$(".opera-button .edit-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
-			var oid = $("#sysoId").val();
-			var orgId = $("#sysorgId").val();
-			queryorgId(oid,orgId,'1');
-			editorg();
+			$("#roleAddForm").attr("action","atRoleAction!updateRole.do");
+			$("#addTip").css("display","none");
 		});
 		$(".reset").click(function(){
 			$(".shadow-bg").css("display","none");
 			$(".add-word").css("display","none");	
+		});
+		$(".button").click(function(){
+			$(".shadow-bg").css("display","none");
+			$(".mainTip").css("display","none");	
 		});
 		
 		$(".find-opera .del-button").click(function(){
@@ -59,8 +60,6 @@ jQuery(function($){
 		$(".find-opera .add-button").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".grxxsz").css("display","block");
-			findzu();
-			finddept();
 		});
 		
 		//个人信息设置tap切换
@@ -72,8 +71,7 @@ jQuery(function($){
 	
 	$(".opera-button .del-bg").click(function(){
 			$(".shadow-bg").css("display","block");
-			//$(".mian").css("display","block");
-			$("#mian").css("display","block");
+			$(".mian").css("display","block");
 		});
 	
 });
