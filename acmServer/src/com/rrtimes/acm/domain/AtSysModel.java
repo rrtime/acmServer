@@ -59,6 +59,12 @@ public class AtSysModel implements ISerializable{
 	private Date updateTime;//修改时间
 	
 	private String remark;//备注
+	
+	private String showClass;
+	
+    private String murl;
+    
+    private String micon;
 
 	public int getId() {
 		return id;
@@ -170,6 +176,30 @@ public class AtSysModel implements ISerializable{
 
 	public void setMname(String mname) {
 		this.mname = mname;
+	}
+
+	public String getShowClass() {
+		return showClass;
+	}
+
+	public void setShowClass(String showClass) {
+		this.showClass = showClass;
+	}
+
+	public String getMurl() {
+		return murl;
+	}
+
+	public void setMurl(String murl) {
+		this.murl = murl;
+	}
+
+	public String getMicon() {
+		return micon;
+	}
+
+	public void setMicon(String micon) {
+		this.micon = micon;
 	}
 	
 	
