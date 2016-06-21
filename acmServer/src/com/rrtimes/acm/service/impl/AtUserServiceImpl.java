@@ -33,6 +33,7 @@ import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AcmSysOrgMapper;
+import com.rrtimes.acm.persistence.AtUserGroupRelMapper;
 import com.rrtimes.acm.persistence.AtUserMapper;
 import com.rrtimes.acm.serviceI.AcmSysOrgService;
 import com.rrtimes.acm.serviceI.AtUserService;
@@ -53,6 +54,10 @@ public class AtUserServiceImpl implements AtUserService{
 	
 	@Resource
 	private AtUserMapper asom;
+	
+	@Resource
+	private AtUserGroupRelMapper agrm;
+
 
 	@Override
 	public List<AtUser> queryUser(AtUser aso, PageObject page) {
@@ -259,6 +264,14 @@ public class AtUserServiceImpl implements AtUserService{
 		page.setSumCloum(asom.findCountByCpCode(map));
 		map.put("page", page);
 		return asom.findByCpCode(map);
+	}
+
+	@Override
+	public int deleteRole(int id) {
+		// TODO Auto-generated method stub
+		agrm.delByRoleId(id);
+		return asom.delete(id)>0?0:1;
+
 	}
 
 }

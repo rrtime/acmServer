@@ -11,7 +11,6 @@ package com.rrtimes.acm.serviceI;
 import java.util.List;
 import java.util.Map;
 
-
 import com.rrtimes.acm.domain.AtFieldRel;
 import com.rrtimes.acm.domain.PageObject;
 
@@ -101,5 +100,18 @@ public interface AtFieldRelService {
 	 * @return
 	 */
 	public List<AtFieldRel> getAtFieldRelListByUid(int uid);
+	
+	/**
+	 * 根据角色ID删除字段权限关系
+	 * @return
+	 */
+	public int delAllByActorId(int uid);
+	
+	/**
+	 * 修改权限
+	 * @return
+	 * @throws Exception 
+	 */
+	public int modifyFieldRel(String[] fieldIds,int actorId,int operator) throws Exception;
 	
 }

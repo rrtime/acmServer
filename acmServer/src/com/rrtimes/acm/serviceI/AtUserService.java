@@ -70,4 +70,8 @@ public interface AtUserService {
 	public List<AtUser> queryBycpCodeAll(String cpCode);
 	
 	public int queryByIname(String iname);
+	
+	//删除角色
+	public int deleteRole(int id);
+
 }

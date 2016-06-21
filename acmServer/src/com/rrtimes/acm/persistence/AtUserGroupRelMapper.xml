@@ -118,4 +118,9 @@
 	    	<if test="remark!=null">and REMARK = #{remark}</if>
   </select>
 
+  <select id="delByRoleId" parameterType="int">
+	    DELETE FROM AT_USER_GROUP_REL
+	    WHERE GID = #{gid}
+  </select>
+  
 </mapper>

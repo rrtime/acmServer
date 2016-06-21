@@ -309,4 +309,24 @@
 	WHERE
 		afr.UID = #{uid}
   </select>
+  
+  <delete id="delAllByActorId" parameterType="int">
+  	DELETE FROM AT_FIELD_REL WHERE UID = #{id}
+  </delete>
+  
+  <select id="getFieldDictByIdArray" resultType="AtFieldDict">
+  	SELECT
+  		 afd.ID as id,
+  		 afd.MENU_CODE as menuCode,
+         afd.F_NAME as fname,
+         afd.F_TITLE as fTitle,
+	     afd.UPDATE_TIME as updateTime,
+         afd.REMARK as remark
+    FROM AT_FIELD_DICT afd
+	    WHERE 
+	    <foreach collection="array" item="fieldIds" open="(" close=")" separator="OR"> 
+			ID = #{fieldIds} 
+		</foreach> 
+  </select>
+  
 </mapper>

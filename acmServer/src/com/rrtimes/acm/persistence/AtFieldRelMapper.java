@@ -119,6 +119,21 @@ public interface AtFieldRelMapper {
 	 * @return
 	 */
 	public List<AtFieldRel> getAtFieldRelListByUid(int uid);
+	
+	/**
+	 * 根据角色ID删除字段权限关系
+	 * @param actorId
+	 * @return
+	 */
+	public int delAllByActorId(int actorId);
+
+	/**
+	 * 根据IDS查询权限字段字典列表
+	 * @param ids
+	 * @return
+	 */
+	public List<AtFieldDict> getFieldDictByIdArray(String[] fieldIds);
+
 
 	
 }
