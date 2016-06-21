@@ -55,7 +55,7 @@ jQuery(function($){
 		
 		$(".find-opera .del-button").click(function(){
 			$(".shadow-bg").css("display","block");
-			$(".mian").css("display","block");
+			$("#mian2").css("display","block");
 		});
 		
 		

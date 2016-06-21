@@ -51,6 +51,7 @@
        document.getElementById("userform").submit();
    }
    function delte(){
+   alert("ss");
       var ids =  document.getElementsByName("id");
       var idvalues="";
       for(var i=1;i<ids.length;i++){
@@ -61,6 +62,7 @@
       }
       //alert(idvalues.substring(0,idvalues.lastIndexOf(",")));
       $("#ids").val(idvalues.substring(0,idvalues.lastIndexOf(",")));
+      alert($("#ids").val());
       document.getElementById("idsform").submit();
    }
    function check(){
@@ -397,7 +399,7 @@
     <input class="reset"type="reset" value="取消"/>
     </div>
 <!---->
-<div class="mian">
+<div class="mian" id="mian2">
     <form id="idsform" action="../xl/user!deletemore.do">
     <input type="hidden" id="ids" name="ids" value=""/>
     <h1 class="mian-title">提示<span class="close-button right"></span></h1>
