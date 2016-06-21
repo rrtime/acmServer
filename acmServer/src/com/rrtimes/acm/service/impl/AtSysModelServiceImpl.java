@@ -18,10 +18,12 @@ import javax.annotation.Resource;
 import com.rrtimes.acm.domain.AtHoldFunction;
 import com.rrtimes.acm.domain.AtModelFunction;
 import com.rrtimes.acm.domain.AtSysModel;
+import com.rrtimes.acm.domain.AtUserGroupRel;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtHoldFunctionMapper;
 import com.rrtimes.acm.persistence.AtModelFunctionMapper;
 import com.rrtimes.acm.persistence.AtSysModelMapper;
+import com.rrtimes.acm.persistence.AtUserGroupRelMapper;
 import com.rrtimes.acm.serviceI.AtSysModelService;
 import com.rrtimes.acm.util.StringUtil;
 
@@ -45,6 +47,8 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 	private AtModelFunctionMapper atModelFunctionMapper;
 	@Resource
 	private AtHoldFunctionMapper atHoldFunctionMapper;
+	@Resource
+	private AtUserGroupRelMapper augrm;
 	
 	/**
 	 * 新增菜单附属功能字典
@@ -170,6 +174,10 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
+		AtUserGroupRel augr = augrm.findByUserId(map);
+		if(augr!=null){
+			map.put("userId", augr.getGid());
+		}
 		return atSysModelMapper.queryAtSysModelByUserId(map);
 	}
 

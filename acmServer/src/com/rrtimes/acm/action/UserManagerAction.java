@@ -19,9 +19,11 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AtCompanyAgent;
 import com.rrtimes.acm.domain.AtSysMenu;
+import com.rrtimes.acm.domain.AtSysModel;
 import com.rrtimes.acm.domain.AtUser;
 import com.rrtimes.acm.serviceI.AtCompanyAgentService;
 import com.rrtimes.acm.serviceI.AtSysMenuService;
+import com.rrtimes.acm.serviceI.AtSysModelService;
 import com.rrtimes.acm.serviceI.AtUserService;
 
 /**
@@ -50,11 +52,16 @@ public class UserManagerAction extends ActionSupport {
 	@Resource
 	private AtCompanyAgentService acas;
 	
+	@Resource
+	private AtSysModelService asm;
+	
 	private AtUser atUser = new AtUser();
 	
 	private AtCompanyAgent atCompanyAgent = new AtCompanyAgent();
 	
 	private List<AtSysMenu> asoList = new ArrayList<AtSysMenu>();
+	
+	private  List<AtSysModel> asmList = new  ArrayList<AtSysModel>();
 	
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	
@@ -98,6 +105,8 @@ public class UserManagerAction extends ActionSupport {
 				try
 				{
 					setAsoList(asoservice.queryByUserId(atUser.getId()));
+					// 获取当前用户三级菜单权限列表
+					this.setAsmList(asm.queryAtSysModelByUserId(atUser.getId()));
 				}catch(Exception ex)
 				{
 					ex.printStackTrace();
@@ -224,6 +233,14 @@ public class UserManagerAction extends ActionSupport {
 
 	public void setAtCompanyAgent(AtCompanyAgent atCompanyAgent) {
 		this.atCompanyAgent = atCompanyAgent;
+	}
+
+	public List<AtSysModel> getAsmList() {
+		return asmList;
+	}
+
+	public void setAsmList(List<AtSysModel> asmList) {
+		this.asmList = asmList;
 	}
 	
 

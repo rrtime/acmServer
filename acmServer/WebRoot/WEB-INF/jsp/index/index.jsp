@@ -87,18 +87,24 @@
 						 	<s:iterator value="#request.asoList" id="asoList2"> 
 						 		<s:if test="#asoList2.parentId==#asoList.id">
 									<li class="<s:property value="#asoList2.showClass"/>">
-										<a href="#" type="button" data-addtab="mail<s:property value="#asoList2.id"/>" url="<s:property value="#asoList2.murl"/>">
-										<span class="grey-square"></span>
-										<s:property value="#asoList2.mtitle"/>
-										
+									
 										<s:if test="#asoList2.mdesc=='1'.toString()">
+											<a href="#" type="button">
+											<span class="grey-square"></span>
+											<s:property value="#asoList2.mtitle"/>
+											<!-- 3级菜单特效样式 -->
 											<span class="blue-arrow"></span>
 										</s:if>
-										</a>
+										<s:else>
+											<a href="#" type="button" data-addtab="mail<s:property value="#asoList2.id"/>" url="<s:property value="#asoList2.murl"/>">
+											<span class="grey-square"></span>
+											<s:property value="#asoList2.mtitle"/>
+										</s:else>
+											</a>
 										<ul class="third-level">
-											<s:iterator value="#request.asoList" id="asoList3"> 
-							 				<s:if test="#asoList3.parentId==#asoList2.id">
-													<li class="<s:property value="#asoList3.showClass"/>"><a href="#" type="button" data-addtab="mail<s:property value="#asoList3.id"/>" url="<s:property value="#asoList3.murl"/>"><s:property value="#asoList3.mtitle"/></a></li>
+											<s:iterator value="#request.asmList" id="asmList"> 
+							 				<s:if test="#asmList.treeId==#asoList2.id">
+													<li class="<s:property value="#asmList.showClass"/>"><a href="#" type="button" data-addtab="mail<s:property value="#asmList.id"/>" url="<s:property value="#asmList.murl"/>"><s:property value="#asmList.mname"/></a></li>
 											</s:if>
 											</s:iterator>
 										</ul>
@@ -110,7 +116,7 @@
 						</li>
 					</s:if>
 				 </s:iterator>     
-             <!-- user menu data init end -->  
+             <!-- user menu data init end -->   
                     
                     
              
