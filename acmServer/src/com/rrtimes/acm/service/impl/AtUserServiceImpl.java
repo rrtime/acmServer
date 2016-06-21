@@ -273,5 +273,16 @@ public class AtUserServiceImpl implements AtUserService{
 		return asom.delete(id)>0?0:1;
 
 	}
+	
+	@Override
+	public int addRole(AtUser aso) {
+		int result = asom.insert(aso)>0?0:1;
+		if(result == 0){
+			return asom.selectId(aso);
+		}else{
+			return 1;
+		}
+
+	}
 
 }

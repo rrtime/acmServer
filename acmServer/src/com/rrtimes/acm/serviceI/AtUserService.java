@@ -73,5 +73,7 @@ public interface AtUserService {
 	
 	//删除角色
 	public int deleteRole(int id);
-
+	
+	//新增角色
+	public int addRole(AtUser aso);
 }

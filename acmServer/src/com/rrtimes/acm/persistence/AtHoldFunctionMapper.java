@@ -146,5 +146,11 @@ public interface AtHoldFunctionMapper {
 	 */
 	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId);
 
+	/**
+	 * 根据角色ID删除功能操作权限
+	 * @param actorId
+	 * @return
+	 */
+	public int delAllByActorId(int actorId);
 
 }

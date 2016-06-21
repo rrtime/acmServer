@@ -85,7 +85,7 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	public int modAtHoldFunction(String[] funIds,int actorId,int operator) throws Exception {
 		int result = 0;
 		//首先删除该用户或者组已有功能操作权限
-		this.delHoldFunctionByFunIdsAndActorId(funIds, actorId);
+		this.delAllByActorId(actorId);
 		//根据funId查询功能详细操作字典
 		List<AtModelFunction> modelFunctionList = atHoldFunctionMapper.getModelFunctionListByIdArray(funIds);
 		//再重新插入
@@ -264,5 +264,15 @@ public class AtHoldFunctionServiceImpl implements AtHoldFunctionService {
 	public List<AtHoldFunction> getHoldFunctionListByActorId(int actorId) throws Exception {
 		return atHoldFunctionMapper.getHoldFunctionListByActorId(actorId);
 	}
+	
+	/**
+	 * 根据角色ID删除功能操作权限
+	 * @param funIds
+	 * @return
+	 */
+	@Override
+	public int delAllByActorId(int actorId) throws Exception {
+		return atHoldFunctionMapper.delAllByActorId(actorId);
+	} 
 
 }

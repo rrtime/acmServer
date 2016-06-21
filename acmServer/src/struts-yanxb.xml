@@ -3,9 +3,13 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
- 	<package name="struts-yanxb" extends="struts-base" namespace="/yanxb">
+ 	<package name="struts-yanxb" extends="struts-base" namespace="/role">
  	
  		<default-interceptor-ref name="loginInterceptorStack"/>
+ 		<!-- 角色管理 -->
+ 		<action name="atRoleAction" class="com.rrtimes.acm.action.RoleAction">
+			<result name="list" type="dispatcher">/WEB-INF/jsp/system/roleManager.jsp</result>
+		</action>
 		<!-- 菜单附属功能字典 -->
  		<action name="atSysModelMag" class="com.rrtimes.acm.action.AtSysModelAction">
 			<result name="addAtSysModel" type="dispatcher">/WEB-INF/jsp/atSysModel/addAtSysModel.jsp</result>

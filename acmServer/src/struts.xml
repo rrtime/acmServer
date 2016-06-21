@@ -44,5 +44,5 @@
 	<!-- 加载Struts配置相关文件 -->
 	<include file="struts-login.xml"/>
 	<include file="struts-lilei.xml"/>
-	
+	<include file="struts-yanxb.xml"/>
 </struts>

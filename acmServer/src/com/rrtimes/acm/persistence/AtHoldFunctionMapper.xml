@@ -420,4 +420,8 @@
     where c.ACTOR_ID = #{actorId}
     	ORDER BY createTime
   </select>
+  
+  <delete id="delAllByActorId" parameterType="int">
+  	DELETE FROM AT_HOLD_FUNCTION WHERE ACTOR_ID = #{id}
+  </delete>
 </mapper>

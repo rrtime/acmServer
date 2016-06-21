@@ -63,4 +63,5 @@ public interface AtUserMapper {
     
     public int findByIname(Map<String,Object> map);
     
+    public int selectId(AtUser asu);
 }
