@@ -169,8 +169,13 @@ public class SysUserAction extends ActionSupport{
 		}
 	//删除org
 		public String deleteOrg(){
-			System.out.println(org.getId());
 			rst=asos.deleteOrg(org.getId());
+			List<AcmSysOrg> alist = asos.queryOrgByOid(org.getId());
+			if(alist!=null&&alist.size()!=0){//存在下级部门
+				for(int i=0;i<alist.size();i++){
+					asos.deleteOrg(alist.get(i).getId());
+				}
+			}
 			if(rst==0){
 				msg="删除成功";
 			}else{

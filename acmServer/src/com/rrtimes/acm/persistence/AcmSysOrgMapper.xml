@@ -137,6 +137,6 @@
   </select>
   
   <select id="findsecondlevel" parameterType="Map" resultType="AcmSysOrg">
-	    select o.ID as id,o.ORG_NAME as orgName from ACM_SYS_ORG o,ACM_SYS_ORG r where o.ID = r.OID and o.OID!=0 and o.CP_CODE= #{cpCode}
+	    select o.ID as id,o.ORG_NAME as orgName from ACM_SYS_ORG o,ACM_SYS_ORG r where o.OID = r.ID and r.OID=0 and o.CP_CODE= #{cpCode}
   </select>
 </mapper>

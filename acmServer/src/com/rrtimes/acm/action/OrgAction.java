@@ -108,9 +108,9 @@ public class OrgAction extends ActionSupport{
 			response.setContentType("text/html; charset=UTF-8");
 			JSONArray jsonArray = new JSONArray();
 			if(aso.getOid()>0){
-				//需要查询是否存在下级
-				List<AcmSysOrg> listn = asos.queryOrgByOid(aso.getId());
-				if(listn!=null&&listn.size()!=0){
+				//需要查询上一级是否是第二级
+				AcmSysOrg orgn = asos.queryOrgById(aso.getOid());
+				if(orgn.getOid()==0){
 					list = asos.queryOrgByOid(0);
 					for(int i=0;i<list.size();i++){
 						JSONObject obj = new JSONObject();
