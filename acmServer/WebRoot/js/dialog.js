@@ -92,7 +92,7 @@ jQuery(function($){
 	
 	$(".opera-button .del-bg").click(function(){
 			$(".shadow-bg").css("display","block");
-			$(".mian").css("display","block");
+			$("#mian").css("display","block");
 		});
 	
 });
