@@ -88,8 +88,7 @@ public class RoleAction extends ActionSupport {
 	// 用户字段权限关系列表
 	private List<AtFieldRel> fieldRelList = new ArrayList<AtFieldRel>();
 
-	private int rst;
-
+	//返回前台字段串
 	private String msg;
 	
 	//角色ID
@@ -100,101 +99,145 @@ public class RoleAction extends ActionSupport {
 	//字段权限ID
 	private String[] fieldIds;
 
+	//定义并取得会话对象
 	HttpSession session = ServletActionContext.getRequest().getSession();
 
-	// 根据用户账号查询所在代账公司的所有角色
+	/**
+	 * 根据用户账号查询所在代账公司的所有角色
+	 * @return
+	 * @throws Exception
+	 */
 	public String getRole() throws Exception {
-		//取得当前
+		//取得当前登录用户信息
 		AtUser loginUser = (AtUser) session.getAttribute("loginUser");
+		//判断当前是否有选择角色 选择有角色时加载所有功能列表及和角色的关系 否则只加载功能列表
 		if (roleId > 0) {
+			//取得角色列表
 			userList = userService.queryjsBycpCode(loginUser.getCpCode());
+			//取得菜单列表
 			menuList = menuService.queryByUserId(loginUser.getId());
+			//取得菜单所属功能列表
 			functionList = atSysModelService.findAll();
+			//取得功能详细操作字典列表
 			modelFunctionList = atSysModelFunctionService.findAll();
+			//取得系统功能操作权限列表
 			holdFunctionList = atHoldFunctionService.getHoldFunctionListByActorId(roleId);
+			//取得系统权限字段字典
 			fieldDictList = atFieldDictService.findAll();
+			//取得用户字段权限关系列表
 			fieldRelList = atFieldRelService.getAtFieldRelListByUid(roleId);
+			//设置当前选中角色ID
 			this.setRoleId(roleId);
+			//设置当前选中角色对象
 			this.setAtUser(userService.queryUserById(roleId));
 		}else{
+			//取得角色列表
 			userList = userService.queryjsBycpCode(loginUser.getCpCode());
+			//取得菜单列表
 			menuList = menuService.queryByUserId(loginUser.getId());
+			//取得菜单所属功能列表
 			functionList = atSysModelService.findAll();
+			//取得功能详细操作字典列表
 			modelFunctionList = atSysModelFunctionService.findAll();
+			//取得系统权限字段字典
 			fieldDictList = atFieldDictService.findAll();
 		}
+		
+		//返回前台页面
 		return "list";
 	}
 	
 	
-	/// 保存权限信息
+	/**
+	 * 保存权限信息
+	 * @return
+	 * @throws Exception
+	 */
 	public String saveRoleStatus() throws Exception {
+		//取得当前登录用户信息
 		AtUser loginUser = (AtUser) session.getAttribute("loginUser");
-		if(null != loginUser){
-			if(roleId > 0){
-				//更新功能权限
-				atHoldFunctionService.modAtHoldFunction(funIds,roleId,loginUser.getId());
-				//更新字段权限
-				atFieldRelService.modifyFieldRel(fieldIds,roleId,loginUser.getId());
-				msg="保存成功!";
-			}else{
-				msg="请选择角色!";
-			}
-			//重新加载权限
-			getRole();
+		//判断当前是否有选择角色 选中角色的场合才能更新
+		if(roleId > 0){
+			//更新功能权限
+			atHoldFunctionService.modAtHoldFunction(funIds,roleId,loginUser.getId());
+			//更新字段权限
+			atFieldRelService.modifyFieldRel(fieldIds,roleId,loginUser.getId());
+			//设置返回信息
+			msg="保存成功!";
+		}else{
+			//设置返回信息
+			msg="请选择角色!";
 		}
+		//重新加载权限
+		getRole();
+		
+		//返回前台页面
 		return "list";
 	}
 	
-	//新增角色
+	
+	/**
+	 * 新增角色
+	 * @return
+	 * @throws Exception
+	 */
 	public String addRole() throws Exception{
-		if(null != atUser){
-			//验证名称是否存在
-			boolean validateResult = userService.queryByInameToinsert(atUser.getIname());
-			if(!validateResult){
-				msg="新增角色失败，角色名称已经存在!";
+		//验证名称是否存在
+		boolean validateResult = userService.queryByInameToinsert(atUser.getIname());
+		//判断验证结果
+		if(!validateResult){
+			//设置返回信息
+			msg="新增角色失败，角色名称已经存在!";
+		}else{
+			//取得当前登录用户信息
+			AtUser loginUser = (AtUser) session.getAttribute("loginUser");
+			//完善角色对象的其它字段以方便入库
+			atUser.setCpCode(loginUser.getCpCode());
+			atUser.setOid(loginUser.getOid());
+			atUser.setItype(2);
+			atUser.setLoginPwd("");
+			atUser.setUserName("");
+			atUser.setSex(0);
+			atUser.setWorkerNo("");
+			atUser.setJobDuty("");
+			atUser.setTelno("");
+			atUser.setEmail("");
+			atUser.setIsUsed(0);
+			atUser.setIsAdmin(0);
+			atUser.setOrderNum(0);
+			atUser.setAuthState(0);
+			atUser.setLastLoginDate(new Date());
+			atUser.setStatus(0);
+			atUser.setLoginIp("");
+			atUser.setLoginTime("");
+			atUser.setOperator(loginUser.getIname());
+			atUser.setLastOperator(loginUser.getIname());
+			//返回新增的角色ID
+			roleId = userService.addRole(atUser);
+			//判断返回结果－如果插入成功则返回的ID一定大于1
+			if(roleId > 1){
+				//设置返回信息
+				msg="新增角色成功";
 			}else{
-				AtUser loginUser = (AtUser) session.getAttribute("loginUser");
-				atUser.setCpCode(loginUser.getCpCode());
-				atUser.setOid(loginUser.getOid());
-				atUser.setItype(2);
-				atUser.setLoginPwd("");
-				atUser.setUserName("");
-				atUser.setSex(0);
-				atUser.setWorkerNo("");
-				atUser.setJobDuty("");
-				atUser.setTelno("");
-				atUser.setEmail("");
-				atUser.setIsUsed(0);
-				atUser.setIsAdmin(0);
-				atUser.setOrderNum(0);
-				atUser.setAuthState(0);
-				atUser.setLastLoginDate(new Date());
-				atUser.setStatus(0);
-				atUser.setLoginIp("");
-				atUser.setLoginTime("");
-				atUser.setOperator(loginUser.getIname());
-				atUser.setLastOperator(loginUser.getIname());
-				
-				rst = userService.addRole(atUser);
-				if(rst > 1){
-					msg="新增角色成功";
-				}else{
-					msg="新增失败";
-				}
-				//返回新增的角色ID
-				roleId = rst;
+				//设置返回信息
+				msg="新增失败";
 			}
-			//重新加载权限
-			getRole();
 		}
+		//重新加载权限
+		getRole();
+		
+		//返回前台页面
 		return "list";
 	}
 	
-	//新增角色校验角色名I_NAME
+	/**
+	 * ajax新增角色校验角色名I_NAME
+	 */
 	public void validateforinsert(){
+		//取得判断结果
 		boolean result = userService.queryByInameToinsert(atUser.getIname());
 		try{
+			//构建返回对象
 			HttpServletResponse response = ServletActionContext.getResponse();
 			PrintWriter out;
 			JSONObject jo = new JSONObject();
@@ -213,17 +256,27 @@ public class RoleAction extends ActionSupport {
 		}
 	}
 	
-	//修改角色
+	
+	/**
+	 * 修改角色
+	 * @return
+	 * @throws Exception
+	 */
 	public String updateRole() throws Exception{
+		//判断前台提交过来的角色对象是否为空
 		if(null != atUser){
 			//验证名称是否存在
 			boolean validateResult = userService.queryByInameToinsert(atUser.getIname());
 			//重新保存角色ID
 			this.setRoleId(roleId);
+			//判断验证结果
 			if(!validateResult){
+				//设置返回信息
 				msg="修改角色失败，角色名称已经存在!";
 			}else{
+				//取得当前登录用户信息
 				AtUser loginUser = (AtUser) session.getAttribute("loginUser");
+				//完善角色对象的其它字段以方便入库
 				atUser.setCpCode(loginUser.getCpCode());
 				atUser.setOid(loginUser.getOid());
 				atUser.setItype(2);
@@ -244,59 +297,56 @@ public class RoleAction extends ActionSupport {
 				atUser.setLoginTime("");
 				atUser.setOperator(loginUser.getIname());
 				atUser.setLastOperator(loginUser.getIname());
-				
-				rst = userService.updateUser(atUser);
+				//定义取得修改结果
+				int rst = userService.updateUser(atUser);
+				//判断修改结果
 				if(rst==0){
+					//设置返回信息
 					msg="修改角色成功";
 				}else{
+					//设置返回信息
 					msg="新增失败";
 				}
 			}
 			//重新加载权限
 			getRole();
 		}
+		
+		//返回前台页面
 		return "list";
 	}
 	
-	//修改角色校验角色名I_NAME
-	public void validateforupdate(){
-		boolean result = userService.queryByInameToupdate(atUser.getIname(), atUser.getId());
-		try{
-			HttpServletResponse response = ServletActionContext.getResponse();
-			PrintWriter out;
-			JSONObject jo = new JSONObject();
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=UTF-8");
-			int i = 0;
-			if(result){
-				i=1;
-			}
-			jo.put("status", i );
-			out = response.getWriter();
-			out.print(jo);
-			out.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
-	//删除角色
+	/**
+	 * 删除角色
+	 * @return
+	 * @throws Exception
+	 */
 	public String deleteRole() throws Exception{
+		//判断当前是否有选择角色 选中角色的场合才能删除
 		if(roleId > 0){
-			rst= userService.deleteRole(roleId);
+			//取得删除结果
+			int rst= userService.deleteRole(roleId);
+			//判断删除结果
 			if(rst==0){
+				//设置返回信息
 				msg="删除成功";
 			}else{
+				//设置返回信息
 				msg="删除失败";
 			}
 			//重新加载权限
 			getRole();
 			//删除后保证选中最后一个
 			if(null != userList && userList.size() > 0){
+				//设置角色ID
 				roleId=userList.get(userList.size()-1).getId();
+				//设置角色对象
 				this.setAtUser(userList.get(userList.size()-1));
 			}
 		}
+		
+		//返回前台页面
 		return "list";
 	}
 
@@ -314,14 +364,6 @@ public class RoleAction extends ActionSupport {
 
 	public void setUserList(List<AtUser> userList) {
 		this.userList = userList;
-	}
-
-	public int getRst() {
-		return rst;
-	}
-
-	public void setRst(int rst) {
-		this.rst = rst;
 	}
 
 	public String getMsg() {
