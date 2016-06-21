@@ -18,6 +18,9 @@ jQuery(function($){
 		$(".opera-button .add-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
+			var oid = $("#sysoId").val();
+			var orgId = $("#sysorgId").val();
+			queryorgId(oid,orgId,'0');
 			$("#orgName").val("");
 			$("#orgDesc").val("");
 		});
@@ -29,6 +32,9 @@ jQuery(function($){
 		$(".opera-button .edit-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
+			var oid = $("#sysoId").val();
+			var orgId = $("#sysorgId").val();
+			queryorgId(oid,orgId,'1');
 			editorg();
 		});
 		$(".reset").click(function(){

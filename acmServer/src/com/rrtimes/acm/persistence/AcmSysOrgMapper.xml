@@ -109,6 +109,19 @@
 	    FROM ACM_SYS_ORG  
 	    WHERE CP_CODE=#{cpCode}
 	  </select>
+	  
+	  <select id="findAllBycpCode" parameterType="String" resultType="Map">
+	  	select m.id,m.orgName,m.rname,g.ORG_NAME as gname,m.cpCode 
+	  	    from 
+	  	    (
+	  	          select o.ID as id,o.ORG_NAME as orgName,r.ORG_NAME as rname,r.OID as roid,r.CP_CODE,o.CP_CODE as cpCode 
+	  	             from ACM_SYS_ORG o left join ACM_SYS_ORG r on o.OID = r.ID
+	  	    )m
+            left join 
+            ACM_SYS_ORG g on m.roid = g.ID 
+            where m.cpCode= #{cpCode} 
+            ORDER BY g.ORG_NAME asc,m.rname asc,m.orgName asc
+	  </select>
   
   <select id="findByCount" parameterType="Map" resultType="int">
 	    SELECT
@@ -122,5 +135,8 @@
 	  		and ORG_NAME = #{orgName}
 	  		</if>
   </select>
-
+  
+  <select id="findsecondlevel" parameterType="Map" resultType="AcmSysOrg">
+	    select o.ID as id,o.ORG_NAME as orgName from ACM_SYS_ORG o,ACM_SYS_ORG r where o.ID = r.OID and o.OID!=0 and o.CP_CODE= #{cpCode}
+  </select>
 </mapper>

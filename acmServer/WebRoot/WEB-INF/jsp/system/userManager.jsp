@@ -42,7 +42,7 @@
 						var array = jsonData.jsonlist;
 						$("#dept").empty();
 						for(var i=0;i<array.length;i++){
-							$("#dept").append("<option value="+array[i].id+">"+array[i].orgName+"</option>");
+							$("#dept").append("<option value="+array[i].id+">"+array[i].gname+" "+array[i].rname+" "+array[i].orgName+"</option>");
 						}
 				}
 			});
@@ -127,9 +127,9 @@
 						$("#dept").empty();
 						for(var i=0;i<array1.length;i++){
 						    if(array1[i].id==jsonData.oid){
-						       $("#dept").append("<option value="+array1[i].id+" selected='selected'>"+array1[i].orgName+"</option>");
+						       $("#dept").append("<option value="+array1[i].id+" selected='selected'>"+array1[i].gname+" "+array1[i].rname+" "+array1[i].orgName+"</option>");
 						    }else{
-						       $("#dept").append("<option value="+array1[i].id+">"+array1[i].orgName+"</option>");
+						       $("#dept").append("<option value="+array1[i].id+">"+array1[i].gname+" "+array1[i].rname+" "+array1[i].orgName+"</option>");
 						    }
 						}
 				}
@@ -152,15 +152,16 @@
      var url="../xl/user!queryByUsername.do?atUser.userName="+username;
      window.location.href=url;
    }
-   function findByOrgId(obj){
-     var url="../xl/user!findByOrgId.do?atUser.oid="+obj;
+   function findByOrgId(obj,obj1){
+     var url="../xl/user!findByOrgId.do?atUser.oid="+obj1+"&org.oid="+obj;
      window.location.href=url;
    }
    function savedept(){
+      var oid = $("#sjdept").val(); 
       var orgName = $("#orgName").val();
       var orgDesc = $("#orgDesc").val(); 
       var orgId = $("#orgId").val();
-      var url="../xl/user!insertOrg.do?org.orgName="+orgName+"&org.orgDesc="+orgDesc+"&org.id="+orgId;
+      var url="../xl/user!insertOrg.do?org.orgName="+orgName+"&org.orgDesc="+orgDesc+"&org.id="+orgId+"&org.oid="+oid;
       window.location.href=url;
    }
    function editorg(){
@@ -183,6 +184,39 @@
       var url="../xl/user!deleteOrg.do?org.id="+orgId;
       window.location.href=url;
    }
+   function queryorgId(obj,obj1,obj2){
+      $("#sysoId").val(obj);
+	  $("#sysorgId").val(obj1);
+      $.ajax({
+				type : "POST",
+				url : "../xl/org!juniorlist.do?aso.oid="+$("#sysoId").val()+"&aso.id="+$("#sysorgId").val(),//obj
+				data : {},
+				async : false,
+				success : function(json) {//调用成功的话
+						var jsonData = JSON.parse(json); 
+						//$("#sysorgId").val(obj1);
+						if(jsonData.status=="0"){
+						   var array = jsonData.jsonlist;
+							$("#sjdept").empty();
+							var oid =  $("#sysoId").val();
+							for(var i=0;i<array.length;i++){
+								  if(obj2=="1"){//编辑状态
+								      if(oid==array[i].id){
+								         $("#sjdept").append("<option value="+array[i].id+" selected='selected'>"+array[i].orgName+"</option>");
+								      }else{
+								         $("#sjdept").append("<option value="+array[i].id+">"+array[i].orgName+"</option>");
+								      }
+								  }else{
+								     $("#sjdept").append("<option value="+array[i].id+">"+array[i].orgName+"</option>");
+								  }
+							}
+						}else{
+						   $("#sjdept").empty();
+						   $("#sjdept").append("<option value='0'>公司组织架构</option>");
+						}
+				}
+			});
+   }
 </script>
 </head>
 <body>
@@ -193,6 +227,7 @@
         <div class="opera">
         	<div class="opera-button clearfix">
         	    <input type="hidden" id="sysorgId" value="${orgId}"/>
+        	    <input type="hidden" id="sysoId" value="${oid}"/>
             	<a class="add-bg" href="#">新增</a>
                 <a class="edit-bg" href="#">编辑</a>
                 <a class="del-bg" href="#">删除</a>
@@ -211,15 +246,15 @@
                             <ul class="sort-a">
                                  <s:iterator value="#request.orglist" id="orglist" status="st">
                                      <s:if test="#orglist.oid==0">
-	                                     <li><a href="#"><s:property value="#orglist.orgName"/></a>
+	                                     <li><a href="#" onclick="queryorgId('<s:property value="#orglist.oid"/>','<s:property value="#orglist.id"/>','0')"><s:property value="#orglist.orgName"/></a>
 	                                       <ul>
 	                                          <s:iterator value="#request.orglist" id="orglist2" status="st">
 	                                              <s:if test="#orglist2.oid==#orglist.id">
-	                                                  <li><a href="#"><s:property value="#orglist2.orgName"/></a>
+	                                                  <li><a href="#" onclick="queryorgId('<s:property value="#orglist2.oid"/>','<s:property value="#orglist2.id"/>','0')"><s:property value="#orglist2.orgName"/></a>
 	                                                     <ul>
 	                                                        <s:iterator value="#request.orglist" id="orglist3" status="st">
 	                                                            <s:if test="#orglist3.oid==#orglist2.id">
-	                                                               <li><a href="#" onclick="findByOrgId('<s:property value="#orglist3.id"/>')"><s:property value="#orglist3.orgName"/></a></li>
+	                                                               <li><a href="#" onclick="findByOrgId('<s:property value="#orglist3.oid"/>','<s:property value="#orglist3.id"/>')"><s:property value="#orglist3.orgName"/></a></li>
 	                                                            </s:if>
 	                                                        </s:iterator>
 	                                                     </ul>
@@ -327,9 +362,9 @@
     <div class="bor">
    
         <div class="intt inf">
-             <!-- <label class="lable class="lables">用户组：</label>
-            <select class="required">
-                <option value="1">January</option>
+             <label class="lable class="lables">上级部门：</label>
+            <select class="required" id="sjdept">
+               <!--   <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>
                 <option value="4">April</option>
@@ -340,8 +375,8 @@
                 <option value="9">September </option>
                 <option value="10">October </option>
                 <option value="11">November</option>
-                <option value="12">December </option>
-            </select>-->
+                <option value="12">December </option>-->
+            </select>
         </div> 
         <div class="intt indd">
         <input type="hidden" id="orgId" value=""/>

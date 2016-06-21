@@ -89,4 +89,18 @@ public class AcmSysOrgServiceImpl implements AcmSysOrgService{
 		return asom.findAll(cpCode);
 	}
 
+	@Override
+	public List<AcmSysOrg> querysecondlevel(String cpCode) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cpCode", cpCode);
+		return asom.findsecondlevel(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> queryAllBycpCode(String cpCode) {
+		// TODO Auto-generated method stub
+		return asom.findAllBycpCode(cpCode);
+	}
+
 }

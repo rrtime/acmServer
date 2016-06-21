@@ -11,6 +11,7 @@ package com.rrtimes.acm.action;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -77,12 +78,15 @@ public class OrgAction extends ActionSupport{
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			AtUser atUser = (AtUser)session.getAttribute("atUser");
-			list = asos.queryAll(atUser.getCpCode());
+			//list = asos.queryAll(atUser.getCpCode());
+			List<Map<String,Object>> alist = asos.queryAllBycpCode(atUser.getCpCode());
 			JSONArray jsonArray = new JSONArray();
-			for(int i=0;i<list.size();i++){
+			for(int i=0;i<alist.size();i++){
 				JSONObject obj = new JSONObject();
-				obj.put("id", list.get(i).getId());
-				obj.put("orgName", list.get(i).getOrgName());
+				obj.put("id", alist.get(i).get("id"));
+				obj.put("orgName", alist.get(i).get("orgName"));
+				obj.put("rname", alist.get(i).get("rname")==null?"":alist.get(i).get("rname"));
+				obj.put("gname", alist.get(i).get("gname")==null?"":alist.get(i).get("gname"));
 				jsonArray.add(i, obj);
 			}
 			jo.put("jsonlist", jsonArray );
@@ -95,9 +99,49 @@ public class OrgAction extends ActionSupport{
 	}
 	
 	//通过组织机构oid查询当前的下级
-	public String juniorlist(){
-		list = asos.queryOrgByOid(aso.getOid());
-		return "juniorlist";
+	public void juniorlist(){
+		try{
+			HttpServletResponse response = ServletActionContext.getResponse();
+			PrintWriter out;
+			JSONObject jo = new JSONObject();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			JSONArray jsonArray = new JSONArray();
+			if(aso.getOid()>0){
+				//需要查询是否存在下级
+				List<AcmSysOrg> listn = asos.queryOrgByOid(aso.getId());
+				if(listn!=null&&listn.size()!=0){
+					list = asos.queryOrgByOid(0);
+					for(int i=0;i<list.size();i++){
+						JSONObject obj = new JSONObject();
+						obj.put("id", list.get(i).getId());
+						obj.put("orgName", list.get(i).getOrgName());
+						jsonArray.add(i, obj);
+					}
+					jo.put("jsonlist", jsonArray );
+					jo.put("status", 0);
+				}else{
+					AtUser atUser = (AtUser)session.getAttribute("atUser");
+					list = asos.querysecondlevel(atUser.getCpCode());
+					for(int i=0;i<list.size();i++){
+						JSONObject obj = new JSONObject();
+						obj.put("id", list.get(i).getId());
+						obj.put("orgName", list.get(i).getOrgName());
+						jsonArray.add(i, obj);
+					}
+					jo.put("jsonlist", jsonArray );
+					jo.put("status", 0);
+				}
+			}else if(aso.getOid()==0){
+				jo.put("jsonlist", "公司组织架构" );
+				jo.put("status", 1);
+			}
+			out = response.getWriter();
+			out.print(jo);
+			out.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	//新增组织机构页面
@@ -158,6 +202,7 @@ public class OrgAction extends ActionSupport{
 		}
 		return list();
 	}
+	
 	public AcmSysOrg getAso() {
 		return aso;
 	}

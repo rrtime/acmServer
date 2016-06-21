@@ -11,6 +11,7 @@ package com.rrtimes.acm.action;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -148,7 +149,6 @@ public class SysUserAction extends ActionSupport{
 		public String insertOrg(){
 				AtUser au = (AtUser)session.getAttribute("atUser");
 				org.setCpCode(au.getCpCode());
-				org.setOid(0);
 				org.setOperator(String.valueOf(au.getId()));
 				if(org.getId()>0){
 					rst=asos.updateOrg(org);
@@ -305,12 +305,15 @@ public class SysUserAction extends ActionSupport{
 				jsonArray.add(i, obj);
 			}
 			jo.put("orglist", jsonArray );
-			orglist = asoservice.queryAll(atUser.getCpCode());
+//			orglist = asoservice.queryAll(atUser.getCpCode());
+			List<Map<String,Object>> alist = asoservice.queryAllBycpCode(atUser.getCpCode());
 			JSONArray jsonArray1 = new JSONArray();
-			for(int i=0;i<orglist.size();i++){
+			for(int i=0;i<alist.size();i++){
 				JSONObject obj = new JSONObject();
-				obj.put("id", orglist.get(i).getId());
-				obj.put("orgName", orglist.get(i).getOrgName());
+				obj.put("id", alist.get(i).get("id"));
+				obj.put("orgName", alist.get(i).get("orgName"));
+				obj.put("rname", alist.get(i).get("rname")==null?"":alist.get(i).get("rname"));
+				obj.put("gname", alist.get(i).get("gname")==null?"":alist.get(i).get("gname"));
 				jsonArray1.add(i, obj);
 			}
 			jo.put("deptlist", jsonArray1 );
@@ -342,6 +345,7 @@ public class SysUserAction extends ActionSupport{
 			list = aus.queryByOrgId(atUser.getOid(), page);
 			orglist = asos.queryAll(au.getCpCode());
 			ServletActionContext.getRequest().setAttribute("orgId", atUser.getOid());
+			ServletActionContext.getRequest().setAttribute("oid", org.getOid());
 			return "queryBycpCode";
 		}
 	

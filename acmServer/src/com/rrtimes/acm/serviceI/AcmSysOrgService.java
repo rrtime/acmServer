@@ -9,6 +9,7 @@
 package com.rrtimes.acm.serviceI;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.PageObject;
@@ -46,5 +47,11 @@ public interface AcmSysOrgService {
 	
 	//通过代账公司code查询当前代账公司的组织机构（不用分页）
 	public List<AcmSysOrg> queryAll(String cpCode);
+	
+	//通过代账公司code查询当前代账公司的组织机构（不用分页）
+	public List<AcmSysOrg> querysecondlevel(String cpCode);
+	
+	//通过cpCode查询组织机构（三级）
+	public List<Map<String,Object>> queryAllBycpCode(String cpCode);
 	
 }
