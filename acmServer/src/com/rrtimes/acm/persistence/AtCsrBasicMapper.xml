@@ -266,7 +266,7 @@
     WHERE 
     EXISTS 
     (
-      select u.id from AT_USER where u.oid = #{orgId}
+      select u.id from AT_USER u where u.oid = #{orgId}
       and
       b.OPERATOR = u.id
     )
