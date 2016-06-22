@@ -3,75 +3,16 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
- 	<package name="struts-yanxb" extends="struts-base" namespace="/role">
+ 	<package name="struts-yanxb" extends="struts-base" namespace="/">
  	
  		<default-interceptor-ref name="loginInterceptorStack"/>
  		<!-- 角色管理 -->
- 		<action name="atRoleAction" class="com.rrtimes.acm.action.RoleAction">
+ 		<action name="role" class="com.rrtimes.acm.action.RoleAction">
 			<result name="list" type="dispatcher">/WEB-INF/jsp/system/roleManager.jsp</result>
 		</action>
 		<!-- 菜单附属功能字典 -->
- 		<action name="atSysModelMag" class="com.rrtimes.acm.action.AtSysModelAction">
-			<result name="addAtSysModel" type="dispatcher">/WEB-INF/jsp/atSysModel/addAtSysModel.jsp</result>
-			<result name="modAtSysModel" type="dispatcher">/WEB-INF/jsp/atSysModel/addAtSysModel.jsp</result>
-			<result name="atSysModelList" type="dispatcher">/WEB-INF/jsp/atSysModel/atSysModelList.jsp</result>
-			<result name="atSysModelDetail" type="dispatcher">/WEB-INF/jsp/atSysModel/addAtSysModel.jsp</result>
-		</action>
-		<!-- 功能详细操作字典 -->
- 		<action name="atModelFunctionMag" class="com.rrtimes.acm.action.AtModelFunctionAction">
-			<result name="addAtModelFunction" type="dispatcher">/WEB-INF/jsp/atModelFunction/addAtModelFunction.jsp</result>
-			<result name="modAtModelFunction" type="dispatcher">/WEB-INF/jsp/atModelFunction/addAtModelFunction.jsp</result>
-			<result name="atModelFunctionList" type="dispatcher">/WEB-INF/jsp/atModelFunction/atModelFunctionList.jsp</result>
-			<result name="atModelFunctionDetail" type="dispatcher">/WEB-INF/jsp/atModelFunction/addAtModelFunction.jsp</result>
-		</action>
-		<!-- 系统功能操作权限 -->
- 		<action name="atHoldFunctionMag" class="com.rrtimes.acm.action.AtHoldFunctionAction">
-			<result name="addAtHoldFunction" type="dispatcher">/WEB-INF/jsp/atHoldFunction/addHoldFunction.jsp</result>
-			<result name="modAtHoldFunction" type="dispatcher">/WEB-INF/jsp/atHoldFunction/addHoldFunction.jsp</result>
-			<result name="atHoldFunctionList" type="dispatcher">/WEB-INF/jsp/atHoldFunction/atHoldFunctionList.jsp</result>
-			<result name="atHoldFunctionDetail" type="dispatcher">/WEB-INF/jsp/atHoldFunction/addHoldFunction.jsp</result>
-		</action>
-		<!-- 系统权限字段字典 -->
- 		<action name="atFieldDictMag" class="com.rrtimes.acm.action.AtFieldDictAction">
-			<result name="addAtFieldDict" type="dispatcher">/WEB-INF/jsp/atFieldDict/addAtFieldDict.jsp</result>
-			<result name="modAtFieldDict" type="dispatcher">/WEB-INF/jsp/atFieldDict/addAtFieldDict.jsp</result>
-			<result name="atFieldDictList" type="dispatcher">/WEB-INF/jsp/atFieldDict/atFieldDictList.jsp</result>
-			<result name="atFieldDictDetail" type="dispatcher">/WEB-INF/jsp/atFieldDict/addAtFieldDict.jsp</result>
-		</action>
-		<!-- 用户字段权限关系 -->
- 		<action name="atFieldRelMag" class="com.rrtimes.acm.action.AtFieldRelAction">
-			<result name="addAtFieldRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
-			<result name="modAtFieldRel" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
-			<result name="atFieldRelList" type="dispatcher">/WEB-INF/jsp/atFieldRel/atFieldRelList.jsp</result>
-			<result name="atFieldRelDetail" type="dispatcher">/WEB-INF/jsp/atFieldRel/addAtFieldRel.jsp</result>
-		</action>
-		<!-- 客户收费记录 -->
- 		<action name="atCstFeeMag" class="com.rrtimes.acm.action.AtCstFeeAction">
-			<result name="addAtCstFee" type="dispatcher">/WEB-INF/jsp/atCstFee/addAtCstFee.jsp</result>
-			<result name="modAtCstFee" type="dispatcher">/WEB-INF/jsp/atCstFee/addAtCstFee.jsp</result>
-			<result name="atCstFeeList" type="dispatcher">/WEB-INF/jsp/atCstFee/atCstFeeList.jsp</result>
-			<result name="atCstFeeDetail" type="dispatcher">/WEB-INF/jsp/atCstFee/addAtCstFee.jsp</result>
-		</action>
-		<!-- 客户投诉信息 -->
- 		<action name="atComplainMag" class="com.rrtimes.acm.action.AtComplainAction">
-			<result name="addAtComplain" type="dispatcher">/WEB-INF/jsp/atComplain/addAtComplain.jsp</result>
-			<result name="modAtComplain" type="dispatcher">/WEB-INF/jsp/atComplain/addAtComplain.jsp</result>
-			<result name="atComplainList" type="dispatcher">/WEB-INF/jsp/atComplain/atComplainList.jsp</result>
-			<result name="atComplainDetail" type="dispatcher">/WEB-INF/jsp/atComplain/addAtComplain.jsp</result>
-		</action>
-		<!-- 客户回访记录 -->
- 		<action name="atCstVisitMag" class="com.rrtimes.acm.action.AtCstVisitAction">
-			<result name="addAtCstVisit" type="dispatcher">/WEB-INF/jsp/atCstVisit/addAtCstVisit.jsp</result>
-			<result name="modAtCstVisit" type="dispatcher">/WEB-INF/jsp/atCstVisit/addAtCstVisit.jsp</result>
-			<result name="atCstVisitList" type="dispatcher">/WEB-INF/jsp/atCstVisit/atCstVisitList.jsp</result>
-			<result name="atCstVisitDetail" type="dispatcher">/WEB-INF/jsp/atCstVisit/addAtCstVisit.jsp</result>
-		</action>
-		<!-- 客户质量赔付记录 -->
- 		<action name="atCstImyMag" class="com.rrtimes.acm.action.AtCstImyAction">
-			<result name="addAtCstImy" type="dispatcher">/WEB-INF/jsp/atCstImy/addAtCstImy.jsp</result>
-			<result name="modAtCstImy" type="dispatcher">/WEB-INF/jsp/atCstImy/addAtCstImy.jsp</result>
-			<result name="atCstImyList" type="dispatcher">/WEB-INF/jsp/atCstImy/atCstImyList.jsp</result>
-			<result name="atCstImyDetail" type="dispatcher">/WEB-INF/jsp/atCstImy/addAtCstImy.jsp</result>
+ 		<action name="customer" class="com.rrtimes.acm.action.CustomerAction">
+			<result name="list" type="dispatcher">/WEB-INF/jsp/system/customer.jsp</result>
 		</action>
     </package>
 </struts>

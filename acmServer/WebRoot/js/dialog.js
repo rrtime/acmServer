@@ -44,10 +44,7 @@ jQuery(function($){
 			queryorgId(obj,obj1,'1');
 			editorg();
 		});
-		$(".reset").click(function(){
-			$(".shadow-bg").css("display","none");
-			$(".add-word").css("display","none");	
-		});
+		
 		$(".button").click(function(){
 			$(".shadow-bg").css("display","none");
 			$(".mainTip").css("display","none");	
@@ -56,11 +53,6 @@ jQuery(function($){
 		$(".find-opera .del-button").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".mian").css("display","block");
-		});
-		
-		$(".find-opera .del-button1").click(function(){
-			$(".shadow-bg").css("display","block");
-			$("#mian2").css("display","block");
 		});
 		
 		
@@ -88,6 +80,40 @@ jQuery(function($){
 			finddept();
 		});
 		
+		$(".w_input1").click(function(){
+			$(".total1").css("display","block");	
+		});
+		$(".w_li").click(function(){
+			$(".total3").css("display","block");	
+		});
+		$(".click").click(function(){
+			$(".total6").css("display","block");	
+		});
+		$(".bunt").click(function(){alert();
+			$(".total4").css("display","block");	
+		});
+		$(".wq_input").click(function(){
+			$(".total5").css("display","block");	
+		});
+		$(".h1 img").click(function(){
+			$(".total1").css("display","none");	
+		});
+		$(".hh img").click(function(){
+			$(".total6").css("display","none");	
+		});
+		$(".ha img").click(function(){
+			$(".total3").css("display","none");	
+		});
+		$(".hg img").click(function(){
+			$(".total4").css("display","none");	
+		});
+		$(".gg img").click(function(){
+			$(".total5").css("display","none");	
+		});
+		$(".h1 img").click(function(){
+			$(".grxxsz").css("display","block");
+		});
+		
 		//个人信息设置tap切换
 	$(".grxxsz ul li").click(function(){
 		var idx = $(this).index();
@@ -100,8 +126,4 @@ jQuery(function($){
 			$(".mainDel").css("display","block");
 		});
 	
-	$("#del-bg1").click(function(){
-		$(".shadow-bg").css("display","block");
-		$("#mian1").css("display","block");
-	});
 });

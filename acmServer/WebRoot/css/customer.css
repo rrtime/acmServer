@@ -1,0 +1,369 @@
+/*右部*/
+
+.w_mian {
+	width: 100%;
+	border: 1px solid #cccccc;
+}
+
+.search ul li,
+.find-opera input {
+	float: left;
+}
+
+.find-opera input[type="button"] {
+	margin-bottom: 15px;
+	margin-top: 5px;
+	background: #fff;
+	border: 1px solid #ccc;
+	margin-left: 15px;
+	height: 30px;
+	padding: 5px 10px;
+}
+
+.find-opera input[type="button"]:first-child,
+.find-opera input[type="button"]:last-child {
+	margin: 0px;
+	margin-top: 5px;
+	background: #4aa0d9;
+	color: #fff;
+	height: 30px;
+}
+
+/*.find-opera input[type="button"]:last-child {
+	width: 60px;
+}*/
+
+.search {
+	float: right;
+	margin-right: 12px;
+}
+
+.search input[type="text"] {
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	height: 28px;
+}
+
+.w_mian .ul {
+	width: 100%;
+	height: 36px;
+	background: #f2f2f2;
+	margin: 0;
+}
+
+.w_mian .ul li {
+	width: 100px;
+	height: 30px;
+	float: left;
+	background: #f9f9f9;
+	line-height: 30px;
+	text-align: center;
+	border: 1px solid #c5d0dc;
+	margin-top: 5px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.w_mian .ul li:first-child {
+	margin-left: 15px;
+	border-bottom: 0;
+}
+
+.w_mian .ul li:last-child {
+	margin-left: 5px;
+	border-bottom: 0;
+}
+/*table*/
+
+.w_mian .table tr td {
+	padding-left: 0px;
+}
+
+.w_mian .table tr td input {
+	/*padding: 3px 5px;*/
+	margin-bottom: 1px;
+}
+
+.search1 input[type="text"] {
+	margin-top: -5px;
+}
+
+.role-list1 .find-opera1 input[type="button"]:first-child {
+	background: #4aa0d9;
+}
+
+.role-list1 .find-opera1 input[type="button"]:nth-child(2) {
+	background: #fff;
+}
+
+.role-list1 .find-opera1 .search input[type="text"] {
+	margin-top: -5px;
+}
+
+.w_mian .ul li.current {
+	border-top: 2px solid #33a3ce;
+	width: 100px;
+	background: #fff;
+	font-weight: bold;
+	color: #0088CC;
+}
+
+.w_mian .table td .w_input {
+	margin-left: 0;
+	font-size:12px;
+}
+
+.w_mian .table {
+	border-top: 0;
+}
+
+.total2 .lwaysa .h2 {
+	font-size: 20px;
+	text-align: center;
+	width: 700px;
+	height: 40px;
+	line-height: 40px;
+}
+.total2 .w_cone {
+	margin: 10px auto;
+}
+.total2 .table-condensed td input {
+	margin-left: -5px;
+	color: #d9d9d9;
+}
+
+.total2 .table-condensed th {
+	font-weight: bold;
+}
+
+.total2 .table-condensed tr td:nth-child(2) {
+	color: #666;
+}
+
+.total3 .w_cone {
+	margin: 0;
+	width: 700px;
+}
+
+.total3 .w_cone .table-cond {
+	width: 700px;
+}
+
+.total3 .w_cone .table-cond th {
+	border-bottom: 1px solid #ccc;
+	background: #f1f1f1;
+	border-top: 1px solid #ccc;
+}
+
+.total3 .w_cone .table-cond td {
+	border-bottom: 1px solid #ccc;
+}
+
+.total3 .w_cone .table-cond tr:nth-child(even) {
+	background: #fbfbfb;
+}
+
+.total3 .hh {
+	margin-bottom: 10px;
+}
+.total3 .footer {
+	background: #fff;
+	width: 700px;
+	float: none;
+	text-align: center;
+	height: 35px;
+	line-height: 35px;
+	margin: 0;
+}
+
+.total3 .footer span,
+.total3 .footer input,
+.total3 .footer select,
+.total3 .footer b {
+	float: left;
+	margin-left: 10px;
+}
+.total3 .footer input,
+.total3 .footer select {
+	margin-top:10px;
+}
+.total3 .footer select {
+	margin-top: 10px;
+}
+.total3 .footer b {
+	margin-top: 3px;
+}
+.total3 .footer span {
+	width:15px;height:15px;margin-top:10px;
+	text-align: center;line-height: 15px;
+}
+.total3 .footer .button {
+	height: auto;
+}
+/************************************/
+
+.table .tab-title th {
+	padding-left: 0;
+	font-weight: bold;
+}
+
+/*.table .tab-title th input {
+	margin-left: 15px;
+}*/
+
+.table tr td input {
+	margin-left: 0;
+}
+
+.table .tab-title .examine {
+	float: right;
+}
+
+.table .tab-title .examine li {
+	float: left;
+	margin-right: 15px;
+	display: inline;
+}
+
+.table .tab-title .examine li .blue-squ {
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+	background: #75b6ee;
+	float: left;
+	margin-right: 3px;
+	margin-top: 8px;
+}
+
+.table .tab-title .examine li .orange-squ {
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+	background: #ff7400;
+	float: left;
+	margin-right: 3px;
+	margin-top: 8px;
+}
+
+.table .tab-title .examine li .grey-squ {
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+	background: #cccccc;
+	float: left;
+	margin-right: 3px;
+	margin-top: 8px;
+}
+
+.table .tab-title .examine li.last-li {
+	margin-right: 0px;
+}
+
+.table .tab-title th.last-child {
+	padding-right: 10px;
+}
+
+.tab-bottom {
+	display: none;
+}
+
+.mr8 {
+	margin-right: 8px;
+}
+.mr8 .click,.mr8 .click1{
+	background:#0088CC;color:#fff;font-size:12px;border:0;margin-top:3px;border:#0088CC;padding:2px 3px;
+}
+.tab-change ul {
+	list-style: none;
+}
+
+.tab-change ul li div {
+	float: left;
+}
+
+.charge-box .charge {
+	float: right;
+	margin-left: 13px;
+}
+
+.charge-box .charge li {
+	float: left;
+	background: #4aa0d9;
+	padding: 0 10px;
+	margin-right: 4px;
+	margin-top:5px;
+}
+
+.charge-box .charge li a {
+	font-size: 14px;
+	color: #fff;
+	padding: 0 5px;
+}
+
+.charge-box .num {
+	margin-right: 13px;
+	position: relative;
+	width:267px;
+	float:right;
+	margin-top:-5px;
+}
+
+.charge-box .num ul {
+	float: right;
+	border: 1px solid #cccccc;
+	height:19px;line-height: 19px;
+	overflow: hidden;
+	margin-top:10px;
+}
+
+.charge-box .num ul li {
+	float: right;
+	/*background:#fff;*/
+}
+
+.charge-box .num ul li a {
+	color: #69757f;
+	margin: 0 5px;
+	float: right;
+}
+
+.charge-box .num ul li.tabl-pic1 {
+	background: none;
+	margin-left: 5px;
+}
+
+.charge-box .num ul li.tab1-pic2 {
+	background: none;
+}
+
+.tab-copy {
+	position: absolute;
+	top: 0;
+	left: 0px;
+	border: none;
+	background: #75b6ee;
+	display: none;
+}
+
+.charge-box {
+	display: none;
+}
+
+.charge-box .tab-timer {
+	float: right;
+	margin-right: 15px;
+	margin-left: 20px;
+}
+
+.tab-change {
+	padding-right: 23px;
+}
+.textarea{
+	margin-left:105px;margin-top:10px;
+	
+}
+.textarea  textarea {
+	width:445px;height:40px;
+	border:none;
+	border:1px solid #999;
+}

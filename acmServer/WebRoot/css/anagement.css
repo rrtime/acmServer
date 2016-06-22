@@ -1,0 +1,128 @@
+
+.lways,.dlzw,.sfls{
+	width:700px;background:#fff;margin:10px auto;border:1px solid  #ccc;
+}
+.lways .h1,.dlzw .h1,.sfls .h1{
+	width:675px;height:30px;background:#f1f1f1;line-height:30px;border-bottom:1px solid  #ccc;padding-left:25px;
+	font-size:12px;position: relative;
+}
+.lways .h1 img{
+	position:absolute;left:650px;top:7px;
+}
+.dlzw .h1 img{	margin-left:500px;margin-top:7px;
+}
+.sfls .h1 img{	margin-left:400px;margin-top:7px;
+}
+.lways .w_ul,.w_data ul:first-child,.dlzw .w_ul,.w_data ul:first-child{
+	width:700px;height:35px;border-bottom:1px solid  #ccc;
+}
+.lways .w_ul li,.dlzw .w_ul li{
+	width:100px;height:25px;float:left;background:#f9f9f9;border:1px solid #c5d0dc;
+	border-bottom:0;margin-top:9px;text-align: center;line-height: 25px;
+	cursor: pointer;
+}
+.lways .w_ul li:first-child,.dlzw .w_ul li:first-child{
+	margin-left:25px;
+}
+.lways .w_ul li:nth-child(2),.dlzw .w_ul li:nth-child(2){
+	margin-left:10px;
+}
+.lways .w_ul li:nth-child(3),.dlzw .w_ul li:nth-child(3){
+	margin-left:10px;
+}
+.total .w_con{
+	margin:25px auto;width:660px;
+}
+.total1 .w_con{
+	margin:15px auto;width:660px;
+}
+.table{
+	float:left;width:330px;font-size:12px;
+}
+.table th{
+	font-weight:inherit;
+}
+/*.table  span{
+	color:red;
+}*/
+.table td select{
+	width:173px;margin-left:15px;margin-bottom:15px;height:25px;
+}
+.table td input[type="text"]{
+	width:173px;
+}
+.table td input{
+	margin-bottom:10px;margin-left:15px;
+}
+.w_lable{
+	margin-left:60px;
+}
+.w_lable input{
+	width:498px;height:35px;margin-left:24px;
+}
+.w_btn{
+	width:60px;height:25px;background:#4aa0d9;border:0;cursor:pointer;color:#fff;
+	margin-left:460px;margin-top:10px;
+}
+.w_bt{
+	background:#abbac3;margin-left:10px;
+}
+.total .w_data ul:nth-child(odd){
+	background:#f2f2f2;
+}
+ .w_data ul:first-child{
+	background:#f2f2f2;border-top:1px solid  #ccc;
+	height:30px;
+}
+ .w_data ul:first-child li,.w_data .w_date li{
+	float:left;line-height: 30px;;
+}
+.total .w_data ul:first-child li:first-child{
+	margin-left:15px;
+}
+.total .w_data ul:first-child li:nth-child(2){
+	margin-left:65px;
+}
+.total .w_data ul:first-child li:nth-child(3){
+	margin-left:120px;
+}
+.total .w_data ul:first-child li:nth-child(4){
+	margin-left:180px;
+}
+.total .w_data ul:first-child li:nth-child(5){
+	margin-left:80px;
+}
+.total .w_data .w_date{
+	border-bottom:1px solid #ccc;height:30px;
+}
+.total .w_data .w_date li:first-child{
+	margin-left:15px;
+}
+.total .w_data .w_date li:nth-child(2){
+	margin-left:25px;
+}
+.total .w_data .w_date li:nth-child(3){
+	margin-left:65px;
+}
+.total .w_data .w_date li:nth-child(5){
+	margin-left:335px;
+}
+.w_ul li.current{
+	border-top:2px solid #33a3ce;
+	width:100px;
+	background:#fff;
+	font-weight: bold;
+	color:#0088CC;
+}
+.w_l{
+	width:700px;height:45px;line-height:45px;text-align: center;font-weight: bold;
+}
+/*定位*/
+.total,.total1,.total2{
+	width:100%;height:100%;background:rgba(0,0,0,.5);border: 1px solid #cccccc; position:fixed;left:0;top:0; 
+	display:none;z-index:999;
+}
+.w_con .table tr td input,.w_con .table tr td select{ height: 30px;}
+.w_con .table tr td input{
+	height: 24px;font-size:12px;margin-bottom:0;
+}
