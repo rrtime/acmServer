@@ -9,10 +9,10 @@
 <meta charset="utf-8">
 <!doctype html>
 <title>角色管理</title>
-<link rel="stylesheet" href="../css/rest.css" />
-<link rel="stylesheet" href="../css/dialog.css" />
-<link rel="stylesheet" href="../css/easyTree.css" />
-<link rel="stylesheet" href="../css/roleManager.css" />
+<link rel="stylesheet" href="<%=path%>/css/rest.css" />
+<link rel="stylesheet" href="<%=path%>/css/dialog.css" />
+<link rel="stylesheet" href="<%=path%>/css/easyTree.css" />
+<link rel="stylesheet" href="<%=path%>/css/roleManager.css" />
 </head>
 <body>
 	<!--total-role start-->
@@ -28,7 +28,7 @@
 				<!--tree-modal start-->
 				<div class="tree-modal">
 					<div class="system-role">
-						<img src="../images/dotted.png" alt="" /> <a href="#">系统角色</a>
+						<img src="<%=path%>/images/dotted.png" alt="" /> <a href="#">系统角色</a>
 					</div>
 					<div class="tree-box easy-tree">
 						<ul class="tree-list">
@@ -37,10 +37,10 @@
 									<s:iterator value="#request.userList" id="listGroup">
 										<s:if test="#listGroup.itype==2"><li>
 											<s:if test="#listGroup.id==roleId">
-												<a class="se" href="atRoleAction!getRole.do?roleId=<s:property value="#listGroup.id"/>"><s:property value="#listGroup.iname"/></a>
+												<a class="se" href="role!getRole.do?roleId=<s:property value="#listGroup.id"/>"><s:property value="#listGroup.iname"/></a>
 											</s:if>
 											<s:else>
-												<a href="atRoleAction!getRole.do?roleId=<s:property value="#listGroup.id"/>"><s:property value="#listGroup.iname"/></a>
+												<a href="role!getRole.do?roleId=<s:property value="#listGroup.id"/>"><s:property value="#listGroup.iname"/></a>
 											</s:else>
 											</li>
 										</s:if>
@@ -57,7 +57,7 @@
 
 		</div>
 		
-		<form id="functionForm" method="post" action="atRoleAction!saveRoleStatus.do">
+		<form id="functionForm" method="post" action="role!saveRoleStatus.do">
 		<input type="hidden" name="roleId" value='<s:property value="roleId"/>' />
 		<div class="role-list">
 			<div class="find-opera clearfix">
@@ -74,8 +74,11 @@
 				<tr>
 					<td style="width:120px;">
 						<div class="data-item">
-							<input onclick="check('level1_<s:property value="#menuList.id"/>')" type="checkbox" style="float:left" id='level1_<s:property value="#menuList.id"/>' name="funIds" value='<s:property value="#menuList.id"/>' />
-							 <span	class="check-word"><s:property value="#menuList.mtitle"/></span>
+							<div class="check-box">
+							<input class="chk_1" onclick="check('level1_<s:property value="#menuList.id"/>')" type="checkbox" style="float:left" id='level1_<s:property value="#menuList.id"/>' name="funIds" value='<s:property value="#menuList.id"/>' />
+							<label for='level1_<s:property value="#menuList.id"/>'></label>
+							</div>
+							<span	class="check-word"><s:property value="#menuList.mtitle"/></span>
 						</div>
 					</td> 
 					<td style="padding-left:0px;">
@@ -84,7 +87,10 @@
 						 		<s:if test="#menuList1.parentId==#menuList.id">
 						 			<tr><td style="border-left:0px;border-top:0px;width:150px">
 						 				<div class="data-item">
-											<input onclick="check('level2_<s:property value="#menuList1.id"/>')" type="checkbox" style="float:left" id='level2_<s:property value="#menuList1.id"/>' value='<s:property value="#menuList1.id"/>' />
+											<div class="check-box">
+											<input class="chk_1" onclick="check('level2_<s:property value="#menuList1.id"/>')" type="checkbox" style="float:left" id='level2_<s:property value="#menuList1.id"/>' value='<s:property value="#menuList1.id"/>' />
+											<label for='level2_<s:property value="#menuList1.id"/>'></label>
+											</div>
 											<span class="check-word"><s:property value="#menuList1.mtitle"/></span>
 										</div>
 						 			</td>
@@ -95,7 +101,10 @@
 								 					<tr><td style="border-left:0px;border-top:0px;width:150px">
 								 						<s:if test="#functionList2.showIndex != -1">
 										 				<div class="data-item">
-															<input onclick="check1('level3_<s:property value="#functionList2.id"/>')" type="checkbox" style="float:left" id='level3_<s:property value="#functionList2.id"/>' value='<s:property value="#functionList2.id"/>' /> 
+															<div class="check-box">
+															<input class="chk_1" onclick="check1('level3_<s:property value="#functionList2.id"/>')" type="checkbox" style="float:left" id='level3_<s:property value="#functionList2.id"/>' value='<s:property value="#functionList2.id"/>' /> 
+															<label for='level3_<s:property value="#functionList2.id"/>'></label>
+															</div>
 															<span class="check-word"><s:property value="#functionList2.mname"/></span>
 														</div>
 														</s:if>
@@ -106,7 +115,10 @@
 																	<s:if test="#fieldDictList.menuCode==#functionList2.menuCode">
 												 					<tr><td style="border-left:0px;border-top:0px;">
 														 				<div class="data-item">
-														 					<input style="float:left" type="checkbox" id='field_id_<s:property value="#fieldDictList.id"/>' name="fieldIds" value='<s:property value="#fieldDictList.id"/>' />
+														 					<div class="check-box">
+																			<input class="chk_1" style="float:left" type="checkbox" id='field_id_<s:property value="#fieldDictList.id"/>' name="fieldIds" value='<s:property value="#fieldDictList.id"/>' />
+														 					<label for='field_id_<s:property value="#fieldDictList.id"/>'></label>
+																			</div>
 														 					<s:iterator value="#request.fieldRelList" id="fieldRelList">
 																				<s:if test="#fieldRelList.menuCode==#fieldDictList.menuCode && #fieldRelList.fid==#fieldDictList.id">
 																					<script>document.getElementById('field_id_'+<s:property value="#fieldDictList.id"/>).checked=true;
@@ -130,7 +142,10 @@
 																	<s:if test="#modelFunctionList.menuCode==#functionList2.menuCode">
 												 					<tr><td style="border-left:0px;border-top:0px;width:150px">
 														 				<div class="data-item">
-														 					<input type="checkbox" style="float:left" id='idfunction_<s:property value="#modelFunctionList.id"/>' name="funIds" value='<s:property value="#modelFunctionList.id"/>' />
+														 					<div class="check-box">
+																			<input class="chk_1" type="checkbox" style="float:left" id='idfunction_<s:property value="#modelFunctionList.id"/>' name="funIds" value='<s:property value="#modelFunctionList.id"/>' />
+														 					<label for='idfunction_<s:property value="#modelFunctionList.id"/>'></label>
+																			</div>
 														 					<s:iterator value="#request.holdFunctionList" id="holdFunctionList">
 																				<s:if test="#holdFunctionList.menuCode==#modelFunctionList.menuCode && #holdFunctionList.funId==#modelFunctionList.id">
 																					<script>document.getElementById('idfunction_'+<s:property value="#modelFunctionList.id"/>).checked=true;
@@ -208,7 +223,7 @@
 				<textarea id="roleDesc" name="atUser.remark" class="textarea"><s:property value="atUser.remark"/></textarea>
 				<div style="height:12px">
 				<div id="addTip" class="banner">
-					<img src="../images/pic12.png" />
+					<img src="<%=path%>/images/pic12.png" />
 					<p id="addTipText">不能为空</p>
 				</div>
 			</div>
@@ -220,14 +235,14 @@
 	</form>
 	
 	<!--删除-->
-	<form id="roleDelForm" method="post" action="atRoleAction!deleteRole.do">
+	<form id="roleDelForm" method="post" action="role!deleteRole.do">
 	<input type="hidden" name="roleId" value='<s:property value="roleId"/>' />
 	<div class="mainDel">
 		<h1 class="mian-title">
 			提示<span class="close-button right"></span>
 		</h1>
 		<div class="delete">
-			<img src="../images/pic14.png" />
+			<img src="<%=path%>/images/pic14.png" />
 			<p>你确定要删除角色[<s:property value="atUser.iname"/>]吗?</p>
 		</div>
 		<input class="submit1" type="submit" value="确定" /> <input
@@ -241,15 +256,15 @@
 			提示<span class="close-button right"></span>
 		</h1>
 		<div class="delete">
-			<img src="../images/pic14.png" />
+			<img src="<%=path%>/images/pic14.png" />
 			<p id="opTipText">操作成功！</p>
 		</div>
 		<input class="button" type="button" value="确定" />
 	</div>
 </body>
-<script src="../js/jquery-1.11.1.min.js"></script>
-<script src="../js/dialog.js"></script>
-<script src="../js/easyTree.js"></script>
+<script src="<%=path%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=path%>/js/dialog.js"></script>
+<script src="<%=path%>/js/easyTree.js"></script>
 <script type="text/javascript">
 $("#saveRoleBtn").click(function () {
 	$("#functionForm").submit();

@@ -18,7 +18,7 @@ jQuery(function($){
 		$(".opera-button .add-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
-			$("#roleAddForm").attr("action","atRoleAction!addRole.do");
+			$("#roleAddForm").attr("action","role!addRole.do");
 			$("#roleName").val('');
 			$("#roleDesc").val('');
 			$("#addTip").css("display","none");
@@ -37,7 +37,7 @@ jQuery(function($){
 		$(".opera-button .edit-bg").click(function(){
 			$(".shadow-bg").css("display","block");
 			$(".add-word").css("display","block");
-			$("#roleAddForm").attr("action","atRoleAction!updateRole.do");
+			$("#roleAddForm").attr("action","role!updateRole.do");
 			$("#addTip").css("display","none");
 			var obj1 = $("#sysorgId").val();
 			var obj = $("#sysoId").val();
