@@ -39,10 +39,11 @@ body {
 .opera{ background:#fff;}
 .opera-button{padding-left:22px; padding-top:10px; padding-bottom:4px; border-bottom:1px solid #cccccc;}
 .opera-button a{ padding:5px 10px 5px 25px; color:#fff; float:left; margin-right:18px;}
+
 .opera .opera-button .add-bg{ background:url(../images/operate-icon.png) 8px 7px no-repeat;background-color:#84b357;}
 .opera .opera-button .edit-bg{ background:url(../images/operate-icon.png) 8px -15px no-repeat; background-color:#2789ca;}
 .opera .opera-button .del-bg{ background:url(../images/operate-icon.png) 8px -38px no-repeat; background-color:#d15b47;}
-
+.opera .opera-button .del-bg1{ background:url(../images/operate-icon.png) 8px -38px no-repeat; background-color:#d15b47;}
 .role-list .find-opera a{}
 .role-list .find-opera a.save-btn{ float:left; background:#4aa0d9; display:block; padding:5px 15px; color:#fff;}
 .tree .tree-folder:before, .tree .tree-item:before{ border-top:1px dotted blue;}

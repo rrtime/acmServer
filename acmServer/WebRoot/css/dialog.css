@@ -99,6 +99,7 @@ h1{
 	border:none;
 	cursor:pointer;
 }
+.mian{ display:none;}
 .mian-title{ font-size:14px;}
 .button{
 	background:#438ee4;color:#fff;height:25px;margin-left:105px;

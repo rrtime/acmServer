@@ -96,6 +96,7 @@ public class SysUserAction extends ActionSupport{
 
 	private String atUserId;
 	
+	private String orgId;
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	
 	//登录
@@ -349,7 +350,8 @@ public class SysUserAction extends ActionSupport{
 			AtUser au = (AtUser)session.getAttribute("atUser");
 			list = aus.queryByOrgId(atUser.getOid(), page);
 			orglist = asos.queryAll(au.getCpCode());
-			ServletActionContext.getRequest().setAttribute("orgId", atUser.getOid());
+			//ServletActionContext.getRequest().setAttribute("orgId", atUser.getOid());
+			orgId = String.valueOf(atUser.getOid());
 			ServletActionContext.getRequest().setAttribute("oid", org.getOid());
 			return "queryBycpCode";
 		}
@@ -589,6 +591,14 @@ public class SysUserAction extends ActionSupport{
 
 	public void setAtUserId(String atUserId) {
 		this.atUserId = atUserId;
+	}
+
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
 	}
 
 }

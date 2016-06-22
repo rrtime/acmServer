@@ -228,11 +228,11 @@
     	<h2 class="role-word">部门管理</h2>
         <div class="opera">
         	<div class="opera-button clearfix">
-        	    <input type="hidden" id="sysorgId" value="${orgId}"/>
+        	    <input type="hidden" id="sysorgId" value="<s:property value="orgId"/>"/>
         	    <input type="hidden" id="sysoId" value="${oid}"/>
             	<a class="add-bg" href="#">新增</a>
                 <a class="edit-bg" href="#">编辑</a>
-                <a class="del-bg" href="#">删除</a>
+                <a class="del-bg del-bg1" id="del-bg1" href="#">删除</a>
             </div>
             
             <!--tree-modal start-->
@@ -256,7 +256,12 @@
 	                                                     <ul>
 	                                                        <s:iterator value="#request.orglist" id="orglist3" status="st">
 	                                                            <s:if test="#orglist3.oid==#orglist2.id">
-	                                                               <li><a href="#" onclick="findByOrgId('<s:property value="#orglist3.oid"/>','<s:property value="#orglist3.id"/>')"><s:property value="#orglist3.orgName"/></a></li>
+	                                                               <s:if test="#orglist3.id==orgId">
+	                                                                  <li><a class="se" href="#" onclick="findByOrgId('<s:property value="#orglist3.oid"/>','<s:property value="#orglist3.id"/>')"><s:property value="#orglist3.orgName"/></a></li>
+	                                                               </s:if>
+	                                                               <s:else>
+	                                                                  <li><a href="#" onclick="findByOrgId('<s:property value="#orglist3.oid"/>','<s:property value="#orglist3.id"/>')"><s:property value="#orglist3.orgName"/></a></li>
+	                                                               </s:else>
 	                                                            </s:if>
 	                                                        </s:iterator>
 	                                                     </ul>
@@ -298,7 +303,7 @@
     <div class="role-list">
     	<div class="find-opera">
         	<input class="add-button" id="add" type="button" value="新增" />
-        	<input class="del-button" type="button" value="删除" />
+        	<input class="del-button1" type="button" value="删除" />
         	<div class="search">
         		<ul>
         			<li>姓名：</li>
@@ -399,7 +404,7 @@
     <input class="reset"type="reset" value="取消"/>
     </div>
 <!---->
-<div class="mian" id="mian2">
+<div class="mainDel" id="mian2">
     <form id="idsform" action="../xl/user!deletemore.do">
     <input type="hidden" id="ids" name="ids" value=""/>
     <h1 class="mian-title">提示<span class="close-button right"></span></h1>
@@ -412,7 +417,7 @@
     </form>
 </div>
 
-<div class="mian" id="mian">
+<div class="mainDel" id="mian1">
     <h1 class="mian-title">提示<span class="close-button right"></span></h1>
     <div class="delete">
         <img src="../images/pic14.png"/>
