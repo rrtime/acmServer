@@ -18,8 +18,10 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rrtimes.acm.domain.AtCsrBasic;
+import com.rrtimes.acm.domain.AtCstFt;
 import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.persistence.AtCsrBasicMapper;
 import com.rrtimes.acm.persistence.AtCstContractMapper;
@@ -214,5 +216,19 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 			result = false;
 		}
 		return result;
+	}
+	
+	@Transactional()
+	public int addbasicAndcsrft(AtCsrBasic ab) {
+		// TODO Auto-generated method stub
+		int i=1;
+		int n=1;
+		int m=1;
+		i=asom.insert(ab)>0?0:1;
+		n=acfm.insert(ab.getAcf())>0?0:1;
+		if(i==0&&n==0){
+			m=0;
+		}
+		return m;
 	}
 }

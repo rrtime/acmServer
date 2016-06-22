@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.util.List;
 
 import com.rrtimes.acm.domain.AtCsrBasic;
+import com.rrtimes.acm.domain.AtCstFt;
 import com.rrtimes.acm.domain.PageObject;
 
 /**
@@ -65,4 +66,7 @@ public interface AtCsrBasicService {
 	
 	//验证客户是否存在
 	public boolean isexistbasic(String csrIdentifer);
+	
+	//同时新增客户和财税信息
+	public int addbasicAndcsrft(AtCsrBasic ab);
 }
