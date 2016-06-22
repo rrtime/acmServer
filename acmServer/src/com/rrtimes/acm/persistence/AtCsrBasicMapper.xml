@@ -380,5 +380,27 @@
 	  		and CSR_NAME = #{csrName}
 	  		</if>	
   </select>
+  
+  <select id="isexistbasic" parameterType="Map" resultType="AtCsrBasic">
+	    SELECT
+	         ID as id,
+	  		 CP_CODE as cpCode,
+	  		 CSR_TYPE as csrType,
+	         CSR_IDENTIFER as csrIdentifer,
+	         CSR_CODE as csrCode,
+	         REG_ADDRESS as regAddress,
+	         OFFICE_ADDRESS as officeAddress,
+	         CSR_OWNER as csrOwner,
+	         FINANCE_LEADER as financeLeader,
+	         TAX_LEADER as taxLeader,
+	         OPERATOR as operator,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark,
+	         CSR_NAME as csrName
+	    FROM AT_CSR_BASIC 
+	    WHERE 1 = 1
+	  	    and CSR_IDENTIFER = #{csrIdentifer}
+  </select>
 
 </mapper>

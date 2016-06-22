@@ -200,4 +200,16 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		map.put("userId", userId);
 		return asom.findCountByUserId(map);
 	}
+	@Override
+	public boolean isexistbasic(String csrIdentifer) {
+		// TODO Auto-generated method stub
+		boolean result = true;
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("csrIdentifer", csrIdentifer);
+		AtCsrBasic ab = asom.isexistbasic(map);
+		if(ab==null){//不存在在这个客户
+			result = false;
+		}
+		return result;
+	}
 }

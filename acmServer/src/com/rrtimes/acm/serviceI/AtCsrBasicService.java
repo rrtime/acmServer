@@ -62,4 +62,7 @@ public interface AtCsrBasicService {
 	
 	//根据用户Id查询需要跟进的客户的个数并设置预警时间
 	public int queryCountByUserId(int userId);
+	
+	//验证客户是否存在
+	public boolean isexistbasic(String csrIdentifer);
 }

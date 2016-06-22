@@ -58,4 +58,6 @@ public interface AtCsrBasicMapper {
 	public List<AtCsrBasic> findByUser(Map<String, Object> map);
 	
 	public int findByUserCount(Map<String, Object> map);
+	
+	public AtCsrBasic isexistbasic(Map<String,Object> map);
 }
