@@ -45,6 +45,7 @@ public class AtCsrBasic implements ISerializable{
       private Timestamp createTime;    //创建时间
       private Date updateTime;         //修改时间
       private String remark;           //备注
+      private String csrName;
       private List<AtCstContract> acc;       //合同信息表关联---------一对多
       
 	public AtCstFt getAcf() {
@@ -143,5 +144,11 @@ public class AtCsrBasic implements ISerializable{
 	}
 	public void setAcc(List<AtCstContract> acc) {
 		this.acc = acc;
+	}
+	public String getCsrName() {
+		return csrName;
+	}
+	public void setCsrName(String csrName) {
+		this.csrName = csrName;
 	}
 } 

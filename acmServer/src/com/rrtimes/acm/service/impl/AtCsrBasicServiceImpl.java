@@ -84,6 +84,9 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		if(!StringUtils.isEmpty(aso.getRemark())){
 			map.put("remark", aso.getRemark());
 		}
+		if(!StringUtils.isEmpty(aso.getCsrName())){
+			map.put("csrName", aso.getCsrName());
+		}
 		int size = asom.findByCount(map);
 		page.setSumCloum(size);
 		map.put("page", page);

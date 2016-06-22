@@ -15,7 +15,8 @@
          FINANCE_LEADER,
          TAX_LEADER,
          OPERATOR,
-         REMARK )
+         REMARK,
+         CSR_NAME )
   	VALUES(
   	     #{cpCode},
   		 #{csrType},
@@ -27,7 +28,8 @@
   		 #{financeLeader},
   		 #{taxLeader},
   		 #{operator},
-         #{remark}  )
+         #{remark},
+         #{csrName}  )
   </insert> 
   
   <update id="update" parameterType="AtCsrBasic">
@@ -58,6 +60,9 @@
 	  		,UPDATE_TIME = #{updateTime}
 	  		<if test="remark != null">
 	  		,REMARK = #{remark}
+	  		</if>
+	  		<if test="csrName != null">
+	  		,CSR_NAME = #{csrName}
 	  		</if>	        
 		WHERE
 			ID=#{id}
@@ -84,7 +89,8 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         CSR_NAME as csrName
 	    FROM AT_CSR_BASIC  
 	    	WHERE 1 = 1
 	    	<if test="cpCode!=null">
@@ -119,6 +125,9 @@
 	  		</if>
 	  		<if test="remark != null">
 	  		and REMARK = #{remark}
+	  		</if>
+	  		<if test="csrName != null">
+	  		and CSR_NAME = #{csrName}
 	  		</if>	
 	    	ORDER BY CREATE_TIME DESC 
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -139,7 +148,8 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         CSR_NAME as csrName
     FROM AT_CSR_BASIC  
     WHERE ID=#{id}
   </select>
@@ -159,7 +169,8 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         CSR_NAME as csrName
     FROM AT_CSR_BASIC  
     WHERE 
     OPERATOR = #{userId}
@@ -195,7 +206,8 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         CSR_NAME as csrName
     FROM AT_CSR_BASIC  
     WHERE 
     CP_CODE = #{cpCode}
@@ -231,7 +243,8 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         CSR_NAME as csrName
     FROM AT_CSR_BASIC b
     WHERE 
     EXISTS 
@@ -277,7 +290,8 @@
 	         b.OPERATOR as operator,
 	         b.CREATE_TIME as createTime,
 	         b.UPDATE_TIME as updateTime,
-	         b.REMARK as remark
+	         b.REMARK as remark,
+	         CSR_NAME as csrName
     FROM AT_CSR_BASIC b 
     WHERE 
      b.ID = #{id}
@@ -298,7 +312,8 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         CSR_NAME as csrName
     FROM AT_CSR_BASIC  
     WHERE 
       CSR_TYPE = 3
@@ -360,6 +375,9 @@
 	  		</if>
 	  		<if test="remark != null">
 	  		and REMARK = #{remark}
+	  		</if>
+	  		<if test="csrName != null">
+	  		and CSR_NAME = #{csrName}
 	  		</if>	
   </select>
 
