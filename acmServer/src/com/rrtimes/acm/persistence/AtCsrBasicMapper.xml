@@ -212,7 +212,10 @@
     WHERE 
     CP_CODE = #{cpCode}
     <if test="csrIdentifer != null">
-	  	and CSR_IDENTIFER = #{csrIdentifer}
+	  	and CSR_IDENTIFER like #{csrIdentifer}
+	</if>
+	<if test="csrName != null">
+	  	or CSR_NAME like #{csrName}
 	</if>
     limit #{page.pageSize} offset #{page.offset}
   </select>
@@ -224,7 +227,10 @@
     WHERE 
     CP_CODE = #{cpCode}
     <if test="csrIdentifer != null">
-	  	and CSR_IDENTIFER = #{csrIdentifer}
+	  	and CSR_IDENTIFER like #{csrIdentifer}
+	</if>
+	<if test="csrName != null">
+	  	or CSR_NAME like #{csrName}
 	</if>
   </select>
   
