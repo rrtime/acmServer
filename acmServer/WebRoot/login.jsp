@@ -39,7 +39,7 @@
             <div class="box yz">
             	<span></span>
                 <input id="identifCode" class="short-input " type="text" value="请输入图中验证码" onfocus="ee()" onblur="ff()"/>
-                <a onclick="javascript:changeCode();"><img id="checkCodeImage" class="fr" src="../CreateImage" style="cursor: pointer" /></a>
+                <a onclick="javascript:changeCode();"><img id="checkCodeImage" class="fr" src="<%=path%>/CreateImage" style="cursor: pointer" /></a>
                 
             </div>
             <div class="opera-box">
