@@ -43,6 +43,11 @@ public class AtCstContract implements ISerializable{
      private Timestamp createTime;         //创建时间
      private Date updateTime;              //修改时间
      private String remark;                //备注
+     private int sendType;                 //派送方式
+     private int lastUid;                   //最后派工人员
+     private Date lastTime;                //最后派工时间
+     private int currentDept;              //当前任务部门
+     private String currentUids;           //派工任务人员集合
 	public int getId() {
 		return id;
 	}
@@ -121,6 +126,36 @@ public class AtCstContract implements ISerializable{
 	}
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+	public int getSendType() {
+		return sendType;
+	}
+	public void setSendType(int sendType) {
+		this.sendType = sendType;
+	}
+	public int getLastUid() {
+		return lastUid;
+	}
+	public void setLastUid(int lastUid) {
+		this.lastUid = lastUid;
+	}
+	public Date getLastTime() {
+		return lastTime;
+	}
+	public void setLastTime(Date lastTime) {
+		this.lastTime = lastTime;
+	}
+	public int getCurrentDept() {
+		return currentDept;
+	}
+	public void setCurrentDept(int currentDept) {
+		this.currentDept = currentDept;
+	}
+	public String getCurrentUids() {
+		return currentUids;
+	}
+	public void setCurrentUids(String currentUids) {
+		this.currentUids = currentUids;
 	}
      
 }

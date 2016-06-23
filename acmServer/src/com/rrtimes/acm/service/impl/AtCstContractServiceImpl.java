@@ -85,6 +85,21 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 		if(!StringUtils.isEmpty(aso.getRemark())){
 			map.put("remark", aso.getRemark());
 		}
+		if(aso.getSendType()>0){
+			map.put("sendType", aso.getSendType());
+		}
+		if(aso.getLastUid()>0){
+			map.put("lastUid", aso.getLastUid());
+		}
+		if(aso.getLastTime()!=null){
+			map.put("lastTime", aso.getLastTime());
+		}
+		if(aso.getCurrentDept()>0){
+			map.put("currentDept", aso.getCurrentDept());
+		}
+		if(!StringUtils.isEmpty(aso.getCurrentUids())){
+			map.put("currentUids", aso.getCurrentUids());
+		}
 		int size = asom.findByCount(map);
 		page.setSumCloum(size);
 		map.put("page", page);

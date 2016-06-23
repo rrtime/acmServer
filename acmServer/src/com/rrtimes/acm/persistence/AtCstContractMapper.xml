@@ -14,7 +14,12 @@
          PAY_DAY,
          SORT_TYPE,
          OPERATOR,
-         REMARK )
+         REMARK,
+         SEND_TYPE,
+         LAST_UID,
+         LAST_TIME,
+         CURRENT_DEPT,
+         CURRENT_UIDS )
   	VALUES(
   	     #{csrIdentifer},
   		 #{serviceType},
@@ -25,7 +30,12 @@
   		 #{payDay},
   		 #{sortType},
   		 #{operator},
-         #{remark}  )
+         #{remark},
+         #{sendType},
+         #{lastUid},
+         #{lastTime},
+         #{currentDept},
+         #{currentUids}  )
   </insert> 
   
   <update id="update" parameterType="AtCstContract">
@@ -43,6 +53,21 @@
 	  		,UPDATE_TIME = #{updateTime}
 	  		<if test="remark != null">
 	  		,REMARK = #{remark}
+	  		</if>
+	  		<if test="sendType != null">
+	  		,SEND_TYPE = #{sendType}
+	  		</if>
+	  		<if test="lastUid != null">
+	  		,LAST_UID = #{lastUid}
+	  		</if>
+	  		<if test="lastTime != null">
+	  		,LAST_TIME = #{lastTime}
+	  		</if>
+	  		<if test="currentDept != null">
+	  		,CURRENT_DEPT = #{currentDept}
+	  		</if>
+	  		<if test="currentUids != null">
+	  		,CURRENT_UIDS = #{currentUids}
 	  		</if>	        
 		WHERE
 			ID=#{id}
@@ -68,7 +93,12 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SEND_TYPE as sendType,
+	         LAST_UID as lastUid,
+	         LAST_TIME as lastTime,
+	         CURRENT_DEPT as currentDept,
+	         CURRENT_UIDS as currentUids
 	    FROM AT_CST_CONTRACT  
 	    	WHERE 1 = 1
 	    	<if test="csrIdentifer!=null">
@@ -100,6 +130,21 @@
 	  		</if>
 	  		<if test="remark != null">
 	  		and REMARK = #{remark}
+	  		</if>
+	  		<if test="sendType != null">
+	  		and SEND_TYPE = #{sendType}
+	  		</if>
+	  		<if test="lastUid != null">
+	  		and LAST_UID = #{lastUid}
+	  		</if>
+	  		<if test="lastTime != null">
+	  		and LAST_TIME = #{lastTime}
+	  		</if>
+	  		<if test="currentDept != null">
+	  		and CURRENT_DEPT = #{currentDept}
+	  		</if>
+	  		<if test="currentUids != null">
+	  		and CURRENT_UIDS = #{currentUids}
 	  		</if>	
 	    	ORDER BY CREATE_TIME DESC 
 	    	limit #{page.pageSize} offset #{page.offset}
@@ -119,7 +164,12 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SEND_TYPE as sendType,
+	         LAST_UID as lastUid,
+	         LAST_TIME as lastTime,
+	         CURRENT_DEPT as currentDept,
+	         CURRENT_UIDS as currentUids
     FROM AT_CST_CONTRACT  
     WHERE ID=#{id}
   </select>
@@ -138,7 +188,12 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SEND_TYPE as sendType,
+	         LAST_UID as lastUid,
+	         LAST_TIME as lastTime,
+	         CURRENT_DEPT as currentDept,
+	         CURRENT_UIDS as currentUids
     FROM AT_CST_CONTRACT c 
     WHERE 
       EXISTS
@@ -173,7 +228,12 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SEND_TYPE as sendType,
+	         LAST_UID as lastUid,
+	         LAST_TIME as lastTime,
+	         CURRENT_DEPT as currentDept,
+	         CURRENT_UIDS as currentUids
     FROM AT_CST_CONTRACT c 
     WHERE 
        EXISTS
@@ -204,7 +264,12 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SEND_TYPE as sendType,
+	         LAST_UID as lastUid,
+	         LAST_TIME as lastTime,
+	         CURRENT_DEPT as currentDept,
+	         CURRENT_UIDS as currentUids
     FROM AT_CST_CONTRACT  
     WHERE 
        1=1
@@ -241,7 +306,12 @@
 	         OPERATOR as operator,
 	         CREATE_TIME as createTime,
 	         UPDATE_TIME as updateTime,
-	         REMARK as remark
+	         REMARK as remark,
+	         SEND_TYPE as sendType,
+	         LAST_UID as lastUid,
+	         LAST_TIME as lastTime,
+	         CURRENT_DEPT as currentDept,
+	         CURRENT_UIDS as currentUids
     FROM AT_CST_CONTRACT c 
     WHERE 
       EXISTS
@@ -280,7 +350,12 @@
 	         c.OPERATOR as operator,
 	         c.CREATE_TIME as createTime,
 	         c.UPDATE_TIME as updateTime,
-	         c.REMARK as remark
+	         c.REMARK as remark,
+	         c.SEND_TYPE as sendType,
+	         c.LAST_UID as lastUid,
+	         c.LAST_TIME as lastTime,
+	         c.CURRENT_DEPT as currentDept,
+	         c.CURRENT_UIDS as currentUids
 	          from AT_CST_CONTRACT c LEFT JOIN AT_CST_FEE f on
     c.ID=f.NID where  NOW() > f.END_TIME
     and EXISTS
@@ -327,6 +402,21 @@
 	  		</if>
 	  		<if test="remark != null">
 	  		and REMARK = #{remark}
+	  		</if>
+	  		<if test="sendType != null">
+	  		and SEND_TYPE = #{sendType}
+	  		</if>
+	  		<if test="lastUid != null">
+	  		and LAST_UID = #{lastUid}
+	  		</if>
+	  		<if test="lastTime != null">
+	  		and LAST_TIME = #{lastTime}
+	  		</if>
+	  		<if test="currentDept != null">
+	  		and CURRENT_DEPT = #{currentDept}
+	  		</if>
+	  		<if test="currentUids != null">
+	  		and CURRENT_UIDS = #{currentUids}
 	  		</if>		
   </select>
 
@@ -344,7 +434,12 @@
 	         c.OPERATOR as operator,
 	         c.CREATE_TIME as createTime,
 	         c.UPDATE_TIME as updateTime,
-	         c.REMARK as remark
+	         c.REMARK as remark,
+	         c.SEND_TYPE as sendType,
+	         c.LAST_UID as lastUid,
+	         c.LAST_TIME as lastTime,
+	         c.CURRENT_DEPT as currentDept,
+	         c.CURRENT_UIDS as currentUids
 	          from AT_CST_CONTRACT c 
 	          where 
 	            c.CSR_IDENTIFER = #{csrIdentifer}
