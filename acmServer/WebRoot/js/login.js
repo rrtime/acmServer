@@ -45,7 +45,10 @@ function login(){
 	function check(){
 		//alert("0000");
 		var nameVal = $("#username").val();
-		var pwdVal = $("#pw").val();	
+		//var pwdVal = $("#pw").val();
+		// 登录口令密文处理
+		var passd = $("#pw").val();
+		var pwdVal = $("#pw").val(CryptoJS.SHA256(passd));
 		var numVal = $("#identifCode").val();	
 		var tip = $(".tip");
 		if(nameVal == '' || nameVal == '请输入您的用户名'){

@@ -48,10 +48,15 @@
 			});
    }
    function save(){
+       // 登录口令密文处理
+	   var passd = $("#loginPwd").val();
+	   var atUserId = $("#atUserId").val();
+	   if(atUserId==""){
+	      $("#loginPwd").val(CryptoJS.SHA256(passd));
+	   }
        document.getElementById("userform").submit();
    }
    function delte(){
-   alert("ss");
       var ids =  document.getElementsByName("id");
       var idvalues="";
       for(var i=1;i<ids.length;i++){
@@ -596,6 +601,7 @@
 <script src="../js/dialog.js"></script>
 <script src="../js/easyTree.js"></script>
 <script src="../js/mpage.js"></script>
+<script type="text/javascript" src="<%=path%>/js/sha256.js"></script>
 </body>
 </html>
 

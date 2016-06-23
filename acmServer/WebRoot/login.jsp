@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="<%=path%>/js/md5.js"></script>	
 	<script type="text/javascript" src="<%=path%>/js/login.js"></script>
 	<script src="<%=path%>/js/identifyingCode.js" type="text/javascript"></script>
+	<script type="text/javascript" src="<%=path%>/js/sha256.js"></script>
 	<LINK href="<%=path%>/css/login.css" type="text/css" rel="stylesheet">
 </head>
 <body>
