@@ -50,8 +50,8 @@
    function save(){
        // 登录口令密文处理
 	   var passd = $("#loginPwd").val();
-	   var atUserId = $("#atUserId").val();
-	   if(atUserId==""){
+	   var yspwd = $("#yspwd").val();
+	   if(yspwd!=passd){
 	      $("#loginPwd").val(CryptoJS.SHA256(passd));
 	   }
        document.getElementById("userform").submit();
@@ -115,6 +115,7 @@
 	                    $("#jobDuty").val(jsonData.jobDuty);
 	                    $("#loginPwd").val(jsonData.loginPwd);
 	                    $("#remark").val(jsonData.remark);
+	                    $("#yspwd").val(jsonData.loginPwd);
 	                    var sexobj =  document.getElementsByName("atUser.sex");
 	                    for(var i=0;i<sexobj.length;i++){
 	                         if(sexobj[i].value==jsonData.sex){
@@ -481,7 +482,7 @@
 										</tr>
 										<tr class="tab-tr">
 											<th align="right">登录密码：</th>
-											<td><input class="tab-pw" style="width:200px; height:30px; line-height:30px; overflow:hidden; border:1px solid #d5d5d5;"  type="password" id="loginPwd" name="atUser.loginPwd" value=""/></td>
+											<td><input class="tab-pw" style="width:200px; height:30px; line-height:30px; overflow:hidden; border:1px solid #d5d5d5;"  type="password" id="loginPwd" name="atUser.loginPwd" value=""/><input type="hidden" id="yspwd" value=""/></td>
 										</tr>
 										<tr>
 											<th align="right">备注：</th>
