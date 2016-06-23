@@ -54,5 +54,7 @@ public interface AtCstContractMapper {
     public List<AtCstContract> findQFByUserId(Map<String,Object> map);
 
 	public List<AtCstContract> findByUserId(Map<String, Object> map);
+
+	public List<AtCstContract> findByCsrIdentiferAndCurdate(Map<String, Object> paramap);
 	
 }

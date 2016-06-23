@@ -330,4 +330,24 @@
 	  		</if>		
   </select>
 
+  <select id="findByCsrIdentiferAndCurdate" parameterType="Map" resultType="AtCstContract">
+  	select 
+			 c.ID as id,
+	  		 c.CSR_IDENTIFER as csrIdentifer,
+	  		 c.SERVICE_TYPE as serviceType,
+	         c.START_TIME as startTime,
+	         c.END_TIME as endTime,
+	         c.SERVICE_FEE as serviceFee,
+	         c.PAY_CYCLE as payCycle,
+	         c.PAY_DAY as payDay,
+	         c.SORT_TYPE as sortType,
+	         c.OPERATOR as operator,
+	         c.CREATE_TIME as createTime,
+	         c.UPDATE_TIME as updateTime,
+	         c.REMARK as remark
+	          from AT_CST_CONTRACT c 
+	          where 
+	            c.CSR_IDENTIFER = #{csrIdentifer}
+	            and CURDATE() BETWEEN c.START_TIME and c.END_TIME
+  </select>
 </mapper>

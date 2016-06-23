@@ -9,7 +9,9 @@
 package com.rrtimes.acm.service.impl;
 
 import java.io.BufferedReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -165,7 +167,14 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		}
 		page.setSumCloum(asom.findByAgentCount(map));
 		map.put("page", page);
-		return asom.findByAgent(map);
+		List<AtCsrBasic> list = asom.findByAgent(map);
+		for(int i=0;i<list.size();i++){
+			//根据数据中的客户编号和当前时间查询合同信息
+			Map<String,Object> paramap = new HashMap<String,Object>();
+			paramap.put("csrIdentifer", list.get(i).getCsrIdentifer());
+			list.get(i).setAcc(accm.findByCsrIdentiferAndCurdate(paramap));
+		}
+		return list;
 	}
 	@Override
 	public List<AtCsrBasic> queryBasicByOrg(int orgId,AtCsrBasic aso,PageObject page) {
@@ -177,7 +186,14 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		}
 		page.setSumCloum(asom.findByOrgCount(map));
 		map.put("page", page);
-		return asom.findByOrg(map);
+		List<AtCsrBasic> list = asom.findByOrg(map);
+		for(int i=0;i<list.size();i++){
+			//根据数据中的客户编号和当前时间查询合同信息
+			Map<String,Object> paramap = new HashMap<String,Object>();
+			paramap.put("csrIdentifer", list.get(i).getCsrIdentifer());
+			list.get(i).setAcc(accm.findByCsrIdentiferAndCurdate(paramap));
+		}
+		return list;
 	}
 	@Override
 	public AtCsrBasic queryBasicById(int id) {
