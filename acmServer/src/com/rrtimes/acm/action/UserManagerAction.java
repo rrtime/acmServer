@@ -115,6 +115,11 @@ public class UserManagerAction extends ActionSupport {
 				// 获取用户的所在代账机构信息
 				this.setAtCompanyAgent(acas.queryBycpCode(atUser.getCpCode()));
 			}
+			else
+			{
+				this.setRst(1);
+				this.setMsg("用户名或密码有误");
+			}
 		}catch(Exception ex){
 			ex.printStackTrace();
 			ex.toString();
@@ -170,14 +175,10 @@ public class UserManagerAction extends ActionSupport {
 		{
 			//"系统当前登录用户会话已过期,自动拦截、注销登录定向至登录页面"
 			this.setRst(5);
-		}else if (this.getCmd() == 7){
-			//"系统License已过期,自动拦截、注销登录定向至登录页面"
-			this.setRst(7);
-		}
-		else
+		}else
 		{
 			//"用户"+"["+alias+"]注销登录已成功。"
-			this.setRst(99);
+			this.setRst(6);
 		}
 		session.removeAttribute("sysPath");
 		session.removeAttribute("loginUser");
