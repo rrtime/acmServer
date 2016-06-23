@@ -47,6 +47,7 @@ public class AtCsrBasic implements ISerializable{
       private String remark;           //备注
       private String csrName;
       private List<AtCstContract> acc;       //合同信息表关联---------一对多
+      private List<AtComplain> ac;
       
 	public AtCstFt getAcf() {
 		return acf;
@@ -150,5 +151,11 @@ public class AtCsrBasic implements ISerializable{
 	}
 	public void setCsrName(String csrName) {
 		this.csrName = csrName;
+	}
+	public List<AtComplain> getAc() {
+		return ac;
+	}
+	public void setAc(List<AtComplain> ac) {
+		this.ac = ac;
 	}
 } 

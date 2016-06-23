@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rrtimes.acm.domain.AtCsrBasic;
 import com.rrtimes.acm.domain.AtCstFt;
 import com.rrtimes.acm.domain.PageObject;
+import com.rrtimes.acm.persistence.AtComplainMapper;
 import com.rrtimes.acm.persistence.AtCsrBasicMapper;
 import com.rrtimes.acm.persistence.AtCstContractMapper;
 import com.rrtimes.acm.persistence.AtCstFtMapper;
@@ -50,6 +51,8 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 	private AtCstContractMapper accm;
 	@Resource
 	private AtCstFtMapper acfm;
+	@Resource
+	private AtComplainMapper acm;
 
 	@Override
 	public List<AtCsrBasic> queryUser(AtCsrBasic aso, PageObject page) {
@@ -173,6 +176,7 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 			Map<String,Object> paramap = new HashMap<String,Object>();
 			paramap.put("csrIdentifer", list.get(i).getCsrIdentifer());
 			list.get(i).setAcc(accm.findByCsrIdentiferAndCurdate(paramap));
+			list.get(i).setAc(acm.findByCsrIdentifer(paramap));
 		}
 		return list;
 	}
@@ -192,6 +196,7 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 			Map<String,Object> paramap = new HashMap<String,Object>();
 			paramap.put("csrIdentifer", list.get(i).getCsrIdentifer());
 			list.get(i).setAcc(accm.findByCsrIdentiferAndCurdate(paramap));
+			list.get(i).setAc(acm.findByCsrIdentifer(paramap));
 		}
 		return list;
 	}

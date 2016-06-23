@@ -83,5 +83,8 @@ public interface AtComplainMapper {
 	 * @return
 	 */
 	public int batchDeleteAtComplain(int[] ids);
+	
+	//按CsrIdentifer客户编号查询投诉信息
+	public List<AtComplain> findByCsrIdentifer(Map<String,Object> map);
 
 }

@@ -105,6 +105,28 @@
     WHERE c.ID=#{id}
   </select>
   
+  <select id="findByCsrIdentifer" parameterType="Map" resultType="AtComplain">
+  	SELECT
+  		 c.ID as id,
+  		 CP_CODE as cpCode,
+  		 CSR_IDENTIFER as csrIdentifer,
+  		 CN_FROM as cnFrom,
+  		 CN_TYPE as cnType,
+         CN_THEME as cnTheme,
+         CN_CONTENT as cnContent,
+         CN_OPT as cnOpt,
+         CN_INQUIRE as cnInquire,
+         CN_RESULT as cnResult,
+         CN_PRINCIPAL as cnPrincipal,
+		 CN_STATUS as cnStatus,         
+         OPERATOR as operator,
+         CREATE_TIME as createTime,
+         UPDATE_TIME as updateTime,
+         REMARK as remark
+    FROM AT_COMPLAIN c 
+    WHERE c.CSR_IDENTIFER=#{csrIdentifer}
+  </select>
+  
   <select id="findByPage" parameterType="Map" resultType="AtComplain">
 	  	SELECT
 	  		 c.ID as id,
