@@ -5,11 +5,14 @@
 	String path = request.getContextPath();
 %>
 <script src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/sha256.js"></script>
 <script type="text/javascript">
 //修改密码
 function updatepwd(){
-        var oldpwd = $("#oldpwd").val();
-        var loginPwd = $("#loginPwd").val();
+        // 登录口令密文处理
+		var passd = $("#oldpwd").val();
+		var oldpwd = CryptoJS.SHA256(passd);
+        var newPwd = $("#loginPwd").val();
 	    $.ajax({
 						type : "POST",
 						url : "../xl/user!checkpwd.do?oldpwd="+oldpwd,
@@ -18,6 +21,7 @@ function updatepwd(){
 						success : function(json) {//调用成功的话
 								var jsonData = JSON.parse(json); 
 								if(jsonData.status=="0"){//旧密码和新密码相同
+								       var loginPwd = CryptoJS.SHA256(newPwd);
 									   $.ajax({
 											type : "POST",
 											url : "../xl/user!updatepassword.do?atUser.loginPwd="+loginPwd,
