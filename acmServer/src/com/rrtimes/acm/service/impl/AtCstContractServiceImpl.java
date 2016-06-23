@@ -52,7 +52,7 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 	Calendar c = Calendar.getInstance();
 	
 	@Override
-	public List<AtCstContract> queryUser(AtCstContract aso, PageObject page) {
+	public List<AtCstContract> queryContract(AtCstContract aso, PageObject page) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(!StringUtils.isEmpty(aso.getCsrIdentifer())){
@@ -92,16 +92,16 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 		return list;
 	}
 	@Override
-	public int addUser(AtCstContract aso){
+	public int addContract(AtCstContract aso){
 		return asom.insert(aso)>0?0:1;
 	}
 	@Override
-	public int updateUser(AtCstContract aso) {
+	public int updateContract(AtCstContract aso) {
 		// TODO Auto-generated method stub
 		return asom.update(aso)>0?0:1;
 	}
 	@Override
-	public int deleteUser(int id) {
+	public int deleteContract(int id) {
 		// TODO Auto-generated method stub
 		return asom.delete(id)>0?0:1;
 	}

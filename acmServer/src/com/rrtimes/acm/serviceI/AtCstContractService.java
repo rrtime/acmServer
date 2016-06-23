@@ -27,16 +27,16 @@ import com.rrtimes.acm.domain.PageObject;
  */
 public interface AtCstContractService {
     //按条件查询并分页
-	public List<AtCstContract> queryUser(AtCstContract aso, PageObject page);
+	public List<AtCstContract> queryContract(AtCstContract aso, PageObject page);
 	
 	//新增用户
-	public int addUser(AtCstContract aso);
+	public int addContract(AtCstContract aso);
 	
 	//修改用户
-	public int updateUser(AtCstContract aso);
+	public int updateContract(AtCstContract aso);
 	
 	//删除用户
-	public int deleteUser(int id);
+	public int deleteContract(int id);
 	
 	//通过id查询用户信息 
 	public AtCstContract queryUserById(int id);
