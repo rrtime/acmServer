@@ -97,6 +97,6 @@ public interface AtSysModelMapper {
 	 * @return
 	 * @throws Exception 
 	 */
-	public List<AtSysModel> queryAtSysModelByUserId(Map<String,Object> map);
+	public List<AtSysModel> queryAtSysModelByUserId(Map<String, Object> map);
 
 }

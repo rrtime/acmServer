@@ -79,6 +79,8 @@ public class SysUserAction extends ActionSupport{
 	
 	private List<AtUser> list = new ArrayList<AtUser>();
 	
+	private List<AtUser> roelist = new ArrayList<AtUser>();
+	
 	private List<AcmSysOrg> orglist = new ArrayList<AcmSysOrg>();
 	
 	private AcmSysOrg org = new AcmSysOrg();
@@ -97,6 +99,8 @@ public class SysUserAction extends ActionSupport{
 	private String atUserId;
 	
 	private String orgId;
+	
+	private String gid;
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	
 	//登录
@@ -130,8 +134,12 @@ public class SysUserAction extends ActionSupport{
 				atUser.setOperator(String.valueOf(au.getId()));
 				rst = aus.addUser(atUser);
 				int id = aus.queryByIname(atUser.getIname());
-				augl.setUid(id);
-				augls.insert(augl);
+				String[] gids = gid.split(",");
+				for(int i=0;i<gids.length;i++){
+					augl.setUid(id);
+					augl.setGid(Integer.parseInt(gids[i]));
+					augls.insert(augl);
+				}
 				if(rst==0){
 					msg="新增成功";
 				}else{
@@ -222,7 +230,13 @@ public class SysUserAction extends ActionSupport{
 		au.setRemark(atUser.getRemark());
 		rst=aus.updateUser(au);
 		augl.setUid(atUser.getId());
-		augls.updateByUid(augl);
+		augls.deleteByUid(augl.getUid());
+		String[] gids = gid.split(",");
+		for(int i=0;i<gids.length;i++){
+			augl.setUid(atUser.getId());
+			augl.setGid(Integer.parseInt(gids[i]));
+			augls.insert(augl);
+		}
 		if(rst==0){
 			msg="修改成功";
 		}else{
@@ -299,19 +313,18 @@ public class SysUserAction extends ActionSupport{
 			jo.put("iname", atUser.getIname());
 			jo.put("loginPwd", atUser.getLoginPwd());
 			jo.put("remark", atUser.getRemark());
-			jo.put("parentId", augls.queryByUserId(atUser.getId()).getGid());
+			//jo.put("parentId", augls.queryByUserId(atUser.getId()).getGid());querylistByUserId
 			jo.put("workerNo", atUser.getWorkerNo());
 			jo.put("jobDuty", atUser.getJobDuty());
-			list = aus.queryjsBycpCode(atUser.getCpCode());
-			JSONArray jsonArray = new JSONArray();
-			for(int i=0;i<list.size();i++){
-				JSONObject obj = new JSONObject();
-				obj.put("id", list.get(i).getId());
-				obj.put("iname", list.get(i).getIname());
-				jsonArray.add(i, obj);
-			}
-			jo.put("orglist", jsonArray );
-//			orglist = asoservice.queryAll(atUser.getCpCode());
+//			list = aus.queryjsBycpCode(atUser.getCpCode());
+//			JSONArray jsonArray = new JSONArray();
+//			for(int i=0;i<list.size();i++){
+//				JSONObject obj = new JSONObject();
+//				obj.put("id", list.get(i).getId());
+//				obj.put("iname", list.get(i).getIname());
+//				jsonArray.add(i, obj);
+//			}
+//			jo.put("orglist", jsonArray );
 			List<Map<String,Object>> alist = asoservice.queryAllBycpCode(atUser.getCpCode());
 			JSONArray jsonArray1 = new JSONArray();
 			for(int i=0;i<alist.size();i++){
@@ -323,6 +336,14 @@ public class SysUserAction extends ActionSupport{
 				jsonArray1.add(i, obj);
 			}
 			jo.put("deptlist", jsonArray1 );
+			List<AtUserGroupRel> rellist = augls.querylistByUserId(atUser.getId());
+			JSONArray jsonArray2 = new JSONArray();
+			for(int i=0;i<rellist.size();i++){
+				JSONObject obj = new JSONObject();
+				obj.put("parentId", rellist.get(i).getGid());
+				jsonArray2.add(i, obj);
+			}
+			jo.put("parentIdlist", jsonArray2 );
 			out = response.getWriter();
 			out.print(jo);
 			out.close();
@@ -342,6 +363,8 @@ public class SysUserAction extends ActionSupport{
 		AtUser atUser = (AtUser)session.getAttribute("atUser");
 		list = aus.queryBycpCode(atUser, page);
 		orglist = asos.queryAll(atUser.getCpCode());
+		//根据代账公司code查询所有角色
+		roelist = aus.queryjsBycpCode(atUser.getCpCode());
 		return "queryBycpCode";
 	}
 	
@@ -362,6 +385,8 @@ public class SysUserAction extends ActionSupport{
 			atUser.setCpCode(au.getCpCode());
 			list = aus.queryByUsername(atUser, page);
 			orglist = asos.queryAll(au.getCpCode());
+			//根据代账公司code查询所有角色
+			roelist = aus.queryjsBycpCode(au.getCpCode());
 			return "queryBycpCode";
 		}
 	
@@ -599,6 +624,22 @@ public class SysUserAction extends ActionSupport{
 
 	public void setOrgId(String orgId) {
 		this.orgId = orgId;
+	}
+
+	public List<AtUser> getRoelist() {
+		return roelist;
+	}
+
+	public void setRoelist(List<AtUser> roelist) {
+		this.roelist = roelist;
+	}
+
+	public String getGid() {
+		return gid;
+	}
+
+	public void setGid(String gid) {
+		this.gid = gid;
 	}
 
 }

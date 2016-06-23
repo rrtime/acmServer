@@ -46,5 +46,9 @@ public interface AtUserGroupRelMapper {
     public AtUserGroupRel findByUserId(Map<String,Object> map);
     
     public void delByRoleId(int gid);
+    
+    public int delByUId(int uid);
+    
+    public List<AtUserGroupRel> findlistByUserId(Map<String,Object> map);
 
 }

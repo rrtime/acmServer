@@ -68,13 +68,13 @@ public class ContractAction extends ActionSupport{
 	
 	//分页查询
 	public String pagelist(){
-		list = accs.queryUser(acc, page);
+		list = accs.queryContract(acc, page);
 		return "pagelist";
 	}
 
 	//新增合同
 	public String insertContract(){
-		rst = accs.addUser(acc);
+		rst = accs.addContract(acc);
 		if(rst == 0){
 			msg="新增成功";
 		}else{
@@ -85,7 +85,7 @@ public class ContractAction extends ActionSupport{
 	
 	//修改合同
 	public String update(){
-		rst = accs.updateUser(acc);
+		rst = accs.updateContract(acc);
 		if(rst == 0){
 			msg="修改成功";
 		}else{
@@ -96,7 +96,7 @@ public class ContractAction extends ActionSupport{
 	
 	//删除合同
 	public String delete(){
-		rst = accs.deleteUser(acc.getId());
+		rst = accs.deleteContract(acc.getId());
 		if(rst == 0){
 			msg="删除成功";
 		}else{

@@ -74,4 +74,18 @@ public class AtUserGroupRelServiceImpl implements AtUserGroupRelService{
 		return augrm.updateByUid(augr);
 	}
 
+	@Override
+	public int deleteByUid(int uid) {
+		// TODO Auto-generated method stub
+		return augrm.delByUId(uid);
+	}
+
+	@Override
+	public List<AtUserGroupRel> querylistByUserId(int userId) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		return augrm.findlistByUserId(map);
+	}
+
 }

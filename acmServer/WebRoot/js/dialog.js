@@ -81,7 +81,7 @@ jQuery(function($){
             $("#jobDuty").val("");
             $("#loginPwd").val("");
             $("#remark").val("");
-			findzu();
+			//findzu();
 			finddept();
 		});
 		

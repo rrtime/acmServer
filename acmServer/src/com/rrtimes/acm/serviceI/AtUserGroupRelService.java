@@ -40,4 +40,8 @@ public interface AtUserGroupRelService {
 	
 	public int updateByUid(AtUserGroupRel augr);
 	
+	public int deleteByUid(int uid);
+	
+	public List<AtUserGroupRel> querylistByUserId(int userId);
+	
 }

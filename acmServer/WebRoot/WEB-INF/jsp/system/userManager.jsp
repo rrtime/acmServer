@@ -54,6 +54,14 @@
 	   if(yspwd!=passd){
 	      $("#loginPwd").val(CryptoJS.SHA256(passd));
 	   }
+	   var ids =  document.getElementsByName("roleId");
+	   var idvalues="";
+	   for(var i=1;i<ids.length;i++){
+	     if(ids[i].checked){
+	       idvalues = ids[i].value+","+idvalues;
+	     }  
+	   }
+       $("#zu").val(idvalues.substring(0,idvalues.lastIndexOf(",")));
        document.getElementById("userform").submit();
    }
    function delte(){
@@ -67,7 +75,7 @@
       }
       //alert(idvalues.substring(0,idvalues.lastIndexOf(",")));
       $("#ids").val(idvalues.substring(0,idvalues.lastIndexOf(",")));
-      alert($("#ids").val());
+      //alert($("#ids").val());
       document.getElementById("idsform").submit();
    }
    function check(){
@@ -122,15 +130,25 @@
 	                           sexobj[i].checked="ture";
 	                         }
           				}
+          				/**
           				var array = jsonData.orglist;
-						$("#zu").empty();
-						for(var i=0;i<array.length;i++){
-						    if(array[i].id==jsonData.parentId){
-						        $("#zu").append("<option value="+array[i].id+" selected='selected'>"+array[i].iname+"</option>");
-						    }else{
-						        $("#zu").append("<option value="+array[i].id+">"+array[i].iname+"</option>");
- 						    }
-						}
+          				var arrayparent = jsonData.parentIdlist;
+          				for(var j=0;j<arrayparent.length;j++){
+							for(var i=0;i<array.length;i++){
+							    if(arrayparent[j]==array[i]){
+							    
+							    }
+							}
+						}**/
+						var arrayparent = jsonData.parentIdlist;
+						var ids =  document.getElementsByName("roleId");
+          				for(var j=0;j<arrayparent.length;j++){
+          				    for(var i=1;i<ids.length;i++){
+						     if(ids[i].value==arrayparent[j].parentId){
+						       ids[i].checked="ture";
+						     }  
+						   }
+          				}
 						var array1 = jsonData.deptlist;
 						$("#dept").empty();
 						for(var i=0;i<array1.length;i++){
@@ -497,21 +515,10 @@
 							    </div>
 							    <div class="int ind">
 							        <label >用户组:</label>
-							         <select class="required" id="zu" name="augl.gid">
-							         <!-- 
-									     <option value="1">January</option>
-									     <option value="2">February</option>
-									     <option value="3">March</option>
-									     <option value="4">April</option>
-									     <option value="5">May</option>
-									     <option value="6">June</option>
-									     <option value="7">July</option>
-									     <option value="8">August</option>
-									     <option value="9">September  </option>
-									     <option value="10">October </option>
-									     <option value="11">November</option>
-									     <option value="12">December </option> -->
-									  </select>
+									  <input type="hidden" id="zu" name="gid" value=""/>
+									  <s:iterator value="roelist" id="roelist" status="st">
+	                                       <input type="checkbox"  name="roleId" value="${id}"/>&nbsp;<label >${iname}</label>&nbsp;&nbsp;
+	                                  </s:iterator>
 							    </div>
 						</div>
 						<input calss="submit" type="button" id="savebt" value="保存" onclick="save()"/>

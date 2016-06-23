@@ -94,6 +94,18 @@
 	    	WHERE UID = #{userId}
   </select>
   
+  <select id="findlistByUserId" parameterType="Map" resultType="AtUserGroupRel">
+	  	SELECT
+	  		ID as id,
+	  		UID as uid,
+	  		GID as gid,
+	  		CREATE_TIME as createTime,
+	  		UPDATE_TIME as updateTime,
+	  		REMARK as remark 
+	    FROM AT_USER_GROUP_REL 
+	    	WHERE UID = #{userId}
+  </select>
+  
   <select id="findById" parameterType="int" resultType="AtUserGroupRel">
   	SELECT
   		 ID as id,
@@ -122,5 +134,10 @@
 	    DELETE FROM AT_USER_GROUP_REL
 	    WHERE GID = #{gid}
   </select>
+  
+  <delete id="delByUId" parameterType="int">
+	    DELETE FROM AT_USER_GROUP_REL
+	    WHERE UID = #{uid}
+  </delete>
   
 </mapper>
