@@ -136,6 +136,7 @@
   </select>
   
  <select id="findByUserId" parameterType="java.util.List" resultType="AtSysMenu">
+ select * from (
   	select 
       ID as id,
 	  M_TITLE as mtitle,
@@ -240,6 +241,7 @@ and e.ID=m.PARENT_ID
 )
 and n.ID = e.PARENT_ID
 )
+)r ORDER BY r.showIndex
   </select>
   
   <select id="findByCount" parameterType="Map" resultType="int">
