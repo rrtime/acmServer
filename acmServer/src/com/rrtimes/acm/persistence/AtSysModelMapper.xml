@@ -218,6 +218,7 @@
   
   <select id="queryAtSysModelByUserId" parameterType="Map" resultType="AtSysModel">
 	  select 
+	     DISTINCT
 	  	 l.ID as id,
   		 l.TREE_ID as treeId,
   		 l.MENU_CODE as menuCode,
@@ -237,7 +238,10 @@
          l.M_ICON as micon
          from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
            WHERE
-             f.ACTOR_ID = #{userId} 
+             f.ACTOR_ID in 
+             <foreach item="item" index="index" collection="userId" open="(" separator="," close=")">  
+ 				#{item}  
+			 </foreach> 
              and f.MENU_CODE = l.MENU_CODE 
              and l.SHOW_INDEX is null
   </select>

@@ -115,7 +115,7 @@
     WHERE ID=#{id}
   </select>
   
-  <select id="findByUserId" parameterType="Map" resultType="AtSysMenu">
+ <select id="findByUserId" parameterType="java.util.List" resultType="AtSysMenu">
   	select 
       ID as id,
 	  M_TITLE as mtitle,
@@ -137,7 +137,11 @@ m.ID =
 (
 select DISTINCT TREE_ID from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
 WHERE
-f.ACTOR_ID = #{userId} and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
+f.ACTOR_ID in 
+<foreach item="item" index="index" collection="userId" open="(" separator="," close=")">  
+ #{item}  
+</foreach>
+ and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
 )
 UNION
 select 
@@ -166,7 +170,11 @@ m.ID =
 (
 select DISTINCT TREE_ID from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
 WHERE
-f.ACTOR_ID = #{userId} and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
+f.ACTOR_ID in 
+<foreach item="item" index="index" collection="userId" open="(" separator="," close=")">  
+ #{item}  
+</foreach>
+ and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
 )
 and e.ID=m.PARENT_ID
 )
@@ -202,7 +210,11 @@ m.ID =
 (
 select DISTINCT TREE_ID from AT_SYS_MODEL l,AT_HOLD_FUNCTION f
 WHERE
-f.ACTOR_ID = #{userId} and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
+f.ACTOR_ID in 
+<foreach item="item" index="index" collection="userId" open="(" separator="," close=")">  
+ #{item}  
+</foreach>
+ and f.MENU_CODE = l.MENU_CODE and m.ID = l.TREE_ID
 )
 and e.ID=m.PARENT_ID
 )

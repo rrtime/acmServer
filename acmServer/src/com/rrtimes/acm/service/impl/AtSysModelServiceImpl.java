@@ -173,12 +173,20 @@ public class AtSysModelServiceImpl implements AtSysModelService {
 	public List<AtSysModel> queryAtSysModelByUserId(int userId) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapparam = new HashMap<String,Object>();
 		map.put("userId", userId);
-		AtUserGroupRel augr = augrm.findByUserId(map);
-		if(augr!=null){
-			map.put("userId", augr.getGid());
+		List<AtUserGroupRel> augrlist = augrm.findrolelistByUserId(map);
+		if(augrlist!=null&&augrlist.size()!=0){
+			int[] ids = new int[augrlist.size()];
+			for(int i=0;i<augrlist.size();i++){
+				ids[i]=augrlist.get(i).getGid();
+			}
+			mapparam.put("userId", ids);
+		}else{
+			int[] ids = {userId};
+			mapparam.put("userId", ids);
 		}
-		return atSysModelMapper.queryAtSysModelByUserId(map);
+		return atSysModelMapper.queryAtSysModelByUserId(mapparam);
 	}
 
 }
