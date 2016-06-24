@@ -43,7 +43,7 @@ public interface AcmSysOrgMapper {
     
     public List<AcmSysOrg> findAll(String cpCode);
     
-    public List<AcmSysOrg> findsecondlevel(Map<String,Object> map);
-    
     public List<Map<String,Object>> findAllBycpCode(String cpCode);
+
+	public List<AcmSysOrg> findsecondlevel(Map<String, Object> map);
 }
