@@ -57,7 +57,7 @@
 	   }
 	   var ids =  document.getElementsByName("roleId");
 	   var idvalues="";
-	   for(var i=1;i<ids.length;i++){
+	   for(var i=0;i<ids.length;i++){
 	     if(ids[i].checked){
 	       idvalues = ids[i].value+","+idvalues;
 	     }  
@@ -144,7 +144,7 @@
 						var arrayparent = jsonData.parentIdlist;
 						var ids =  document.getElementsByName("roleId");
           				for(var j=0;j<arrayparent.length;j++){
-          				    for(var i=1;i<ids.length;i++){
+          				    for(var i=0;i<ids.length;i++){
 						     if(ids[i].value==arrayparent[j].parentId){
 						       ids[i].checked="ture";
 						     }  
