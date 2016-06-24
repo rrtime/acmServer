@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtSortDetailImgMapper">
+
+  <insert id="insert" parameterType="AtSortDetailImg">
+  	INSERT INTO AT_SORT_DETAIL_IMG(
+  		 DID,
+  		 IMG_URL,
+         REMARK )
+  	VALUES(
+  	     #{did},
+  		 #{imgUrl},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtSortDetailImg">
+  	UPDATE AT_SORT_DETAIL_IMG
+  		SET
+            DID = #{did}
+	  	    ,IMG_URL = #{imgUrl}
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_SORT_DETAIL_IMG WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtSortDetailImg">
+	  	SELECT
+	  		 ID as id,
+	  		 DID as did,
+	  		 IMG_URL as imgUrl,
+	  		 CREATE_TIME as createTime,
+	         REMARK as remark
+	    FROM AT_SORT_DETAIL_IMG  
+	    	WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="did!=null">
+	    	and DID = #{did}
+	    	</if>
+	    	<if test="imgUrl != null">
+	  	    and IMG_URL = #{imgUrl}
+	  		</if>
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtSortDetailImg">
+  	SELECT
+  		 ID as id,
+	  		 DID as did,
+	  		 IMG_URL as imgUrl,
+	  		 CREATE_TIME as createTime,
+	         REMARK as remark
+    FROM AT_SORT_DETAIL_IMG  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_SORT_DETAIL_IMG 
+	    WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="did!=null">
+	    	and DID = #{did}
+	    	</if>
+	    	<if test="imgUrl != null">
+	  	    and IMG_URL = #{imgUrl}
+	  		</if>
+  </select>
+
+</mapper>

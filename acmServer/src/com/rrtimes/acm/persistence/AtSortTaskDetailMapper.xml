@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrtimes.acm.persistence.AtSortTaskDetailMapper">
+
+  <insert id="insert" parameterType="AtSortTaskDetail">
+  	INSERT INTO AT_SORT_TASK_DETAIL(
+  		 CID,
+  		 SZ_TYPE,
+  		 BS_TYPE,
+  		 RT_TYPE,
+         IS_IF,
+         IS_DK,
+         DEPT,
+         EMPLOYEE,
+         WL_COMPANY,
+         STOCK,
+         PROJECT,
+         SORT_USER,
+         REMARK )
+  	VALUES(
+  	     #{cid},
+  		 #{szType},
+  		 #{bsType},
+  		 #{rtType},
+  		 #{isIf},
+         #{isDk},
+         #{dept},
+         #{employee},
+         #{wlCompany},
+         #{stock},
+         #{project},
+         #{sortUser},
+         #{remark}  )
+  </insert> 
+  
+  <update id="update" parameterType="AtSortTaskDetail">
+  	UPDATE AT_SORT_TASK_DETAIL
+  		SET
+            CID = #{cid}
+	  	    ,SZ_TYPE = #{szType}
+	  	    ,BS_TYPE = #{bsType}
+	  		<if test="rtType != null">
+	  	    ,RT_TYPE = #{rtType}
+	  		</if>
+	  		<if test="isIf != null">
+	  	    ,IS_IF = #{isIf}
+	  		</if>
+	  		<if test="isDk != null">
+	  	    ,IS_DK = #{isDk}
+	  		</if>
+	  		<if test="dept != null">
+	  		,DEPT = #{dept}
+	  		</if>
+	  		<if test="employee != null">
+	  		,EMPLOYEE = #{employee}
+	  		</if>
+	  		<if test="wlCompany != null">
+	  		,WL_COMPANY = #{wlCompany}
+	  		</if>
+	  		<if test="stock != null">
+	  		,STOCK = #{stock}
+	  		</if>
+	  		<if test="project != null">
+	  		,PROJECT = #{project}
+	  		</if>
+	  		<if test="sortUser != null">
+	  		,SORT_USER = #{sortUser}
+	  		</if>
+	  		<if test="updateTime != null">
+	  		,UPDATE_TIME = #{updateTime}
+	  		</if>
+	  		<if test="remark != null">
+	  		,REMARK = #{remark}
+	  		</if>	        
+		WHERE
+			ID=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	DELETE FROM AT_SORT_TASK_DETAIL WHERE ID=#{id}
+  </delete>
+  
+  
+  
+  <select id="findByPage" parameterType="Map" resultType="AtSortTaskDetail">
+	  	SELECT
+	  		 ID as id,
+	  		 CID as cid,
+	  		 SZ_TYPE as szType,
+	  		 BS_TYPE as bsType,
+	  		 RT_TYPE as rtType,
+	         IS_IF as isIf,
+	         IS_DK as isDk,
+	         DEPT as dept,
+	         EMPLOYEE as employee,
+	         WL_COMPANY as wlCompany,
+	         STOCK as stock,
+	         PROJECT as project,
+	         SORT_USER as sortUser,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+	    FROM AT_SORT_TASK_DETAIL  
+	    	WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="cid!=null">
+	    	and CID = #{cid}
+	    	</if>
+	    	<if test="szType != null">
+	  	    and SZ_TYPE = #{szType}
+	  		</if>
+	  		<if test="bsType != null">
+	  		and BS_TYPE = #{bsType}
+	  		</if>
+	  		<if test="rtType != null">
+	  		and RT_TYPE = #{rtType}
+	  		</if>
+	  		<if test="isIf != null">
+	  		and IS_IF = #{isIf}
+	  		</if>
+	  		<if test="isDk != null">
+	  		and IS_DK = #{isDk}
+	  		</if>
+	  		<if test="dept != null">
+	  		and DEPT = #{dept}
+	  		</if>	
+	  		<if test="employee != null">
+	  		and EMPLOYEE = #{employee}
+	  		</if>	
+	  		<if test="wlCompany != null">
+	  		and WL_COMPANY = #{wlCompany}
+	  		</if>	
+	  		<if test="stock != null">
+	  		and STOCK = #{stock}
+	  		</if>	
+	  		<if test="project != null">
+	  		and PROJECT = #{project}
+	  		</if>	
+	  		<if test="sortUser != null">
+	  		and SORT_USER = #{sortUser}
+	  		</if>	
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>	
+	    	ORDER BY CREATE_TIME DESC 
+	    	limit #{page.pageSize} offset #{page.offset}
+  </select>
+  
+  <select id="findById" parameterType="int" resultType="AtSortTaskDetail">
+  	SELECT
+  		 ID as id,
+	  		 CID as cid,
+	  		 SZ_TYPE as szType,
+	  		 BS_TYPE as bsType,
+	  		 RT_TYPE as rtType,
+	         IS_IF as isIf,
+	         IS_DK as isDk,
+	         DEPT as dept,
+	         EMPLOYEE as employee,
+	         WL_COMPANY as wlCompany,
+	         STOCK as stock,
+	         PROJECT as project,
+	         SORT_USER as sortUser,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark
+    FROM AT_SORT_TASK_DETAIL  
+    WHERE ID=#{id}
+  </select>
+  
+  <select id="findByCount" parameterType="Map" resultType="int">
+	    SELECT
+	         count(*)
+	    FROM AT_SORT_TASK_DETAIL 
+	    WHERE 1 = 1
+	    	<if test="id!=null">
+	    	and ID = #{id}
+	    	</if>
+	    	<if test="cid!=null">
+	    	and CID = #{cid}
+	    	</if>
+	    	<if test="szType != null">
+	  	    and SZ_TYPE = #{szType}
+	  		</if>
+	  		<if test="bsType != null">
+	  		and BS_TYPE = #{bsType}
+	  		</if>
+	  		<if test="rtType != null">
+	  		and RT_TYPE = #{rtType}
+	  		</if>
+	  		<if test="isIf != null">
+	  		and IS_IF = #{isIf}
+	  		</if>
+	  		<if test="isDk != null">
+	  		and IS_DK = #{isDk}
+	  		</if>
+	  		<if test="dept != null">
+	  		and DEPT = #{dept}
+	  		</if>	
+	  		<if test="employee != null">
+	  		and EMPLOYEE = #{employee}
+	  		</if>	
+	  		<if test="wlCompany != null">
+	  		and WL_COMPANY = #{wlCompany}
+	  		</if>	
+	  		<if test="stock != null">
+	  		and STOCK = #{stock}
+	  		</if>	
+	  		<if test="project != null">
+	  		and PROJECT = #{project}
+	  		</if>	
+	  		<if test="sortUser != null">
+	  		and SORT_USER = #{sortUser}
+	  		</if>	
+	  		<if test="remark != null">
+	  		and REMARK = #{remark}
+	  		</if>
+  </select>
+
+</mapper>
