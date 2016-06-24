@@ -127,4 +127,9 @@ public class AtSysMenuServiceImpl implements AtSysMenuService{
 		}
 		return asom.findByUserId(mapparam);
 	}
+	@Override
+	public List<AtSysMenu> queryAll() {
+		// TODO Auto-generated method stub
+		return asom.findAll();
+	}
 }

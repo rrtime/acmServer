@@ -39,4 +39,7 @@ public interface AtSysMenuService {
 	
 	//根据用户Id查询当前用户的菜单权限
 	public List<AtSysMenu> queryByUserId(int userId);
+	
+	//查询所有菜单
+	public List<AtSysMenu> queryAll();
 }

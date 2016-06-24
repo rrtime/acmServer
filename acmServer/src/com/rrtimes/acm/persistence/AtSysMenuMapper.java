@@ -41,4 +41,6 @@ public interface AtSysMenuMapper {
     
 
 	public List<AtSysMenu> findByUserId(Map<String, Object> map);
+	
+	public List<AtSysMenu> findAll();
 }

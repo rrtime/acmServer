@@ -115,6 +115,26 @@
     WHERE ID=#{id}
   </select>
   
+  <select id="findAll"  resultType="AtSysMenu">
+  	SELECT
+  		 ID as id,
+	  		 M_TITLE as mtitle,
+	  		 M_DESC as mdesc,
+	  		 PARENT_ID as parentId,
+	  		 TFLAG as tflag,
+	  		 INID as inid,
+	  		 IS_SYSTEM as isSystem,
+	  		 CATEGORY as category,
+	  		 IS_ENDNODE as isEndnode,
+	  		 SHOW_INDEX as showIndex,
+	         CREATE_TIME as createTime,
+	         UPDATE_TIME as updateTime,
+	         REMARK as remark,
+	         SHOW_CLASS as showClass,
+	         M_URL as murl
+    FROM AT_SYS_MENU  
+  </select>
+  
  <select id="findByUserId" parameterType="java.util.List" resultType="AtSysMenu">
   	select 
       ID as id,
