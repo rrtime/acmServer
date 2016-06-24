@@ -121,7 +121,7 @@ public class AtCstContractServiceImpl implements AtCstContractService{
 		return asom.delete(id)>0?0:1;
 	}
 	@Override
-	public AtCstContract queryUserById(int id) {
+	public AtCstContract queryContractById(int id) {
 		// TODO Auto-generated method stub
 		return asom.findById(id);
 	}

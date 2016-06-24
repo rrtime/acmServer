@@ -39,7 +39,7 @@ public interface AtCstContractService {
 	public int deleteContract(int id);
 	
 	//通过id查询用户信息 
-	public AtCstContract queryUserById(int id);
+	public AtCstContract queryContractById(int id);
 	
 	//通过用户Id查询需要预警的合同信息
 	public List<AtCstContract> queryContractByUserIdAndDay(int userId,int day);

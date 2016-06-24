@@ -114,7 +114,7 @@ public class ContractAction extends ActionSupport{
 	//根据Id查询合同
 	public String findById(){
 		setCmd(1);
-		setAcc(accs.queryUserById(acc.getId()));
+		setAcc(accs.queryContractById(acc.getId()));
 		return "add";
 	}
 	
