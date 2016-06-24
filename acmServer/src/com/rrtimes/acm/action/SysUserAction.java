@@ -9,6 +9,7 @@
 package com.rrtimes.acm.action;
 
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -134,6 +135,12 @@ public class SysUserAction extends ActionSupport{
 				atUser.setIsAdmin(0);
 				atUser.setStatus(0);
 				atUser.setOperator(String.valueOf(au.getId()));
+				try {
+					atUser.setUserName(new String(atUser.getUserName().getBytes("ISO-8859-1"),"utf-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				rst = aus.addUser(atUser);
 				int id = aus.queryByIname(atUser.getIname());
 				String[] gids = gid.split(",");
@@ -161,6 +168,12 @@ public class SysUserAction extends ActionSupport{
 				AtUser au = (AtUser)session.getAttribute("atUser");
 				org.setCpCode(au.getCpCode());
 				org.setOperator(String.valueOf(au.getId()));
+				try {
+					org.setOrgName(new String(org.getOrgName().getBytes("ISO-8859-1"),"utf-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if(org.getId()>0){
 					rst=asos.updateOrg(org);
 					if(rst==0){
@@ -220,7 +233,13 @@ public class SysUserAction extends ActionSupport{
 	public String update(){
 		atUser.setId(Integer.parseInt(atUserId));
 		AtUser au = aus.queryUserById(atUser.getId());
-		au.setUserName(atUser.getUserName());
+		try {
+			au.setUserName(new String(atUser.getUserName().getBytes("ISO-8859-1"),"utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		au.setUserName(atUser.getUserName());
 		au.setSex(atUser.getSex());
 		au.setEmail(atUser.getEmail());
 		au.setTelno(atUser.getTelno());
@@ -386,7 +405,20 @@ public class SysUserAction extends ActionSupport{
 			AtUser au = (AtUser)session.getAttribute("atUser");
 			atUser.setCpCode(au.getCpCode());
 			if(StringUtils.isEmpty(atUser.getUserName())){
-				atUser.setUserName(username);
+//				atUser.setUserName(username);
+				try {
+					atUser.setUserName(new String(username.getBytes("ISO-8859-1"),"utf-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else{
+				try {
+					atUser.setUserName(new String(atUser.getUserName().getBytes("ISO-8859-1"),"utf-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			list = aus.queryByUsername(atUser, page);
 			orglist = asos.queryAll(au.getCpCode());
