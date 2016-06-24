@@ -245,7 +245,15 @@
 			});
    }
    function load(){
-       show(1,"成功");
+       var msg = $("#msg").val();
+       if(msg!=""){
+          show(1,msg);
+          setTimeout("codefans()",2000);//2秒
+       }
+   }
+   function codefans(){
+       $(".answer").hide();
+		$(".fault").hide();
    }
 </script>
 </head>
@@ -256,6 +264,7 @@
     	<h2 class="role-word">部门管理</h2>
         <div class="opera">
         	<div class="opera-button clearfix">
+        	    <input type="hidden" id="msg" value="${msg}"/>
         	    <input type="hidden" id="sysorgId" value="<s:property value="orgId"/>"/>
         	    <input type="hidden" id="sysoId" value="${oid}"/>
             	<a class="add-bg" href="#">新增</a>
