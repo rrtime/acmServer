@@ -54,4 +54,20 @@ border-bottom:1px solid #cccccc;height:30px;
 .table-cond tr th{
 	background:#f3f3f3;
 }
-
+/*µ¯´°*/
+.answer,.fault{
+	position: absolute;top:10px;left:500px;display: none;
+}
+.answer li{
+	height:25px;border-radius:5px;background:#00cc00;line-height: 25px;color:#fff;
+	
+}
+.answer li img,.fault li img{
+	padding-right:5px;padding-left:5px;
+}
+.answer li span,.fault li span{
+	padding-right:5px;
+}
+.fault li{
+	width:150px;height:25px;border-radius:5px;background:#ff6600;line-height: 25px;color:#fff;text-align: center;
+}

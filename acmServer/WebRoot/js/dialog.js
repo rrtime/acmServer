@@ -55,6 +55,11 @@ jQuery(function($){
 			$(".mian").css("display","block");
 		});
 		
+		$(".find-opera .del-button1").click(function(){
+			$(".shadow-bg").css("display","block");
+			$("#mian2").css("display","block");
+		});
+		
 		
 		$(".reset1").click(function(){
 			$(".shadow-bg").css("display","none");
@@ -76,7 +81,7 @@ jQuery(function($){
             $("#jobDuty").val("");
             $("#loginPwd").val("");
             $("#remark").val("");
-			findzu();
+			//findzu();
 			finddept();
 		});
 		
@@ -91,5 +96,10 @@ jQuery(function($){
 			$(".shadow-bg").css("display","block");
 			$(".mainDel").css("display","block");
 		});
+	
+	$("#del-bg1").click(function(){
+		$(".shadow-bg").css("display","block");
+		$("#mian1").css("display","block");
+	});
 	
 });
