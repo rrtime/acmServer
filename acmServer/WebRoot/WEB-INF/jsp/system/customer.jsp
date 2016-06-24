@@ -119,12 +119,12 @@
 									<input onclick="imy(<s:property value="#csrList.id"/>)" class="w_input w_input" type="button" value="质量赔付" />
 								</div>
 								<div class="tab-change1 charge-box mr8">
-									<input style="float:right;margin-right:23px;margin-left:5px;" type="button" value="收费历史" class="click1" />
+									<input style="float:right;margin-right:23px;margin-left:5px;" onclick='fee_his(<s:property value="#csrList.id"/>)' type="button" value="收费历史" class="click1" />
 									<s:if test="#csrList.acc.size() > 0">
 										<input type="hidden" id="cst_acc_<s:property value="#csrList.id"/>" value='<s:property value="#csrList.acc[0].id"/>' />
 										<input style="float:right;margin-left:5px;" onclick="fee(<s:property value="#csrList.id"/>)" class="click" type="button" value="收费" />
 									</s:if>
-									<input style="float:right;margin-left:5px;background:#0088CC;color:#fff;" type="button" value="合同" class="click" />
+									<input style="float:right;margin-left:5px;background:#0088CC;color:#fff;" onclick="contract_his(<s:property value="#csrList.id"/>,<s:property value="#csrList.csrIdentifer"/>)" type="button" value="合同" class="click" />
 									<div class="num" style="float:left;">
 										<ul class="tab-ul" style="min-width:265px;">
 											<li class="tab1-pic2 right"><img class="w_li" src="<%=path%>/images/tab-pic2.png" alt="" /></li>
@@ -418,55 +418,59 @@
 		<!--合同-->
 		<div class="total total2 total6">
 			<form id="contractAddForm" method="post">
+			<input type="hidden" name="cstContract.csrIdentifer" id="contract_cnIdentifer" value="" />
+			<input type="hidden" name="cstContract.id" id="contract_id" value="" />
 			<div class="lways lwaysa">
 				<h1 class="h1 hh">
 					代理记账服务合同
 					<img src="<%=path%>/images/delete.png"/>
 				</h1>
-				<h2 class="h2"><span></span></h2>
+				<h2 class="h2"><span id="contract_csrName"></span></h2>
 				<div>
 					<div class="w_con w_cone">
 						<table class="table1">
 							<tbody>
 								<tr>
-									<th align="right"><span style="color:red">*</span>所属代账机构：</th>
-									<td><input type="text" /></td>
-									<th align="right">所属客户编号：</th>
-									<td><input type="text" /></td>
-								</tr>
-								<tr>
-									<th align="right"><span style="color:red">*</span>回访客户来源：</th>
-									<td><input type="text" /></td>
-									<th align="right">回放方式：</th>
+									<th align="right"><span style="color:red">*</span>业务类别：</th>
 									<td class="td">
-										<select name="">
-										<option value=""></option>
-										<option value=""></option>
-										<option value=""></option>
+										<select id="contract_serviceType" name="cstContract.serviceType">
+										<option value="1">代理计帐、纳税申报</option>
+										<option value="2">所得税汇算</option>
+										<option value="3">咨询筹划</option>
+										<option value="4">税务局沟通</option>
+										<option value="5">上市服务</option>
+										<option value="6">企业清算</option>
+										<option value="7">企业重组</option>
+										<option value="8">财产损失</option>
 									</select>
 									</td>
+									<th align="right"><span style="color:red">*</span>服务费：</th>
+									<td><input id="contract_serviceFee" name="cstContract.serviceFee" type="text" /></td>
 								</tr>
 								<tr>
-									<th align="right">回访联系方式：</th>
+									<th align="right"><span style="color:red">*</span>服务起始时间：</th>
+									<td><input type="text" id="contract_startTime" name="cstContract.startTime" value="2016-01-20 12:20:01" /></td>
+									<th align="right"><span style="color:red">*</span>服务截止时间：</th>
+									<td><input type="text" id="contract_endTime" name="cstContract.endTime" value="2016-12-20 12:20:01" /></td>
+								</tr>
+								<tr>
+									<th align="right"><span style="color:red">*</span>付款模式：</th>
 									<td class="td">
-										<select name="">
-										<option value=""></option>
-										<option value=""></option>
-										<option value=""></option>
+										<select id="contract_payCycle" name="cstContract.payCycle">
+										<option value="1">月付</option>
+										<option value="2">季付</option>
+										<option value="3">年付</option>
 									</select>
 									</td>
-									<th align="right">回访时间：</th>
-									<td><input type="text" /></td>
+									<th align="right">付款时间点：</th>
+									<td><input id="contract_payDay" name="cstContract.payDay" type="text" /></td>
 								</tr>
 								<tr>
-									<th align="right">回放内容：</th>
-									<td><input type="text" /></td>
-									<th align="right">回放结果：</th>
-									<td class="td">
-										<select name="">
-										<option value=""></option>
-										<option value=""></option>
-										<option value=""></option>
+									<th align="right">理票约定：</th>
+									<td class="td" colspan="3">
+										<select id="contract_sortType" name="cstContract.sortType">
+										<option value="1">自行理票</option>
+										<option value="2">我方理票</option>
 									</select>
 									</td>
 								</tr>
@@ -474,147 +478,29 @@
 						</table>
 						<div class="textarea">
 							<lable>备注：</lable>
-							<textarea name="" rows="" cols=""></textarea>
+							<textarea id="contract_remark" name="cstContract.remark" rows="" cols=""></textarea>
 						</div>
-						<input class="w_btn" type="button" value="保存" />
+						<input id="contractAddBtn" class="w_btn" type="button" value="保存" />
 						<input class="w_btn w_bt" type="button" value="取消" />
 					</div>
-					<table class="table table-condensed">
-						<tr>
-							<th align="left">签约时间</th>
-							<th align="left">合同期限</th>
-							<th align="left">月服务费</th>
-							<th align="left">年帐本费</th>
-							<th align="left">付款方式</th>
-							<th align="left">附件</th>
-							<th align="left">记录人</th>
-							<th align="left">操作</th>
-						</tr>
-						<tr>
-							<td align="left">2016-07-08</td>
-							<td align="left">2017.1-2017.12</td>
-							<td align="left">12300.00</td>
-							<td align="left">14000.00</td>
-							<td align="left">按月收费</td>
-							<td align="left"></td>
-							<td align="left">小美</td>
-							<td align="left"><img src="<%=path%>/images/pic15.png" /><img src="<%=path%>/images/pic16.png" /><img src="<%=path%>/images/pic17.png" /></td>
-						</tr>
-						<tr>
-							<td align="left">2016-07-08</td>
-							<td align="left">2017.1-2017.12</td>
-							<td align="left">12300.00</td>
-							<td align="left">14000.00</td>
-							<td align="left">按月收费</td>
-							<td align="left"></td>
-							<td align="left">小美</td>
-							<td align="left"><img src="<%=path%>/images/pic15.png" /><img src="<%=path%>/images/pic16.png" /><img src="<%=path%>/images/pic17.png" /></td>
-						</tr>
-						<tr>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-						</tr>
-						<tr>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-						</tr>
-						<tr>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-							<td align="left"></td>
-						</tr>
+					</form>
+					<table id="contractHisTable" class="table table-condensed">
+						
 					</table>
 				</div>
 			</div>
-			</form>
 		</div>
 		<!--历史-->
 		<div class="total total3">
 			<div class="lways lwaysa">
 				<h1 class="h1 hh ha">
-					收费历史-北京市阳光照明股份有限公司
+					收费历史-<spna id="feeHisName"></spna>
 					<img src="<%=path%>/images/delete.png"/>
 				</h1>
 				<div>
 					<div class="w_con w_cone">
-						<table class="table table-condensed table-cond">
-							<tr>
-								<th align="left">日期</th>
-								<th align="left">收费时段</th>
-								<th align="left">账本表</th>
-								<th align="left">其他收费</th>
-								<th align="left">收费金额</th>
-								<th align="left">收款人</th>
-								<th align="left">说明</th>
-								<th align="left">操作</th>
-							</tr>
-							<tr>
-								<td align="left">2016-07-08</td>
-								<td align="left">2017.1，2月</td>
-								<td align="left">0.00</td>
-								<td align="left">0.00</td>
-								<td align="left">4464.00</td>
-								<td align="left">小美</td>
-								<td align="left"></td>
-								<td align="left"><input type="button" value="查看" /></td>
-							</tr>
-							<tr>
-								<td align="left">2016-07-08</td>
-								<td align="left">2017.1，2月</td>
-								<td align="left">0.00</td>
-								<td align="left">0.00</td>
-								<td align="left">4464.00</td>
-								<td align="left">小美</td>
-								<td align="left"></td>
-								<td align="left"><input type="button" value="查看" /></td>
-							</tr>
-							<tr>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-							</tr>
-							<tr>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-							</tr>
-							<tr>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-								<td align="left"></td>
-							</tr>
+						<table id="feeHisTable" class="table table-condensed table-cond">
+							
 						</table>
 						<div style="clear:both;"></div>
 						<div class="footer">

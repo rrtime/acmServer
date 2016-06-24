@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import com.rrtimes.acm.iinterface.ISerializable;
+import com.rrtimes.acm.util.StringUtil;
 
 /**
  * @Title:       AtCstFee.java
@@ -42,11 +43,17 @@ public class AtCstFee implements ISerializable{
 	
 	private Date feeTime;//收费时间
 	
+	private String feeTimeStr;
+	
 	private double feeSum;//收费金额
 	
 	private Date startTime;//服务起始时间
 	
+	private String startTimeStr;
+	
 	private Date endTime;//服务截止时间
+	
+	private String endTimeStr;
 	
 	private String operator;//操作员
 	
@@ -94,6 +101,7 @@ public class AtCstFee implements ISerializable{
 
 	public void setFeeTime(Date feeTime) {
 		this.feeTime = feeTime;
+		this.setFeeTimeStr(StringUtil.getFormatDate(feeTime));
 	}
 
 	public double getFeeSum() {
@@ -110,6 +118,7 @@ public class AtCstFee implements ISerializable{
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
+		this.setStartTimeStr(StringUtil.getFormatDate(startTime));
 	}
 
 	public Date getEndTime() {
@@ -118,6 +127,7 @@ public class AtCstFee implements ISerializable{
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+		this.setEndTimeStr(StringUtil.getFormatDate(endTime));
 	}
 
 	public String getOperator() {
@@ -150,6 +160,30 @@ public class AtCstFee implements ISerializable{
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getFeeTimeStr() {
+		return feeTimeStr;
+	}
+
+	public void setFeeTimeStr(String feeTimeStr) {
+		this.feeTimeStr = feeTimeStr;
+	}
+
+	public String getStartTimeStr() {
+		return startTimeStr;
+	}
+
+	public void setStartTimeStr(String startTimeStr) {
+		this.startTimeStr = startTimeStr;
+	}
+
+	public String getEndTimeStr() {
+		return endTimeStr;
+	}
+
+	public void setEndTimeStr(String endTimeStr) {
+		this.endTimeStr = endTimeStr;
 	}
 	
 	

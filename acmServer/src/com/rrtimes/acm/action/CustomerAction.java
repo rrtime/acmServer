@@ -8,15 +8,16 @@
  */
 package com.rrtimes.acm.action;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.rrtimes.acm.domain.AcmSysOrg;
 import com.rrtimes.acm.domain.AtComplain;
@@ -36,6 +37,8 @@ import com.rrtimes.acm.serviceI.AtCstFeeService;
 import com.rrtimes.acm.serviceI.AtCstFtService;
 import com.rrtimes.acm.serviceI.AtCstImyService;
 import com.rrtimes.acm.serviceI.AtCstVisitService;
+
+import net.sf.json.JSONArray;
 
 /**
  * @Title: RoleAction.java
@@ -105,7 +108,6 @@ public class CustomerAction extends ActionSupport {
 	
 	// 客户列表
 	private List<AtCsrBasic> csrList = new ArrayList<AtCsrBasic>();
-	
 
 	//返回前台字段串
 	private String msg;
@@ -171,7 +173,6 @@ public class CustomerAction extends ActionSupport {
 			//完善客户对象的其它字段以方便入库
 			csrBasic.setCpCode(loginUser.getCpCode());
 			csrBasic.setOperator(String.valueOf(loginUser.getId()));
-			csrBasic.setCreateTime(new Timestamp(System.currentTimeMillis()));
 			//完善财税对象的其它字段以方便入库
 			//判断前台是否提交报表ID
 			if(null != rids && rids.length > 0){
@@ -187,7 +188,6 @@ public class CustomerAction extends ActionSupport {
 			}
 			cstFt.setCsrIdentifer(csrBasic.getCsrIdentifer());
 			cstFt.setOperator(String.valueOf(loginUser.getId()));
-			cstFt.setCreateTime(new Timestamp(System.currentTimeMillis()));
 			//设置财税对象
 			csrBasic.setAcf(cstFt);
 			//返回新增的角色ID
@@ -217,7 +217,6 @@ public class CustomerAction extends ActionSupport {
 		AtUser loginUser = (AtUser) session.getAttribute("loginUser");
 		//完善收费对象的其它字段以方便入库
 		cstFee.setOperator(String.valueOf(loginUser.getId()));
-		cstFee.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		//取得操作结果
 		int rst = cstFeeService.addAtCstFee(cstFee);
 		
@@ -236,31 +235,42 @@ public class CustomerAction extends ActionSupport {
 	}
 	
 	/**
-	 * 新增合同信息
+	 * ajax保存合同信息
 	 * @return
 	 * @throws Exception
 	 */
-	public String addContract() throws Exception{
+	public void updContract() throws Exception{
 		//取得当前登录用户信息
 		AtUser loginUser = (AtUser) session.getAttribute("loginUser");
 		//完善合同对象的其它字段以方便入库
 		cstContract.setOperator(String.valueOf(loginUser.getId()));
-		cstContract.setCreateTime(new Timestamp(System.currentTimeMillis()));
-		//取得操作结果
-		int rst = cstContractService.addContract(cstContract);
-		
-		//判断返回结果
-		if(rst == 0){
-			msg="新增合同信息成功";
+		//判断是新增还是修改 id大于0是修改否则是新增
+		if(cstContract.getId() > 0){
+			//取得操作结果
+			int rst = cstContractService.updateContract(cstContract);
+			//判断返回结果
+			if(rst == 0){
+				msg="修改合同成功";
+			}else{
+				//设置返回信息
+				msg="修改失败";
+			}
 		}else{
-			//设置返回信息
-			msg="新增失败";
-		}
+			//取得操作结果
+			int rst = cstContractService.addContract(cstContract);
+			//判断返回结果
+			if(rst == 0){
+				msg="新增合同成功";
+			}else{
+				//设置返回信息
+				msg="新增失败";
+			}
+		}	
 		
-		//刷新信息
-		list();
-		//返回前台页面
-		return "list";
+		//返回JSON对象  
+        HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);  
+        response.setCharacterEncoding("UTF-8");   
+        response.getWriter().print(msg);
 	}
 	
 	/**
@@ -274,7 +284,6 @@ public class CustomerAction extends ActionSupport {
 		//完善合同对象的其它字段以方便入库
 		cstVisit.setCpCode(loginUser.getCpCode());
 		cstVisit.setOperator(String.valueOf(loginUser.getId()));
-		cstVisit.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		//取得操作结果
 		int rst = cstVisitService.addAtCstVisit(cstVisit);
 		
@@ -303,7 +312,6 @@ public class CustomerAction extends ActionSupport {
 		//完善投诉对象的其它字段以方便入库
 		complain.setCpCode(loginUser.getCpCode());
 		complain.setOperator(String.valueOf(loginUser.getId()));
-		complain.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		//取得操作结果
 		int rst = complainService.addAtComplain(complain);
 		
@@ -332,7 +340,6 @@ public class CustomerAction extends ActionSupport {
 		//完善质量赔付对象的其它字段以方便入库
 		cstImy.setCpCode(loginUser.getCpCode());
 		cstImy.setOperator(String.valueOf(loginUser.getId()));
-		cstImy.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		//取得操作结果
 		int rst = cstImyService.addAtCstImy(cstImy);
 		
@@ -348,6 +355,54 @@ public class CustomerAction extends ActionSupport {
 		list();
 		//返回前台页面
 		return "list";
+	}
+	
+	/**
+	 * ajax获取收费历史信息
+	 * @return
+	 * @throws Exception
+	 */
+	public void getFeeHis() throws Exception{
+		//取得收费历史列表
+		List<AtCstFee> feeList = cstFeeService.queryListByPage(cstFee, page);
+		//将list转化成JSON对象  
+        JSONArray jsonArray = JSONArray.fromObject(feeList);  
+        HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);  
+        response.setCharacterEncoding("UTF-8");   
+        response.getWriter().print(jsonArray);
+
+	}
+	
+	/**
+	 * ajax获取合同历史信息
+	 * @return
+	 * @throws Exception
+	 */
+	public void getContractHis() throws Exception{
+		//取得合同列表
+		List<AtCstContract> contractList = cstContractService.queryByBasicId(csrBasic.getCsrIdentifer());
+		//将list转化成JSON对象  
+        JSONArray jsonArray = JSONArray.fromObject(contractList);  
+        HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);  
+        response.setCharacterEncoding("UTF-8");   
+        response.getWriter().print(jsonArray);
+
+	}
+	
+	/**
+	 * ajax根据合同ID查询合同信息
+	 * @return
+	 * @throws Exception
+	 */
+	public void getContractById() throws Exception{
+		//取得合同信息
+		AtCstContract contract = cstContractService.queryContractById(cstContract.getId());
+		//将list转化成JSON对象  
+        JSONArray jsonArray = JSONArray.fromObject(contract);  
+        HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);  
+        response.setCharacterEncoding("UTF-8");   
+        response.getWriter().print(jsonArray);
+
 	}
 
 
@@ -493,7 +548,5 @@ public class CustomerAction extends ActionSupport {
 	public void setCstContract(AtCstContract cstContract) {
 		this.cstContract = cstContract;
 	}
-
-	
 	
 }

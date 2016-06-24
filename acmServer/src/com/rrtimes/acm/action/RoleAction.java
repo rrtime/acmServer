@@ -27,7 +27,6 @@ import com.rrtimes.acm.domain.AtModelFunction;
 import com.rrtimes.acm.domain.AtSysMenu;
 import com.rrtimes.acm.domain.AtSysModel;
 import com.rrtimes.acm.domain.AtUser;
-import com.rrtimes.acm.domain.PageObject;
 import com.rrtimes.acm.serviceI.AtFieldDictService;
 import com.rrtimes.acm.serviceI.AtFieldRelService;
 import com.rrtimes.acm.serviceI.AtHoldFunctionService;
@@ -115,7 +114,7 @@ public class RoleAction extends ActionSupport {
 			//取得角色列表
 			userList = userService.queryjsBycpCode(loginUser.getCpCode());
 			//取得菜单列表
-			menuList = menuService.queryByUserId(loginUser.getId());
+			menuList = menuService.queryAll();
 			//取得菜单所属功能列表
 			functionList = atSysModelService.findAll();
 			//取得功能详细操作字典列表
@@ -134,7 +133,7 @@ public class RoleAction extends ActionSupport {
 			//取得角色列表
 			userList = userService.queryjsBycpCode(loginUser.getCpCode());
 			//取得菜单列表
-			menuList = menuService.queryByUserId(loginUser.getId());
+			menuList = menuService.queryAll();
 			//取得菜单所属功能列表
 			functionList = atSysModelService.findAll();
 			//取得功能详细操作字典列表
