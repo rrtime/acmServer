@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../css/dialog.css"/>
 <link rel="stylesheet" href="../css/easyTree.css"/>
 <link rel="stylesheet" href="../css/userManager.css"/>
+<link rel="stylesheet" href="../css/public.css" />
 <script type="text/javascript">
    //根据cpCode查询组
    function findzu(){

@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="<%=path%>/css/dialog.css" />
 <link rel="stylesheet" href="<%=path%>/css/easyTree.css" />
 <link rel="stylesheet" href="<%=path%>/css/roleManager.css" />
+<link rel="stylesheet" href="<%=path%>/css/public.css" />
 </head>
 <body>
 	<!--total-role start-->
@@ -62,7 +63,7 @@
 		<div class="role-list">
 			<div class="find-opera clearfix">
 				<s:if test="menuList!=null && menuList.size() > 0">
-				<a id="saveRoleBtn" class="save-btn" href="#">保 存</a>
+				<input id="saveRoleBtn" class="save-btn" style="background:#438ee4;color:#fff;border:1px solid #438ee4;height:25px;font-size: 12px;padding:2px 5px;margin-top:5px;margin-bottom:5px;" type="button" value="保存" />
 				</s:if>
 			</div>
 			<table class="table-diction" border="1" cellspacing="0">
