@@ -327,7 +327,7 @@ form div .ind .required {
 	border-bottom: 1px solid #ccc;
 }*/
 
-.grxxsz input[type="submit"] {
+.grxxsz input[type="button"] {
 	width: 65px;
 	height: 27px;
 	background: #33A3CE;

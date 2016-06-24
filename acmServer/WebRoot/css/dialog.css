@@ -56,8 +56,8 @@
 	margin-top:10px;margin-left:5px;color:#fff; border:none; cursor:pointer;
 }
 .button{
-	width:65px;height:25px;background:#4aa0d9;line-height: 25px;text-align: center;
-	text-align: center;margin-left:185px;margin-top:10px;color:#fff;
+	background:#4aa0d9;text-align: center;
+	text-align: center;margin-left:185px;color:#fff;
 	border:none; cursor:pointer;
 }
 .shadow-bg{ background:rgba(0,0,0, .5); position:fixed; width:100%; height:100%; display:none; z-index:9; top:0; left:0;}
