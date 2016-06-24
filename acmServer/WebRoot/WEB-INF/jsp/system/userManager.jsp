@@ -243,6 +243,9 @@
 				}
 			});
    }
+   function load(){
+       show(1,"成功");
+   }
 </script>
 </head>
 <body>
@@ -605,11 +608,23 @@
 					</form>
 				</div>-->
 			</div>
+			<!-- 成功与失败的弹窗 -->
+			<div class="answer">
+				<ul>
+					<li><img src="../images/pic20.png"/><span></span></li>			
+				</ul>
+			</div>
+			<div class="fault">
+				<ul>
+					<li><img src="../images/pic21.png"/><span></span></li>
+				</ul>
+			</div>
 <script src="../js/jquery-1.11.1.min.js"></script>
 <script src="../js/dialog.js"></script>
 <script src="../js/easyTree.js"></script>
 <script src="../js/mpage.js"></script>
 <script type="text/javascript" src="<%=path%>/js/sha256.js"></script>
+<script type="text/javascript" src="<%=path%>/js/show.js"></script>
 </body>
 </html>
 
