@@ -101,6 +101,8 @@ public class SysUserAction extends ActionSupport{
 	private String orgId;
 	
 	private String gid;
+	
+	private String username;
 	HttpSession session = ServletActionContext.getRequest().getSession();
 	
 	//登录
@@ -383,6 +385,9 @@ public class SysUserAction extends ActionSupport{
 		public String queryByUsername(){
 			AtUser au = (AtUser)session.getAttribute("atUser");
 			atUser.setCpCode(au.getCpCode());
+			if(StringUtils.isEmpty(atUser.getUserName())){
+				atUser.setUserName(username);
+			}
 			list = aus.queryByUsername(atUser, page);
 			orglist = asos.queryAll(au.getCpCode());
 			//根据代账公司code查询所有角色
@@ -640,6 +645,14 @@ public class SysUserAction extends ActionSupport{
 
 	public void setGid(String gid) {
 		this.gid = gid;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

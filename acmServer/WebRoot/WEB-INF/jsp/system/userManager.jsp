@@ -249,7 +249,7 @@
    }
 </script>
 </head>
-<body>
+<body onload="load()">
 <!--total-role start-->
 <div class="total-role">
 	<div class="role-definite">
@@ -329,13 +329,14 @@
  
     <!--右部-->
     <div class="role-list">
+        <form id="queryfrom" action="../xl/user!queryByUsername.do">
     	<div class="find-opera">
         	<input class="add-button" id="add" type="button" value="新增" />
         	<input class="del-button1" type="button" value="删除" />
         	<div class="search">
         		<ul>
         			<li>姓名：</li>
-        			<li><input type="text" id="name" value=""/></li>
+        			<li><input type="text" id="name" name="username" value=""/></li>
         			<li><input type="button"  value="查询" onclick="search()"/></li>
         		</ul>
         	</div>
@@ -389,6 +390,7 @@
             <span>2</span>
             <input class="button"type="button" value="确定">
         </div>
+        </form>
     </div>
 </div>
 <!--total-role end-->
