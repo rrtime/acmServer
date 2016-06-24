@@ -164,8 +164,6 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		map.put("cpCode", agentCode);
 		if(!StringUtils.isEmpty(aso.getCsrIdentifer())){
 			map.put("csrIdentifer", "%"+aso.getCsrIdentifer()+"%");
-		}
-		if(!StringUtils.isEmpty(aso.getCsrName())){
 			map.put("csrName", "%"+aso.getCsrIdentifer()+"%");
 		}
 		page.setSumCloum(asom.findByAgentCount(map));
@@ -186,7 +184,8 @@ public class AtCsrBasicServiceImpl implements AtCsrBasicService{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("orgId", orgId);
 		if(!StringUtils.isEmpty(aso.getCsrIdentifer())){
-			map.put("csrIdentifer", aso.getCsrIdentifer());
+			map.put("csrIdentifer", "%"+aso.getCsrIdentifer()+"%");
+			map.put("csrName", "%"+aso.getCsrIdentifer()+"%");
 		}
 		page.setSumCloum(asom.findByOrgCount(map));
 		map.put("page", page);
