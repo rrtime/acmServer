@@ -21,7 +21,6 @@
 <script src="../js/bootstrap-addtabs.js"></script>
 <script src="../js/myjs.js"></script>
 <script src="../js/Marquee.js"></script>
-<script src="../js/turn.js"></script>
 
 </head>
 
