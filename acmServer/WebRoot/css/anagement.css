@@ -31,7 +31,7 @@
 	margin-left:10px;
 }
 .total .w_con{
-	margin:25px auto;width:660px;
+	margin:10px auto;width:660px;
 }
 .total1 .w_con{
 	margin:15px auto;width:660px;
@@ -42,9 +42,6 @@
 .table th{
 	font-weight:inherit;
 }
-/*.table  span{
-	color:red;
-}*/
 .table td select{
 	width:173px;margin-left:15px;margin-bottom:15px;height:25px;
 }
@@ -119,7 +116,7 @@
 }
 /*定位*/
 .total,.total1,.total2{
-	width:100%;height:100%;background:rgba(0,0,0,.5);border: 1px solid #cccccc; position:fixed;left:0;top:0; 
+	width:100%;height:100%;background:rgba(255,255,255,.5);border: 1px solid #cccccc; position:fixed;left:0;top:0; 
 	display:none;z-index:999;
 }
 .w_con .table tr td input,.w_con .table tr td select{ height: 30px;}

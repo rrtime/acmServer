@@ -1,210 +1,56 @@
 @charset "utf-8";
 /* CSS Document */
-* {
-	margin: 0;
-	padding: 0;
-	font-family: "微软雅黑";
-}
-ul {
-	list-style: none;
-}
-a {
-	text-decoration: none;
-}
-input{outline:none;}
-img {
-	border: none;
-}
-.clear {
-	clear: both;
-}
-.fl {
-	float: left;
-}
-.fr {
-	float: right;
-}
-body {
-	background: #ebf4f9;
-}
-.wrapper {
-	width: 1075px;
-	margin: 0 auto;
-}
-.title {
-	background: #fff;
-	padding: 15px 0 11px;
-	box-shadow: 0 0 20px #dfe4ea;
-}
-.logo {
-	background: url(../images/logo.png) no-repeat;
-	width: 229px;
-	height: 37px;
-	overflow: hidden;
-	float: left;
-}
-.login-con {
-	padding-top: 60px;
-}
-.login-con .left-pic {
-	margin: 59px 0 0 104px;
-	width:392px;
-	height:328px;
-	overflow:hidden;
-}
-/*form-login*/
-.form-login {
-	width: 330px;
-	background: #fff;
-	padding-top: 34px;
-	padding-bottom: 30px;
-	box-shadow: 0px 5px 15px #CADDE6;
-	position: relative;
-}
-.form-login .head {
-	width: 95px;
-	height: 98px;
-	overflow: hidden;
-	display: block;
-	margin: 0 auto;
-	border: 4px solid #f2f2f2;
-	border-radius: 50%;
-}
-.form-login .head img {
-	width: 95px;
-	height: 98px;
-	overflow: hidden;
-	display: block;
-}
-.form-login .box {
-	width: 250px;
-	margin: 0 auto;
-	border-bottom: 1px solid #E8EFF2;
-	font-size: 12px;
-	overflow: hidden;
-}
-.form-login .box span{ float:left;background: url(../images/Group4.png) no-repeat;width:20px;
-	height:22px;
-	overflow:hidden; margin-top:14px;margin-top:15px;}
-.form-login .box input {
-	border: none;
-	font-size: 14px;
-	color: #B6B6B6;
-	padding-bottom: 11px;
-	padding-top: 20px;
-	margin-left: 12px;
-	background: #fff;
-	border:0;
-	outline:none;
-}
-.form-login .box.username span {
-	background-position: -4px -5px;
-	
-	
-}
-.form-login .box.pw span {
-	background-position: -4px -53px;
-}
-.form-login .box.yz span {
-	background-position: -4px -101px;
-}
-.opera-box {
-	width: 250px;
-	margin: 0 auto;
-	padding-top: 9px;
-	height:16px;
-	line-height:16px;
-	overflow:hidden;
-}
-.opera-box span {
-	float: left;
-	color: #666666;
-	font-size: 14px;
-}
-.opera-box a {
-	float: right;
-	font-size: 14px;
-	color: #EC651A;
-}
-/*筛选框*/
-.cbox {
-	display: block;
-	width: 14px;
-	height: 15px;
-	cursor: pointer;
-	margin-right: 5px;
-	position: relative;
-	background: url(../images/Group4.png) -4px -276px no-repeat;
+*{ margin:0; padding:0;}
+img{ border:none;}
+body{font-family:MicrosoftYaHei;}
+.left{ float:left;}
+.right{ float:right;}
+a{ text-decoration:none; outline:none;}
+/*title*/
+.title{background:#5f6770;height:80px;}
+.wrapper{ width:1200px; margin:0 auto;}
+.title .logo{ background:url(../images/logo.png) no-repeat; width:246px; height:41px; overflow:hidden; float:left; margin-left:50px; display:inline; margin-top:20px;}
+
+/*login-box*/
+.login-box{ width:355px; margin:0px auto 0px;}
+.login-logo{ background:url(../images/login-logo.png) no-repeat; width:76px; height:36px; overflow:hidden; margin:0px auto 0; display:block;}
+.login-box .text-box{/*width:337px;*/ border-top:none; border-left:none; border-right:none; font-size:14px;color:#bdbdbd; /*margin-top:30px;*/ outline:none; margin-left:30px; border:none; padding-top:5px;}
+.remeber{ height:14px; line-height:14px; margin-top:12px;}
+.remeber span{ float:right;font-size:12px;color:#ffa900;}
+.remeber .reme-word{ margin-left:10px; display:inline;}
+.login-box span{ cursor:pointer;}
+.login-box .remeber .empty-radio{ background:url(../images/radio.png) 0 0  no-repeat; width:14px; height:14px; overflow:hidden;}
+.login-box .remeber .reme-radio{ background:url(../images/radio.png) 0 -22px no-repeat; width:14px; height:14px; overflow:hidden;}
+
+.login-box .login-btn{font-size:16px;color:#ffffff; background:#f06717; border:none; cursor:pointer; text-align:center; margin-top:22px; width:100%; padding:10px 0; border-radius:33px; outline:none;box-shadow:0px 6px 4px 0px rgba(240,102,22,0.30);}
+.infor{ padding:0 15px; margin:15px 0 11px;}
+.infor a{ font-size:12px;color:#ffa900;}
+.infor .forget{ color:#bdbdbd;}
+
+
+.footer{ text-align:center; font-size:14.5px;color:#C3C3C3; padding-top:32px; padding-bottom:17px; background:#5f6770-;}
+
+
+.login-box .tip{
+	font-size:12px;color:#7d7d7d; 
+	background:url(../images/tip.png) 5px 14px no-repeat; height:45px; 
+	line-height:45px; overflow:hidden; text-indent:27px; 
+	margin-left:54px; 
+	display:none;
+	float:left;}
+
+@media screen and (min-width:1440px){
+	.wrapper{ width:1440px; margin:0 auto;}
 }
 
-.login-con .checked{
-	background: url(../images/Group4.png) -4px -154px no-repeat;
-}
-.cbox:active {
-	width: 14px;
-	height: 15px;
-	background: url(../images/Group4.png) -4px -179px no-repeat;
-}
-.cbox.checked:after {
-/*content: '';
-	position: absolute;*/
-	/*width: 9px;
-	height: 5px;*/
-	/*background: transparent;
-	top: 2px;
-	left: 3px;*/
-	 /*background:url(../images/Group4.png) no-repeat;*/
-	 /*background:url(../images/Group4.png) -4px -176px no-repeat;
-	width:11px;
-	height:10px;*/
-}
-.form-login .login-btn, .tip {
-	background-image: none;
-	border-bottom: none;
-}
-.form-login .login-btn {
-	background: #EC651A;
-	display: block;
-	width: 250px;
-	overflow: hidden;
-	text-align: center;
-	margin-left: 0;
-	padding: 0;
-	color: #fff;
-	font-size: 18px;
-	font-weight: bold;
-	cursor: pointer;
-	border-radius: 32px;
-	margin:32px auto 0;
-	padding:11px 0;
-	border:none;
-	cursor:pointer;
-}
-.form-login  .tip{
-	font-size: 14px;
-	color: #E31515;
-	width:250px;
-	height:14px;
-	margin:10px auto 0;
-	padding-left:23px;
-}
-.form-login .short-input {
-	width: 112px;
-}
-.form-login .yz img {
-	margin-top: 13px;
-	width:68px;
-	height:30px;
-	overflow:hidden;
-}
-.dimension {
-	display: block;
-	background: url(../images/Group4.png) -3px -203px no-repeat;
-	width: 56px;
-	height: 58px;
-	overflow: hidden;
-	position: absolute;
-	right: 0;
-	bottom: 0;
-}
-.foot{ text-align:center; margin-top:40px; margin-bottom:18px; font-size:16px; color:#6F797D;}
+.login-box .user-box{ width:343px;border-bottom:1px solid #bfbfbf; margin-top:25px; padding-left:12px;padding-bottom:13px;}
+.login-box .user-box .user-icon{ background:url(../images/user-pic.png) left no-repeat; width:21px; height:23px; float:left;}
+.login-box .user-box .pw-icon{background:url(../images/pw-pic.png) left no-repeat; width:20px; height:25px; float:left;}
+
+
+
+
+
+
+
+

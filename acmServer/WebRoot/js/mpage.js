@@ -93,10 +93,8 @@ function mSub(type)
 		}
 	}
 	$("#currentPage").val(curpage);
-	//$("#queryfrom").submit();
-	var username = $("#name").val();
-    var url="../xl/user!queryByUsername.do?atUser.userName="+username+"&page.currentPage="+$("#currentPage").val();
-    window.location.href=url;
+	    
+    $("#queryfrom").submit();
 }
 
 //分页查询js(费率策略指定开发者和套餐专用)

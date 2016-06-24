@@ -55,11 +55,6 @@ jQuery(function($){
 			$(".mian").css("display","block");
 		});
 		
-		$(".find-opera .del-button1").click(function(){
-			$(".shadow-bg").css("display","block");
-			$("#mian2").css("display","block");
-		});
-		
 		
 		$(".reset1").click(function(){
 			$(".shadow-bg").css("display","none");
@@ -81,42 +76,8 @@ jQuery(function($){
             $("#jobDuty").val("");
             $("#loginPwd").val("");
             $("#remark").val("");
-			//findzu();
+			findzu();
 			finddept();
-		});
-		
-		$(".w_input1").click(function(){
-			$(".total1").css("display","block");	
-		});
-		$(".w_li").click(function(){
-			$(".total3").css("display","block");	
-		});
-		$(".click").click(function(){
-			$(".total6").css("display","block");	
-		});
-		$(".bunt").click(function(){alert();
-			$(".total4").css("display","block");	
-		});
-		$(".wq_input").click(function(){
-			$(".total5").css("display","block");	
-		});
-		$(".h1 img").click(function(){
-			$(".total1").css("display","none");	
-		});
-		$(".hh img").click(function(){
-			$(".total6").css("display","none");	
-		});
-		$(".ha img").click(function(){
-			$(".total3").css("display","none");	
-		});
-		$(".hg img").click(function(){
-			$(".total4").css("display","none");	
-		});
-		$(".gg img").click(function(){
-			$(".total5").css("display","none");	
-		});
-		$(".h1 img").click(function(){
-			$(".grxxsz").css("display","block");
 		});
 		
 		//个人信息设置tap切换
@@ -130,10 +91,5 @@ jQuery(function($){
 			$(".shadow-bg").css("display","block");
 			$(".mainDel").css("display","block");
 		});
-	
-	$("#del-bg1").click(function(){
-		$(".shadow-bg").css("display","block");
-		$("#mian1").css("display","block");
-	});
 	
 });

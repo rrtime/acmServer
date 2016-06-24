@@ -205,6 +205,7 @@
 .table .tab-title th {
 	padding-left: 0;
 	font-weight: bold;
+	background:#fff;
 }
 
 /*.table .tab-title th input {
@@ -365,5 +366,11 @@
 .textarea  textarea {
 	width:445px;height:40px;
 	border:none;
-	border:1px solid #999;
+	border:1px solid #d5d5d5;
+}
+.textarea  lable{
+	vertical-align: top;font-weight: bold;color:#333;
+}
+.table1 tr th{
+	color:#333;
 }
