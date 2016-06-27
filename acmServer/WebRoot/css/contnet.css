@@ -109,6 +109,7 @@ body {
 	height: 210px;
 	overflow: hidden;
 	display: block;
+	cursor:pointer;
 }
 .modules {
 	float: left; /*width:200px;  overflow:hidden;*/
@@ -222,4 +223,166 @@ body {
     text-align: center;
     color: #639BF6;
     font-weight: bold;
+}
+/*application*/
+.application{ width:789px; overflow:hidden; background:#fff; position:fixed; top:47%; left:50%; border:1px solid #cccccc; z-index:999; padding-bottom:6px; margin-left:-394px; display:none;margin-top:-120px; height: auto;}
+.application .app-title{ background:url(../images/grandice-bg.png) repeat-x; height:40px; line-height:40px; overflow:hidden; padding-left:23px; border-bottom:1px solid #cccccc; color:#333333;}
+.app-list{ margin-left:10px; margin-right:10px;}
+.app-list ul{ border-bottom:1px dashed #cccccc;padding-left:27px; padding-bottom:10px; margin-top:18px;}
+.do-list{ float:left; border:2px solid #fff; border-radius:5px; padding:9px 5px; width:223px; margin-right:7px;}
+.do-list .do-word{ width:152px; line-height:24px; margin-left:10px;}
+.do-list .do-word h2{ color:#333333;}
+.do-list p{ font-size:12px; color:#999999; line-height:24px;}
+.do-list .app-btn{ color:#fff; border:none; cursor:pointer; background:#fa8562; border-radius:5px; width:52px; height:24px;  overflow:hidden; display:none;}
+.do-list:hover {border:2px solid #e8e8e8;}
+.do-list:hover .app-btn{ display:block;}
+.app-title{ position:relative;}
+.app-title .close-button{ position:absolute; top:13px; right:14px; cursor:pointer;}
+
+.function{
+	width:500px;background:#fff;border:1px solid #ccc;height:auto;color:#636363;position: absolute;top:50px;
+	left:350px;z-index:999;display: none;font-size:12px;
+}
+.function .fun{
+	width:475px;
+	border-bottom: 1px solid #ccc;
+	line-height: 40px;
+	padding-left: 25px;
+	background: #f3f3f3;
+	font-size: 14px;
+	position: relative;
+}
+.function .fun img{
+	position: absolute;top:15px;left:460px;cursor: pointer;
+}
+.function .left1{
+	width:249px;background:#f6f6f6;float:left;
+}
+.function .left1 h2,.function .right1 h2{
+	padding:10px;padding-left:20px;font-size:14px;color:#333333;
+}
+.function .right1 h2{
+	border-bottom:1px solid #ccc;font-size:12px;
+}
+.wcontent{
+	width:500px;min-height: 100px;
+}
+.function .right1{
+	width:249px;float:left;
+}
+.function .left1 ul li{
+	padding:7px 0px;cursor: pointer;color:#666;
+}
+.function .left1 span,.function .left1 b{
+	margin-left:10px;
+}
+.function .left1 b{
+	font-weight:normal;
+}
+.function .left1 ul li ul{
+	margin-left:50px;
+}
+.function .left1 ul li span{
+	display: block;
+	float: left;
+	width:0;
+	height:0; 
+border:6px solid #0066cc; 
+border-color:transparent transparent transparent #6e6e6e;
+margin-left: 20px;
+transition: all 0.1s;
+ }
+ .function .left1 ul li span.click{
+	/*display: block;*/
+	/*float: left;
+	width:0;
+	height:0; 
+border:10px solid #0066cc; 
+border-color:#666 transparent transparent transparent ;
+margin-left: 15px;*/
+-moz-transform: rotate(90deg);
+-ms-transform: rotate(90deg);
+-webkit-transform: rotate(90deg);
+-o-transform: rotate(90deg);
+transition: all 0.1s;
+ }
+ .function .left1 ul li>input{
+ 	float: left;
+ }
+.function .right1 ul li{
+	padding:7px 17px;
+	border-bottom:1px solid #ccc;
+	color:#666;
+	cursor: pointer;
+	background:url(../images/pic13.png) 220px 5px no-repeat;
+	/*position: relative;*/
+}
+/*.function .right1 ul li img{
+	position: absolute;top:0;left:0;
+}*/
+.wcontent .left1 ul li ul{
+	display: none;
+}
+.left1>ul>li.show>ul{
+	display: block;
+}
+.wcontent .left1 ul li ul li b{
+	margin-left:0;
+}
+/*筛选框*/
+.chk_1{
+    display: none;
+}
+/*******STYLE 1*******/
+.chk_1 + label {
+	background-color:#3fb838;
+	border: 1px solid #3fb838;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	width:14px;
+	height:14px;
+	display: inline-block;
+	position: relative;
+	margin-right:5px;
+	cursor:pointer;
+	border-radius: 50%;
+}
+.chk_1 + label:active {
+	/*box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);*/
+}
+
+.chk_1:checked + label {
+	/*background-color: #ECF2F7;*/
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+	color: #243441;
+}
+
+.chk_1:checked + label:after {
+	content: '';
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: #758794;
+	width: 100%;
+	text-align: center;
+	background: transparent;
+	font-size: 1.4em;
+	padding: 1px 0 0 0;
+	vertical-align: text-top;
+	background:url(../images/dui.png) 2px 1px no-repeat;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+}
+.foter{
+	position: absolute;bottom:10px ;left:300px;
+}
+.foter input{
+	margin-left:15px;padding: 0 10px;
+}
+.foter input:first-child{
+	background:#4aa0d9;color:#fff;border:none;cursor: pointer;
+}
+.foter input:last-child{
+	background:#abbac3;color:#fff;border:none;cursor: pointer;
 }

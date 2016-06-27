@@ -1,9 +1,9 @@
-.find-opera{ margin-bottom:16px;}
+
 /*table-diction*/
 .table-diction{ width:100%; background:#fff; border:1px solid #cccccc;}
 .table-diction tr td{ border-left:1px solid #e0e0e0;border-top:1px solid #e0e0e0; height:38px; line-height:38px; overflow:hidden; vertical-align:middle; padding-left:12px;}
 .table-diction tr th{ border-top:1px solid #e0e0e0;}
-.table-diction tr th{ height:40px; line-height:40px; overflow:hidden; color:#333333; font-weight:bold; text-align:left; padding-left:18px; background:url(../images/grandice-bg.png) repeat-x;}
+.table-diction tr th{ height:40px; overflow:hidden; color:#333333; font-weight:bold; text-align:left; padding-left:18px; background:url(../images/grandice-bg.png) repeat-x;}
 
 
 .table-diction tr td .data-item{ float:left;/* margin-right:11px;*/}
@@ -64,3 +64,17 @@
 	height:10px;
 }
 .data-item .check-box{ float:left; margin-top:12px;}
+.find-opera  .w_oul li{
+	float:left;
+}
+.find-opera  .w_oul li:first-child{
+	margin-top:8px;margin-right:10px;
+}
+.find-opera  .w_oul li:first-child span{
+	display: inline-block;
+	vertical-align:middle;
+	margin-top:-9px;
+}
+.find-opera  .w_oul li:nth-child(2) input{
+	background:#438ee4;color:#fff;border:1px solid #438ee4;height:25px;font-size: 12px;padding:2px 5px;margin-top:5px;width:60px;
+}
