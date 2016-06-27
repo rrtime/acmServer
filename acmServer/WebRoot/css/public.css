@@ -728,5 +728,25 @@ input[type="button"]{
 .tree-modal .system-role img{ width:13px; height:16px; overflow:hidden; display:inline-block; position:absolute; top:-8px; left:5px;}
 /*.parent_li>a.active{ background-image:url(../images/white-close-file.png) no-repeat margin-top:5px;}*/
 .tree-box .tree-list .parent_li > a.active{ background:url(../images/white-open-file.png) 6px 6px no-repeat #478fca; color:#fff;}
-/*.tree-box .tree-list .parent_li > a.active1{ background:url(../images/white-close-file.png) 6px 6px no-repeat #478fca; color:#fff;}*/
+.tree-box .tree-list .parent_li > a.active1{ background:url(../images/white-close-file.png) 6px 6px no-repeat #478fca; color:#fff;}
 .sort-a li a.se{ background:url(../images/white-person.png) 5px 6px no-repeat #478FCA; margin-top:5px; color:#fff;}
+.total-role .tree-box .tree-list .parent_li > a.on{background-color:#478fca;color:#fff;}
+
+
+/*弹窗*/
+.answer,.fault{
+	position: absolute;top:10px;left:500px;display: none;
+}
+.answer li{
+	height:25px;border-radius:5px;background:#00cc00;line-height: 25px;color:#fff;
+	
+}
+.answer li img,.fault li img{
+	padding-right:5px;padding-left:5px;
+}
+.answer li span,.fault li span{
+	padding-right:5px;
+}
+.fault li{
+	width:150px;height:25px;border-radius:5px;background:#ff6600;line-height: 25px;color:#fff;text-align: center;
+}
