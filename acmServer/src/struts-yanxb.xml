@@ -14,5 +14,10 @@
  		<action name="customer" class="com.rrtimes.acm.action.CustomerAction">
 			<result name="list" type="dispatcher">/WEB-INF/jsp/system/customer.jsp</result>
 		</action>
+		
+		<!-- 消息公告 -->
+ 		<action name="message" class="com.rrtimes.acm.action.MessageAction">
+			<result name="list" type="dispatcher">/WEB-INF/jsp/system/message.jsp</result>
+		</action>
     </package>
 </struts>
