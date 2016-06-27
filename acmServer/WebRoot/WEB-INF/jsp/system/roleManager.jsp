@@ -66,9 +66,9 @@
 				<input id="saveRoleBtn" class="save-btn" style="background:#438ee4;color:#fff;border:1px solid #438ee4;height:25px;font-size: 12px;padding:2px 5px;margin-top:5px;margin-bottom:5px;" type="button" value="保存" />
 				</s:if>
 			</div>
-			<table class="table-diction" border="1" cellspacing="0">
+			<table class="table-diction">   
 				<tr>
-					<th colspan="3">权限菜单</th>
+					<th colspan="5">权限菜单</th>
 				</tr>
 				<s:iterator value="#request.menuList" id="menuList">
 				<s:if test="#menuList.parentId==0">
@@ -86,7 +86,7 @@
 						<table id='tb_level1_<s:property value="#menuList.id"/>' style="border-left:0px;">
 						<s:iterator value="#request.menuList" id="menuList1">
 						 		<s:if test="#menuList1.parentId==#menuList.id">
-						 			<tr><td style="border-left:0px;border-top:0px;width:150px">
+						 			<tr><td style="width:180px">
 						 				<div class="data-item">
 											<div class="check-box">
 											<input class="chk_1" onclick="check('level2_<s:property value="#menuList1.id"/>')" type="checkbox" style="float:left" id='level2_<s:property value="#menuList1.id"/>' value='<s:property value="#menuList1.id"/>' />
@@ -96,10 +96,10 @@
 										</div>
 						 			</td>
 						 			<td style="padding-left:0px;">				 					
-						 				<table id='tb_level2_<s:property value="#menuList1.id"/>' style="border-left:0px;">
+						 				<table id='tb_level2_<s:property value="#menuList1.id"/>'>
 						 					<s:iterator value="#request.functionList" id="functionList2">
 													<s:if test="#functionList2.treeId==#menuList1.id">
-								 					<tr><td style="border-left:0px;border-top:0px;width:150px">
+								 					<tr><td style="width:180px">
 								 						<s:if test="#functionList2.showIndex != -1">
 										 				<div class="data-item">
 															<div class="check-box">
@@ -110,14 +110,14 @@
 														</div>
 														</s:if>
 										 			</td>
-										 			<td style="width:150px">
-										 				<table id='tb1_level3_<s:property value="#functionList2.id"/>' style="border-left:0px;">
+										 			<td style="padding-left:0px;width:180px">
+										 				<table style="width:100%;" id='tb1_level3_<s:property value="#functionList2.id"/>'>
 										 					<s:iterator value="#request.fieldDictList" id="fieldDictList" status='st'>
 																	<s:if test="#fieldDictList.menuCode==#functionList2.menuCode">
-												 					<tr><td style="border-left:0px;border-top:0px;">
+												 					<tr><td>
 														 				<div class="data-item">
 														 					<div class="check-box">
-																			<input class="chk_1" style="float:left" type="checkbox" id='field_id_<s:property value="#fieldDictList.id"/>' name="fieldIds" value='<s:property value="#fieldDictList.id"/>' />
+																			<input class="chk_1" type="checkbox" id='field_id_<s:property value="#fieldDictList.id"/>' name="fieldIds" value='<s:property value="#fieldDictList.id"/>' />
 														 					<label for='field_id_<s:property value="#fieldDictList.id"/>'></label>
 																			</div>
 														 					<s:iterator value="#request.fieldRelList" id="fieldRelList">
@@ -129,19 +129,16 @@
 																			<span class="check-word"><s:property value="#fieldDictList.ftitle"/></span>
 																		</div>
 														 			</td>
-														 			<td>
-														 			
-														 			</td>
 														 			</tr>
 																	</s:if>
 																	</s:iterator>
 														</table>
 										 			</td>
-										 			<td>
+										 			<td style="padding-left:0px;">
 										 				<table id='tb2_level3_<s:property value="#functionList2.id"/>' style="border-left:0px;">
 										 					<s:iterator value="#request.modelFunctionList" id="modelFunctionList" status="status">
 																	<s:if test="#modelFunctionList.menuCode==#functionList2.menuCode">
-												 					<tr><td style="border-left:0px;border-top:0px;width:150px">
+												 					<tr><td style="width:180px">
 														 				<div class="data-item">
 														 					<div class="check-box">
 																			<input class="chk_1" type="checkbox" style="float:left" id='idfunction_<s:property value="#modelFunctionList.id"/>' name="funIds" value='<s:property value="#modelFunctionList.id"/>' />
@@ -156,9 +153,6 @@
 																			<span class="check-word"><s:property value="#modelFunctionList.fname"/></span>
 																		</div>
 														 			</td>
-														 			<td>
-														 			
-														 			</td>
 														 			</tr>
 																	</s:if>
 																	</s:iterator>
@@ -167,7 +161,7 @@
 										 			</td>
 										 			</tr>
 													</s:if>
-													</s:iterator>
+											</s:iterator>
 										</table>
 						 			</td>
 						 			</tr>	
@@ -251,66 +245,27 @@
 	</div>
 	</form>
 	
-	<!-- 提示 -->
-	<div class="mainTip" style="display:none;">
-		<h1 class="mian-title">
-			提示<span class="close-button right"></span>
-		</h1>
-		<div class="delete">
-			<img src="<%=path%>/images/pic14.png" />
-			<p id="opTipText">操作成功！</p>
-		</div>
-		<input class="button" type="button" value="确定" />
+	<!-- 提示消息 -->
+	<div class="answer">
+		<ul>
+			<li><img src="<%=path%>/images/pic20.png"/><span></span></li>			
+		</ul>
+	</div>
+	<div class="fault">
+		<ul>
+			<li><img src="<%=path%>/images/pic21.png"/><span></span></li>
+		</ul>
 	</div>
 </body>
 <script src="<%=path%>/js/jquery-1.11.1.min.js"></script>
 <script src="<%=path%>/js/dialog.js"></script>
 <script src="<%=path%>/js/easyTree.js"></script>
-<script type="text/javascript">
-$("#saveRoleBtn").click(function () {
-	$("#functionForm").submit();
-});
-$("#addRoldBtn").click(function () {
-	if($("#roleName").val()==''){
-		$("#addTipText").text('请输入角色名称!');
-		$("#addTip").css("display","block");
-		$("#roleName").focus();
-		return;
-	}
-	$("#roleAddForm").submit();
-});
-$("#roleName").keyup(function(){
-	$("#addTip").css("display","none");
-});
-$("#all").click(function(){    
-    if(this.checked){    
-        $("#list :checkbox").attr("checked", true);   
-    }else{    
-        $("#list :checkbox").attr("checked", false); 
-    }    
-});
-function check(id){
-	if($("#"+id+"").prop("checked")){    
-        $("#tb_"+id+" :checkbox").prop("checked", true);   
-    }else{    
-        $("#tb_"+id+" :checkbox").prop("checked", false); 
-    }    
-}
-function check1(id){
-	if($("#"+id+"").prop("checked")){    
-        $("#tb1_"+id+" :checkbox").prop("checked", true);  
-        $("#tb2_"+id+" :checkbox").prop("checked", true);
-    }else{    
-        $("#tb1_"+id+" :checkbox").prop("checked", false); 
-        $("#tb2_"+id+" :checkbox").prop("checked", false); 
-    }    
-}
-</script>
+<script src="<%=path%>/js/show.js"></script>
+<script src="<%=path%>/js/roleManager.js"></script>
 <s:if test="null != msg && msg.length() > 0">
 <script>
-$("#opTipText").text('<s:property value="msg"/>');
-$(".shadow-bg").css("display","block");
-$(".mainTip").css("display","block");
+show(1,'<s:property value="msg"/>');
+setTimeout("codefans()",2000);//2秒
 </script>
 </s:if>
 </html>
