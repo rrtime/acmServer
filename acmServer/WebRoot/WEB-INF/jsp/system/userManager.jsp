@@ -74,6 +74,13 @@
           idvalues = ids[i].value+","+idvalues;
         }  
       }
+      if(idvalues==""){
+         $(".shadow-bg").css("display","none");
+		 $(".mainDel").css("display","none");
+         show(2,"请选择要删除的记录");
+         setTimeout("codefans()",2000);//2秒
+         return false;
+      }
       //alert(idvalues.substring(0,idvalues.lastIndexOf(",")));
       $("#ids").val(idvalues.substring(0,idvalues.lastIndexOf(",")));
       //alert($("#ids").val());
@@ -208,6 +215,13 @@
    }
    function deletedept(){
       var orgId = $("#sysorgId").val();
+      if(orgId==""){
+         $(".shadow-bg").css("display","none");
+		 $(".mainDel").css("display","none");
+         show(2,"请选择要删除的部门");
+         setTimeout("codefans()",2000);//2秒
+         return false;
+      }
       var url="../xl/user!deleteOrg.do?org.id="+orgId;
       window.location.href=url;
    }
